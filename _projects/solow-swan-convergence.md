@@ -119,19 +119,13 @@ The Solow-Swan model assumes constant growth rates but fails to capture:
 
 1. **Technology Gaps Are Hard to Bridge**
    - Singapore and South Korea continue to push the technological frontier
-   - Czech Republic faces "middle-income trap" risks
 
 2. **Structural Transformation Is Critical**
    - Taiwan case: From OEM to independent innovation (TSMC)
-   - Capital accumulation alone is insufficient for sustained growth
 
 3. **Global Shocks Amplify Gaps**
    - 2008 financial crisis, 2020 pandemic
    - Recovery speeds differ significantly across economies
-
-4. **Institutional and Policy Factors**
-   - Education investment, R&D expenditure
-   - Industrial policy, degree of openness
 
 ---
 
