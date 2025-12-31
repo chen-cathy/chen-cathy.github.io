@@ -1,0 +1,35 @@
+### Site Settings ###
+title               : chen-cathy
+description         : Economic Research Portfolio
+baseurl             : ""
+url                 : "https://chen-cathy.github.io"
+repository          : chen-cathy/chen-cathy.github.io
+
+### Plugins ###
+plugins:
+  - jemoji
+  - jekyll-remote-theme
+
+### Remote Theme ###
+remote_theme: YoussefRaafatNasry/portfolYOU
+
+### Collections ###
+collections:
+  projects:
+    output: true
+    permalink: /projects/:name
+
+### Defaults for Projects ###
+defaults:
+  - scope:
+      path: "_projects"
+      type: projects
+    values:
+      layout: page
+
+### Exclude from processing ###
+exclude:
+  - README.md
+  - CONTRIBUTING.md
+  - LICENSE
+  - "*.log"
