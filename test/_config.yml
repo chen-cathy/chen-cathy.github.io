@@ -1,35 +1,87 @@
 ### Site Settings ###
-title               : chen-cathy
-description         : Economic Research Portfolio
-baseurl             : ""
-url                 : "https://chen-cathy.github.io"
-repository          : chen-cathy/chen-cathy.github.io
+source              : ../
+collections_dir     : docs
+data_dir            : docs/_data
+baseurl             : "/portfolYOU-test"
+repository          : yousinix/portfolYOU
+open_new_tab        : false
 
-### Plugins ###
-plugins:
-  - jemoji
-  - jekyll-remote-theme
+### Navbar Settings ###
+nav_exclude:
+  - docs/pages/tags.html
+  - docs/pages/404.html
+  - docs/pages/index.md
+  - docs/pages/documentation/**
 
-### Remote Theme ###
-remote_theme: YoussefRaafatNasry/portfolYOU
+
+### Author Info ###
+author:
+  name              : YRN
+  image             : https://avatars2.githubusercontent.com/u/41103290
+  github            : yousinix
+
+
+### Posts ###
+permalink: /blog/:title
+
+disqus:
+  shortname: your-disqus-shortname
 
 ### Collections ###
 collections:
   projects:
     output: true
     permalink: /projects/:name
+  elements:
+    output: true
 
-### Defaults for Projects ###
+
+### Analytics ###
+analytics:
+  enabled: true
+  google:
+    tracking_id: google-tracking-id
+
+
+### Buy me a coffee ###
+# See https://www.buymeacoffee.com/
+buymeacoffee:
+  enabled: false
+  username: your_username
+  color: "#007bff"
+  message: "Thank you for visiting."                    # Message to be displayed aside from the button for a few seconds.
+  description: "Support me on Buy me a coffee!"
+
+
+### Defaults for collections ###
 defaults:
   - scope:
-      path: "_projects"
-      type: projects
+      path: ""
+      type: "projects"
     values:
-      layout: page
+      layout: "page"
+  - scope:
+      path: ""
+      type: "elements"
+    values:
+      layout: "element"
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      comments: false
 
-### Exclude from processing ###
+plugins:
+  - jekyll-default-layout
+  - jekyll-gist
+  - jekyll-github-metadata
+  - jekyll-include-cache
+  - jemoji
+
+
 exclude:
-  - README.md
-  - CONTRIBUTING.md
-  - LICENSE
-  - "*.log"
+  - test/
+  - docs/Gemfile
+  - docs/Gemfile.lock
+  - docs/_site/
+  - docs/.sass-cache/
