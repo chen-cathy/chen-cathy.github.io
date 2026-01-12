@@ -1,0 +1,18 @@
+[
+    {
+        "title": "Keynesian Cross Model",
+        "file": "keynesian_cross.html",
+        "description": "Interactive demonstration of the 45-degree line model with adjustable MPC and autonomous consumption parameters.",
+        "year": 2025,
+        "type": "Interactive",
+        "tags": ["interactive", "macroeconomics", "keynesian"]
+    },
+    {
+        "title": "Solow-Swan Growth Model",
+        "file": "solow_swan.html",
+        "description": "Analysis of economic growth convergence using comparable data from Taiwan, Czechia, South Korea, and Singapore.",
+        "year": 2025,
+        "type": "Data Analysis",
+        "tags": ["interactive", "growth", "solow-swan", "regression"]
+    }
+]

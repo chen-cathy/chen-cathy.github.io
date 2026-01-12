@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solow-Swan Model: Capital Accumulation & Convergence</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- MathJax -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Plotly -->
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+
+    <style>
+        /* Specific embedded dashboard styles */
+        .embedded-dashboard {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 1.5rem;
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e2e8f0;
+            margin: 2rem 0;
+            overflow: hidden;
+            height: 600px;
+        }
+
+        .report-sidebar {
+            background: #f1f5f9;
+            padding: 1.5rem;
+            border-right: 1px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            overflow-y: auto;
+        }
+
+        .control-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 0.5rem;
+        }
+
+        select,
+        input[type="range"] {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 0.375rem;
+            background: white;
+        }
+
+        .report-main-view {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            background: #ffffff;
+        }
+
+        .chart-wrapper {
+            flex-grow: 1;
+            min-height: 400px;
+            width: 100%;
+            position: relative;
+        }
+
+        #analysis-card {
+            background: white;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid #e2e8f0;
+            font-size: 0.9rem;
+        }
+
+        #analysis-card h4 {
+            color: #0f172a;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            border-bottom: 2px solid #3b82f6;
+            padding-bottom: 0.25rem;
+        }
+
+        #model-details {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 0.5rem;
+        }
+
+        #model-details span:nth-child(odd) {
+            color: #64748b;
+        }
+
+        #model-details span:nth-child(even) {
+            font-weight: 600;
+            text-align: right;
+        }
+
+        @media (max-width: 900px) {
+            .embedded-dashboard {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+
+            .report-sidebar {
+                max-height: 300px;
+            }
+
+            .chart-wrapper {
+                min-height: 350px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="container">
+        <a href="index.html" class="logo">
+            <i class="fa-solid fa-chart-line"></i> Reports Library
+        </a>
+    </header>
+
+    <main class="container article-container">
+
+        <!-- Document Header -->
+        <article class="report-content" style="background:white; padding:2rem; border-radius:1rem; margin-bottom:2rem;">
+            <p style="color:var(--accent-color); font-weight:600; text-transform:uppercase; font-size:0.9rem;">Economic
+                Growth & Development</p>
+            <h1 style="color:#0f172a; font-size:2.5rem; margin-bottom:1rem;">Solow-Swan Model: Capital Accumulation &
+                Convergence</h1>
+            <div class="report-meta-info" style="color:#64748b; margin-bottom:2rem;">
+                <span><i class="fa-regular fa-calendar"></i> January 2026</span>
+                <span style="margin:0 1rem;">|</span>
+                <span><i class="fa-solid fa-user"></i> Author: Economic Research Team</span>
+            </div>
+
+            <section class="summary-box"
+                style="background:#f8fafc; padding:1.5rem; border-left:4px solid var(--accent-color); border-radius:0.5rem; margin-bottom:2rem;">
+                <h3 style="color:#0f172a; margin-bottom:0.5rem;">Executive Summary</h3>
+                <p style="color:#334155;">
+                    This report consolidates the analysis of the Solow-Swan growth model applied to selected economies
+                    (Singapore, Taiwan, Czech Republic, South Korea).
+                    <strong>Part I</strong> examines the capital accumulation phase and GDP growth trends compared to
+                    the theoretical exponential model.
+                    <strong>Part II</strong> analyzes the convergence hypothesis, testing both \(\beta\)-convergence
+                    (catch-up effect) and \(\sigma\)-convergence (reduction in dispersion) over the period 2000–2024.
+                </p>
+            </section>
+
+            <!-- PART I -->
+            <hr style="border:0; border-top:1px solid #e2e8f0; margin:3rem 0;">
+            <h2 style="color:#0f172a; margin-bottom:1rem;">Část I: Solowův-Swanův model akumulace kapitálu</h2>
+            <p style="color:#334155; line-height:1.8;">
+                The first part of our analysis focuses on the long-term growth trajectory. Using the Solow-Swan
+                framework, we model the GDP per capita growth as an exponential function
+                \( y(t) = A e^{gt} \), where \(g\) represents the balanced growth rate driven by technological progress
+                and capital accumulation.
+            </p>
+
+            <!-- EMBEDDED DASHBOARD 1: GDP -->
+            <div class="embedded-dashboard">
+                <aside class="report-sidebar">
+                    <div class="control-group">
+                        <label><i class="fa-solid fa-earth-americas"></i> Select Countries</label>
+                        <div id="gdp-country-checkboxes">
+                            <!-- JS Populated -->
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label><i class="fa-solid fa-magnifying-glass"></i> Highlight Country</label>
+                        <select id="gdp-focus-country-select"></select>
+                    </div>
+
+                    <div class="control-group">
+                        <label><i class="fa-regular fa-calendar"></i> Time Period</label>
+                        <div style="font-weight:bold; color:var(--accent-color); margin-bottom:0.5rem;">2005 - 2024
+                        </div>
+                    </div>
+
+                    <!-- Analysis Card -->
+                    <div id="analysis-card">
+                        <h4><i class="fa-solid fa-calculator"></i> Model Analysis</h4>
+
+                        <!-- Dynamic Content -->
+                        <div id="model-details"
+                            style="display:flex; flex-direction:column; gap:0.5rem; font-family:monospace; font-size:0.85rem;">
+                            <!-- Filled by JS -->
+                        </div>
+                    </div>
+                </aside>
+
+                <main class="report-main-view">
+                    <div id="trend-view" class="view-panel" style="display:flex; flex-direction:column; height:100%;">
+                        <h3 style="color:#0f172a;">Comparison of the S-S model of GDP per capita development with the
+                            polynomial model</h3>
+                        <div class="chart-wrapper">
+                            <div id="gdp-trendChart" style="width:100%; height:100%;"></div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+
+            <p style="color:#334155; margin-top:1rem;">
+                The chart above demonstrates the high correlation (\(R^2 > 0.95\)) between the theoretical model and
+                actual data for the selected "Asian Tigers" and the Czech Republic, suggesting that the standard
+                Solow-Swan assumptions hold reasonably well for this period.
+            </p>
+
+
+            <!-- PART II -->
+            <hr style="border:0; border-top:1px solid #e2e8f0; margin:3rem 0;">
+            <h2 style="color:#0f172a; margin-bottom:1rem;">Část II: Konvergence (resp. divergence/stagnace) ekonomik
+            </h2>
+            <p style="color:#334155; line-height:1.8;">
+                The second part investigates whether these economies are converging.
+                <strong>\(\beta\)-convergence</strong> implies that poorer economies grow faster than richer ones
+                (negative correlation between initial level and growth rate).
+                <strong>\(\sigma\)-convergence</strong> refers to the reduction of income dispersion (standard
+                deviation) over time.
+            </p>
+
+            <!-- EMBEDDED DASHBOARD 2: CONVERGENCE -->
+            <div class="embedded-dashboard">
+                <aside class="report-sidebar">
+                    <div class="control-group">
+                        <label><i class="fa-solid fa-earth-americas"></i> Countries</label>
+                        <div style="font-size:0.85rem; color:#475569; line-height:1.8;">
+                            Korea<br>
+                            Singapore<br>
+                            Czech Republic<br>
+                            Taiwan
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label><i class="fa-regular fa-calendar"></i> Time Period</label>
+                        <div style="font-weight:bold; color:var(--accent-color); margin-bottom:0.5rem;">2005 - 2024
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <h4 style="color:#0f172a; font-size:0.95rem; margin:0 0 0.75rem 0; font-weight:600;">Analysis
+                            Type</h4>
+
+                        <!-- Group 1: Beta -->
+                        <div style="margin-bottom:0.75rem;">
+                            <label style="display:flex; align-items:center; cursor:pointer; font-size:0.85rem;">
+                                <input type="radio" name="conv-mode" value="beta" checked
+                                    onchange="switchConvMode('beta')" style="margin-right:0.5rem;">
+                                Beta Convergence (Catch-up Effect)
+                            </label>
+                        </div>
+
+                        <hr style="border:0; border-top:1px solid #cbd5e1; margin:0.75rem 0;">
+
+                        <!-- Group 2: Sigma Level -->
+                        <h5 style="color:#475569; font-size:0.85rem; margin:0 0 0.5rem 0; font-weight:600;">Sigma: GDP
+                            per capita (Level)</h5>
+                        <div style="display:flex; flex-direction:column; gap:0.4rem; margin-bottom:0.75rem;">
+                            <label style="display:flex; align-items:center; cursor:pointer; font-size:0.85rem;">
+                                <input type="radio" name="conv-mode" value="sigma-gdp-sd"
+                                    onchange="switchConvMode('sigma-gdp-sd')" style="margin-right:0.5rem;">
+                                Standard Deviation (SD)
+                            </label>
+                            <label style="display:flex; align-items:center; cursor:pointer; font-size:0.85rem;">
+                                <input type="radio" name="conv-mode" value="sigma-gdp-cv"
+                                    onchange="switchConvMode('sigma-gdp-cv')" style="margin-right:0.5rem;">
+                                Coefficient of Variation (CV)
+                            </label>
+                        </div>
+
+                        <hr style="border:0; border-top:1px solid #cbd5e1; margin:0.75rem 0;">
+
+                        <!-- Group 3: Sigma Log -->
+                        <h5 style="color:#475569; font-size:0.85rem; margin:0 0 0.5rem 0; font-weight:600;">Sigma:
+                            ln(GDP) (Logarithmic)</h5>
+                        <div style="display:flex; flex-direction:column; gap:0.4rem;">
+                            <label style="display:flex; align-items:center; cursor:pointer; font-size:0.85rem;">
+                                <input type="radio" name="conv-mode" value="sigma-ln-sd"
+                                    onchange="switchConvMode('sigma-ln-sd')" style="margin-right:0.5rem;">
+                                Standard Deviation (SD)
+                            </label>
+                            <label style="display:flex; align-items:center; cursor:pointer; font-size:0.85rem;">
+                                <input type="radio" name="conv-mode" value="sigma-ln-cv"
+                                    onchange="switchConvMode('sigma-ln-cv')" style="margin-right:0.5rem;">
+                                Coefficient of Variation (CV)
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Analysis Card -->
+                    <div id="conv-analysis-card"
+                        style="background:white; padding:1rem; border-radius:0.5rem; border:1px solid #e2e8f0; font-size:0.9rem;">
+                        <h4
+                            style="color:#0f172a; margin-bottom:0.5rem; font-size:1rem; border-bottom:2px solid #3b82f6; padding-bottom:0.25rem;">
+                            <i class="fa-solid fa-calculator"></i> Model Analysis
+                        </h4>
+                        <div id="conv-model-details"
+                            style="display:grid; grid-template-columns:1fr auto; gap:0.5rem; font-size:0.85rem;">
+                            <!-- Filled by JS -->
+                        </div>
+                    </div>
+                </aside>
+
+                <main class="report-main-view">
+                    <div id="conv-chart-view" style="display:flex; flex-direction:column; height:100%;">
+                        <h3 id="conv-chart-title" style="color:#0f172a;">Beta Convergence: Catch-up Effect</h3>
+                        <p id="conv-chart-description" style="font-size:0.9rem; color:#64748b;">
+                            Regression of Average Growth Rate on Initial GDP Level. A negative slope indicates
+                            convergence.
+                        </p>
+                        <div class="chart-wrapper">
+                            <div id="conv-chart" style="width:100%; height:100%;"></div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+
+            <p style="color:#334155; margin-top:1rem;">
+                The results indicate a strong tendency towards convergence among the selected group. The negative slope
+                in the \(\beta\)-convergence chart confirms the catch-up mechanism, while the \(\sigma\)-convergence
+                chart tracks the reduction in inequality over the two decades.
+            </p>
+
+        </article>
+    </main>
+
+    <footer>
+        <div class="container" style="text-align:center; padding:2rem; color:#94a3b8;">
+            <p>&copy; 2026 Economic Research Department.</p>
+        </div>
+    </footer>
+
+    <!-- Load Logic Scripts at the End -->
+    <!-- Note: These scripts now use namespaced IDs (gdp-*, conv-*) to coexist -->
+    <script src="assets/js/solow_gdp.js"></script>
+    <script src="assets/js/solow_convergence.js"></script>
+
+<!-- 閱讀計數器 V2 - 含當日統計 -->
+<style>
+.admin-trigger {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    opacity: 0.1;
+    z-index: 998;
+}
+.admin-trigger:hover {
+    opacity: 0.3;
+}
+.admin-panel {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 25px 25px 45px 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    z-index: 1000;
+    width: 420px;
+    max-width: 90vw;
+    font-family: "Microsoft JhengHei", Arial, sans-serif;
+}
+.admin-panel.active {
+    display: block;
+}
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 999;
+}
+.overlay.active {
+    display: block;
+}
+.admin-panel input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+.admin-panel button {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+.btn-primary {
+    background: #2563eb;
+    color: white;
+}
+.btn-secondary {
+    background: #e5e7eb;
+    color: #374151;
+    margin-bottom: 0;
+}
+.btn-reset {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    width: auto;
+    max-width: 50px;
+    padding: 2px 6px;
+    margin: 0;
+    background: #4b5563;
+    color: #9ca3af;
+    font-size: 8px;
+    border-radius: 2px;
+    opacity: 0.25;
+    transition: opacity 0.2s;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.btn-reset:hover {
+    opacity: 1;
+    color: #dc2626;
+    background: #374151;
+}
+.stats-summary {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin: 15px 0;
+}
+.stats-card {
+    padding: 12px;
+    border-radius: 6px;
+    text-align: center;
+}
+.stats-card.today {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+.stats-card.total {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+}
+.stats-card-label {
+    font-size: 11px;
+    opacity: 0.9;
+    margin-bottom: 4px;
+}
+.stats-card-value {
+    font-size: 24px;
+    font-weight: bold;
+}
+.section-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #374151;
+    margin: 12px 0 8px 0;
+    padding-bottom: 4px;
+    border-bottom: 2px solid #e5e7eb;
+}
+.error {
+    color: #dc2626;
+    font-size: 13px;
+    margin-top: 5px;
+}
+.page-stats-container {
+    max-height: 280px;
+    overflow-y: auto;
+    margin-bottom: 5px;
+}
+.page-stats {
+    margin: 8px 0;
+    padding: 10px;
+    background: #eff6ff;
+    border-left: 3px solid #2563eb;
+    border-radius: 4px;
+}
+.page-name {
+    font-weight: 600;
+    color: #1e40af;
+    margin-bottom: 6px;
+    font-size: 13px;
+}
+.page-counts {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 6px;
+}
+.count-item {
+    display: flex;
+    flex-direction: column;
+}
+.count-label {
+    color: #6b7280;
+    font-size: 10px;
+}
+.count-value {
+    color: #111827;
+    font-weight: 600;
+    font-size: 15px;
+}
+.page-time {
+    font-size: 10px;
+    color: #6b7280;
+}
+.current-page {
+    background: #fef3c7;
+    border-left-color: #f59e0b;
+}
+.current-page .page-name {
+    color: #92400e;
+}
+.today-badge {
+    display: inline-block;
+    background: #10b981;
+    color: white;
+    font-size: 9px;
+    padding: 2px 5px;
+    border-radius: 3px;
+    margin-left: 4px;
+}
+</style>
+
+<button class="admin-trigger" onclick="openAdmin()"></button>
+<div class="overlay" id="overlay" onclick="closeAdmin()"></div>
+
+<div class="admin-panel" id="adminPanel">
+    <div id="loginView">
+        <h3 style="margin-top:0;">管理員登入</h3>
+        <input type="password" id="passwordInput" placeholder="請輸入管理密碼" autocomplete="off">
+        <div class="error" id="errorMsg"></div>
+        <button class="btn-primary" onclick="login()">登入</button>
+        <button class="btn-secondary" onclick="closeAdmin()">取消</button>
+    </div>
+    
+    <div id="statsView" style="display:none;">
+        <h3 style="margin-top:0;margin-bottom:12px;">📊 閱讀統計</h3>
+        
+        <div class="stats-summary">
+            <div class="stats-card today">
+                <div class="stats-card-label">今日閱讀</div>
+                <div class="stats-card-value" id="todayTotal">0</div>
+            </div>
+            <div class="stats-card total">
+                <div class="stats-card-label">累計閱讀</div>
+                <div class="stats-card-value" id="totalAllViews">0</div>
+            </div>
+        </div>
+        
+        <div class="section-title">📄 各頁面統計</div>
+        <div class="page-stats-container" id="pageStatsList"></div>
+        
+        <div style="padding-right: 60px;">
+            <button class="btn-secondary" onclick="closeAdmin()">關閉</button>
+        </div>
+        <button class="btn-reset" onclick="resetAllStats()">重置</button>
+    </div>
+</div>
+
+<script>
+(function() {
+    const ADMIN_PASSWORD = '0520'; // 請修改為你自己的密碼
+    const STORAGE_PREFIX = 'page_stats_';
+    
+    function getPageName() {
+        const path = window.location.pathname;
+        return path.split('/').pop() || 'index.html';
+    }
+    
+    function getTodayString() {
+        const now = new Date();
+        return now.toISOString().split('T')[0];
+    }
+    
+    function recordVisit() {
+        const pageName = getPageName();
+        const storageKey = STORAGE_PREFIX + pageName;
+        const stats = getPageStats(pageName);
+        const now = new Date().toISOString();
+        const today = getTodayString();
+        
+        stats.totalCount = (stats.totalCount || 0) + 1;
+        stats.lastVisit = now;
+        
+        if (!stats.firstVisit) {
+            stats.firstVisit = now;
+        }
+        
+        if (!stats.dailyStats) {
+            stats.dailyStats = {};
+        }
+        
+        if (!stats.dailyStats[today]) {
+            stats.dailyStats[today] = 0;
+        }
+        
+        stats.dailyStats[today] += 1;
+        
+        const thirtyDaysAgo = new Date();
+        thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+        const cutoffDate = thirtyDaysAgo.toISOString().split('T')[0];
+        
+        Object.keys(stats.dailyStats).forEach(date => {
+            if (date < cutoffDate) {
+                delete stats.dailyStats[date];
+            }
+        });
+        
+        localStorage.setItem(storageKey, JSON.stringify(stats));
+    }
+    
+    function getPageStats(pageName) {
+        const storageKey = STORAGE_PREFIX + pageName;
+        const data = localStorage.getItem(storageKey);
+        if (data) {
+            return JSON.parse(data);
+        }
+        return {
+            totalCount: 0,
+            firstVisit: null,
+            lastVisit: null,
+            dailyStats: {}
+        };
+    }
+    
+    function getAllPagesStats() {
+        const allStats = [];
+        for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i);
+            if (key.startsWith(STORAGE_PREFIX)) {
+                const pageName = key.replace(STORAGE_PREFIX, '');
+                const stats = JSON.parse(localStorage.getItem(key));
+                allStats.push({
+                    page: pageName,
+                    ...stats
+                });
+            }
+        }
+        return allStats.sort((a, b) => (b.totalCount || 0) - (a.totalCount || 0));
+    }
+    
+    window.openAdmin = function() {
+        document.getElementById('adminPanel').classList.add('active');
+        document.getElementById('overlay').classList.add('active');
+        document.getElementById('passwordInput').value = '';
+        document.getElementById('errorMsg').textContent = '';
+        setTimeout(() => {
+            document.getElementById('passwordInput').focus();
+        }, 100);
+    };
+    
+    window.closeAdmin = function() {
+        document.getElementById('adminPanel').classList.remove('active');
+        document.getElementById('overlay').classList.remove('active');
+        document.getElementById('loginView').style.display = 'block';
+        document.getElementById('statsView').style.display = 'none';
+    };
+    
+    window.login = function() {
+        const password = document.getElementById('passwordInput').value;
+        
+        if (password === ADMIN_PASSWORD) {
+            showStats();
+        } else {
+            document.getElementById('errorMsg').textContent = '密碼錯誤';
+        }
+    };
+    
+    window.showStats = function() {
+        const currentPage = getPageName();
+        const today = getTodayString();
+        const allStats = getAllPagesStats();
+        
+        let totalAllViews = 0;
+        let todayTotal = 0;
+        
+        allStats.forEach(page => {
+            totalAllViews += (page.totalCount || 0);
+            if (page.dailyStats && page.dailyStats[today]) {
+                todayTotal += page.dailyStats[today];
+            }
+        });
+        
+        document.getElementById('totalAllViews').textContent = totalAllViews;
+        document.getElementById('todayTotal').textContent = todayTotal;
+        
+        const listHtml = allStats.map(page => {
+            const isCurrent = page.page === currentPage;
+            const todayCount = (page.dailyStats && page.dailyStats[today]) || 0;
+            const hasToday = todayCount > 0;
+            
+            return `
+                <div class="page-stats ${isCurrent ? 'current-page' : ''}">
+                    <div class="page-name">
+                        ${page.page} 
+                        ${isCurrent ? '(當前)' : ''}
+                        ${hasToday ? '<span class="today-badge">今日活躍</span>' : ''}
+                    </div>
+                    <div class="page-counts">
+                        <div class="count-item">
+                            <span class="count-label">今日</span>
+                            <span class="count-value">${todayCount}</span>
+                        </div>
+                        <div class="count-item">
+                            <span class="count-label">累計</span>
+                            <span class="count-value">${page.totalCount || 0}</span>
+                        </div>
+                    </div>
+                    <div class="page-time">
+                        最近: ${formatDateShort(page.lastVisit)}
+                    </div>
+                </div>
+            `;
+        }).join('');
+        
+        document.getElementById('pageStatsList').innerHTML = listHtml || '<p style="color:#9ca3af;text-align:center;padding:20px 0;font-size:12px;">尚無資料</p>';
+        
+        document.getElementById('loginView').style.display = 'none';
+        document.getElementById('statsView').style.display = 'block';
+    };
+    
+    function formatDateShort(isoString) {
+        if (!isoString) return '--';
+        const date = new Date(isoString);
+        const now = new Date();
+        const today = now.toDateString() === date.toDateString();
+        
+        if (today) {
+            return '今天 ' + date.toLocaleTimeString('zh-TW', { hour: '2-digit', minute: '2-digit' });
+        }
+        
+        return date.toLocaleString('zh-TW', {
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+    }
+    
+    window.resetAllStats = function() {
+        if (confirm('⚠️ 確定要重置所有統計資料嗎?\n此操作無法復原！')) {
+            const keys = [];
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key.startsWith(STORAGE_PREFIX)) {
+                    keys.push(key);
+                }
+            }
+            keys.forEach(key => localStorage.removeItem(key));
+            alert('✅ 所有統計資料已重置');
+            closeAdmin();
+        }
+    };
+    
+    recordVisit();
+    
+    const passwordInput = document.getElementById('passwordInput');
+    if (passwordInput) {
+        passwordInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                login();
+            }
+        });
+    }
+})();
+</script>
+
+</body>
+
+</html>

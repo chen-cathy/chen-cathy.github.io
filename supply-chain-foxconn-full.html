@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Řízení dodavatelského řetězce | Foxconn CZ</title>
+    <meta name="description"
+        content="Komplexní analýza řízení dodavatelského řetězce a logistických technologií na příkladu společnosti Foxconn v České republice">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="./supply-chain-foxconn-style.css">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="nav-sticky">
+        <div class="container nav-content">
+            <a href="index.html" class="nav-logo"><i class="fa-solid fa-arrow-left"></i> Synthesis Hub</a>
+            <div class="nav-links">
+                <a href="#teoria">Teorie</a>
+                <a href="#technologie">Technologie</a>
+                <a href="#foxconn">Foxconn</a>
+                <a href="#implementace">Implementace</a>
+                <a href="#zaver">Závěr</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="hero">
+        <div class="container">
+            <h1>Řízení dodavatelského řetězce v podniku</h1>
+            <p class="subtitle">Příklad společnosti Foxconn CZ – Analýza strategií Supply Chain Managementu a
+                pokročilých logistických technologií v elektronickém výrobním průmyslu</p>
+            <p style="color: #64748b; font-size: 0.9rem;">Publikováno: Leden 2026</p>
+        </div>
+    </header>
+
+    <!-- Section 1: Supply Chain Overview -->
+    <section id="teoria">
+        <div class="container">
+            <div class="section-header">
+                <h2>1. Dodavatelský řetězec</h2>
+                <p>Komplexní síť propojující dodavatele, výrobce, distributory a zákazníky</p>
+            </div>
+
+            <div class="highlight-box">
+                <p><strong>Dodavatelský řetězec</strong> je komplexní síť zahrnující více subjektů — dodavatele,
+                    výrobce, distributory, maloobchodníky i zákazníky. Jeho hlavním cílem je uspokojení zákazníků s
+                    maximální efektivitou. Jakýkoli prvek, který hodnotu nevytváří, je považován za plýtvání a má být
+                    odstraněn.</p>
+            </div>
+
+            <h3 style="color: white; margin: 2rem 0 1.5rem; font-family: 'Outfit', sans-serif;">Klíčové oblasti
+                dodavatelského řetězce</h3>
+
+            <div class="grid-5">
+                <div class="card icon-card">
+                    <i class="fa-solid fa-truck-ramp-box"></i>
+                    <h4>Opatřování</h4>
+                    <p>Zajištění surovin a komponentů od dodavatelů včas na místo výroby</p>
+                </div>
+                <div class="card icon-card">
+                    <i class="fa-solid fa-industry"></i>
+                    <h4>Výroba</h4>
+                    <p>Přeměna surovin na finální produkty prostřednictvím zpracování a montáže</p>
+                </div>
+                <div class="card icon-card">
+                    <i class="fa-solid fa-warehouse"></i>
+                    <h4>Skladování</h4>
+                    <p>Vyrovnání časového nesouladu mezi nabídkou a poptávkou</p>
+                </div>
+                <div class="card icon-card">
+                    <i class="fa-solid fa-truck-fast"></i>
+                    <h4>Distribuce</h4>
+                    <p>Doprava hotových výrobků logistickou sítí ke konečnému zákazníkovi</p>
+                </div>
+                <div class="card icon-card">
+                    <i class="fa-solid fa-recycle"></i>
+                    <h4>Recyklace</h4>
+                    <p>Zpětné logistické toky a plnění environmentální odpovědnosti</p>
+                </div>
+            </div>
+
+            <!-- Supply Chain Diagram -->
+            <div class="mermaid">
+                graph LR
+                A[🏭 Dodavatelé] --> B[📦 Opatřování]
+                B --> C[⚙️ Výroba]
+                C --> D[🏪 Skladování]
+                D --> E[🚚 Distribuce]
+                E --> F[👥 Zákazníci]
+                F -.->|Recyklace| A
+                style A fill:#1e40af,stroke:#38bdf8,color:#fff
+                style B fill:#1e3a5f,stroke:#38bdf8,color:#fff
+                style C fill:#1e3a5f,stroke:#38bdf8,color:#fff
+                style D fill:#1e3a5f,stroke:#38bdf8,color:#fff
+                style E fill:#1e3a5f,stroke:#38bdf8,color:#fff
+                style F fill:#10b981,stroke:#34d399,color:#fff
+            </div>
+
+            <!-- Integration Section -->
+            <div class="card" style="margin-top: 3rem;">
+                <h3>1.2 Klíčové prvky integrace logistického řetězce</h3>
+                <p>Integrace logistického řetězce vyžaduje specifický technický základ a vhodný systémový návrh.</p>
+
+                <div class="grid-3" style="margin-top: 1.5rem;">
+                    <div class="highlight-box">
+                        <h4 style="color: var(--accent-color);">Dopravní systémy</h4>
+                        <p>Zajišťují pohyb fyzických toků mezi články řetězce</p>
+                    </div>
+                    <div class="highlight-box">
+                        <h4 style="color: var(--accent-color);">Skladové systémy</h4>
+                        <p>Vyrovnávají nerovnováhu mezi nabídkou a poptávkou</p>
+                    </div>
+                    <div class="highlight-box">
+                        <h4 style="color: var(--accent-color);">ICT systémy</h4>
+                        <p>Zajišťují přenos dat, vizualizaci a synchronizaci</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Logical Solutions -->
+            <div class="grid-2" style="margin-top: 2rem;">
+                <div class="card">
+                    <h3>🔬 Mikrologické řešení</h3>
+                    <p>Zaměřuje se na efektivitu jednotlivých subsystémů:</p>
+                    <ul>
+                        <li>Jedna továrna, sklad nebo výrobní jednotka</li>
+                        <li>Výpočet kapacit a stanovení ploch</li>
+                        <li>Výpočty potřebného času</li>
+                        <li>Nákladové propočty</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>🌐 Makrologické řešení</h3>
+                    <p>Zaměřuje se na návrh a optimalizaci celkové sítě:</p>
+                    <ul>
+                        <li>Redukce fyzické redundance</li>
+                        <li>Modelování a hodnocení variant</li>
+                        <li>Hledání synergického efektu</li>
+                        <li>Optimalizace celého systému</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Green Supply Chain -->
+            <div class="card highlight-box green" style="margin-top: 2rem;">
+                <h3 style="color: #10b981;">🌿 Zelený dodavatelský řetězec (GSCM)</h3>
+                <p>S rostoucím důrazem na udržitelný rozvoj se pojetí SCM rozšířilo o environmentální rozměr. Hodnocení
+                    výkonnosti již nestojí pouze na kritériích <strong>Cost, Quality, Delivery a Service</strong>, ale
+                    zahrnuje i faktor <strong>Environment</strong>.</p>
+                <p style="margin-top: 1rem;">Podniky musí při volbě dodavatelů zohledňovat uhlíkovou stopu a efektivní
+                    využití zdrojů.</p>
+            </div>
+
+            <!-- Strategy Evolution -->
+            <h3 style="color: white; margin: 3rem 0 1.5rem; font-family: 'Outfit', sans-serif;">1.3 Strategie
+                dodavatelského řetězce: historický vývoj</h3>
+
+            <p style="color: var(--text-secondary); margin-bottom: 2rem;">Formování strategií nevzniklo náhle, ale
+                postupně se vyvíjelo v reakci na technologický pokrok, rostoucí globální konkurenci, geopolitická rizika
+                a tlak na environmentální udržitelnost.</p>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4>Lean Manufacturing</h4>
+                    <p>Strategie zaměřená na minimalizaci plýtvání a maximalizaci hodnoty. Výroba standardizovaných
+                        komponent ve velkých objemech na základě predikcí.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Agile Manufacturing</h4>
+                    <p>Rychlá montáž, flexibilní reakce na skutečné objednávky a maximalizace úrovně služby. Zaměřeno na
+                        proměnlivou poptávku.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Leagile Strategy</h4>
+                    <p>Dialektická jednota Lean a Agile prostřednictvím <strong>decoupling point (CODP)</strong>.
+                        Kombinuje výhody obou přístupů.</p>
+                </div>
+            </div>
+
+            <!-- Leagile Diagram -->
+            <div class="mermaid">
+                graph LR
+                subgraph LEAN["🏭 LEAN - Před Decoupling Point"]
+                L1[Stabilní prostředí]
+                L2[Tlak na náklady]
+                L3[Predikce poptávky]
+                end
+                subgraph DP["⚡ CODP"]
+                D[Decoupling Point]
+                end
+                subgraph AGILE["🚀 AGILE - Za Decoupling Point"]
+                A1[Proměnlivá poptávka]
+                A2[Customizace]
+                A3[Skutečné objednávky]
+                end
+                LEAN --> DP
+                DP --> AGILE
+                style DP fill:#f59e0b,stroke:#fbbf24,color:#000
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Logistics Technologies -->
+    <section id="technologie"
+        style="background: linear-gradient(180deg, transparent 0%, rgba(56, 189, 248, 0.03) 100%);">
+        <div class="container">
+            <div class="section-header">
+                <h2>2. Logistické technologie</h2>
+                <p>Čtyři hlavní oblasti moderních logistických technologií</p>
+            </div>
+
+            <div class="mermaid">
+                graph TB
+                subgraph LT["📊 Logistické technologie"]
+                V[🏭 Výroba] --> I[💻 Informační systémy]
+                D[📦 Distribuce] --> I
+                T[🚚 Doprava] --> I
+                I --> SC[🔗 Supply Chain]
+                end
+                style LT fill:#1e293b,stroke:#38bdf8
+                style I fill:#818cf8,stroke:#a78bfa,color:#fff
+                style SC fill:#10b981,stroke:#34d399,color:#fff
+            </div>
+
+            <div class="highlight-box">
+                <p>Pokročilé logistické technologie tvoří důležitý most mezi strategickým plánováním a operativní
+                    realizací. Díky jejich využití mohou podniky efektivně převádět své dodavatelské strategie do
+                    konkrétních procesů.</p>
+            </div>
+
+            <h3 style="color: white; margin: 3rem 0 1.5rem; font-family: 'Outfit', sans-serif;">2.2 Tři klíčové
+                logistické technologie</h3>
+
+            <!-- AGV Section -->
+            <div class="card" id="agv">
+                <h3><i class="fa-solid fa-robot" style="margin-right: 0.5rem;"></i> 2.2.1 Automaticky řízená vozidla
+                    (AGV)</h3>
+                <p>Klíčové zařízení pro automatizaci interní logistiky. Slouží k přepravě materiálu, přesunu hotových
+                    výrobků a doplňování skladových pozic.</p>
+
+                <div class="grid-3" style="margin-top: 1.5rem;">
+                    <div class="card" style="background: rgba(56, 189, 248, 0.1);">
+                        <h4>🧭 Navigační systém</h4>
+                        <ul>
+                            <li>Magnetické pásky</li>
+                            <li>Laserová navigace</li>
+                            <li>SLAM navigace</li>
+                        </ul>
+                    </div>
+                    <div class="card" style="background: rgba(129, 140, 248, 0.1);">
+                        <h4>📋 Řízení úkolů</h4>
+                        <ul>
+                            <li>Plánování úkolů</li>
+                            <li>Předcházení kolizím</li>
+                            <li>Řízení toků</li>
+                        </ul>
+                    </div>
+                    <div class="card" style="background: rgba(16, 185, 129, 0.1);">
+                        <h4>⚙️ Řízení zařízení</h4>
+                        <ul>
+                            <li>Pohonné jednotky</li>
+                            <li>Zdvihací mechanismy</li>
+                            <li>Bezpečnostní senzory</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="highlight-box" style="margin-top: 1.5rem;">
+                    <p><strong>Přínosy AGV:</strong> Zvýšení konzistence interní logistiky, snížení chybovosti,
+                        minimalizace rizik spojených s ruční manipulací a podpora provozu s vysokou taktností.</p>
+                </div>
+            </div>
+
+            <!-- RFID Section -->
+            <div class="card" id="rfid" style="margin-top: 2rem;">
+                <h3><i class="fa-solid fa-wifi" style="margin-right: 0.5rem;"></i> 2.2.2 RFID technologie</h3>
+                <p>Radiofrekvenční identifikace je bezkontaktní IoT senzorová technologie využívající elektromagnetické
+                    pole k automatické identifikaci štítků.</p>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Vlastnost</th>
+                                <th>Čárový kód</th>
+                                <th>RFID</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Přímá viditelnost</td>
+                                <td>Vyžadována</td>
+                                <td>Není nutná (Non-Line-of-Sight)</td>
+                            </tr>
+                            <tr>
+                                <td>Hromadné čtení</td>
+                                <td>Ne</td>
+                                <td>Stovky štítků současně</td>
+                            </tr>
+                            <tr>
+                                <td>Dynamický zápis</td>
+                                <td>Ne</td>
+                                <td>Ano</td>
+                            </tr>
+                            <tr>
+                                <td>Integrace s WMS</td>
+                                <td>Omezená</td>
+                                <td>Plná vizualizace toků</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Digital Twin Section -->
+            <div class="card" id="digital-twin" style="margin-top: 2rem;">
+                <h3><i class="fa-solid fa-cube" style="margin-right: 0.5rem;"></i> 2.2.3 Digitální dvojče (Digital Twin)
+                </h3>
+                <p>Simulační platforma propojená s umělou inteligencí umožňující detailní simulace bez narušení
+                    fyzického provozu.</p>
+
+                <div class="grid-2" style="margin-top: 1.5rem;">
+                    <div>
+                        <h4 style="color: var(--accent-color);">Klíčové přínosy</h4>
+                        <ul>
+                            <li>Identifikace výrobních úzkých míst</li>
+                            <li>Návrhy úprav výrobního sledu</li>
+                            <li>Predikce dopadů poruch strojů</li>
+                            <li>Virtuální zkušební provoz</li>
+                            <li>Simulace alternativních scénářů</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--accent-color);">Výhody pro SCM</h4>
+                        <ul>
+                            <li>Rychlá škálovatelnost</li>
+                            <li>Optimalizace složitých procesů</li>
+                            <li>Predikce rizik</li>
+                            <li>Pružné přerozdělení zdrojů</li>
+                            <li>Kontinuita výroby v nejistotě</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Foxconn -->
+    <section id="foxconn">
+        <div class="container">
+            <div class="section-header">
+                <h2>3. Foxconn - Praktická část</h2>
+                <p>Hon Hai Precision Industry Co., Ltd. – největší světový poskytovatel EMS</p>
+            </div>
+
+            <!-- Company Stats -->
+            <div class="grid-3">
+                <div class="card stat-card">
+                    <div class="stat-value">1974</div>
+                    <div class="stat-label">Rok založení</div>
+                </div>
+                <div class="card stat-card">
+                    <div class="stat-value">Fortune 500</div>
+                    <div class="stat-label">Globální pozice</div>
+                </div>
+                <div class="card stat-card">
+                    <div class="stat-value">2000</div>
+                    <div class="stat-label">Vstup do ČR</div>
+                </div>
+            </div>
+
+            <!-- eCMMS Model -->
+            <div class="card" style="margin-top: 2rem;">
+                <h3>3.1 Obchodní model eCMMS</h3>
+                <div class="grid-2" style="margin-top: 1rem;">
+                    <div class="mermaid">
+                        graph TB
+                        C[Component<br />Komponenty] --> M[Module<br />Moduly]
+                        M --> MV[Move<br />Logistika]
+                        MV --> S[Service<br />Služby]
+                        style C fill:#1e40af,stroke:#38bdf8,color:#fff
+                        style M fill:#1e3a5f,stroke:#38bdf8,color:#fff
+                        style MV fill:#1e3a5f,stroke:#38bdf8,color:#fff
+                        style S fill:#10b981,stroke:#34d399,color:#fff
+                    </div>
+                    <div>
+                        <ul>
+                            <li><strong>Component:</strong> Výroba šasi, konektorů, chladicích modulů</li>
+                            <li><strong>Module:</strong> Integrace komponent do funkčních modulů</li>
+                            <li><strong>Move:</strong> Řízení globální logistické sítě</li>
+                            <li><strong>Service:</strong> Návrh produktů, opravy, servis</li>
+                        </ul>
+                        <p style="margin-top: 1rem; color: var(--text-secondary);">Model rozšiřuje tradiční montážní
+                            výrobu díky hluboké vertikální integraci.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3+3 Strategy -->
+            <div class="card" style="margin-top: 2rem;">
+                <h3>3.2 Strategie „3+3"</h3>
+                <div class="grid-2">
+                    <div>
+                        <h4 style="color: var(--accent-color);">3 Nové průmyslové oblasti</h4>
+                        <ul>
+                            <li><i class="fa-solid fa-car"></i> Elektromobilita</li>
+                            <li><i class="fa-solid fa-heart-pulse"></i> Digitální zdravotnictví</li>
+                            <li><i class="fa-solid fa-robot"></i> Robotika</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--accent-secondary);">3 Klíčové technologie</h4>
+                        <ul>
+                            <li><i class="fa-solid fa-brain"></i> Umělá inteligence</li>
+                            <li><i class="fa-solid fa-microchip"></i> Polovodiče</li>
+                            <li><i class="fa-solid fa-tower-cell"></i> Komunikační technologie</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Czech Operations -->
+            <h3 style="color: white; margin: 3rem 0 1.5rem; font-family: 'Outfit', sans-serif;">3.3 Foxconn v České
+                republice</h3>
+
+            <div class="highlight-box">
+                <p>Česká republika se díky své poloze v geografickém středu Evropy, silné průmyslové tradici a výhodám
+                    členství v EU stala první volbou Foxconnu pro evropskou výrobu.</p>
+            </div>
+
+            <div class="grid-2" style="margin-top: 1.5rem;">
+                <div class="card">
+                    <h3>🏭 Závod Pardubice</h3>
+                    <p><strong>E Business Group:</strong></p>
+                    <ul>
+                        <li>Výroba a montáž počítačů, monitorů</li>
+                        <li>Poprodejní služby</li>
+                        <li>Logistická distribuce</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>G Group:</strong></p>
+                    <ul>
+                        <li>Komunikační technologie (switches, routers, servers)</li>
+                        <li>Výroba kovových šasi a plastových dílů</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>🏭 Závod Kutná Hora</h3>
+                    <p><strong>F Group:</strong></p>
+                    <ul>
+                        <li>Komplexní konfigurovatelné servery</li>
+                        <li>Disková pole (disk arrays)</li>
+                        <li>Serverové sestavy</li>
+                        <li>Servisní centrum pro opravy základních desek</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>Mechanická divize</strong> se silným zaměřením na výrobu</p>
+                </div>
+            </div>
+
+            <!-- Associated Companies -->
+            <div class="grid-2" style="margin-top: 1.5rem;">
+                <div class="card" style="border-left: 4px solid var(--accent-color);">
+                    <h4>Foxconn 4Tech</h4>
+                    <p>České R&D centrum zaměřené na Průmysl 4.0, analýzu velkých dat a IoT řešení. Technologické
+                        mozkové centrum modernizace českých závodů.</p>
+                </div>
+                <div class="card" style="border-left: 4px solid var(--accent-secondary);">
+                    <h4>JUSDA Europe</h4>
+                    <p>Profesionální společnost pro řízení dodavatelských řetězců. Zajišťuje koordinaci logistických
+                        operací napříč celou Evropou.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Implementation -->
+    <section id="implementace"
+        style="background: linear-gradient(180deg, transparent 0%, rgba(129, 140, 248, 0.03) 100%);">
+        <div class="container">
+            <div class="section-header">
+                <h2>4. Implementace technologií v Foxconn CZ</h2>
+                <p>Praktické nasazení AGV, RFID a Digital Twin v českých závodech</p>
+            </div>
+
+            <!-- AGV Implementation -->
+            <div class="card">
+                <h3><i class="fa-solid fa-robot" style="margin-right: 0.5rem;"></i> 4.1 AGV v praxi</h3>
+                <p>V pardubickém závodě byla nasazena první plně automatická manipulační jednotka <strong>Jungheinrich
+                        ERC 215a</strong> v České republice.</p>
+
+                <div class="highlight-box" style="margin: 1.5rem 0;">
+                    <ul>
+                        <li>Navigace pomocí laserových reflexních bodů</li>
+                        <li>Bezpečný provoz v prostředí sdíleném s pracovníky</li>
+                        <li>Projekt od návrhu po spuštění: cca 14 měsíců</li>
+                        <li>Instalace a zprovoznění: 1 měsíc</li>
+                    </ul>
+                </div>
+
+                <a href="https://www.youtube.com/watch?v=L4ZXtU_ZNi4" target="_blank" class="video-thumbnail"
+                    title="Přehrát video: Jungheinrich AGV ve Foxconn">
+                    <div class="image-showcase">
+                        <img src="./assets/agv_warehouse.png" alt="Jungheinrich AGV v automatizovaném skladu">
+                        <div class="play-overlay"><i class="fa-solid fa-play"></i></div>
+                    </div>
+                </a>
+                <p style="text-align: center; color: var(--text-secondary); font-size: 0.85rem;"><i
+                        class="fa-brands fa-youtube" style="color: #ff0000; margin-right: 0.3rem;"></i> Klikněte pro
+                    přehrání videa: Automatický vozík ERC 215a ve firmě Foxconn</p>
+            </div>
+
+            <!-- RFID Implementation -->
+            <div class="card" style="margin-top: 2rem;">
+                <h3><i class="fa-solid fa-wifi" style="margin-right: 0.5rem;"></i> 4.2 RFID a projekt Chytrá logistika
+                </h3>
+
+                <div class="grid-2">
+                    <div>
+                        <h4 style="color: var(--accent-color);">Real-time sledování (JIT)</h4>
+                        <ul>
+                            <li>RFID kombinováno s RTLS technologií</li>
+                            <li>IoT aplikace na protokolu LoRa</li>
+                            <li>Data odesílána do MES/ERP a cloudu</li>
+                            <li>Optimalizované plánování v režimu JIT</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--accent-secondary);">Projekt Optimus</h4>
+                        <ul>
+                            <li>RFID s adaptivními čtecími systémy (ARS)</li>
+                            <li>Zkrácení doby zpracování</li>
+                            <li>Zjednodušení rozhraní SAP</li>
+                            <li>Zvýšení produktivity blížící se 100%</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="image-showcase" style="margin-top: 1.5rem;">
+                    <img src="./assets/rfid_logistics.png" alt="RFID technologie ve skladové logistice"
+                        style="width: 100%; border-radius: 1rem;">
+                </div>
+                <p style="text-align: center; color: var(--text-secondary); font-size: 0.85rem;">RFID sledování
+                    materiálu v reálném čase</p>
+            </div>
+
+            <!-- Digital Twin Implementation -->
+            <div class="card" style="margin-top: 2rem;">
+                <h3><i class="fa-solid fa-cube" style="margin-right: 0.5rem;"></i> 4.3 Digitální dvojče s NVIDIA</h3>
+                <p>Foxconn spolupracuje se společností NVIDIA a využívá platformu <strong>Omniverse</strong> ve spojení
+                    s metodikou <strong>FODT</strong> (Factory Omniverse Digital Twin).</p>
+
+                <div class="highlight-box" style="margin: 1.5rem 0;">
+                    <h4 style="color: var(--accent-color);">Klíčové schopnosti</h4>
+                    <ul>
+                        <li>Simulace celé výrobní linky ve 3D prostoru</li>
+                        <li>Testování rozmístění robotických ramen a AGV/AMR</li>
+                        <li>Ověřování logistických toků a procesů spolupráce člověka a stroje</li>
+                        <li>Očekávaná úspora energie >30% ročně</li>
+                    </ul>
+                </div>
+
+                <a href="https://www.youtube.com/watch?v=HjpwGgmt57U" target="_blank" class="video-thumbnail"
+                    title="Přehrát video: NVIDIA Foxconn Digital Twin">
+                    <div class="image-showcase">
+                        <img src="./assets/digital_twin_factory.png" alt="Digitální dvojče výrobní linky">
+                        <div class="play-overlay"><i class="fa-solid fa-play"></i></div>
+                    </div>
+                </a>
+                <p style="text-align: center; color: var(--text-secondary); font-size: 0.85rem;"><i
+                        class="fa-brands fa-youtube" style="color: #ff0000; margin-right: 0.3rem;"></i> Klikněte pro
+                    přehrání videa: Building Digital Twins of Foxconn's Robotic Factories</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Conclusion -->
+    <section id="zaver">
+        <div class="container">
+            <div class="section-header">
+                <h2>Závěr</h2>
+            </div>
+
+            <div class="card" style="text-align: center; max-width: 900px; margin: 0 auto;">
+                <p style="font-size: 1.1rem; line-height: 1.8;">S rychlým rozvojem technologií a dynamickými změnami
+                    vnějšího prostředí se strategie dodavatelských řetězců postupně posouvají k novému paradigmatickému
+                    modelu.</p>
+
+                <div class="highlight-box" style="margin: 2rem 0; text-align: left;">
+                    <p><strong>Budoucí SCM bude hledat rovnováhu mezi:</strong></p>
+                    <ul>
+                        <li>Flexibilitou</li>
+                        <li>Udržitelností</li>
+                        <li>Inteligentními systémy</li>
+                    </ul>
+                </div>
+
+                <p style="color: var(--text-secondary);">Přestože technologie neustále pokročují, provoz dodavatelského
+                    řetězce zůstává závislý na lidském úsudku, spolupráci a odbornosti. <strong>Technologie mají člověka
+                        podporovat a posilovat, nikoli nahrazovat lidský rozměr.</strong></p>
+
+                <p style="margin-top: 1.5rem; color: var(--accent-color); font-weight: 500;">Cílem je vytvářet hodnotu
+                    prostřednictvím co nejefektivnějšího uspokojení potřeb zákazníka.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>Synthesis Hub | Research & Analysis Portfolio</p>
+            <p style="margin-top: 0.5rem; font-size: 0.8rem;">© 2026 | Řízení dodavatelského řetězce - Foxconn CZ</p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            themeVariables: {
+                primaryColor: '#1e40af',
+                primaryTextColor: '#f8fafc',
+                primaryBorderColor: '#38bdf8',
+                lineColor: '#38bdf8',
+                secondaryColor: '#1e293b',
+                tertiaryColor: '#0f172a'
+            }
+        });
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>

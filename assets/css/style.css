@@ -1,0 +1,474 @@
+/* ===========================
+   SYNTHESIS HUB - ENHANCED VISUAL DESIGN
+   Based on criminal_law_case_study.html
+   Typography: Merriweather (serif) + Inter (sans-serif)
+   Colors: Slate-900 + Amber-700 with rich gradients
+   =========================== */
+
+/* Global Variables */
+:root {
+    /* Background & Surface */
+    --bg-color: #f8fafc;              
+    --card-bg: #ffffff;               
+    --card-border: #e2e8f0;           
+    
+    /* Text Colors */
+    --text-primary: #0f172a;          
+    --text-secondary: #475569;        
+    --text-muted: #94a3b8;            
+    
+    /* Accent Colors - Amber Rich Palette */
+    --amber-900: #78350f;
+    --amber-800: #92400e;
+    --amber-700: #b45309;
+    --amber-600: #d97706;
+    --amber-500: #f59e0b;
+    --amber-400: #fbbf24;
+    --amber-50: #fffbeb;
+    
+    /* Slate Palette */
+    --slate-900: #0f172a;
+    --slate-800: #1e293b;
+    --slate-700: #334155;
+    --slate-600: #475569;
+    --slate-200: #e2e8f0;
+    
+    /* Design Elements */
+    --accent-gradient: linear-gradient(135deg, #b45309 0%, #f59e0b 100%);
+    --card-shadow: 0 10px 40px rgba(15, 23, 42, 0.1);
+    --card-shadow-hover: 0 20px 60px rgba(180, 83, 9, 0.15);
+    --glass-surface: rgba(255, 255, 255, 0.9);
+    
+    /* UI Elements */
+    --btn-radius: 0.75rem;
+    --card-radius: 1rem;
+    --transition-speed: 0.3s;
+    
+    /* Typography */
+    --font-serif: 'Merriweather', Georgia, serif;
+    --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* Reset & Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-sans);
+    background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+    color: var(--text-primary);
+    line-height: 1.625;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Typography */
+h1, h2, h3, h4 {
+    font-family: var(--font-serif);
+    font-weight: 900;
+    color: var(--text-primary);
+    line-height: 1.25;
+}
+
+h1 { font-size: 3rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: var(--transition-speed);
+}
+
+/* Layout */
+.container {
+    max-width: 1152px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    width: 100%;
+}
+
+/* Header - Enhanced with backdrop blur */
+header {
+    padding: 1.5rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--card-border);
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+}
+
+.logo {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-primary);
+    transition: transform 0.3s;
+}
+
+.logo:hover {
+    transform: translateY(-2px);
+}
+
+.logo i {
+    color: var(--amber-600);
+    font-size: 1.75rem;
+}
+
+nav a {
+    color: var(--text-secondary);
+    font-size: 1.25rem;
+    transition: all 0.3s;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+}
+
+nav a:hover {
+    color: var(--amber-700);
+    background: var(--amber-50);
+}
+
+/* Hero - Enhanced with decorative elements */
+.hero {
+    text-align: center;
+    padding: 4rem 0 3rem;
+    position: relative;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: var(--accent-gradient);
+    border-radius: 2px;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    margin-top: 2rem;
+    color: var(--slate-900);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+}
+
+.hero p {
+    color: var(--text-secondary);
+    font-size: 1.125rem;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.75;
+}
+
+/* Filters - Enhanced with active state */
+.filters {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    background: white;
+    border: 2px solid var(--slate-200);
+    color: var(--text-secondary);
+    padding: 0.625rem 1.5rem;
+    border-radius: 2rem;
+    cursor: pointer;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+}
+
+.filter-btn:hover {
+    border-color: var(--amber-400);
+    color: var(--amber-700);
+    background: var(--amber-50);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(180, 83, 9, 0.15);
+}
+
+.filter-btn.active {
+    background: var(--accent-gradient);
+    color: white;
+    border-color: var(--amber-700);
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(180, 83, 9, 0.3);
+}
+
+/* Grid */
+.report-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+/* Report Card - Enhanced with border-top accent */
+.report-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-top: 4px solid var(--amber-600);
+    border-radius: var(--card-radius);
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+    height: 100%;
+    box-shadow: var(--card-shadow);
+    position: relative;
+    overflow: hidden;
+}
+
+.report-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--accent-gradient);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.report-card:hover::before {
+    opacity: 1;
+}
+
+.report-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--card-shadow-hover);
+    border-color: var(--amber-400);
+}
+
+.report-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.25rem;
+    font-size: 0.75rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--slate-200);
+}
+
+.category-tag {
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    color: var(--amber-700);
+    background: var(--amber-50);
+    padding: 0.25rem 0.75rem;
+    border-radius: 0.375rem;
+}
+
+.card-icon {
+    font-size: 1.5rem;
+    color: var(--amber-600);
+    opacity: 0.7;
+}
+
+.report-title {
+    font-family: var(--font-serif);
+    font-size: 1.375rem;
+    font-weight: 900;
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
+    color: var(--slate-900);
+}
+
+.report-desc {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+    line-height: 1.625;
+}
+
+/* Card Actions Area */
+.card-actions {
+    margin-top: auto;
+}
+
+/* Dual View Buttons */
+.dual-btn-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+/* Base Link Button Style - Enhanced with gradients */
+.btn-original,
+.btn-interactive,
+.btn-workflow,
+.btn-primary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.25rem;
+    border-radius: 0.625rem;
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    transform: scale(1);
+    font-family: var(--font-sans);
+    letter-spacing: 0.01em;
+}
+
+.btn-original:hover,
+.btn-interactive:hover,
+.btn-workflow:hover,
+.btn-primary:hover {
+    transform: translateY(-2px);
+}
+
+/* 1. Original Research - Deep Slate with subtle gradient */
+.btn-original,
+.btn-primary {
+    background: linear-gradient(135deg, #334155 0%, #475569 100%);
+    border: 2px solid #475569;
+    color: white;
+    box-shadow: 0 2px 8px rgba(51, 65, 85, 0.2);
+}
+
+.btn-original:hover,
+.btn-primary:hover {
+    background: linear-gradient(135deg, #475569 0%, #64748b 100%);
+    border-color: #64748b;
+    box-shadow: 0 6px 16px rgba(51, 65, 85, 0.3);
+}
+
+.btn-original i,
+.btn-primary i {
+    font-size: 1rem;
+}
+
+/* 2. Interactive / AI Synergy - Amber gradient with glow */
+.btn-interactive {
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.15) 0%, rgba(245, 158, 11, 0.15) 100%);
+    border: 2px solid var(--amber-400);
+    color: var(--amber-800);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(245, 158, 11, 0.2);
+}
+
+.btn-interactive::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+.btn-interactive:hover::before {
+    left: 100%;
+}
+
+.btn-interactive:hover {
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.3) 0%, rgba(245, 158, 11, 0.3) 100%);
+    border-color: var(--amber-600);
+    color: var(--amber-900);
+    box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+}
+
+/* 3. AI Lab Workflow - Solid Amber with hover lift */
+.btn-workflow {
+    background: var(--accent-gradient);
+    border: 2px solid var(--amber-700);
+    color: white;
+    width: 100%;
+    box-shadow: 0 2px 8px rgba(180, 83, 9, 0.25);
+    font-weight: 700;
+}
+
+.btn-workflow:hover {
+    background: linear-gradient(135deg, #d97706 0%, #fbbf24 100%);
+    border-color: var(--amber-600);
+    box-shadow: 0 6px 20px rgba(180, 83, 9, 0.4);
+    transform: translateY(-2px);
+}
+
+/* Footer - Enhanced */
+footer {
+    margin-top: auto;
+    padding: 2.5rem 0;
+    border-top: 1px solid var(--card-border);
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    background: white;
+    box-shadow: 0 -1px 3px rgba(15, 23, 42, 0.05);
+}
+
+footer p {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .report-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .filters {
+        overflow-x: auto;
+        padding-bottom: 0.5rem;
+        justify-content: flex-start;
+    }
+    
+    header {
+        position: static;
+    }
+}
+
+/* Add subtle animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.report-card {
+    animation: fadeInUp 0.5s ease-out;
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}

@@ -1,0 +1,75 @@
+[
+  {
+    "slug": "criminal-law-casestudy",
+    "title": "Analýza právní kvalifikace v případu Lukáše Nováčka_úvahy nad aplikací trestního práva ve specifických bezpečnostních kontextech",
+    "driveId": "1aSGI2BhoVrcc6DwHDezGPmPDYcofs0PL",
+    "driveId2": null,
+    "lock": false,
+    "content": {
+      "intro": "Tato seminární práce se zaměřuje na analýzu libovolně zvolené a pravomocně ukončené trestní kauzy z veřejných zdrojů, přičemž klade hlavní důraz na identifikaci znaků skutkové podstaty, jako jsou objekt, subjekt a jejich objektivní i subjektivní stránka. Vzhledem k tomu, že v této fázi výuky dosud neproběhl výklad trestního práva procesního, analýza se soustředí primárně na uplatnění základních principů trestního práva hmotného při posuzování daného činu. Součástí textu je rovněž popis či návrh vyšetřovacích metod a určení příslušných policejních útvarů, to vše v odborném formátu s řádným uvedením všech použitých podkladů a informačních zdrojů.",
+      "summary": ""
+    }
+  },
+  {
+    "slug": "solow-swan-model",
+    "title": "Konstrukce Solowova_Swanova modelu akumulace kapitálu_odhad konvergencedivergence vybraných ekonomik",
+    "driveId": "1Jz-tuLMzPAcqF8UFiA5tu4GfglUj3OrS",
+    "driveId2": "1PPS8ALGXYoPmQHadzA_7qx7nyq35M0jB",
+    "lock": false,
+    "content": {
+      "intro": "Předmětem této práce je analýza ekonomického růstu s využitím Solowova-Swanova modelu aplikovaného na vybranou skupinu zemí: Taiwan a Českou republiku, coby regiony aktuálního pobytu, Jižní Koreu jakožto tradičního hospodářského konkurenta Taiwanu a Singapur, jakožto příklad specifické a vysoce výkonné malé ekonomiky. Hlavním přínosem práce je kvantitativní zpracování reálných dat za posledních 20 let k interpretaci dynamiky růstu v těchto odlišných geografických a ekonomických kontextech, přičemž zvláštní pozornost je věnována hloubkové analýze hospodářského vývoje Taiwanu v uplynulém půlstoletí. Závěrečná část je věnována komparativní diskusi a porovnání výsledků, které reflektují specifické faktory ovlivňující ekonomickou sílu a stabilitu těchto čtyř subjektů.",
+      "summary": ""
+    }
+  },
+  {
+    "slug": "microeconomic-models",
+    "title": "Optimalizační modely v mikroekonomii_Spotřební modely",
+    "driveId": "1n18wUeiMJhV-f8Low2R--ld8wYOmfe_J",
+    "driveId2": "16Cn8G9gnerkGftBumepaqrYQo6Ibxvc2",
+    "lock": false,
+    "content": {
+      "intro": "Tato semestrální práce se zaměřuje na praktickou aplikaci teorie optima spotřebitele prostřednictvím analýzy dvou klíčových komodit: rýže, představující základní potravinu na Taiwanu, a brambor, jakožto dominantního prvku západní stravy. Cílem je pomocí softwarových nástrojů, jako jsou MS Excel či GeoGebra, modelovat obecné principy optimalizace a vázaných extrémů v ekonomii při změnách důchodových a cenových podmínek. Práce klade důraz na interpretaci důchodového a cenového efektu a následné počítačové zpracování dat do formy tabulek a grafů, přičemž teoretický výklad je omezen na nezbytné minimum ve prospěch praktické diskuse získaných výsledků.",
+      "summary": ""
+    }
+  },
+  {
+    "slug": "sustainable-development-praha3",
+    "title": "Přístupy k udržitelnému rozvoji na příkladu veřejných služeb a strategického plánování_Praha 3_Pečovatelská služba",
+    "driveId": "1pgWwuPHHby0qFEOKPDcyZVjfOfqeACuB",
+    "driveId2": null,
+    "lock": false,
+    "content": { "intro": "", "summary": "" }
+  },
+  {
+    "slug": "supply-chain-foxconn",
+    "title": "Řízení dodavatelského řetězce v podniku_Příklad společnosti Foxconn CZ",
+    "driveId": "1v9AnYQvPQhkrvYJzOKBkd7S7wIeDxlcE",
+    "driveId2": null,
+    "lock": false,
+    "content": { "intro": "", "summary": "" }
+  },
+  {
+    "slug": "strategic-management-nobilis-tilia",
+    "title": "Strategický management_Příklad společnosti Nobilis Tilia",
+    "driveId": "10NE67li6D2doVbIbrDEhQC3yGwjcRAO4",
+    "driveId2": null,
+    "lock": false,
+    "content": { "intro": "", "summary": "" }
+  },
+  {
+    "slug": "fiscal-transfers-tw-cz",
+    "title": "Účinnost fiskálních transferů v modelu produkt–výdaje aplikace stimulačních poukazů na Tchaj-wanu a jejich možná implementace v ČR",
+    "driveId": "1hpbBI2LTUuRqDzznhAYAVl3-4xVxMk4P",
+    "driveId2": null,
+    "lock": false,
+    "content": { "intro": "", "summary": "" }
+  },
+  {
+    "slug": "economic-growth-tw-cz",
+    "title": "Srovnání hospodářského růstu Tchaj-wanu a České republiky Role lidského kapitálu z pohledu rozšířeného Solowova modelu",
+    "driveId": "1-GsoDjKYtnfRdW2UJEptyjvq0kj1LSkr",
+    "driveId2": null,
+    "lock": false,
+    "content": { "intro": "", "summary": "" }
+  }
+]

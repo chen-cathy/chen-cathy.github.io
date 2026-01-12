@@ -1,0 +1,309 @@
+/* Global Variables */
+:root {
+    --bg-color: #0f172a;
+    --card-bg: #1e293b;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --accent-color: #38bdf8;
+    --accent-gradient: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+
+    --glass-surface: rgba(30, 41, 59, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.1);
+
+    --btn-radius: 0.5rem;
+    --transition-speed: 0.3s;
+}
+
+/* Reset & Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4 {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    color: white;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: var(--transition-speed);
+}
+
+/* Layout */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    width: 100%;
+}
+
+/* Header */
+header {
+    padding: 2rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Hero */
+.hero {
+    text-align: center;
+    padding: 4rem 0;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero p {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Filters */
+.filters {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    background: transparent;
+    border: 1px solid var(--glass-border);
+    color: var(--text-secondary);
+    padding: 0.5rem 1.25rem;
+    border-radius: 2rem;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.filter-btn:hover {
+    border-color: var(--accent-color);
+    color: white;
+}
+
+.filter-btn.active {
+    background: var(--accent-color);
+    color: #0f172a;
+    border-color: var(--accent-color);
+    font-weight: 600;
+}
+
+/* Grid */
+.report-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    /* Slightly wider cards for dual buttons */
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+/* Report Card */
+.report-card {
+    background: var(--glass-surface);
+    border: 1px solid var(--glass-border);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+}
+
+.report-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+    border-color: rgba(56, 189, 248, 0.3);
+}
+
+.report-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.category-tag {
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+    color: var(--accent-color);
+}
+
+.card-icon {
+    font-size: 1.2rem;
+    opacity: 0.7;
+}
+
+.report-title {
+    font-size: 1.4rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
+}
+
+.report-desc {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+}
+
+/* Card Actions Area */
+.card-actions {
+    margin-top: auto;
+}
+
+/* Dual View Buttons (Standard) */
+.dual-btn-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+/* Base Link Button Style */
+.btn-original,
+.btn-interactive,
+.btn-workflow,
+.btn-primary {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1rem;
+    border-radius: var(--btn-radius);
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    /* Ensure pointer */
+    transform: scale(1);
+    /* Base scale */
+}
+
+/* Hover Scale Effect (Global for these buttons) */
+.btn-original:hover,
+.btn-interactive:hover,
+.btn-workflow:hover,
+.btn-primary:hover {
+    transform: scale(1.02);
+}
+
+/* 1. Original Research (Standard Blue) */
+/* Transition: #1e40af -> #3b82f6 */
+.btn-original,
+.btn-primary {
+    background-color: #1e40af;
+    /* Dark Blue Base */
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    color: #f8fafc;
+}
+
+.btn-original:hover,
+.btn-primary:hover {
+    background-color: #3b82f6;
+    /* Bright Blue Hover */
+    border-color: #60a5fa;
+    color: white;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+/* 2. Interactive / AI Synergy (Gradient + Glow) */
+.btn-interactive {
+    background: linear-gradient(135deg, rgba(56, 189, 248, 0.1) 0%, rgba(129, 140, 248, 0.1) 100%);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    color: var(--accent-color);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-interactive:hover {
+    /* Brighter Gradient */
+    background: linear-gradient(135deg, rgba(6, 182, 212, 0.25) 0%, rgba(139, 92, 246, 0.25) 100%);
+    border-color: #a78bfa;
+    color: white;
+    /* Outer Glow */
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+}
+
+/* 3. AI Lab Workflow (Purple) */
+.btn-workflow {
+    justify-content: center;
+    background: rgba(139, 92, 246, 0.1);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    color: #a78bfa;
+    width: 100%;
+}
+
+.btn-workflow:hover {
+    background: rgba(139, 92, 246, 0.25);
+    color: white;
+    border-color: #c084fc;
+    box-shadow: 0 0 15px rgba(167, 139, 250, 0.3);
+}
+
+/* Footer */
+footer {
+    margin-top: auto;
+    padding: 2rem 0;
+    border-top: 1px solid var(--glass-border);
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .report-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+
+    .filters {
+        overflow-x: auto;
+        padding-bottom: 0.5rem;
+        justify-content: flex-start;
+    }
+}

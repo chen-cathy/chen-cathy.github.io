@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="cs" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Účinnost fiskálních transferů | Model produkt–výdaje</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; }
+        .math-font { font-family: 'Times New Roman', Times, serif; font-style: italic; }
+        .code-font { font-family: 'JetBrains Mono', monospace; }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #64748b; }
+
+        /* Fraction styling */
+        .fraction { text-align: center; vertical-align: middle; margin: 0 0.2em; font-size: 0.9em; }
+        .fraction > span { display: block; padding: 0.1em; }
+        .fraction span.border-b { border-bottom: 1px solid currentColor; }
+
+        /* Animations */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fade-in { animation: fadeIn 0.8s ease-out forwards; }
+        .animate-delay-100 { animation-delay: 0.1s; }
+        .animate-delay-200 { animation-delay: 0.2s; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-indigo-100 selection:text-indigo-900">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white/90 backdrop-blur-md border-b border-slate-200 z-50 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center gap-2">
+                    <div class="w-8 h-8 bg-indigo-900 text-white flex items-center justify-center font-serif font-bold rounded-sm">E</div>
+                    <span class="font-serif font-semibold text-slate-900 tracking-tight hidden sm:block">Ekonomie a Hospodářská Politika</span>
+                </div>
+                <div class="hidden md:flex space-x-8 text-sm font-medium">
+                    <a href="#theory" class="text-slate-500 hover:text-indigo-900 transition-colors">Teorie</a>
+                    <a href="#taiwan" class="text-slate-500 hover:text-indigo-900 transition-colors">Tchaj-wan</a>
+                    <a href="#multiplier" class="text-slate-500 hover:text-indigo-900 transition-colors">Multiplikátor</a>
+                    <a href="#czech" class="text-slate-500 hover:text-indigo-900 transition-colors">Česká republika</a>
+                    <a href="#conclusion" class="text-slate-500 hover:text-indigo-900 transition-colors">Závěr</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-slate-900 text-white">
+        <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#6366f1 1px, transparent 1px); background-size: 32px 32px;"></div>
+        <div class="max-w-4xl mx-auto px-6 relative z-10 text-center">
+            <p class="text-indigo-300 font-medium tracking-wide uppercase text-sm mb-4 opacity-0 animate-fade-in">6MEHP1 &bull; Chen Shuli</p>
+            <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-6 opacity-0 animate-fade-in animate-delay-100">
+                Účinnost fiskálních transferů v modelu produkt–výdaje
+            </h1>
+            <p class="text-xl md:text-2xl text-slate-300 font-light max-w-2xl mx-auto mb-10 leading-relaxed opacity-0 animate-fade-in animate-delay-200">
+                Aplikace stimulačních poukazů na Tchaj-wanu a jejich možná implementace v ČR.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center opacity-0 animate-fade-in animate-delay-200">
+                <a href="#theory" class="px-8 py-3 bg-white text-slate-900 font-semibold rounded hover:bg-indigo-50 transition-colors">Začít číst</a>
+                <a href="#interactive-model" class="px-8 py-3 border border-slate-600 text-white font-medium rounded hover:bg-slate-800 transition-colors flex items-center justify-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                    </svg>
+                    Interaktivní model
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-6 py-12">
+        
+        <!-- Section 1: Theory -->
+        <section id="theory" class="mb-24 scroll-mt-24">
+            <div class="prose prose-lg prose-slate max-w-none">
+                <h2 class="text-3xl font-bold text-slate-900 mb-6 border-b pb-4 border-slate-200">1. Výzkumní otázky a přehled modelu</h2>
+                <p class="lead text-xl text-slate-600 mb-8">
+                    Z hlediska Keynesova teorie spotřeby a multiplikátorového efektu jednoduchého keynesiánského modelu diskutujeme o účinnosti spotřebitelských poukazů na Tchaj-wanu. Následně posuzujeme vhodnost aplikace této politiky v České republice.
+                </p>
+
+                <div class="grid md:grid-cols-2 gap-8 my-10">
+                    <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+                        <h3 class="text-lg font-semibold text-indigo-900 mb-4 uppercase tracking-wider text-xs">Keynesova teorie spotřeby</h3>
+                        <div class="math-font text-2xl text-center py-4 text-slate-800 bg-slate-50 rounded mb-4">
+                            C = f(YD) = Ca + cYD
+                        </div>
+                        <ul class="text-sm space-y-2 text-slate-600">
+                            <li><strong class="text-slate-900">Ca</strong> : Autonomní spotřeba (nezávislá na důchodu)</li>
+                            <li><strong class="text-slate-900">c</strong> : Mezní sklon ke spotřebě (MPC)</li>
+                            <li><strong class="text-slate-900">MPC</strong> : <span class="math-font">∆C / ∆Y</span></li>
+                            <li class="pt-2 border-t border-slate-100">Platí: <span class="math-font">APC + APS = 1</span> a <span class="math-font">c + s = 1</span></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+                        <h3 class="text-lg font-semibold text-indigo-900 mb-4 uppercase tracking-wider text-xs">Model produkt-výdaje</h3>
+                        <div class="math-font text-xl text-center py-4 text-slate-800 bg-slate-50 rounded mb-4">
+                            Ys = Yd = AE = AD
+                        </div>
+                        <p class="text-sm text-slate-600 mb-2">Determinace rovnovážné produkce ve čtyřsektorové ekonomice:</p>
+                        <div class="math-font text-center text-slate-800 text-lg leading-relaxed">
+                            = C + I + G + NX<br>
+                            = Ca + cYD + I + G + NX<br>
+                            = Ca + c*(Y – t*Y – TAa + TRa) + I + G + NX
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Taiwan Case Study -->
+        <section id="taiwan" class="mb-24 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-slate-900 mb-6 border-b pb-4 border-slate-200">2. Aplikace spotřebitelských poukázek na Tchaj-wanu</h2>
+            
+            <div class="prose prose-lg prose-slate max-w-none mb-10">
+                <p>
+                    Tchaj-wan v letech 2009 a 2021 dvakrát prostřednictvím zvláštního rozpočtu vydal spotřební poukázky, čímž uskutečnil fiskální stimulaci. V době hospodářské krize vláda přijímá opatření na podporu spotřeby, aby napravila Keynesem zdůrazněný nedostatek agregátní poptávky.
+                </p>
+                <p>
+                    Obecně je monetární politika schopna působit rychleji, avšak při úrokových sazbách blížících se nule je její účinnost omezena. Právě tehdy mohou fiskální nástroje (jako spotřební poukázky) příměji posílit reálnou ekonomickou poptávku.
+                </p>
+            </div>
+
+            <!-- Comparison Table Component -->
+            <div class="bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden mb-12">
+                <div class="bg-slate-900 text-white p-4 flex justify-between items-center">
+                    <h3 class="font-serif font-bold text-lg">Srovnání: 2009 vs 2021</h3>
+                    <span class="text-xs text-slate-400 font-mono">1 TWD ≈ 0.71 ~ 0.75 CZK</span>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left">
+                        <thead class="bg-slate-50 text-slate-500 uppercase font-medium text-xs">
+                            <tr>
+                                <th class="px-6 py-4">Položka</th>
+                                <th class="px-6 py-4 text-indigo-700 bg-indigo-50/50">Poukázky 2009</th>
+                                <th class="px-6 py-4 text-emerald-700 bg-emerald-50/50">Trojité poukázky 2021</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <tr>
+                                <td class="px-6 py-4 font-medium text-slate-900">Politické pozadí</td>
+                                <td class="px-6 py-4">Finanční krize 2008 (recese)</td>
+                                <td class="px-6 py-4">Pandemie COVID-19</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 font-medium text-slate-900">Rozpočet</td>
+                                <td class="px-6 py-4">858 mld. TWD</td>
+                                <td class="px-6 py-4">50 mld. TWD</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 font-medium text-slate-900">Částka na osobu</td>
+                                <td class="px-6 py-4">3 600 TWD (zdarma)</td>
+                                <td class="px-6 py-4">Za 1 000 TWD hodnota 3 000 TWD (subvence 2 000)</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 font-medium text-slate-900">Skutečný přínos</td>
+                                <td class="px-6 py-4">HDP +0,28 % až +0,43 %</td>
+                                <td class="px-6 py-4">Extra spotřeba +44,3–78,6 mld. TWD<br><span class="text-xs text-slate-500">MPC ≈ 0,49 – 0,63</span></td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 font-medium text-slate-900">Dopad na odvětví</td>
+                                <td class="px-6 py-4">Maloobchod, cestovní ruch</td>
+                                <td class="px-6 py-4">Gastronomie, obchodní domy</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 font-medium text-slate-900">Formát</td>
+                                <td class="px-6 py-4">Papírové</td>
+                                <td class="px-6 py-4">Papírové nebo Digitální</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="bg-slate-50 p-4 text-xs text-slate-500 border-t border-slate-200">
+                    Zdroj: Kan et al., 2017a; Liao et al., 2021; Wei, n.d.
+                </div>
+            </div>
+
+            <div class="prose prose-lg prose-slate max-w-none">
+                <p>
+                    O politice spotřebních poukázek existuje řada studií, které se k jejím přínosům staví rozporuplně. Akademické i vládní výzkumy se shodují, že první série poukázek (2009) v hodnotě 1 USD vyvolala neplánované výdaje pouze ve výši <strong>0,24 USD</strong> (Kan et al., 2017b). Ve druhé vlně byl mezní sklon ke spotřebě (MPC) odhadnut na <strong>0,57</strong>.
+                </p>
+            </div>
+        </section>
+
+        <!-- Section 3: Multiplier Effect -->
+        <section id="multiplier" class="mb-24 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-slate-900 mb-6 border-b pb-4 border-slate-200">2.2 Diskuse o multiplikátorovém efektu</h2>
+            
+            <div class="grid lg:grid-cols-5 gap-12">
+                <div class="lg:col-span-3 prose prose-slate">
+                    <p>
+                        Vláda původně odhadovala, že poukázky zvýší HDP o 0,66–1 %, ale výzkumy ukazují hodnoty pouze 0,24–0,44. Mnozí kritici tvrdí, že multiplikátorový efekt poukázek je daleko pod očekáváním.
+                    </p>
+                    <p>
+                        Spotřebitelské poukázky se v rovnici agregátní poptávky řadí mezi vládní transferové platby (TRa). Nejprve zvyšují disponibilní důchod domácností, který je následně utracen dle MPC.
+                    </p>
+                    
+                    <div class="my-6 p-4 border-l-4 border-indigo-500 bg-indigo-50">
+                        <h4 class="text-indigo-900 font-bold m-0 text-sm uppercase">Multiplikátor transferových plateb</h4>
+                        <div class="math-font text-xl mt-2 text-indigo-950">
+                            ΔY = <span class="fraction inline-block align-middle text-center"><span class="block border-b border-indigo-900">c</span><span class="block">1 - c(1-t) + m</span></span> * ΔTRa
+                        </div>
+                    </div>
+                    
+                    <p>
+                        Z rovnice vyplývá, že multiplikátor transferů bude vždy menší než multiplikátor vládních výdajů (G). Aby byl multiplikátor v dvousektorové ekonomice větší než 1, musí platit <code>c > 0.5</code>.
+                    </p>
+                    <p>
+                        Ve čtyřsektorové ekonomice snižuje účinek multiplikátoru i <strong>mezní sklon k importu (m)</strong>. Jelikož jsou daňové sazby i sklon k dovozu větší než nula, multiplikátor je v reálné ekonomice obvykle menší než 1.
+                    </p>
+                </div>
+
+                <!-- Interactive Calculator -->
+                <div class="lg:col-span-2" id="interactive-model">
+                    <div class="sticky top-24 bg-slate-900 text-white rounded-xl shadow-2xl p-6 border border-slate-700">
+                        <h3 class="text-xl font-bold text-white mb-2 flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                            </svg>
+                            Simulátor Multiplikátoru
+                        </h3>
+                        <p class="text-slate-400 text-xs mb-6">Spočítejte účinnost fiskálního transferu ve čtyřsektorové ekonomice.</p>
+                        
+                        <div class="space-y-5">
+                            <div>
+                                <label class="flex justify-between text-sm font-medium mb-1">
+                                    <span>MPC (c) - Sklon ke spotřebě</span>
+                                    <span id="val-c" class="text-indigo-300">0.60</span>
+                                </label>
+                                <input type="range" id="input-c" min="0.1" max="0.95" step="0.05" value="0.60" class="w-full accent-indigo-500 h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer">
+                            </div>
+
+                            <div>
+                                <label class="flex justify-between text-sm font-medium mb-1">
+                                    <span>Tax Rate (t) - Daňová sazba</span>
+                                    <span id="val-t" class="text-indigo-300">0.20</span>
+                                </label>
+                                <input type="range" id="input-t" min="0" max="0.6" step="0.05" value="0.20" class="w-full accent-indigo-500 h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer">
+                            </div>
+
+                            <div>
+                                <label class="flex justify-between text-sm font-medium mb-1">
+                                    <span>MPM (m) - Sklon k importu</span>
+                                    <span id="val-m" class="text-indigo-300">0.30</span>
+                                </label>
+                                <input type="range" id="input-m" min="0" max="0.8" step="0.05" value="0.30" class="w-full accent-indigo-500 h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer">
+                            </div>
+                        </div>
+
+                        <div class="mt-8 pt-6 border-t border-slate-700">
+                            <div class="flex justify-between items-end mb-2">
+                                <span class="text-sm text-slate-400">Výdajový multiplikátor:</span>
+                                <span id="result-mult" class="text-3xl font-bold text-white">1.00</span>
+                            </div>
+                            <div class="flex justify-between items-end">
+                                <span class="text-sm text-slate-400">Transferový multiplikátor:</span>
+                                <span id="result-trans" class="text-2xl font-bold text-indigo-400">0.60</span>
+                            </div>
+                            <p class="mt-4 text-xs text-slate-500 italic" id="interpretation">
+                                Nízká efektivita vlivem úniků do dovozu a daní.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Czech Context -->
+        <section id="czech" class="mb-24 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-slate-900 mb-6 border-b pb-4 border-slate-200">3. Česká republika vs spotřebitelské poukázky</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8 mb-8">
+                <!-- Card 1 -->
+                <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-red-500">
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Vysoká míra úspor</h3>
+                    <p class="text-slate-600 mb-4">
+                        Ve srovnání s ostatními evropskými zeměmi má Česko relativně vysokou míru úspor. Ve druhém čtvrtletí roku 2023 se míra úspor českých domácností blížila <strong>19 procentům</strong>.
+                    </p>
+                    <p class="text-slate-600 text-sm">
+                        Historická zkušenost: Češi jsou prakticky založení, se sklonem ke spoření a opatrnému plánování. Dávají přednost nízké ceně před kvalitou a jsou citliví na ceny.
+                    </p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-blue-500">
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Zahraniční obchod</h3>
+                    <p class="text-slate-600 mb-4">
+                        Česká ekonomika je malá, otevřená a orientovaná na export. Zahraniční obchod dosahuje přibližně <strong>130 % HDP</strong>.
+                    </p>
+                    <p class="text-slate-600 text-sm">
+                        To vede k tomu, že výdaje ze spotřebitelských poukázek by převážně prospívaly zahraničním ekonomikám (import), čímž by se výrazně omezil domácí multiplikační efekt.
+                    </p>
+                </div>
+            </div>
+
+            <div class="prose prose-lg prose-slate max-w-none">
+                <h3 class="text-lg font-bold text-indigo-900 mt-8">Jsou poukázky efektivní v ČR?</h3>
+                <p>
+                    Pokud poukázky nejsou spojeny s žádnými omezeními použití, mohou zcela nahradit autonomní spotřebu (Ca), a tím plnit funkci hotovosti — tedy mohou být teoreticky ušetřeny. Zkušenost s českými privatizačními poukázkami (windfall income) ukázala nízký mezní sklon ke spotřebě (kolem 0,3).
+                </p>
+                <p>
+                    Kromě toho ani relativně nízká míra nezaměstnanosti v ČR nepředstavuje příznivou podmínku. Masivní vydávání poukazů by mohlo vést k nadměrnému růstu poptávky a vyvolat inflační tlaky.
+                </p>
+            </div>
+        </section>
+
+        <!-- Section 5: Conclusion -->
+        <section id="conclusion" class="mb-24 scroll-mt-24 bg-slate-100 p-8 rounded-2xl">
+            <h2 class="text-3xl font-bold text-slate-900 mb-4">4. Závěr a doporučení</h2>
+            <div class="prose prose-lg prose-slate max-w-none">
+                <p>
+                    Ačkoli účinnost spotřebitelských poukázek může být teoreticky omezená a vysoká míra úspor v České republice by mohla snižovat jejich potenciál, země jako Jižní Korea, USA či Japonsko tuto formu stimulace využily.
+                </p>
+                <p>
+                    Výzkumy ukazují, že zvýšení poptávky způsobené poukázkami vedlo k větší nabídce ze strany podniků, což významně podpořilo malé a střední podniky. Proto kromě samotného multiplikátorového efektu stojí za to prozkoumat, jaké další strukturální účinky mohou poukázky přinést.
+                </p>
+            </div>
+        </section>
+
+        <!-- References -->
+        <footer class="border-t border-slate-200 pt-12 pb-24 text-sm text-slate-500">
+            <h3 class="font-bold text-slate-900 mb-6 uppercase tracking-wider">Seznam bibliografických odkazů</h3>
+            <div class="grid md:grid-cols-2 gap-x-8 gap-y-4">
+                <p>Batini, N., et al. (2014). Fiscal Multipliers: Size, Determinants, and Use in Macroeconomic Projections.</p>
+                <p>Hanousek, J., & Tůma, Z. (2002). A test of the permanent income hypothesis on Czech voucher privatization.</p>
+                <p>Kan, K., Shin-Kun, P., & Wang, P. (2017). Understanding Consumption Behavior: Evidence from Consumers’ Reaction to Shopping Vouchers.</p>
+                <p>Liao, W.-J., Kuo, N.-L., & Chuang, S.-H. (2021). Taiwan’s budgetary responses to COVID-19.</p>
+                <p>Lin, F.-L., & Chen, W.-Y. (2020). Did the Consumption Voucher Scheme Stimulate the Economy?</p>
+                <p>Mecerodová, B. (2020). Životní styl a spotřební kultura.</p>
+                <p>Czech National Bank (n.d.). The Saving Rate in the Euro Area and the Czech Republic.</p>
+            </div>
+            <div class="mt-12 text-center text-slate-400">
+                <p>&copy; 2025 Chen Shuli - Ekonomie a Hospodářská Politika. Vytvořeno pro akademické účely.</p>
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- Scripts -->
+    <script>
+        // Multiplier Calculator Logic
+        const inputs = ['c', 't', 'm'];
+        
+        function calculate() {
+            const c = parseFloat(document.getElementById('input-c').value);
+            const t = parseFloat(document.getElementById('input-t').value);
+            const m = parseFloat(document.getElementById('input-m').value);
+
+            // Update displayed values
+            document.getElementById('val-c').innerText = c.toFixed(2);
+            document.getElementById('val-t').innerText = t.toFixed(2);
+            document.getElementById('val-m').innerText = m.toFixed(2);
+
+            // Formula: 1 / (1 - c(1-t) + m)
+            const denominator = 1 - (c * (1 - t)) + m;
+            const multiplier = 1 / denominator;
+            const transferMultiplier = (c) / denominator; // c * multiplier roughly approx for transfers in some models, but strictly c * (1/denom) for first round impact. 
+            // Using the formula from text: Delta Y = c / (1 - c(1-t) + m) * Delta Tra
+            
+            document.getElementById('result-mult').innerText = multiplier.toFixed(2);
+            document.getElementById('result-trans').innerText = transferMultiplier.toFixed(2);
+
+            // Dynamic interpretation
+            const textEl = document.getElementById('interpretation');
+            if (transferMultiplier < 1) {
+                textEl.innerText = "Multiplikátor je menší než 1. Transfer je z hlediska růstu HDP neefektivní (silné úniky).";
+                textEl.className = "mt-4 text-xs text-red-400 font-medium";
+            } else {
+                textEl.innerText = "Multiplikátor je větší než 1. Dochází k efektivnímu řetězení spotřeby.";
+                textEl.className = "mt-4 text-xs text-emerald-400 font-medium";
+            }
+        }
+
+        inputs.forEach(id => {
+            document.getElementById(`input-${id}`).addEventListener('input', calculate);
+        });
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-md');
+            } else {
+                nav.classList.remove('shadow-md');
+            }
+        });
+
+        // Initial Calc
+        calculate();
+    </script><!-- 閱讀計數器 V2 - 含當日統計 -->
+<style>
+.admin-trigger {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    width: 10px;
+    height: 10px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    opacity: 0.1;
+    z-index: 998;
+}
+.admin-trigger:hover {
+    opacity: 0.3;
+}
+.admin-panel {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    z-index: 1000;
+    width: 420px;
+    max-width: 90vw;
+    max-height: 90vh;
+    font-family: "Microsoft JhengHei", Arial, sans-serif;
+    position: relative;
+}
+.admin-panel.active {
+    display: block;
+}
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 999;
+}
+.overlay.active {
+    display: block;
+}
+.admin-panel input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+.admin-panel button {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+.btn-primary {
+    background: #2563eb;
+    color: white;
+}
+.btn-secondary {
+    background: #e5e7eb;
+    color: #374151;
+}
+.btn-reset {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    width: auto;
+    padding: 3px 8px;
+    margin: 0;
+    background: #4b5563;
+    color: #9ca3af;
+    font-size: 9px;
+    border-radius: 3px;
+    opacity: 0.3;
+    transition: opacity 0.2s;
+}
+.btn-reset:hover {
+    opacity: 1;
+    color: #dc2626;
+    background: #374151;
+}
+.stats-summary {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin: 15px 0;
+}
+.stats-card {
+    padding: 12px;
+    border-radius: 6px;
+    text-align: center;
+}
+.stats-card.today {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+.stats-card.total {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+}
+.stats-card-label {
+    font-size: 11px;
+    opacity: 0.9;
+    margin-bottom: 4px;
+}
+.stats-card-value {
+    font-size: 24px;
+    font-weight: bold;
+}
+.section-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #374151;
+    margin: 12px 0 8px 0;
+    padding-bottom: 4px;
+    border-bottom: 2px solid #e5e7eb;
+}
+.error {
+    color: #dc2626;
+    font-size: 13px;
+    margin-top: 5px;
+}
+.page-stats-container {
+    max-height: 320px;
+    overflow-y: auto;
+    margin-bottom: 35px;
+}
+.page-stats {
+    margin: 8px 0;
+    padding: 10px;
+    background: #eff6ff;
+    border-left: 3px solid #2563eb;
+    border-radius: 4px;
+}
+.page-name {
+    font-weight: 600;
+    color: #1e40af;
+    margin-bottom: 6px;
+    font-size: 13px;
+}
+.page-counts {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 6px;
+}
+.count-item {
+    display: flex;
+    flex-direction: column;
+}
+.count-label {
+    color: #6b7280;
+    font-size: 10px;
+}
+.count-value {
+    color: #111827;
+    font-weight: 600;
+    font-size: 15px;
+}
+.page-time {
+    font-size: 10px;
+    color: #6b7280;
+}
+.current-page {
+    background: #fef3c7;
+    border-left-color: #f59e0b;
+}
+.current-page .page-name {
+    color: #92400e;
+}
+.today-badge {
+    display: inline-block;
+    background: #10b981;
+    color: white;
+    font-size: 9px;
+    padding: 2px 5px;
+    border-radius: 3px;
+    margin-left: 4px;
+}
+</style>
+
+<button class="admin-trigger" onclick="openAdmin()"></button>
+<div class="overlay" id="overlay" onclick="closeAdmin()"></div>
+
+<div class="admin-panel" id="adminPanel">
+    <div id="loginView">
+        <h3 style="margin-top:0;">管理員登入</h3>
+        <input type="password" id="passwordInput" placeholder="請輸入管理密碼" autocomplete="off">
+        <div class="error" id="errorMsg"></div>
+        <button class="btn-primary" onclick="login()">登入</button>
+        <button class="btn-secondary" onclick="closeAdmin()">取消</button>
+    </div>
+    
+    <div id="statsView" style="display:none;">
+        <h3 style="margin-top:0;margin-bottom:12px;">📊 閱讀統計</h3>
+        
+        <div class="stats-summary">
+            <div class="stats-card today">
+                <div class="stats-card-label">今日閱讀</div>
+                <div class="stats-card-value" id="todayTotal">0</div>
+            </div>
+            <div class="stats-card total">
+                <div class="stats-card-label">累計閱讀</div>
+                <div class="stats-card-value" id="totalAllViews">0</div>
+            </div>
+        </div>
+        
+        <div class="section-title">📄 各頁面統計</div>
+        <div class="page-stats-container" id="pageStatsList"></div>
+        
+        <button class="btn-secondary" onclick="closeAdmin()">關閉</button>
+        <button class="btn-reset" onclick="resetAllStats()">重置</button>
+    </div>
+</div>
+
+<!-- 閱讀計數器 V2 - 含當日統計 -->
+<style>
+.admin-trigger {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    opacity: 0.1;
+    z-index: 998;
+}
+.admin-trigger:hover {
+    opacity: 0.3;
+}
+.admin-panel {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 25px 25px 45px 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    z-index: 1000;
+    width: 240px;
+    max-width: 90vw;
+    font-family: "Microsoft JhengHei", Arial, sans-serif;
+}
+.admin-panel.active {
+    display: block;
+}
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 999;
+}
+.overlay.active {
+    display: block;
+}
+.admin-panel input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+.admin-panel button {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+.btn-primary {
+    background: #2563eb;
+    color: white;
+}
+.btn-secondary {
+    background: #e5e7eb;
+    color: #374151;
+}
+.btn-reset {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: auto;
+    padding: 3px 8px;
+    margin: 0;
+    background: #4b5563;
+    color: #9ca3af;
+    font-size: 9px;
+    border-radius: 3px;
+    opacity: 0.3;
+    transition: opacity 0.2s;
+}
+.btn-reset:hover {
+    opacity: 1;
+    color: #dc2626;
+    background: #374151;
+}
+.stats-summary {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin: 15px 0;
+}
+.stats-card {
+    padding: 12px;
+    border-radius: 6px;
+    text-align: center;
+}
+.stats-card.today {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+.stats-card.total {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+}
+.stats-card-label {
+    font-size: 11px;
+    opacity: 0.9;
+    margin-bottom: 4px;
+}
+.stats-card-value {
+    font-size: 24px;
+    font-weight: bold;
+}
+.section-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #374151;
+    margin: 12px 0 8px 0;
+    padding-bottom: 4px;
+    border-bottom: 2px solid #e5e7eb;
+}
+.error {
+    color: #dc2626;
+    font-size: 13px;
+    margin-top: 5px;
+}
+.page-stats-container {
+    max-height: 280px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
+.page-stats {
+    margin: 8px 0;
+    padding: 10px;
+    background: #eff6ff;
+    border-left: 3px solid #2563eb;
+    border-radius: 4px;
+}
+.page-name {
+    font-weight: 600;
+    color: #1e40af;
+    margin-bottom: 6px;
+    font-size: 13px;
+}
+.page-counts {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 6px;
+}
+.count-item {
+    display: flex;
+    flex-direction: column;
+}
+.count-label {
+    color: #6b7280;
+    font-size: 10px;
+}
+.count-value {
+    color: #111827;
+    font-weight: 600;
+    font-size: 15px;
+}
+.page-time {
+    font-size: 10px;
+    color: #6b7280;
+}
+.current-page {
+    background: #fef3c7;
+    border-left-color: #f59e0b;
+}
+.current-page .page-name {
+    color: #92400e;
+}
+.today-badge {
+    display: inline-block;
+    background: #10b981;
+    color: white;
+    font-size: 9px;
+    padding: 2px 5px;
+    border-radius: 3px;
+    margin-left: 4px;
+}
+</style>
+
+<button class="admin-trigger" onclick="openAdmin()"></button>
+<div class="overlay" id="overlay" onclick="closeAdmin()"></div>
+
+<div class="admin-panel" id="adminPanel">
+    <div id="loginView">
+        <h3 style="margin-top:0;">管理員登入</h3>
+        <input type="password" id="passwordInput" placeholder="請輸入管理密碼" autocomplete="off">
+        <div class="error" id="errorMsg"></div>
+        <button class="btn-primary" onclick="login()">登入</button>
+        <button class="btn-secondary" onclick="closeAdmin()">取消</button>
+    </div>
+    
+    <div id="statsView" style="display:none;">
+        <h3 style="margin-top:0;margin-bottom:12px;">📊 閱讀統計</h3>
+        
+        <div class="stats-summary">
+            <div class="stats-card today">
+                <div class="stats-card-label">今日閱讀</div>
+                <div class="stats-card-value" id="todayTotal">0</div>
+            </div>
+            <div class="stats-card total">
+                <div class="stats-card-label">累計閱讀</div>
+                <div class="stats-card-value" id="totalAllViews">0</div>
+            </div>
+        </div>
+        
+        <div class="section-title">📄 各頁面統計</div>
+        <div class="page-stats-container" id="pageStatsList"></div>
+        
+        <button class="btn-secondary" onclick="closeAdmin()">關閉</button>
+        <button class="btn-reset" onclick="resetAllStats()">重置</button>
+    </div>
+</div>
+
+<!-- 閱讀計數器 V2 - 含當日統計 -->
+<style>
+.admin-trigger {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    opacity: 0.1;
+    z-index: 998;
+}
+.admin-trigger:hover {
+    opacity: 0.3;
+}
+.admin-panel {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 25px 25px 45px 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    z-index: 1000;
+    width: 420px;
+    max-width: 90vw;
+    font-family: "Microsoft JhengHei", Arial, sans-serif;
+}
+.admin-panel.active {
+    display: block;
+}
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 999;
+}
+.overlay.active {
+    display: block;
+}
+.admin-panel input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+.admin-panel button {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+.btn-primary {
+    background: #2563eb;
+    color: white;
+}
+.btn-secondary {
+    background: #e5e7eb;
+    color: #374151;
+    margin-bottom: 0;
+}
+.btn-reset {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    width: auto;
+    max-width: 50px;
+    padding: 2px 6px;
+    margin: 0;
+    background: #4b5563;
+    color: #9ca3af;
+    font-size: 8px;
+    border-radius: 2px;
+    opacity: 0.25;
+    transition: opacity 0.2s;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.btn-reset:hover {
+    opacity: 1;
+    color: #dc2626;
+    background: #374151;
+}
+.stats-summary {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin: 15px 0;
+}
+.stats-card {
+    padding: 12px;
+    border-radius: 6px;
+    text-align: center;
+}
+.stats-card.today {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+.stats-card.total {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+}
+.stats-card-label {
+    font-size: 11px;
+    opacity: 0.9;
+    margin-bottom: 4px;
+}
+.stats-card-value {
+    font-size: 24px;
+    font-weight: bold;
+}
+.section-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #374151;
+    margin: 12px 0 8px 0;
+    padding-bottom: 4px;
+    border-bottom: 2px solid #e5e7eb;
+}
+.error {
+    color: #dc2626;
+    font-size: 13px;
+    margin-top: 5px;
+}
+.page-stats-container {
+    max-height: 280px;
+    overflow-y: auto;
+    margin-bottom: 5px;
+}
+.page-stats {
+    margin: 8px 0;
+    padding: 10px;
+    background: #eff6ff;
+    border-left: 3px solid #2563eb;
+    border-radius: 4px;
+}
+.page-name {
+    font-weight: 600;
+    color: #1e40af;
+    margin-bottom: 6px;
+    font-size: 13px;
+}
+.page-counts {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 6px;
+}
+.count-item {
+    display: flex;
+    flex-direction: column;
+}
+.count-label {
+    color: #6b7280;
+    font-size: 10px;
+}
+.count-value {
+    color: #111827;
+    font-weight: 600;
+    font-size: 15px;
+}
+.page-time {
+    font-size: 10px;
+    color: #6b7280;
+}
+.current-page {
+    background: #fef3c7;
+    border-left-color: #f59e0b;
+}
+.current-page .page-name {
+    color: #92400e;
+}
+.today-badge {
+    display: inline-block;
+    background: #10b981;
+    color: white;
+    font-size: 9px;
+    padding: 2px 5px;
+    border-radius: 3px;
+    margin-left: 4px;
+}
+</style>
+
+<button class="admin-trigger" onclick="openAdmin()"></button>
+<div class="overlay" id="overlay" onclick="closeAdmin()"></div>
+
+<div class="admin-panel" id="adminPanel">
+    <div id="loginView">
+        <h3 style="margin-top:0;">管理員登入</h3>
+        <input type="password" id="passwordInput" placeholder="請輸入管理密碼" autocomplete="off">
+        <div class="error" id="errorMsg"></div>
+        <button class="btn-primary" onclick="login()">登入</button>
+        <button class="btn-secondary" onclick="closeAdmin()">取消</button>
+    </div>
+    
+    <div id="statsView" style="display:none;">
+        <h3 style="margin-top:0;margin-bottom:12px;">📊 閱讀統計</h3>
+        
+        <div class="stats-summary">
+            <div class="stats-card today">
+                <div class="stats-card-label">今日閱讀</div>
+                <div class="stats-card-value" id="todayTotal">0</div>
+            </div>
+            <div class="stats-card total">
+                <div class="stats-card-label">累計閱讀</div>
+                <div class="stats-card-value" id="totalAllViews">0</div>
+            </div>
+        </div>
+        
+        <div class="section-title">📄 各頁面統計</div>
+        <div class="page-stats-container" id="pageStatsList"></div>
+        
+        <div style="padding-right: 60px;">
+            <button class="btn-secondary" onclick="closeAdmin()">關閉</button>
+        </div>
+        <button class="btn-reset" onclick="resetAllStats()">重置</button>
+    </div>
+</div>
+
+<script>
+(function() {
+    const ADMIN_PASSWORD = '0520'; // 請修改為你自己的密碼
+    const STORAGE_PREFIX = 'page_stats_';
+    
+    function getPageName() {
+        const path = window.location.pathname;
+        return path.split('/').pop() || 'index.html';
+    }
+    
+    function getTodayString() {
+        const now = new Date();
+        return now.toISOString().split('T')[0];
+    }
+    
+    function recordVisit() {
+        const pageName = getPageName();
+        const storageKey = STORAGE_PREFIX + pageName;
+        const stats = getPageStats(pageName);
+        const now = new Date().toISOString();
+        const today = getTodayString();
+        
+        stats.totalCount = (stats.totalCount || 0) + 1;
+        stats.lastVisit = now;
+        
+        if (!stats.firstVisit) {
+            stats.firstVisit = now;
+        }
+        
+        if (!stats.dailyStats) {
+            stats.dailyStats = {};
+        }
+        
+        if (!stats.dailyStats[today]) {
+            stats.dailyStats[today] = 0;
+        }
+        
+        stats.dailyStats[today] += 1;
+        
+        const thirtyDaysAgo = new Date();
+        thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+        const cutoffDate = thirtyDaysAgo.toISOString().split('T')[0];
+        
+        Object.keys(stats.dailyStats).forEach(date => {
+            if (date < cutoffDate) {
+                delete stats.dailyStats[date];
+            }
+        });
+        
+        localStorage.setItem(storageKey, JSON.stringify(stats));
+    }
+    
+    function getPageStats(pageName) {
+        const storageKey = STORAGE_PREFIX + pageName;
+        const data = localStorage.getItem(storageKey);
+        if (data) {
+            return JSON.parse(data);
+        }
+        return {
+            totalCount: 0,
+            firstVisit: null,
+            lastVisit: null,
+            dailyStats: {}
+        };
+    }
+    
+    function getAllPagesStats() {
+        const allStats = [];
+        for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i);
+            if (key.startsWith(STORAGE_PREFIX)) {
+                const pageName = key.replace(STORAGE_PREFIX, '');
+                const stats = JSON.parse(localStorage.getItem(key));
+                allStats.push({
+                    page: pageName,
+                    ...stats
+                });
+            }
+        }
+        return allStats.sort((a, b) => (b.totalCount || 0) - (a.totalCount || 0));
+    }
+    
+    window.openAdmin = function() {
+        document.getElementById('adminPanel').classList.add('active');
+        document.getElementById('overlay').classList.add('active');
+        document.getElementById('passwordInput').value = '';
+        document.getElementById('errorMsg').textContent = '';
+        setTimeout(() => {
+            document.getElementById('passwordInput').focus();
+        }, 100);
+    };
+    
+    window.closeAdmin = function() {
+        document.getElementById('adminPanel').classList.remove('active');
+        document.getElementById('overlay').classList.remove('active');
+        document.getElementById('loginView').style.display = 'block';
+        document.getElementById('statsView').style.display = 'none';
+    };
+    
+    window.login = function() {
+        const password = document.getElementById('passwordInput').value;
+        
+        if (password === ADMIN_PASSWORD) {
+            showStats();
+        } else {
+            document.getElementById('errorMsg').textContent = '密碼錯誤';
+        }
+    };
+    
+    window.showStats = function() {
+        const currentPage = getPageName();
+        const today = getTodayString();
+        const allStats = getAllPagesStats();
+        
+        let totalAllViews = 0;
+        let todayTotal = 0;
+        
+        allStats.forEach(page => {
+            totalAllViews += (page.totalCount || 0);
+            if (page.dailyStats && page.dailyStats[today]) {
+                todayTotal += page.dailyStats[today];
+            }
+        });
+        
+        document.getElementById('totalAllViews').textContent = totalAllViews;
+        document.getElementById('todayTotal').textContent = todayTotal;
+        
+        const listHtml = allStats.map(page => {
+            const isCurrent = page.page === currentPage;
+            const todayCount = (page.dailyStats && page.dailyStats[today]) || 0;
+            const hasToday = todayCount > 0;
+            
+            return `
+                <div class="page-stats ${isCurrent ? 'current-page' : ''}">
+                    <div class="page-name">
+                        ${page.page} 
+                        ${isCurrent ? '(當前)' : ''}
+                        ${hasToday ? '<span class="today-badge">今日活躍</span>' : ''}
+                    </div>
+                    <div class="page-counts">
+                        <div class="count-item">
+                            <span class="count-label">今日</span>
+                            <span class="count-value">${todayCount}</span>
+                        </div>
+                        <div class="count-item">
+                            <span class="count-label">累計</span>
+                            <span class="count-value">${page.totalCount || 0}</span>
+                        </div>
+                    </div>
+                    <div class="page-time">
+                        最近: ${formatDateShort(page.lastVisit)}
+                    </div>
+                </div>
+            `;
+        }).join('');
+        
+        document.getElementById('pageStatsList').innerHTML = listHtml || '<p style="color:#9ca3af;text-align:center;padding:20px 0;font-size:12px;">尚無資料</p>';
+        
+        document.getElementById('loginView').style.display = 'none';
+        document.getElementById('statsView').style.display = 'block';
+    };
+    
+    function formatDateShort(isoString) {
+        if (!isoString) return '--';
+        const date = new Date(isoString);
+        const now = new Date();
+        const today = now.toDateString() === date.toDateString();
+        
+        if (today) {
+            return '今天 ' + date.toLocaleTimeString('zh-TW', { hour: '2-digit', minute: '2-digit' });
+        }
+        
+        return date.toLocaleString('zh-TW', {
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+    }
+    
+    window.resetAllStats = function() {
+        if (confirm('⚠️ 確定要重置所有統計資料嗎？\n此操作無法復原！')) {
+            const keys = [];
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key.startsWith(STORAGE_PREFIX)) {
+                    keys.push(key);
+                }
+            }
+            keys.forEach(key => localStorage.removeItem(key));
+            alert('✅ 所有統計資料已重置');
+            closeAdmin();
+        }
+    };
+    
+    recordVisit();
+    
+    const passwordInput = document.getElementById('passwordInput');
+    if (passwordInput) {
+        passwordInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                login();
+            }
+        });
+    }
+})();
+</script>
+</body>
+</html>
