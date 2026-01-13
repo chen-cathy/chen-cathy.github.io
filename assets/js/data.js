@@ -89,10 +89,10 @@ window.filesData = [
     // 5. AI Lab / Workflow
     {
         "id": 10,
-        "title": "The Workflow Philosophy",
+        "title": "Building a Self-Replicating System",
         "category": "AI Lab / Workflow",
-        "description": "How I balance academic rigor with AI efficiency using Obsidian for documentation.",
-        "file": "workflow_philosophy.html",
+        "description": "Transforming manual maintenance into a robust, AI-assisted automated workflow.",
+        "file": "automated-research-workflow.html",
         "type": "AI Lab"
     },
     {
@@ -111,12 +111,4 @@ window.filesData = [
         "file": "prompt_lab.html",
         "type": "AI Lab"
     },
-    {
-        "id": 13,
-        "title": "Debugging Economic Logic",
-        "category": "AI Lab / Workflow",
-        "description": "Case studies on identifying AI hallucinations and refining mathematical accuracy.",
-        "file": "debug_logic.html",
-        "type": "AI Lab"
-    }
-];
+    ];
