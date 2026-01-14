@@ -97,18 +97,18 @@ window.filesData = [
     },
     {
         "id": 11,
-        "title": "Antigravity Development",
+        "title": "AI Tools Orchestration: Real Stories from the Field",
         "category": "AI Lab / Workflow",
-        "description": "Time-lapse records of transforming Solow-Swan equations into dynamic dashboards.",
-        "file": "antigravity_dev.html",
+        "description": "Multi-AI workflow design: real lessons from Antigravity, Claude, and beyond.",
+        "file": "ai-tools-orchestration.html",
         "type": "AI Lab"
     },
     {
         "id": 12,
-        "title": "Prompt Engineering Lab",
+        "title": "AI Illusions & Human Judgment (Work in Progress)",
         "category": "AI Lab / Workflow",
-        "description": "A collection of structure-based prompts for precise economic modeling.",
-        "file": "prompt_lab.html",
+        "description": "AI Illusions & Human Judgment (Work in Progress)",
+        "file": "#",
         "type": "AI Lab"
     },
     ];
