@@ -26,7 +26,7 @@ window.filesData = [
         "title": "Fiscal Transfer Effectiveness",
         "category": "Economic Models",
         "description": "Evaluating fiscal policy and subsidies impact on regional development in Taiwan.",
-        "file": "#",
+        "file": "mutiplikator.html",
         "pdf_link": "fiscal-transfers-tw-cz.html",
         "target": "_blank",
         "type": "Standard"
