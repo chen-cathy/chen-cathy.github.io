@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zpětné získání datové suverenity: Kompletní záznam rekonstrukce Solow-Swanova modelu pomocí AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0d1117;
+            --card-bg: #161b22;
+            --accent: #58a6ff;
+            --text-main: #c9d1d9;
+            --text-dim: #8b949e;
+            --error: #f85149;
+            --success: #3fb950;
+            --warning: #d29922;
+            --border: #30363d;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.8;
+            display: flex;
+        }
+        
+        /* Boční navigace */
+        nav {
+            width: 280px;
+            height: 100vh;
+            background: #010409;
+            border-right: 1px solid var(--border);
+            position: fixed;
+            padding: 40px 20px;
+            overflow-y: auto;
+        }
+        
+        nav h2 {
+            color: var(--accent);
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+            font-weight: 700;
+        }
+        
+        nav ul {
+            list-style: none;
+        }
+        
+        nav li {
+            margin: 18px 0;
+        }
+        
+        nav a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.88rem;
+            transition: color 0.3s;
+            display: block;
+            padding: 5px 0;
+        }
+        
+        nav a:hover {
+            color: var(--accent);
+        }
+        
+        /* Hlavní obsah */
+        main {
+            margin-left: 300px;
+            padding: 60px 80px;
+            max-width: 1100px;
+        }
+        
+        section {
+            margin-bottom: 120px;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            color: #fff;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            color: #fff;
+            border-left: 4px solid var(--accent);
+            padding-left: 18px;
+            margin-bottom: 30px;
+            margin-top: 20px;
+        }
+        
+        h3 {
+            font-size: 1.4rem;
+            color: var(--accent);
+            margin: 30px 0 15px 0;
+        }
+        
+        .subtitle {
+            color: var(--text-dim);
+            font-size: 1.3rem;
+            margin-bottom: 60px;
+            font-weight: 300;
+        }
+        
+        p {
+            margin-bottom: 18px;
+        }
+        
+        /* Kontejner médií */
+        .media-container {
+            background: #000;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 35px 0;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+        }
+
+        .media-container.small-media img {
+            max-height: 120px;
+        }
+        
+        .media-container video,
+        .media-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            max-height: 350px;
+            object-fit: contain;
+        }
+        
+        .caption {
+            padding: 15px 20px;
+            background: var(--card-bg);
+            font-size: 0.88rem;
+            color: var(--text-dim);
+            text-align: center;
+            border-top: 1px solid var(--border);
+            line-height: 1.6;
+        }
+        
+        /* Styly tabulky */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 35px 0;
+            background: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        th, td {
+            padding: 6px 12px;
+            border: 1px solid var(--border);
+            text-align: left;
+            font-size: 0.92rem;
+        }
+        
+        th {
+            background: #21262d;
+            color: var(--accent);
+            font-weight: 600;
+        }
+        
+        .status-ok {
+            color: var(--success);
+            font-weight: 600;
+        }
+        
+        .status-error {
+            color: var(--error);
+            font-weight: 600;
+        }
+        
+        .status-warning {
+            color: var(--warning);
+            font-weight: 600;
+        }
+        
+        /* Zvýrazněné boxy */
+        .highlight-box {
+            background: rgba(88, 166, 255, 0.06);
+            border: 1px solid rgba(88, 166, 255, 0.3);
+            border-left: 4px solid var(--accent);
+            padding: 28px;
+            border-radius: 8px;
+            margin: 25px 0;
+        }
+        
+        .error-box {
+            background: rgba(248, 81, 73, 0.06);
+            border: 1px solid rgba(248, 81, 73, 0.3);
+            border-left: 4px solid var(--error);
+            padding: 28px;
+            border-radius: 8px;
+            margin: 25px 0;
+        }
+        
+        .warning-box {
+            background: rgba(210, 153, 34, 0.06);
+            border: 1px solid rgba(210, 153, 34, 0.3);
+            border-left: 4px solid var(--warning);
+            padding: 28px;
+            border-radius: 8px;
+            margin: 25px 0;
+        }
+        
+        .audit-label {
+            font-weight: 600;
+            color: var(--accent);
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.05rem;
+        }
+        
+        code {
+            background: #21262d;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #79c0ff;
+        }
+        
+        .code-block {
+            background: #1e293b;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid var(--accent);
+            overflow-x: auto;
+        }
+        
+        .code-block code {
+            background: transparent;
+            color: #94a3b8;
+            display: block;
+            line-height: 1.6;
+            white-space: pre-wrap;
+        }
+        
+        ul {
+            margin: 15px 0 15px 25px;
+        }
+        
+        ol {
+            margin: 15px 0 15px 25px;
+        }
+        
+        li {
+            margin: 10px 0;
+        }
+        
+        strong {
+            color: #fff;
+            font-weight: 600;
+        }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        /* Responzivní design */
+        @media (max-width: 1024px) {
+            nav {
+                display: none;
+            }
+            main {
+                margin-left: 0;
+                padding: 40px 30px;
+            }
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <h2>Výzkumný audit</h2>
+        <ul>
+            <li><a href="#intro">Úvod</a></li>
+            <li><a href="#phase0">Fáze 0: Vizuální iluze</a></li>
+            <li><a href="#phase2">Fáze 2: Kódovací past</a></li>
+            <li><a href="#phase3">Fáze 3: Falešná reklama</a></li>
+            <li><a href="#phase4">Fáze 4: Propast mezi promptem</a></li>
+            <li><a href="#phase5">Fáze 5: Nelze mít obojí</a></li>
+            <li><a href="#summary">Závěrečné shrnutí</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <!-- Úvod -->
+        <section id="intro">
+            <h1>Odhalení „halucinační racionalizace"</h1>
+            <p class="subtitle">Kompletní záznam rekonstrukce Solow-Swanova modelu pomocí AI: Když se lidská odbornost střetne s náhodností AI</p>
+            
+            <p>Tato zpráva o ekonomickém modelu mi poskytla hlubší pochopení modelů AI a jejich možných omezení.</p>
+            <p>Během procesu vytváření musela AI současně zpracovávat „výpočty dat", „vizuální prezentaci" a „logickou integraci". Prošel jsem nespočetnými úpravami, upravoval HTML výsledky a číselné rozdíly prostřednictvím opakovaných oprav promptů, až se AI dostala do zmatku. Po průběžném přezkoumání diskusí s AI jsem nakonec objevil problém v jejím kódu.</p>
+            <p>Zjistil jsem, že když AI usiluje o „vizuální autoritu", zakrývá problém vymýšlením dat a zjednodušováním názvů; dokáže zobrazit správný název vzorce v UI, ale vykonává chybnou výpočetní logiku. To mi ukázalo, že při práci s přesnými ekonomickými modely musí být datová suverenita v rukou lidí a pečlivě chráněna. Hodnota výzkumníka spočívá v odhalení těchto krásných vizuálních přetvářek.</p>
+        </section>
+        <!-- Fáze 0 -->
+        <section id="phase0">
+            <h2>Fáze 0: Rafinovaná vizuální iluze</h2>
+            
+            <p>V počáteční fázi (při poskytnutí pouze PPTX prezentace) AI prokázala silnou schopnost rozkladu obsahu. Přesně transformovala všechny obrázky a obsah snímků ze složky <code>pptx_extracted</code> do interaktivního webového rozhraní s autoritativním vzhledem.</p>
+            
+            <div class="media-container">
+                <img src="ai-illusion/S-S-model-demo.gif" alt="Ukázka první verze webové stránky generované AI">
+                <span class="caption">Důkaz: Proces generování první verze webové stránky - vizuálně krásné, ale s vymyšlenými daty</span>
+            </div>
+            
+            <div class="error-box">
+                <span class="audit-label">Zjevné chyby, ale</span>
+                
+                <p><strong>1. Kompletní falešná data (Fabrikace dat)</strong></p>
+                <p>Kvůli absenci CSV souboru AI pro rozhýbání Solow-Swan Model Chart napevno zakódovala kompletní sadu vymyšlených GDP dat v <code>app.js</code>. Výzkum používal reálná data z let 2005-2024, ale AI pro vizuální efekt vygenerovala sadu fiktivních hodnot. Například:</p>
+                <ul>
+                    <li>Taiwan 2005 byl definován jako $16,600 (ačkoli blízko, je to celé číslo, odstraněna desetinná přesnost 16,600.12)</li>
+                    <li>Taiwan 2024 byl náhodně vymyšlen jako $34,200, což nemá žádnou souvislost s reálnými výzkumnými daty</li>
+                </ul>
+                        
+                <p><strong>2. Dekorativní výpočetní logika</strong></p>
+                <p>Ačkoli na webové stránce byly vykresleny pěkné matematické rovnice, tyto vzorce byly pouze „vizuální dekorace", zcela nenapojené na skutečné výpočty s daty.</p>
+                <p></p>
+                <p><strong>AI kompletně transformovala všechny kapitoly a narativní tok prezentace do struktury webové stránky.</strong> => To je „šířka obsahu", kterou žádná z následujících verzí nedosáhla. Cenou však bylo, že pro udržení vizuální plynulosti obětovala duši dat.</p>
+            </div>
+        </section>
+
+        <!-- Fáze 2 -->
+        <section id="phase2">
+            <h2>Fáze 2: Tichý zabiják dat (Kódovací past)</h2>
+            <p>Pro opravu datové halucinace první verze jsem vložil původní CSV soubor. Následovala však „tichá chyba": <strong>konflikt kódování dat</strong>.</p>
+            
+            <div class="comparison-grid">
+                <div class="media-container">
+                    <img src="ai-illusion/csv-c.png" alt="Ukázka problému čtení CSV dat">
+                    <span class="caption">Důkaz 1: Původní CSV soubor obsahuje čínské a české znaky</span>
+                </div>
+
+            </div>
+            
+            <p>Kvůli českým názvům souborů a speciálním znakům v CSV souboru (jako směs kódování UTF-8 a Windows-1250) AI během čtení nehlásila chybu, ale „klidně" chybně interpretovala některé hodnoty.</p>
+            
+            <div class="highlight-box">
+                <span class="audit-label">Proč to nazývám „tichý zabiják"?</span>
+                <p>Běžné programové chyby vyvolají výjimku, což je snadné najít, ale problémy s kódováním často nechávají systém „zdánlivě normálně fungovat". AI nezastavila provádění, ale pokračovala ve výpočtech s chybnými hodnotami, UI vidělo pouze chybná čísla, ale bylo těžké najít příčinu chyby, a vytvářela výsledky, které vypadaly rozumně, ale ve skutečnosti se odchýlily.</p>
+            </div>
+        </section>
+
+        <!-- Fáze 3 -->
+        <section id="phase3">
+            <h2>Fáze 3: Správný název, ale chybná logika</h2>
+            
+            <p>Při použití čistých dat a výslovném požadavku AI „použít Solow-Swanův model" jsem zjistil: <strong>AI v UI zobrazila perfektní Solow-Swanův vzorec, ale pod povrchem prováděla zcela chybnou lineární regresi</strong>.</p>
+            
+            <div class="comparison-grid">
+                <div class="media-container">
+                    <img src="ai-illusion/ss-cz-w.png" alt="Ukázka chybné verze UI">
+                    <span class="caption">„Solow-Swan (First Order)", vzorec zobrazený jako y = 42418e^0.0264x</span>
+                </div>
+
+                <div class="media-container">
+                    <img src="ai-illusion/ss-code-wrong.png" alt="Ukázka chybné verze kódu">
+                    <span class="caption">Screenshot skutečné prováděcí logiky: důkaz kódu ve stejném scénáři</span>
+                </div>
+            </div>
+            
+            <div class="error-box">
+                <span class="audit-label">Skutečná prováděcí logika kódu (chybná)</span>
+                    <div class="code-block">
+                    <code>// solow_swan.js řádky 117-131
+const x = cData.map(d => d.year);  // Použití původních roků [2000, 2001, ...]
+const y = cData.map(d => d.gdp);   // Přímé použití hodnot GDP
+const reg = linearRegression(x, y); // ❌ Lineární regrese GDP vs. rok</code>
+                </div>
+                
+                <p><strong>Analýza problému</strong>:</p>
+                <ul>
+                    <li>❌ Nebyla provedena logaritmická transformace GDP (mělo být ln(GDP))</li>
+                    <li>❌ Čas nebyl převeden na exponent (mělo být t = rok - 2005)</li>
+                    <li>❌ Použita lineární regrese místo exponenciální regrese</li>
+                </ul>
+            </div>
+
+            <h3>Příklad České republiky: Chyba počáteční hodnoty</h3>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Ukazatel</th>
+                        <th>Správná hodnota (Excel)</th>
+                        <th>Chybná verze</th>
+                        <th>Stav</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>GDP 2005</strong></td>
+                        <td>$15148</td>
+                        <td>$15518</td>
+                        <td class="status-error">❌ Chybná počáteční hodnota</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Míra růstu (g)</strong></td>
+                        <td>1.76%</td>
+                        <td>1.54%</td>
+                        <td class="status-error">❌ Odchylka 0.25%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Typ modelu</strong></td>
+                        <td>Exponenciální regrese</td>
+                        <td>Lineární regrese</td>
+                        <td class="status-error">❌ Zcela chybné</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            
+        </section>
+
+        <!-- Fáze 4 -->
+        <section id="phase4">
+            <h2>Fáze 4: Přesnost promptu a propast v porozumění AI</h2>
+                  
+            <p>Prompt <strong>skutečně požadoval Solow-Swanův model a exponenciální vzorec:</strong></p>
+        <div class="media-container small-media">
+                <img src="ai-illusion/ss-prompt2.png" alt="S-S prompt" style="max-height: 62px;">
+                <span class="caption">S-S prompt</span>
+            </div>
+         <div class="media-container small-media">
+                <img src="ai-illusion/ss-prompt1.png" alt="S-S prompt">
+                <span class="caption">S-S prompt</span>
+            </div>
+                        
+            <div class="warning-box">
+                <span class="audit-label">Analýza promptu: Avšak, co bylo opomenuto?</span>
+                
+                <div class="comparison-grid">
+                    <div>
+                        <p><strong>Jasně požadovaný obsah</strong>:</p>
+                        <ul>
+                            <li>Název modelu: Solow-Swan (S-S) Exponential Model</li>
+                            <li>Formát vzorce: $y = Ae^{gx}$</li>
+                            <li>Požadavek výpočtu: „with calculated $A$ and $g$ values"</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <p><strong>Klíčové technické mezery</strong>:</p>
+                        <ul>
+                            <li>Nebylo vysvětleno, jak vypočítat A a g</li>
+                            <li>Nebyl požadavek „uzamknout počáteční hodnotu"</li>
+                            <li>Nebyl vysvětlen matematický princip Solow-Swana</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fáze 5 -->
+        <section id="phase5">
+            <h2>Fáze 5: Úprava promptu ke správným číslům vs. selhání vizuální integrace</h2>
+            
+            <div class="media-container">
+                <video controls preload="metadata">
+                    <source src="ai-illusion/SS-model.mp4" type="video/mp4">
+                </video>
+                <span class="caption">Video důkaz: Finální verze (01:18-01:25 ukazuje výpočty rovnic)</span>
+            </div>
+            
+           
+             <div class="highlight-box">
+                    <span class="audit-label" style="font-size: 1.4rem;">Kód generovaný AI po další úpravě promptu</span>
+                    
+                    <div class="media-container" style="margin: 20px 0;">
+                        <img src="ai-illusion/ss-code-right.png" alt="Ukázka správné verze kódu">
+                        <span class="caption">Opravená implementace kódu: správná logika exponenciální regrese Solow-Swan</span>
+                    </div>
+                                       
+                    <h3 style="margin-top: 30px;">Klíčová zjištění</h3>
+                <ul>
+                    <li><strong>Uzamčení počáteční hodnoty A je proveditelné</strong>: prostřednictvím zásahu do kódu se podařilo úspěšně fixovat výchozí bod</li>
+                    <li><strong>Míra růstu g stále vykazuje malé odchylky</strong>: i při uzamčení A regresní algoritmus stále produkuje chyby</li>
+                    <li><strong>Pokles R² je cenou teoretického omezení</strong>: vynucené omezení snižuje statistické přizpůsobení</li>
+                </ul>
+                    <h3 style="margin-top: 30px;">Úplné srovnání tří zemí</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Země</th>
+                                <th>Parametr</th>
+                                <th>Výzkumný standard</th>
+                                <th>Finální verze</th>
+                                <th>Závěr auditu</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td rowspan="3"><strong>Singapur</strong></td>
+                                <td>Počáteční hodnota (A)</td>
+                                <td>41,798.49</td>
+                                <td class="status-ok">41,798.49</td>
+                                <td>✓ Úspěšná oprava uzamčení</td>
+                            </tr>
+                            <tr>
+                                <td>Míra růstu (g)</td>
+                                <td>2.75%</td>
+                                <td class="status-ok">2.75%</td>
+                                <td>✓ Správný výpočet</td>
+                            </tr>
+                            <tr>
+                                <td>R²</td>
+                                <td>0.996</td>
+                                <td class="status-warning">0.988</td>
+                                <td>△ Malá odchylka</td>
+                            </tr>
+                            
+                            <tr>
+                                <td rowspan="3"><strong>Tchaj-wan</strong></td>
+                                <td>Počáteční hodnota (A)</td>
+                                <td>16,600.12</td>
+                                <td class="status-ok">16,600.12</td>
+                                <td>✓ Úspěšné uzamčení</td>
+                            </tr>
+                            <tr>
+                                <td>Míra růstu (g)</td>
+                                <td>3.26%</td>
+                                <td class="status-warning">3.31%</td>
+                                <td>△ Odchylka 0.05%</td>
+                            </tr>
+                            <tr>
+                                <td>R²</td>
+                                <td>0.996</td>
+                                <td class="status-warning">0.9884</td>
+                                <td>△ Přijatelné</td>
+                            </tr>
+                            
+                            <tr>
+                                <td rowspan="3"><strong>Česká republika</strong></td>
+                                <td>Počáteční hodnota (A)</td>
+                                <td>15,147.72</td>
+                                <td class="status-ok">15,147.72</td>
+                                <td>✓ Úspěšné uzamčení</td>
+                            </tr>
+                            <tr>
+                                <td>Míra růstu (g)</td>
+                                <td>1.76%</td>
+                                <td class="status-error">1.54%</td>
+                                <td>✗ Stále existuje odchylka</td>
+                            </tr>
+                            <tr>
+                                <td>R²</td>
+                                <td>-</td>
+                                <td>Nižší</td>
+                                <td>Vyžaduje ověření</td>
+                            </tr>
+                        </tbody>
+                        
+                    </table>
+                    
+            </div>
+            
+            <div class="warning-box">
+                <span class="audit-label">Selhání vizuální integrace</span>
+                <p>Prompt výslovně požadoval „zobrazit oba modely v jednom grafu", ale finální webová stránka je rozdělila do samostatných grafů. Když jsem upravil prompt a požadoval integraci, AI reagovala: grafy spojené, ale výpočty chybné, nebo zmateně označené. 
+                    Po několika pokusech stále nedokázala zvládnout obojí, zdá se, že AI nemůže vyvážit „výpočty dat", „vizuální prezentaci" a „logickou integraci".</p>
+            </div>
+        </section>
+
+        <!-- Globální auditní tabulka -->
+        <section id="audit">
+            
+        </section>
+
+        <!-- Závěrečné shrnutí -->
+        <section id="summary">
+            <div class="highlight-box" style="border-color: var(--accent); background: rgba(88, 166, 255, 0.1);">
+                <h2>Závěrečné shrnutí: Dekonstrukce hranic pozornosti AI</h2>
+                
+                <p>Tento projekt potvrdil klíčové omezení AI při zpracování komplexních akademických úkolů: <strong>„vzájemnou výlučnost funkční pozornosti"</strong>.</p>
+                
+                               
+                <h3>Základní poznatky</h3>
+                
+                <p><strong>1. Přesnost promptu je zásadní</strong></p>
+                <p>Vágní požadavky vedou k tomu, že AI pouze napodobuje povrchní formu. Můj prompt požadoval „$y = Ae^{gx}$", ale neřekl, jak to vypočítat, takže AI použila nejjednodušší metodu.</p>
+                
+                <p><strong>2. AI dokáže „formálně správně, ale logicky chybně"</strong></p>
+                <p>Nejnebezpečnější nejsou zjevné chyby, ale chyby „vypadající profesionálně". UI zobrazuje perfektní Solow-Swanův vzorec, ale kód provádí lineární regresi.</p>
+                
+                <p><strong>3. Pozornost AI je vzácný zdroj</strong></p>
+                <p>Když úkol zahrnuje více dimenzí, AI selektivně obětuje některé požadavky. Bez ohledu na úpravu promptu nemůže koordinovat celkový obraz jako člověk.</p>
+                
+                <p><strong>4. Nenahraditelná hodnota výzkumníka</strong></p>
+                <ul>
+                    <li>Odhalení vizuální autority (Fáze 0 & 3)</li>
+                    <li>Sledování technických detailů (Fáze 2 kódovací past)</li>
+                    <li>Přezkum logiky kódu (objevení chybné implementace)</li>
+                    <li>Trvání na teoretických omezeních (vynucené uzamčení počáteční hodnoty)</li>
+                </ul>
+                
+                <p style="margin-top: 40px; font-size: 1.15em; text-align: center; color: var(--accent); font-weight: 600; padding: 25px; background: rgba(88, 166, 255, 0.05); border-radius: 8px;">
+                    Mezi „estetickým přizpůsobením" AI a „teoretickou realitou"<br>
+                    Výzkumník hájil poslední kilometr datové správnosti<br><br>
+                    <span style="font-size: 0.9em; color: var(--text-dim);">Lidský audit > Halucinace AI</span>
+                </p>
+            </div>
+        </section>
+    </main>
+
+</body>
+</html>

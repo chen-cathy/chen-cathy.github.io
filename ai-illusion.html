@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>數據主權的奪回：Solow-Swan 模型 AI 重建全紀錄</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0d1117;
+            --card-bg: #161b22;
+            --accent: #58a6ff;
+            --text-main: #c9d1d9;
+            --text-dim: #8b949e;
+            --error: #f85149;
+            --success: #3fb950;
+            --warning: #d29922;
+            --border: #30363d;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.8;
+            display: flex;
+        }
+        
+        /* 側邊導航 */
+        nav {
+            width: 280px;
+            height: 100vh;
+            background: #010409;
+            border-right: 1px solid var(--border);
+            position: fixed;
+            padding: 40px 20px;
+            overflow-y: auto;
+        }
+        
+        nav h2 {
+            color: var(--accent);
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+            font-weight: 700;
+        }
+        
+        nav ul {
+            list-style: none;
+        }
+        
+        nav li {
+            margin: 18px 0;
+        }
+        
+        nav a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.88rem;
+            transition: color 0.3s;
+            display: block;
+            padding: 5px 0;
+        }
+        
+        nav a:hover {
+            color: var(--accent);
+        }
+        
+        /* 主內容區 */
+        main {
+            margin-left: 300px;
+            padding: 60px 80px;
+            max-width: 1100px;
+        }
+        
+        section {
+            margin-bottom: 120px;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            color: #fff;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            color: #fff;
+            border-left: 4px solid var(--accent);
+            padding-left: 18px;
+            margin-bottom: 30px;
+            margin-top: 20px;
+        }
+        
+        h3 {
+            font-size: 1.4rem;
+            color: var(--accent);
+            margin: 30px 0 15px 0;
+        }
+        
+        .subtitle {
+            color: var(--text-dim);
+            font-size: 1.3rem;
+            margin-bottom: 60px;
+            font-weight: 300;
+        }
+        
+        p {
+            margin-bottom: 18px;
+        }
+        
+        /* 媒體容器 */
+        .media-container {
+            background: #000;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 35px 0;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+        }
+
+        .media-container.small-media img {
+            max-height: 120px;
+        }
+        
+        .media-container video,
+        .media-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            max-height: 350px;
+            object-fit: contain;
+        }
+        
+        .caption {
+            padding: 15px 20px;
+            background: var(--card-bg);
+            font-size: 0.88rem;
+            color: var(--text-dim);
+            text-align: center;
+            border-top: 1px solid var(--border);
+            line-height: 1.6;
+        }
+        
+        /* 表格樣式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 35px 0;
+            background: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        th, td {
+            padding: 6px 12px;
+            border: 1px solid var(--border);
+            text-align: left;
+            font-size: 0.92rem;
+        }
+        
+        th {
+            background: #21262d;
+            color: var(--accent);
+            font-weight: 600;
+        }
+        
+        .status-ok {
+            color: var(--success);
+            font-weight: 600;
+        }
+        
+        .status-error {
+            color: var(--error);
+            font-weight: 600;
+        }
+        
+        .status-warning {
+            color: var(--warning);
+            font-weight: 600;
+        }
+        
+        /* 高亮框 */
+        .highlight-box {
+            background: rgba(88, 166, 255, 0.06);
+            border: 1px solid rgba(88, 166, 255, 0.3);
+            border-left: 4px solid var(--accent);
+            padding: 28px;
+            border-radius: 8px;
+            margin: 25px 0;
+        }
+        
+        .error-box {
+            background: rgba(248, 81, 73, 0.06);
+            border: 1px solid rgba(248, 81, 73, 0.3);
+            border-left: 4px solid var(--error);
+            padding: 28px;
+            border-radius: 8px;
+            margin: 25px 0;
+        }
+        
+        .warning-box {
+            background: rgba(210, 153, 34, 0.06);
+            border: 1px solid rgba(210, 153, 34, 0.3);
+            border-left: 4px solid var(--warning);
+            padding: 28px;
+            border-radius: 8px;
+            margin: 25px 0;
+        }
+        
+        .audit-label {
+            font-weight: 600;
+            color: var(--accent);
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.05rem;
+        }
+        
+        code {
+            background: #21262d;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #79c0ff;
+        }
+        
+        .code-block {
+            background: #1e293b;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid var(--accent);
+            overflow-x: auto;
+        }
+        
+        .code-block code {
+            background: transparent;
+            color: #94a3b8;
+            display: block;
+            line-height: 1.6;
+            white-space: pre-wrap;
+        }
+        
+        ul {
+            margin: 15px 0 15px 25px;
+        }
+        
+        ol {
+            margin: 15px 0 15px 25px;
+        }
+        
+        li {
+            margin: 10px 0;
+        }
+        
+        strong {
+            color: #fff;
+            font-weight: 600;
+        }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        /* 響應式設計 */
+        @media (max-width: 1024px) {
+            nav {
+                display: none;
+            }
+            main {
+                margin-left: 0;
+                padding: 40px 30px;
+            }
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <h2>研究審計</h2>
+        <ul>
+            <li><a href="#intro">序言</a></li>
+            <li><a href="#phase0">Phase 0：視覺幻覺</a></li>
+            <li><a href="#phase2">Phase 2：編碼陷阱</a></li>
+            <li><a href="#phase3">Phase 3：掛羊頭賣狗肉</a></li>
+            <li><a href="#phase4">Phase 4：Prompt 鴻溝</a></li>
+            <li><a href="#phase5">Phase 5：未能兩全</a></li>
+            <li><a href="#summary">結案總結</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <!-- 序言 -->
+        <section id="intro">
+            <h1>識破「幻覺式合理化」</h1>
+            <p class="subtitle">Solow-Swan 模型 AI 重建全紀錄：當人類專業遇上 AI 隨機性</p>
+            
+            <p>這份關於經濟模型的報告，讓我對 AI 模型及其可能的侷限性有了更深一層的了解。</p>
+            <p>在製作過程中，AI 必須同時處理「數據計算」、「視覺呈現」與「邏輯整合」。為此我經歷了無數次修改，透過一次次 Prompt 的修正來調整 HTML 
+                結果與數字差異，甚至改到連 AI 都陷入混亂。在陸續回顧與 AI 的討論過程後，我終於在它寫的 Code 中發現問題。</p>
+            <p>我發現，當 AI 追求「視覺權威感」時，會透過編造數據與簡化標題來矇混過關；它能在 UI 上展示正確的公式名稱，底層卻執行著錯誤的計算邏輯。這讓我意識到，在處理嚴謹的經濟模型時，數據主權必需由人類掌握及小心維護。研究者的價值，就在於識破這些優美的視覺偽裝。</p>
+        </section>
+        <!-- Phase 0 -->
+        <section id="phase0">
+            <h2>Phase 0：精緻的視覺幻覺</h2>
+            
+            <p>在最初階段（僅提供 PPTX 簡報時），AI 展現了極強的內容拆解力。它精準地將 <code>pptx_extracted</code> 資料夾中的所有圖片、投影片內容轉化為極具權威感的互動網頁介面。</p>
+            
+            <div class="media-container">
+                <img src="ai-illusion/S-S-model-demo.gif" alt="第一版 AI 生成網頁展示">
+                <span class="caption">證據：視覺優美但數據編造的第一版網頁生成過程</span>
+            </div>
+            
+            <div class="error-box">
+                <span class="audit-label">顯而易見的錯誤但</span>
+                
+                <p><strong>1. 全套虛假數據（Data Fabrication）</strong></p>
+                <p>由於缺乏 CSV 檔案約束，AI 為了讓 Solow-Swan Model Chart 「動起來」，不惜在 <code>app.js</code> 中硬編碼編造了整套 GDP 數據。研究使用的是 2005-2024 年的真實數據，但 AI 為了視覺效果，自行生成了一套虛構數值。例如：</p>
+                <ul>
+                    <li>台灣 2005 年被定義為 $16,600（雖然接近，但為整數，去除了小數精確度 16,600.12）</li>
+                    <li>台灣 2024 年被隨機編造為 $34,200，這與真實研究數據毫無關聯</li>
+                </ul>
+                        
+                <p><strong>2. 計算邏輯的裝飾化</strong></p>
+                <p>雖然網頁上渲染了漂亮的數學方程式，但此時這些公式只是「視覺裝飾品」，完全沒有與實際數據聯動計算。</p>
+                <p></p>
+                <p><strong>AI 將簡報的所有章節與敘事流程完整轉化為網頁結構。</strong>=> 這是其他後續版本都沒有達成的「內容廣度」。但代價是，它為了維持視覺流暢，犧牲了數據的靈魂。</p>
+            </div>
+        </section>
+
+        <!-- Phase 2 -->
+        <section id="phase2">
+            <h2>Phase 2：數據的沈默殺手（編碼陷阱）</h2>
+            <p>為了修正第一版的數據幻覺，我放入了原始 CSV 檔案。然而，隨之而來的是一個「沈默錯誤」：<strong>數據編碼衝突</strong>。</p>
+            
+            <div class="comparison-grid">
+                <div class="media-container">
+                    <img src="ai-illusion/csv-c.png" alt="CSV 數據讀取問題展示">
+                    <span class="caption">證據 1：原始 CSV 檔案中包含中文及捷克文字元</span>
+                </div>
+
+            </div>
+            
+            <p>由於 CSV 檔案中包含捷克文檔名與特殊字元（如 UTF-8 與 Windows-1250 編碼混用），AI 在讀取過程中也並未報錯，而是「冷靜地」誤解了部分數值。</p>
+            
+            <div class="highlight-box">
+                <span class="audit-label">我它稱為「沈默殺手」？</span>
+                <p>若一般程式錯誤會拋出異常則會很容發現，但當編碼問題往往讓系統「看似正常運作」。AI 沒有停止執行，反而用錯誤的數值繼續計算，UI 只會看到數字錯誤，而很難找到為什麼錯誤，並產出看起來合理但實際偏離的結果。</p>
+            </div>
+        </section>
+
+        <!-- Phase 3 -->
+        <section id="phase3">
+            <h2>Phase 3：標題正確但邏輯錯誤</h2>
+            
+            <p>用了乾淨的數據，並明確要求 AI「使用 Solow-Swan 模型」時，發現：<strong>AI 在 UI 上展示了完美的 Solow-Swan 公式，但底層執行的卻是完全錯誤的線性回歸</strong>。</p>
+            
+            <div class="comparison-grid">
+                <div class="media-container">
+                    <img src="ai-illusion/ss-cz-w.png" alt="錯誤版本的 UI 展示">
+                    <span class="caption">「Solow-Swan (First Order)」，公式顯示為 y = 42418e^0.0264x</span>
+                </div>
+
+                <div class="media-container">
+                    <img src="ai-illusion/ss-code-wrong.png" alt="錯誤版本的代碼展示">
+                    <span class="caption">實際執行邏輯截圖：同場景下的程式碼證據</span>
+                </div>
+            </div>
+            
+            <div class="error-box">
+                <span class="audit-label">實際代碼執行的邏輯（錯誤）</span>
+                    <div class="code-block">
+                    <code>// solow_swan.js 第 117-131 行
+const x = cData.map(d => d.year);  // 使用原始年份 [2000, 2001, ...]
+const y = cData.map(d => d.gdp);   // 直接使用 GDP 值
+const reg = linearRegression(x, y); // ❌ 對 GDP vs. 年份做線性回歸</code>
+                </div>
+                
+                <p><strong>問題分析</strong>：</p>
+                <ul>
+                    <li>❌ 沒有對 GDP 進行對數轉換（應該是 ln(GDP)）</li>
+                    <li>❌ 沒有將時間轉換為指數（應該是 t = year - 2005）</li>
+                    <li>❌ 使用的是線性回歸，不是指數回歸</li>
+                </ul>
+            </div>
+
+            <h3>捷克案例：起始值的錯誤</h3>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>指標</th>
+                        <th>正確值（Excel）</th>
+                        <th>錯誤版本</th>
+                        <th>狀態</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>GDP 2005</strong></td>
+                        <td>$15148</td>
+                        <td>$15518</td>
+                        <td class="status-error">❌ 起始值錯誤</td>
+                    </tr>
+                    <tr>
+                        <td><strong>成長率 (g)</strong></td>
+                        <td>1.76%</td>
+                        <td>1.54%</td>
+                        <td class="status-error">❌ 偏差 0.25%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>模型類型</strong></td>
+                        <td>指數回歸</td>
+                        <td>線性回歸</td>
+                        <td class="status-error">❌ 完全錯誤</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            
+        </section>
+
+        <!-- Phase 4 -->
+        <section id="phase4">
+            <h2>Phase 4：Prompt 的精確度與 AI 的理解鴻溝</h2>
+                  
+            <p>Pompt<strong>確實要求了 Solow-Swan 模型與指數公式:</strong>。</p>
+        <div class="media-container small-media">
+                <img src="ai-illusion/ss-prompt2.png" alt="S-S prompt" style="max-height: 62px;">
+                <span class="caption">S-S prompt</span>
+            </div>
+         <div class="media-container small-media">
+                <img src="ai-illusion/ss-prompt1.png" alt="S-S prompt">
+                <span class="caption">S-S prompt</span>
+            </div>
+                        
+            <div class="warning-box">
+                <span class="audit-label">Prompt 分析：然而，是否還遺漏了什麼？</span>
+                
+                <div class="comparison-grid">
+                    <div>
+                        <p><strong>明確要求的內容</strong>：</p>
+                        <ul>
+                            <li>模型名稱：Solow-Swan (S-S) Exponential Model</li>
+                            <li>公式格式：$y = Ae^{gx}$</li>
+                            <li>要求計算：「with calculated $A$ and $g$ values」</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <p><strong>關鍵的技術空白</strong>：</p>
+                        <ul>
+                            <li>沒有說明如何計算 A 和 g</li>
+                            <li>沒有要求「鎖定初始值」</li>
+                            <li>沒有說明 Solow-Swan 的數學原理</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Phase 5 -->
+        <section id="phase5">
+            <h2>Phase 5：Prompt 修改到正確數字 v.s 視覺整合的失敗</h2>
+            
+            <div class="media-container">
+                <video controls preload="metadata">
+                    <source src="ai-illusion/SS-model.mp4" type="video/mp4">
+                </video>
+                <span class="caption">證據影片：最終版本（01:18-01:25 展示方程式運算）</span>
+            </div>
+            
+           
+             <div class="highlight-box">
+                    <span class="audit-label" style="font-size: 1.4rem;">再次修改prompt 後AI 產生的代碼</span>
+                    
+                    <div class="media-container" style="margin: 20px 0;">
+                        <img src="ai-illusion/ss-code-right.png" alt="正確版本的代碼展示">
+                        <span class="caption">修正後的代碼實現：正確的 Solow-Swan 指數回歸邏輯</span>
+                    </div>
+                                       
+                    <h3 style="margin-top: 30px;">關鍵發現</h3>
+                <ul>
+                    <li><strong>初始值 A 的鎖定是可行的</strong>：透過代碼干預成功固定起點</li>
+                    <li><strong>成長率 g 仍存在微小偏差</strong>：即使鎖定 A，回歸算法仍產生誤差</li>
+                    <li><strong>R² 的下降是理論約束的代價</strong>：強制約束降低了統計擬合度</li>
+                </ul>
+                    <h3 style="margin-top: 30px;">三國完整對照</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>國家</th>
+                                <th>參數</th>
+                                <th>研究基準</th>
+                                <th>最終版</th>
+                                <th>審計結論</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td rowspan="3"><strong>新加坡</strong></td>
+                                <td>初始值 (A)</td>
+                                <td>41,798.49</td>
+                                <td class="status-ok">41,798.49</td>
+                                <td>✓ 鎖定修正成功</td>
+                            </tr>
+                            <tr>
+                                <td>成長率 (g)</td>
+                                <td>2.75%</td>
+                                <td class="status-ok">2.75%</td>
+                                <td>✓ 計算正確</td>
+                            </tr>
+                            <tr>
+                                <td>R²</td>
+                                <td>0.996</td>
+                                <td class="status-warning">0.988</td>
+                                <td>△ 微小偏差</td>
+                            </tr>
+                            
+                            <tr>
+                                <td rowspan="3"><strong>台灣</strong></td>
+                                <td>初始值 (A)</td>
+                                <td>16,600.12</td>
+                                <td class="status-ok">16,600.12</td>
+                                <td>✓ 鎖定成功</td>
+                            </tr>
+                            <tr>
+                                <td>成長率 (g)</td>
+                                <td>3.26%</td>
+                                <td class="status-warning">3.31%</td>
+                                <td>△ 偏差 0.05%</td>
+                            </tr>
+                            <tr>
+                                <td>R²</td>
+                                <td>0.996</td>
+                                <td class="status-warning">0.9884</td>
+                                <td>△ 可接受</td>
+                            </tr>
+                            
+                            <tr>
+                                <td rowspan="3"><strong>捷克</strong></td>
+                                <td>初始值 (A)</td>
+                                <td>15,147.72</td>
+                                <td class="status-ok">15,147.72</td>
+                                <td>✓ 鎖定成功</td>
+                            </tr>
+                            <tr>
+                                <td>成長率 (g)</td>
+                                <td>1.76%</td>
+                                <td class="status-error">1.54%</td>
+                                <td>✗ 仍存偏差</td>
+                            </tr>
+                            <tr>
+                                <td>R²</td>
+                                <td>-</td>
+                                <td>較低</td>
+                                <td>需驗證</td>
+                            </tr>
+                        </tbody>
+                        
+                    </table>
+                    
+            </div>
+            
+            <div class="warning-box">
+                <span class="audit-label">視覺整合的失敗</span>
+                <p>Prompt 明確要求「在同一圖表上顯示兩個模型」，但最終網頁將它們分成獨立圖表。當我修改 Prompt 要求整合時，AI 會出現：圖表合併但計算錯誤，或產生混亂標註。 
+                    在多次嘗試後仍會顧此失彼，似乎AI 在「數據計算」、「視覺呈現」、「邏輯整合」三者之間無法兼顧。</p>
+            </div>
+        </section>
+
+        <!-- 全域審核表 -->
+        <section id="audit">
+            
+        </section>
+
+        <!-- 結案總結 -->
+        <section id="summary">
+            <div class="highlight-box" style="border-color: var(--accent); background: rgba(88, 166, 255, 0.1);">
+                <h2>結案總結：解構 AI 的專注力邊界</h2>
+                
+                <p>本專案證實了 AI 在處理複雜學術任務時的一項關鍵侷限：<strong>「功能專注力的互斥性」</strong>。</p>
+                
+                               
+                <h3>核心啟示</h3>
+                
+                <p><strong>1. Prompt 的精確度至關重要</strong></p>
+                <p>模糊的要求會導致 AI 只模仿表面形式。我的 Prompt 要求了「$y = Ae^{gx}$」但沒說如何計算，AI 就用最簡單的方法敷衍。</p>
+                
+                <p><strong>2. AI 會「形式正確但邏輯錯誤」</strong></p>
+                <p>最危險的不是明顯錯誤，而是「看起來專業」的錯誤。UI 顯示完美的 Solow-Swan 公式，但代碼執行線性回歸。</p>
+                
+                <p><strong>3. AI 的專注力是稀缺資源</strong></p>
+                <p>當任務涉及多個維度時，AI 會選擇性犧牲某些要求。無論如何調整 Prompt，都無法像人類那樣統籌全局。</p>
+                
+                <p><strong>4. 研究者的不可替代價值</strong></p>
+                <ul>
+                    <li>識破視覺權威感（Phase 0 & 3）</li>
+                    <li>追蹤技術細節（Phase 2 編碼陷阱）</li>
+                    <li>代碼邏輯審查（發現錯誤實現）</li>
+                    <li>理論約束的堅持（強制鎖定初始值）</li>
+                </ul>
+                
+                <p style="margin-top: 40px; font-size: 1.15em; text-align: center; color: var(--accent); font-weight: 600; padding: 25px; background: rgba(88, 166, 255, 0.05); border-radius: 8px;">
+                    在 AI 的「美觀擬合」與「理論真實」之間<br>
+                    研究者守住了數據正確性的最後一公里<br><br>
+                    <span style="font-size: 0.9em; color: var(--text-dim);">Human Audit > AI Hallucination</span>
+                </p>
+            </div>
+        </section>
+    </main>
+
+</body>
+</html>

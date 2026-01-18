@@ -107,8 +107,8 @@ window.filesData = [
         "id": 12,
         "title": "AI Illusions & Human Judgment (Work in Progress)",
         "category": "AI Lab / Workflow",
-        "description": "AI Illusions & Human Judgment (Work in Progress)",
-        "file": "#",
+        "description": "AI Illusions & Human Judgment",
+        "file": "ai-illusion-cz.html",
         "type": "AI Lab"
     },
     ];
