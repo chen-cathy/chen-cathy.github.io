@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Srovnání hospodářského růstu Tchaj-wanu a České republiky | Analýza lidského kapitálu</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #1a365d;
+            --secondary: #2c5282;
+            --accent-tw: #dc2626;
+            --accent-cz: #2563eb;
+            --bg-light: #f8fafc;
+            --bg-white: #ffffff;
+            --text-dark: #1e293b;
+            --text-medium: #475569;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 1.125rem;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--bg-light);
+        }
+        
+        .sans {
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+        
+        /* Reading Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: var(--accent-cz);
+            z-index: 9999;
+            transition: width 0.1s ease;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        
+        .header-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 1.5rem;
+        }
+        
+        .subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 400;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+        
+        .author {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.125rem;
+            font-weight: 500;
+            margin-top: 2rem;
+            opacity: 0.95;
+        }
+        
+        /* Container */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        /* Article */
+        article {
+            background: var(--bg-white);
+            margin: 3rem auto;
+            padding: 4rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            border-radius: 8px;
+        }
+        
+        /* TOC Card */
+        .toc-card {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 2px solid var(--accent-cz);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .toc-card h2 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin: 0 0 1.5rem 0;
+            padding: 0;
+            border: none;
+        }
+        
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .toc-list li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .toc-list a {
+            display: block;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.05rem;
+            color: var(--primary);
+            text-decoration: none;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            background: white;
+            border-left: 4px solid var(--accent-cz);
+        }
+        
+        .toc-list a:hover {
+            background: var(--accent-cz);
+            color: white;
+            transform: translateX(8px);
+        }
+        
+        /* Typography */
+        h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--accent-cz);
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--secondary);
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        h4 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        p {
+            margin-bottom: 1.25rem;
+        }
+        
+        /* Lists */
+        ul {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+        }
+        
+        li {
+            margin-bottom: 0.75rem;
+        }
+        
+        /* Equations */
+        .equation {
+            font-family: 'Times New Roman', serif;
+            font-size: 1.25rem;
+            text-align: center;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            background: var(--bg-light);
+            border-left: 4px solid var(--accent-cz);
+            border-radius: 4px;
+        }
+        
+        /* Story Illustration Container */
+        .story-illustration {
+            margin: 3rem 0;
+            padding: 2rem;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-radius: 12px;
+        }
+        
+        .illustration-title {
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 1.3125rem;
+            font-weight: 700;
+            text-transform: none;
+            letter-spacing: 0;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Chart Placeholder */
+        .chart-placeholder {
+            margin: 3rem 0;
+            padding: 4rem 2rem;
+            background: white;
+            border: 2px dashed var(--border);
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .chart-placeholder .chart-icon {
+            font-size: 3rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+        
+        .chart-placeholder h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-medium);
+            margin: 0 0 0.5rem 0;
+        }
+        
+        .chart-placeholder p {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.875rem;
+            color: var(--text-light);
+            margin: 0;
+        }
+        
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+        }
+        
+        thead {
+            background: var(--primary);
+            color: white;
+        }
+        
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        tbody tr:hover {
+            background: var(--bg-light);
+        }
+        
+        /* Highlight Box */
+        .highlight-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-left: 4px solid #f59e0b;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 4px;
+        }
+        
+        .highlight-box p {
+            margin: 0;
+            font-weight: 500;
+        }
+        
+        /* Key Finding */
+        .key-finding {
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            border-left: 4px solid var(--accent-cz);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 4px;
+        }
+        
+        .key-finding strong {
+            display: block;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        
+        /* Reference */
+        .reference {
+            font-size: 0.95rem;
+            color: var(--text-medium);
+            font-style: italic;
+            margin: 0.5rem 0;
+        }
+        
+        /* References Section */
+        details.references-section {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border: 2px solid #f59e0b;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+        
+        details.references-section summary {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        details.references-section summary::-webkit-details-marker {
+            display: none;
+        }
+        
+        details.references-section summary::before {
+            content: '▶';
+            font-size: 1rem;
+            transition: transform 0.2s ease;
+        }
+        
+        details.references-section[open] summary::before {
+            transform: rotate(90deg);
+        }
+        
+        .references-list {
+            margin-top: 1.5rem;
+            padding-left: 1.5rem;
+        }
+        
+        .references-list li {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+        
+        .references-list a {
+            color: var(--accent-cz);
+            text-decoration: none;
+            border-bottom: 1px solid var(--accent-cz);
+        }
+        
+        .references-list a:hover {
+            color: var(--accent-tw);
+            border-bottom-color: var(--accent-tw);
+        }
+        
+        /* Section Navigation */
+        .section-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px solid var(--border);
+            gap: 1rem;
+        }
+        
+        .section-nav a {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: white;
+            background: var(--accent-cz);
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .section-nav a:hover {
+            background: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .section-nav .nav-prev::before {
+            content: '← ';
+        }
+        
+        .section-nav .nav-next::after {
+            content: ' →';
+        }
+        
+        .section-nav .spacer {
+            flex: 1;
+        }
+        
+        /* Two Column Data Display */
+        .data-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .data-column {
+            padding: 1.5rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+        }
+        
+        .data-column h4 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 0 0 1rem 0;
+        }
+        
+        .data-column p {
+            margin: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .data-comparison {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+        
+        footer p {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.875rem;
+            margin: 0;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.875rem;
+            }
+            
+            article {
+                padding: 2rem 1.5rem;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .section-nav {
+                flex-direction: column;
+            }
+            
+            .section-nav .spacer {
+                display: none;
+            }
+        }
+        
+        /* Floating Chart Button */
+        .float-chart-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--accent-cz);
+            color: white;
+            border: none;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .float-chart-btn:hover {
+            background: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(37, 99, 235, 0.5);
+        }
+        
+        .float-chart-btn::before {
+            content: '📊';
+            font-size: 1.2rem;
+        }
+        
+        /* Modal Overlay */
+        .chart-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .chart-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+        
+        .chart-modal-content {
+            background: white;
+            border-radius: 16px;
+            max-width: min(1100px, 92vw);
+            max-height: 90vh;
+            overflow: auto;
+            position: relative;
+            padding: 2rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            animation: modalSlideIn 0.3s ease;
+        }
+        
+        @keyframes modalSlideIn {
+            from {
+                transform: translateY(-30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .chart-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border);
+        }
+        
+        .chart-modal-title {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 0;
+        }
+        
+        .chart-modal-close {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: var(--text-medium);
+            cursor: pointer;
+            padding: 0;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+        
+        .chart-modal-close:hover {
+            background: var(--bg-light);
+            color: var(--primary);
+        }
+        
+        .chart-modal-image {
+            width: 100%;
+            height: auto;
+            max-height: 70vh;
+            object-fit: contain;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        
+        .chart-modal-caption {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            color: var(--text-medium);
+            text-align: center;
+            line-height: 1.5;
+        }
+        
+        /* Lock body scroll when modal is open */
+        body.modal-open {
+            overflow: hidden;
+        }
+        
+        /* Open Chart Link */
+        .open-chart {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            color: var(--accent-cz);
+            text-decoration: none;
+            border-bottom: 1px solid var(--accent-cz);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-left: 0.3rem;
+        }
+        
+        .open-chart:hover {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+        
+        .open-chart::before {
+            content: '📊';
+            font-size: 0.85rem;
+        }
+        
+        @media (max-width: 768px) {
+            .float-chart-btn {
+                padding: 0.75rem 1rem;
+                font-size: 0.85rem;
+                bottom: 15px;
+                right: 15px;
+            }
+            
+            .chart-modal-content {
+                padding: 1.5rem;
+                max-width: 95vw;
+            }
+            
+            .chart-modal-title {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Reading Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <header>
+        <div class="header-content">
+            <h1>Český paradox: více lidského kapitálu a produktivity, přesto nižší HDP na obyvatele než Tchaj-wan</h1>
+            <p class="subtitle">Vysvětlení pomocí rozšířeného Solowova modelu (MRW, 1992)</p>
+            <p class="author">Chen Shuli</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <article>
+            <!-- Table of Contents -->
+            <div class="toc-card">
+                <h2>📚 Průvodce kapitolami</h2>
+                <ul class="toc-list">
+                    <li><a href="#sec1">1. Úvod: v čem spočívá „český paradox"</a></li>
+                    <li><a href="#sec2">2. Teoretický rámec: rozšířený Solowův model (MRW, 1992)</a></li>
+                    <li><a href="#sec3">3. Co říkají data: lidský kapitál, produktivita a HDP (Česko vs. Tchaj-wan)</a></li>
+                    <li><a href="#sec4">4. Interpretace: proč vyšší HC a TFP nemusí znamenat vyšší HDP</a></li>
+                    <li><a href="#sec5">5. Závěr: co z toho plyne (a co zůstává otevřené)</a></li>
+                </ul>
+            </div>
+
+            <!-- Story Illustration 1: Diverging Trajectories -->
+            <div class="story-illustration">
+                <div class="illustration-title">Příběh dvou ekonomik: Rozcházející se trajektorie</div>
+                <svg viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Background -->
+                    <defs>
+                        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:#e0f2fe;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#fef3c7;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <rect width="800" height="300" fill="url(#grad1)" opacity="0.3"/>
+                    
+                    <!-- Grid -->
+                    <line x1="100" y1="50" x2="100" y2="250" stroke="#475569" stroke-width="3"/>
+                    <line x1="100" y1="250" x2="700" y2="250" stroke="#475569" stroke-width="3"/>
+                    
+                    <!-- Timeline markers -->
+                    <text x="150" y="270" font-family="Inter" font-size="18" font-weight="600" fill="#1e293b" text-anchor="middle">2000</text>
+                    <text x="400" y="270" font-family="Inter" font-size="18" font-weight="600" fill="#1e293b" text-anchor="middle">2010</text>
+                    <text x="650" y="270" font-family="Inter" font-size="18" font-weight="600" fill="#1e293b" text-anchor="middle">2023</text>
+                    
+                    <!-- Czech Republic path (slower growth) -->
+                    <path d="M 150 150 Q 300 140, 400 135 T 650 120" 
+                          stroke="#2563eb" stroke-width="6" fill="none" stroke-dasharray="12,6"/>
+                    <circle cx="150" cy="150" r="8" fill="#2563eb"/>
+                    <circle cx="650" cy="120" r="11" fill="#2563eb"/>
+                    <text x="650" y="100" font-family="Inter" font-size="20" font-weight="700" fill="#1e40af" text-anchor="end">CZ: 20,444</text>
+                    
+                    <!-- Taiwan path (faster growth) -->
+                    <path d="M 150 160 Q 300 130, 400 100 T 650 50" 
+                          stroke="#dc2626" stroke-width="6" fill="none"/>
+                    <circle cx="150" cy="160" r="8" fill="#dc2626"/>
+                    <circle cx="650" cy="50" r="11" fill="#dc2626"/>
+                    <text x="650" y="35" font-family="Inter" font-size="20" font-weight="700" fill="#991b1b" text-anchor="end">TW: 31,127</text>
+                    
+                    <!-- Convergence point (2000-2005) -->
+                    <circle cx="150" cy="155" r="15" fill="none" stroke="#f59e0b" stroke-width="2.5" stroke-dasharray="5,2.5"/>
+                    <text x="150" y="190" font-family="Inter" font-size="15" font-weight="600" fill="#78350f" text-anchor="middle">Podobná úroveň</text>
+                    <text x="150" y="208" font-family="Inter" font-size="15" font-weight="600" fill="#78350f" text-anchor="middle">2000-2005</text>
+                    
+                    <!-- Arrow showing divergence -->
+                    <path d="M 400 125 L 400 85" stroke="#1e293b" stroke-width="3" marker-end="url(#arrowhead)"/>
+                    <defs>
+                        <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+                            <polygon points="0 0, 10 5, 0 10" fill="#1e293b" />
+                        </marker>
+                    </defs>
+                    <text x="420" y="110" font-family="Inter" font-size="17" font-weight="600" fill="#1e293b">Rozcházení</text>
+                    
+                    <!-- Y-axis label -->
+                    <text x="40" y="150" font-family="Crimson Pro" font-size="26" font-weight="700" fill="#1e293b" text-anchor="middle" transform="rotate(-90 40 150)">HDP na obyvatele</text>
+                </svg>
+            </div>
+
+            <h2 id="sec1" style="letter-spacing: -0.02em;">1. Úvod: v čem spočívá „český paradox"</h2>
+            <p>V minulé práci jsem analyzovala trendy ekonomické konvergence mezi Tchaj-wanem a Českou republikou pomocí standardního Solowova-Swanova modelu. Analýza ukázala, že v letech 2000–2005 byly HDP na obyvatele a kapitálová zásoba (K) v obou zemích na podobné úrovni. Následně se však jejich trajektorie začaly rozcházet. V roce 2023 dosáhl HDP na obyvatele na Tchaj-wanu přibližně 31 127 (GDP per capita (constant 2015 US$), zatímco v České republice činil přibližně 20 444 (GDP per capita (constant 2015 US$).</p>
+            
+            <p>Standardní S-S model připisuje tento rozdíl „akumulaci kapitálu" a „míře růstu populace". To však nevysvětluje rozpor, který jsem pozorovala během svého života v České republice: Česko má bezplatný vzdělávací systém, vysokou míru vysokoškolského vzdělání a kvalitu obyvatelstva. Češi také vynikají v mezinárodních srovnáních logických a matematických dovedností. Přesto ekonomický rozvoj od roku 2005 dlouhodobě stagnuje. Proto jsem se rozhodla použít Augmented Solow Model (rozšířený Solowův model zahrnující lidský kapitál), abych našel odpověď z pohledu lidského kapitálu.</p>
+
+            <div class="section-nav">
+                <div class="spacer"></div>
+                <a href="#sec2" class="nav-next">Další: Teoretický rámec</a>
+            </div>
+
+            <h2 id="sec2" style="letter-spacing: -0.02em;">2. Teoretický rámec: rozšířený Solowův model (MRW, 1992)</h2>
+            <p class="reference">(Mankiw et al., 1992)</p>
+            
+            <p>Tento článek koriguje nedostatky tradičního Solowova modelu. Autoři poukazují na to, že standardní model považuje pracovní sílu za homogenní a zaměřuje se pouze na fyzický kapitál (K) a množství práce (L). To vede k tomu, že model nedokáže efektivně vysvětlit obrovské rozdíly v příjmech mezi zeměmi a přeceňuje výnosnost kapitálu.</p>
+            
+            <p>MRW (1992) navrhli rozšířený Solowův model, který do produkční funkce začleňuje lidský kapitál (H).</p>
+            
+            <div class="equation">
+                <em>Y</em>(<em>t</em>) = <em>K</em>(<em>t</em>)<sup>α</sup> <em>H</em>(<em>t</em>)<sup>β</sup> (<em>A</em>(<em>t</em>) <em>L</em>(<em>t</em>))<sup>1−α−β</sup>
+            </div>
+
+            <h3>2.1 Hlavní zjištění</h3>
+            <ul>
+                <li><strong>Lidský kapitál je klíčovým faktorem:</strong> Po zahrnutí lidského kapitálu (zastoupeného mírou zápisu na střední školy) se vysvětlovací schopnost modelu pro rozdíly v příjmech mezi zeměmi zvýšila z méně než 60 % na přibližně 80 %.</li>
+                <li><strong>Rychlost konvergence:</strong> Článek potvrdil existenci „podmíněné konvergence" (Conditional Convergence). To znamená, že po kontrole míry úspor, růstu populace a lidského kapitálu rostou chudší země skutečně rychleji než země bohaté.</li>
+            </ul>
+
+            <div class="section-nav">
+                <a href="#sec1" class="nav-prev">Předchozí: Úvod</a>
+                <a href="#sec3" class="nav-next">Další: Co říkají data</a>
+            </div>
+
+            <h2 id="sec3" style="letter-spacing: -0.02em;">3. Co říkají data: lidský kapitál, produktivita a HDP<br>(Česko vs. Tchaj-wan)</h2>
+            <p>Analýza využívá data z Penn World Table (PWT 11.0)<span class="reference">(PWT 11.0, 2025)</span> za období 1994–2023. Dvěma nejdůležitějšími proměnnými jsou:</p>
+            
+            <ul>
+                <li><strong>Index lidského kapitálu (HC):</strong> Průměrná délka vzdělání a návratnost vzdělání (odhadnuto na základě Mincerovy rovnice).</li>
+                <li><strong>TFP (Celková produktivita faktorů):</strong> TFP měří „všechny faktory kromě kapitálu a práce, které činí ekonomiku efektivnější", včetně technologických inovací, optimalizace řízení a institucionální efektivity.</li>
+            </ul>
+
+            <div style="background: linear-gradient(135deg, #fee2e2 0%, #fef3c7 100%); padding: 1.5rem; border-radius: 12px; border-left: 6px solid #dc2626; margin: 2rem 0; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                <h3 style="color: #991b1b; margin-top: 0; font-size: 1.4rem;">3.1 Hlavní otázka: Proč má Česko vyšší HC i TFP než Tchaj-wan, ale bylo předstiženo v HDP?</h3>
+            </div>
+            
+            <div class="data-comparison">
+                <div class="data-column">
+                    <h4>HC</h4>
+                    <p>Český HC vzrostl z 3,32 v roce 1994 na 3,78 v roce 2023 (+14 %), zatímco tchajwanský vzrostl z 2,53 na 3,50 (+38 %). To znamená, že po celé sledované období byla průměrná délka vzdělání české pracovní síly vyšší než tchajwanské. Podle definice PWT je HC veličinou „stavu" (stock), což značí, že Česko má kvalitnější základnu pracovní síly.</p>
+                </div>
+                <div class="data-column">
+                    <h4>TFP</h4>
+                    <p>V roce 1994 bylo české TFP 0,79, zatímco tchajwanské pouze 0,68 (Česko vedlo o 16 %). V roce 2021 se však hodnoty vyrovnaly (cca 0,96–0,97) a v roce 2023 Tchaj-wan poprvé překonal Česko (0,99 vs. 0,98).</p>
+                </div>
+            </div>
+
+            <!-- Graf 1: HC vs TFP Scatter Plot -->
+            <div class="story-illustration" id="key-chart">
+                <div class="illustration-title">Graf 1: Vztah mezi lidským kapitálem (HC) a TFP</div>
+                <img class="key-chart-img" src="economic-growth-tw-cz-ai/chart1-hc-tfp.png" alt="Bodový graf HC vs TFP (1994-2023)" style="width: 100%; height: auto; border-radius: 8px;">
+                <p style="font-family: 'Inter', sans-serif; font-size: 0.875rem; color: #64748b; text-align: center; margin-top: 1rem;">
+                    Bodový graf | Regresní analýza HC vs. TFP (1994-2023)<br>
+                    Česko (R² = 0.72, sklon = 0.58) | Tchaj-wan (R² = 0.95, sklon = 0.33)
+                </p>
+            </div>
+
+            <div style="background: linear-gradient(135deg, #fee2e2 0%, #fef3c7 100%); padding: 1.5rem; border-radius: 12px; border-left: 6px solid #dc2626; margin: 2rem 0; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                <p style="margin: 0;"><strong>Klíčová paradox:</strong> Pokud má Česko trvale vyšší zásobu lidského kapitálu a TFP bylo většinu času vyšší, proč Tchaj-wan výrazně předstihl Česko v HDP? <a href="#" class="open-chart">(Otevřít graf)</a></p>
+            </div>
+
+            <p>Podle produkční funkce rozšířeného Solowova modelu závisí HDP (Y) nejen na H a TFP (A), ale také na:</p>
+            
+            <ul>
+                <li><strong>Zásobě fyzického kapitálu (K):</strong> Tchaj-wan masivně investuje do kapitálově náročných odvětví (např. polovodiče).</li>
+                <li><strong>Pracovním vstupu (L):</strong> Průměrná roční pracovní doba na Tchaj-wanu je výrazně vyšší než v Česku (cca 2000+ hodin vs. 1700+ hodin) a míra participace pracovní síly je také vyšší<span class="reference">(Taipei Times, 2023)</span>.</li>
+                <li><strong>Dynamickém efektu:</strong> Ačkoli mělo Česko vyšší „startovní pozici" (vysoké HC a TFP), Tchaj-wan rostl rychleji:
+                    <ul>
+                        <li>HC: Tchaj-wan +38 % vs. Česko +14 %</li>
+                        <li>TFP: Tchaj-wan +45 % vs. Česko +24 %</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <div style="background: linear-gradient(135deg, #fee2e2 0%, #fef3c7 100%); padding: 1.5rem; border-radius: 12px; border-left: 6px solid #dc2626; margin: 2rem 0; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                <strong>Klíčové zjištění</strong>
+                <p style="margin-bottom: 0;">Česko mělo lepší „počáteční podmínky", ale Tchaj-wan dosáhl vyššího HDP díky rychlejší akumulaci kapitálu, vyššímu pracovnímu vstupu a rychlejšímu růstu lidského kapitálu. To potvrzuje, že ekonomický růst je dynamický proces akumulace, nikoliv statické srovnání.</p>
+            </div>
+
+            <h3>3.2 Vztah mezi lidským kapitálem a TFP: Analýza bodového grafu</h3>
+            
+            <p>Regresní rovnice jsou následující:</p>
+            <ul>
+                <li><strong>Česká republika:</strong> y = 0.58x - 1.24</li>
+                <li><strong>Tchaj-wan:</strong> y = 0.33x - 0.14</li>
+            </ul>
+
+            <h4>3.2.1 Rozdělení zásoby lidského kapitálu (HC)</h4>
+            <ul>
+                <li>Česká data jsou koncentrována ve vysokém pásmu hodnot HC 3,3–3,8 a jsou rozmístěna velmi těsně.</li>
+                <li>Tchajwanská data se rozprostírají v širokém rozmezí od 2,5 až po 3,5.</li>
+            </ul>
+            <p><a href="#" class="open-chart">(Otevřít graf pro detailní pohled)</a></p>
+
+            <h4>3.2.2 Ekonomický význam směrnice</h4>
+            <p>Česká směrnice (0,58) je vyšší než tchajwanská (0,33), což znamená:</p>
+            <ul>
+                <li>V Česku zvýšení HC o 1 jednotku odpovídá průměrnému zvýšení TFP o 0,58.</li>
+                <li>Na Tchaj-wanu zvýšení HC o 1 jednotku odpovídá průměrnému zvýšení TFP o 0,33.</li>
+            </ul>
+
+            <p>Zdá se, že Česko má vyšší „efektivitu transformace". Protože je však skutečný přírůstek HC v Česku minimální (+0,46), je celkový růst TFP omezený (+0,19) i přes vysokou směrnici. Naopak Tchaj-wan zaznamenal velký přírůstek HC (+0,97), takže i při nižší směrnici dosáhl vyššího celkového růstu TFP (+0,31). <strong>Analogicky:</strong> Směrnice představuje efektivitu, ale skutečný výstup závisí na „vstupu krát efektivita". Tchaj-wan zvolil strategii masivních vstupů. <a href="#" class="open-chart">(Otevřít graf)</a></p>
+
+            <p>Kromě toho tchajwanská data stabilně rostou, zatímco česká data (modré body) vykazují silné výkyvy:</p>
+            <ul>
+                <li><strong>Rychlý růst:</strong> Některé body (např. 1994–1998) ukazují rychlý růst TFP, což odpovídá počátku ekonomické transformace a efektu „dohánění" (catch-up effect).</li>
+                <li><strong>Pokles:</strong> Body, kde HC roste, ale TFP klesá, se objevují v letech 2008–2009 a 2012–2013. To odpovídá globální finanční krizi a dluhové krizi v eurozóně. Vnější šoky způsobily dočasný pokles efektivity i přes růst lidského kapitálu.</li>
+                <li><strong>Stagnace:</strong> V letech 2014–2019 HC rostlo, ale TFP se téměř neměnilo. To naznačuje, že Česko narazilo na růstový strop a mezní přínos lidského kapitálu se blížil nule.</li>
+            </ul>
+
+            <p>To se odráží i v hodnotách vysvětlovací schopnosti R²：</p>
+            <ul>
+                <li><strong>Tchaj-wan R²= 0.95:</strong> HC vysvětluje 95 % variability TFP. Vztah je velmi těsný.</li>
+                <li><strong>Česko R²= 0.72:</strong> 28 % variability TFP nelze vysvětlit pomocí HC, což naznačuje vliv jiných faktorů (např. závislost na zahraničním kapitálu, struktura průmyslu). <a href="#" class="open-chart">(Otevřít graf pro porovnání)</a></li>
+            </ul>
+
+            <h3>3.3 Vývoj TFP v čase: Analýza liniového grafu</h3>
+
+            <p>Z grafu vývoje TFP v čase jsou patrné trajektorie obou zemí. Období 30 let dělím do tří fází:</p>
+
+            <!-- Graf 2: TFP Evolution -->
+            <div class="story-illustration">
+                <div class="illustration-title">Graf 2: Vývoj TFP v čase (1994-2023)</div>
+                <img src="economic-growth-tw-cz-ai/chart2-tfp-tw-cz.png" alt="Vývoj TFP ukazující tři fáze divergence (1994-2023)" style="width: 100%; height: auto; border-radius: 8px;">
+                <p style="font-family: 'Inter', sans-serif; font-size: 0.875rem; color: #64748b; text-align: center; margin-top: 1rem;">
+                    Čárový graf | Vývoj TFP ukazující tři fáze<br>
+                    Fáze 1 (1994-2005) CZ vede | Fáze 2 (2005-2020) Konvergence | Fáze 3 (2021-2023) TW předstihuje
+                </p>
+            </div>
+
+            
+            <p>V roce 1994 bylo české TFP výrazně vyšší, což odráží průmyslovou základnu a vyšší zásobu HC. Z pohledu tempa růstu však Česko rostlo průměrně o 0,8 % ročně (s výrazným zpomalením po roce 2008), zatímco Tchaj-wan si udržel stabilní růst cca 1,3 % ročně.</p>
+
+            <div class="highlight-box">
+                <p><strong>Průsečík:</strong> Podle dat se hodnoty TFP poprvé vyrovnaly v roce 2021 (cca 0,96–0,97) a v roce 2023 Tchaj-wan oficiálně překonal Česko (0,99 vs. 0,98).</p>
+            </div>
+
+            <h3>3.4 Srovnání míry růstu: Indexovaný graf</h3>
+            
+            <p>Při nastavení roku 1994 jako základního roku (100) je tchajwanský model jasný: HC a TFP rostou synchronizovaně. Sklon modré přerušované čáry (HC) a modré plné čáry (TFP) je podobný, což značí efektivní transformaci investic do vzdělání v produktivitu.</p>
+
+            <p>Český model je odlišný: HC roste pomalu, ale TFP relativně rychleji (poměr 1,79). To částečně odráží zlepšení efektivity po transformaci z plánované ekonomiky („institucionální dividenda"). Po roce 2005 však tempo růstu TFP v průměru mírně zpomalovalo a vývoj byl výrazněji kolísavý (např. pokles kolem let 2008–2009).</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Stát</th>
+                        <th>Růst HC</th>
+                        <th>Růst TFP</th>
+                        <th>Poměr TFP/HC</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Česko</td>
+                        <td>+14 %</td>
+                        <td>+24 %</td>
+                        <td>1,79</td>
+                    </tr>
+                    <tr>
+                        <td>Tchaj-wan</td>
+                        <td>+38 %</td>
+                        <td>+45 %</td>
+                        <td>1,18</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Graf 3: Indexed Growth Rate Comparison -->
+            <div class="story-illustration">
+                <div class="illustration-title">Graf 3: Srovnání míry růstu indexované (1994=100)</div>
+                <img src="economic-growth-tw-cz-ai/chart3-index-graf.png" alt="Srovnání míry růstu: Indexovaný graf (1994-2023)" style="width: 100%; height: auto; border-radius: 8px;">
+                <p style="font-family: 'Inter', sans-serif; font-size: 0.875rem; color: #64748b; text-align: center; margin-top: 1rem;">
+                    Čárový graf | Srovnání indexovaného růstu HC a TFP (1994=100)<br>
+                    CZ: HC +14%, TFP +24% | TW: HC +38%, TFP +45%
+                </p>
+            </div>
+
+            <div class="section-nav">
+                <a href="#sec2" class="nav-prev">Předchozí: Teoretický rámec</a>
+                <a href="#sec4" class="nav-next">Další: Interpretace</a>
+            </div>
+
+            <h2 id="sec4" style="letter-spacing: -0.02em;">4. Interpretace: proč vyšší HC a TFP nemusí znamenat vyšší HDP</h2>
+            <p>Augmented Solow Model má při vysvětlování rozdílů mezi zeměmi své úspěchy, ale i jasná omezení.</p>
+
+            <h3>4.1 Co model úspěšně vysvětluje</h3>
+            
+            <div class="key-finding">
+                <strong>1. Podmíněná konvergence (Conditional Convergence)</strong>
+                <p>Tchaj-wan začínal s nižším HC (2,53) i TFP (0,68) a rychlejším tempem dohnal a překonal úroveň Česka. To odpovídá predikci modelu MRW: po kontrole míry úspor a růstu populace rostou ekonomiky s nižším startovním bodem rychleji.</p>
+            </div>
+
+            <div class="key-finding">
+                <strong>2. Kvantifikace přínosu lidského kapitálu</strong>
+                <p>Model umožňuje kvantifikovat vliv HC na TFP:</p>
+                <ul style="margin-top: 0.5rem;">
+                    <li>Tchaj-wan: Zvýšení HC o 1 jedn. → Zvýšení TFP o 0,33 jedn. (vysoce stabilní, R²=0.95).</li>
+                    <li>Česko: Zvýšení HC o 1 jedn. → Zvýšení TFP o 0,58 jedn. (ale skutečný přírůstek je malý).</li>
+                </ul>
+            </div>
+
+            <h3>4.2 Co model nedokáže vysvětlit</h3>
+
+            <div class="highlight-box">
+                <p><strong>1. Volatilita a stagnace TFP:</strong> Po roce 2008 v Česku HC dále rostlo, ale TFP stagnovalo nebo klesalo. Model předpokládá automatickou transformaci H to TFP. Empirická data však naznačují vliv jiných faktorů, jako je struktura průmyslu (výroba vs. high-tech výzkum), vnější šoky (finanční krize, pandemie) nebo institucionální prostředí.</p>
+            </div>
+
+            <div class="highlight-box">
+                <p><strong>2. Heterogenita lidského kapitálu:</strong> Model předpokládá, že veškerý lidský kapitál je homogenní. V realitě se však přínos inženýra výzkumu a vývoje (R&D) a technika na výrobní lince k TFP může lišit desetinásobně. Podle dat OECD (2022) činí výdaje na R&D na Tchaj-wanu 3,96 % HDP<span class="reference">(Gross Domestic Spending on R&D, n.d.)</span>, zatímco v Česku pouze 1.82%<span class="reference">(Czech Statistical Office, 2024)</span>. To může vysvětlit, proč při podobné zásobě HC generuje Tchaj-wan vyšší růst TFP.</p>
+            </div>
+
+            <div class="highlight-box">
+                <p><strong>3. Tok kapitálu a odliv zisků:</strong> Přibližně 38 % českého průmyslu je vlastněno zahraničním kapitálem. Odliv zisků snižuje reálný hrubý národní důchod (GNI), což tento model nezohledňuje.</p>
+            </div>
+
+            <div class="section-nav">
+                <a href="#sec3" class="nav-prev">Předchozí: Co říkají data</a>
+                <a href="#sec5" class="nav-next">Další: Závěr</a>
+            </div>
+
+            <h2 id="sec5" style="letter-spacing: -0.02em;">5. Závěr: co z toho plyne (a co zůstává otevřené)</h2>
+            
+            <p>Případ České republiky ukazuje, že pouhá vysoká zásoba lidského kapitálu automaticky nezaručuje trvalý hospodářský růst. České HC je dlouhodobě vyšší než tchajwanské, ale tempo růstu ekonomiky je pomalejší. To potvrzuje koncept podmíněné konvergence: ekonomiky, které se již nacházejí ve vysokém ustáleném stavu (steady state), zpomalují svůj růst v důsledku klesajících mezních výnosů.</p>
+            
+            <p>Ekonomický růst však závisí spíše na dynamickém procesu zvyšování lidského kapitálu než jen na jeho statické úrovni. Tchaj-wan díky trvalým investicím do vzdělání zvýšil HC z 2,53 na 3,50 (+38 %) a zároveň dosáhl synchronizovaného růstu TFP (+45 %). Tento efekt dynamické akumulace se nakonec projevil v překonání HDP.</p>
+            
+            <p>Efektivita transformace lidského kapitálu na produktivitu je ovlivněna mnoha faktory mimo model. Ačkoliv obě země dosáhly v roce 2023 podobné úrovně TFP (0,98 vs. 0,99), Tchaj-wan toho dosáhl za kratší dobu z nižšího startovního bodu a jeho HDP je výrazně vyšší. To naznačuje, že klíčovou roli hrají faktory jako struktura průmyslu (tchajwanské zaměření na polovodiče a vysokou přidanou hodnotu) a intenzita výzkumu a vývoje.</p>
+            
+            <p>Ve skutečnosti jsou limity vysvětlovací schopnosti rozšířeného Solowova modelu v případě Česka v souladu se zjištěními samotných autorů Mankiw, Romer & Weil (1992). Podle původních dat dosahuje model ve vzorku všech zemí (Non-oil) vysoké vysvětlovací schopnosti (R² = 0.78), avšak ve vzorku zemí OECD tato schopnost prudce klesá na 0,28. To ukazuje, že jakmile země dosáhne určité úrovně rozvoje (jako Česko a Tchaj-wan), pouhé měření „akumulace kapitálu" a „délky vzdělání" již nestačí k vysvětlení rozdílů v růstu. To koresponduje s kritikou Temple 1999: u vyspělých zemí se motor růstu přesouvá od „akumulace faktorů" k „efektivitě alokace faktorů". Pro komplexnější pochopení dynamiky růstu je nutné endogenizovat faktory, jako jsou strukturální rozdíly v lidském kapitálu (kvalita vzdělání, oborová struktura) a postavení v globálních hodnotových řetězcích.</p>
+
+            <div class="section-nav">
+                <a href="#sec4" class="nav-prev">Předchozí: Interpretace</a>
+                <div class="spacer"></div>
+            </div>
+
+            <!-- References Section (Collapsible) -->
+            <details class="references-section">
+                <summary>📖 Reference a citace</summary>
+                <ol class="references-list">
+                    <li>Mankiw, N. G., Romer, D., & Weil, D. N. (1992). A Contribution to the Empirics of Economic Growth. <em>The Quarterly Journal of Economics</em>, 107(2), 407–437. <a href="https://doi.org/10.2307/2118477" target="_blank" rel="noopener">https://doi.org/10.2307/2118477</a></li>
+                    
+                    <li>Feenstra, R. C., Inklaar, R., & Timmer, M. P. (2015). The Next Generation of the Penn World Table. <em>American Economic Review</em>, 105(10), 3150-3182. Dostupné na: <a href="https://www.rug.nl/ggdc/productivity/pwt/" target="_blank" rel="noopener">www.rug.nl/ggdc/productivity/pwt/</a></li>
+                    
+                    <li>Taipei Times. (2023, July 25). <em>Taiwanese work longer than most others: report</em>. <a href="https://www.taipeitimes.com/News/taiwan/archives/2023/07/25/2003803787" target="_blank" rel="noopener">https://www.taipeitimes.com/News/taiwan/archives/2023/07/25/2003803787</a></li>
+                    
+                    <li>OECD. (2022). <em>Gross domestic spending on R&D</em> (indicator). <a href="https://doi.org/10.1787/d8b068b4-en" target="_blank" rel="noopener">https://doi.org/10.1787/d8b068b4-en</a></li>
+                    
+                    <li>Czech Statistical Office. (2024). <em>Research and Development Indicators</em>. <a href="https://www.czso.cz/csu/czso/research_and_development_indicators" target="_blank" rel="noopener">https://www.czso.cz/csu/czso/research_and_development_indicators</a></li>
+                    
+                    <li>Temple, J. (1999). The New Growth Evidence. <em>Journal of Economic Literature</em>, 37(1), 112–156. <a href="https://doi.org/10.1257/jel.37.1.112" target="_blank" rel="noopener">https://doi.org/10.1257/jel.37.1.112</a></li>
+                </ol>
+            </details>
+
+        </article>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Chen Shuli | Ekonomická analýza | VŠE</p>
+    </footer>
+
+    <!-- Floating Chart Button -->
+    <button class="float-chart-btn" id="floatChartBtn" aria-label="Zobrazit klíčový graf">
+        Zobrazit klíčový graf
+    </button>
+
+    <!-- Chart Modal -->
+    <div class="chart-modal" id="chartModal" aria-hidden="true" role="dialog" aria-labelledby="modalTitle">
+        <div class="chart-modal-content">
+            <div class="chart-modal-header">
+                <h3 class="chart-modal-title" id="modalTitle">Klíčový graf: Vztah mezi lidským kapitálem (HC) a TFP</h3>
+                <button class="chart-modal-close" id="modalClose" aria-label="Zavřít">&times;</button>
+            </div>
+            <img class="chart-modal-image" src="economic-growth-tw-cz-ai/chart1-hc-tfp.png" alt="Bodový graf HC vs TFP (1994-2023)">
+            <p class="chart-modal-caption">
+                Bodový graf | Regresní analýza HC vs. TFP (1994-2023)<br>
+                Česko (R² = 0.72, sklon = 0.58) | Tchaj-wan (R² = 0.95, sklon = 0.33)
+            </p>
+        </div>
+    </div>
+
+    <!-- JavaScript for Reading Progress Bar -->
+    <script>
+        // Reading Progress Bar
+        window.addEventListener('scroll', function() {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + '%';
+        });
+
+        // Smooth scrolling for TOC links
+        document.querySelectorAll('.toc-list a, .section-nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    const headerOffset = 20;
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Chart Modal Controls
+        const modal = document.getElementById('chartModal');
+        const floatBtn = document.getElementById('floatChartBtn');
+        const closeBtn = document.getElementById('modalClose');
+        const openChartLinks = document.querySelectorAll('.open-chart');
+
+        // Open modal function
+        function openModal() {
+            modal.classList.add('active');
+            modal.setAttribute('aria-hidden', 'false');
+            document.body.classList.add('modal-open');
+        }
+
+        // Close modal function
+        function closeModal() {
+            modal.classList.remove('active');
+            modal.setAttribute('aria-hidden', 'true');
+            document.body.classList.remove('modal-open');
+        }
+
+        // Float button click
+        floatBtn.addEventListener('click', openModal);
+
+        // Close button click
+        closeBtn.addEventListener('click', closeModal);
+
+        // Click outside modal to close
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // ESC key to close
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+
+        // Open chart links
+        openChartLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                openModal();
+            });
+        });
+    </script>
+</body>
+</html>

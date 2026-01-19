@@ -1,5 +1,27 @@
 window.filesData = [
     
+    // Featured
+    {
+        "id": 5,
+        "title": "The Czech Paradox",
+        "category": "Economic Models",
+        "description": "Higher human capital & productivity in Czechia—yet Taiwan leads in GDP per capita: why Taiwan overtook Czechia (MRW / extended Solow).",
+        "file": "#",
+        "pdf_link": "economic-growth-tw-cz-ai.html",
+        "target": "_blank",
+        "type": "Standard"
+    },
+    {
+        "id": 6,
+        "title": "From Terrorism to Organized Crime",
+        "category": "Legal Analysis",
+        "description": "What changed in legal qualification—and what stayed unproven.",
+        "file": "criminal_law_case_study.html",
+        "pdf_link": "criminal-law-casestudy.html",
+        "target": "_blank",
+        "type": "Standard"
+    },
+
     // 1. AI Lab / Workflow
     {
         "id": 10,
@@ -11,17 +33,17 @@ window.filesData = [
     },
     {
         "id": 11,
-        "title": "AI Tools Orchestration: Real Stories from the Field",
+        "title": "AI Makes Progress Addictive: I Keep Iterating Because It Keeps Surprising Me",
         "category": "AI Lab / Workflow",
-        "description": "Multi-AI workflow design: real lessons from Antigravity, Claude, and beyond.",
+        "description": "A personal log of getting hooked on iteration, speed, and “one more run.",
         "file": "ai-tools-orchestration.html",
         "type": "AI Lab"
     },
     {
         "id": 12,
-        "title": "AI Illusions & Human Judgment (Work in Progress)",
+        "title": "AI Illusions & Human Judgment",
         "category": "AI Lab / Workflow",
-        "description": "AI Illusions & Human Judgment",
+        "description": "A recurring pattern in my workflow: persuasive AI output that still needs verification.",
         "file": "ai-illusion-cz.html",
         "type": "AI Lab"
     },
@@ -57,28 +79,8 @@ window.filesData = [
         "target": "_blank",
         "type": "Standard"
     },
-    {
-        "id": 5,
-        "title": "Human Capital & Economic Growth",
-        "category": "Economic Models",
-        "description": "Theoretical comparison of education and labor productivity as growth drivers.",
-        "file": "#",
-        "pdf_link": "economic-growth-tw-cz.html",
-        "target": "_blank",
-        "type": "Standard"
-    },
 
     // 3. Legal Analysis
-    {
-        "id": 6,
-        "title": "Criminal Law in Security Contexts",
-        "category": "Legal Analysis",
-        "description": "Case study on criminal law applications within the security frameworks of the Czech Republic.",
-        "file": "criminal_law_case_study.html",
-        "pdf_link": "criminal-law-casestudy.html",
-        "target": "_blank",
-        "type": "Standard"
-    },
 
     // 4. Management
     {
