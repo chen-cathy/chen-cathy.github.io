@@ -1,5 +1,31 @@
 window.filesData = [
     
+    // 1. AI Lab / Workflow
+    {
+        "id": 10,
+        "title": "Building a Self-Replicating System",
+        "category": "AI Lab / Workflow",
+        "description": "Transforming manual maintenance into a robust, AI-assisted automated workflow.",
+        "file": "automated-research-workflow.html",
+        "type": "AI Lab"
+    },
+    {
+        "id": 11,
+        "title": "AI Tools Orchestration: Real Stories from the Field",
+        "category": "AI Lab / Workflow",
+        "description": "Multi-AI workflow design: real lessons from Antigravity, Claude, and beyond.",
+        "file": "ai-tools-orchestration.html",
+        "type": "AI Lab"
+    },
+    {
+        "id": 12,
+        "title": "AI Illusions & Human Judgment (Work in Progress)",
+        "category": "AI Lab / Workflow",
+        "description": "AI Illusions & Human Judgment",
+        "file": "ai-illusion-cz.html",
+        "type": "AI Lab"
+    },
+
     // 2. Economic Models
     {
         "id": 2,
@@ -84,31 +110,5 @@ window.filesData = [
         "pdf_link": "sustainable-development-praha3.html",
         "target": "_blank",
         "type": "Standard"
-    },
-
-    // 5. AI Lab / Workflow
-    {
-        "id": 10,
-        "title": "Building a Self-Replicating System",
-        "category": "AI Lab / Workflow",
-        "description": "Transforming manual maintenance into a robust, AI-assisted automated workflow.",
-        "file": "automated-research-workflow.html",
-        "type": "AI Lab"
-    },
-    {
-        "id": 11,
-        "title": "AI Tools Orchestration: Real Stories from the Field",
-        "category": "AI Lab / Workflow",
-        "description": "Multi-AI workflow design: real lessons from Antigravity, Claude, and beyond.",
-        "file": "ai-tools-orchestration.html",
-        "type": "AI Lab"
-    },
-    {
-        "id": 12,
-        "title": "AI Illusions & Human Judgment (Work in Progress)",
-        "category": "AI Lab / Workflow",
-        "description": "AI Illusions & Human Judgment",
-        "file": "ai-illusion-cz.html",
-        "type": "AI Lab"
     },
     ];
