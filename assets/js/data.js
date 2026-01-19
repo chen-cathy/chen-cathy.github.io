@@ -98,7 +98,7 @@ window.filesData = [
         "title": "Nobilis Tilia Strategic Management",
         "category": "Management",
         "description": "Strategic business model analysis for sustainable aromatherapy branding.",
-        "file": "#",
+        "file": "https://72zr9nteav.skywork.website/",
         "pdf_link": "strategic-management-nobilis-tilia.html",
         "target": "_blank",
         "type": "Standard"
