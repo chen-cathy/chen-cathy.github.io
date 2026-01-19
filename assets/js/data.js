@@ -6,8 +6,8 @@ window.filesData = [
         "title": "The Czech Paradox",
         "category": "Economic Models",
         "description": "Higher human capital & productivity in Czechia—yet Taiwan leads in GDP per capita: why Taiwan overtook Czechia (MRW / extended Solow).",
-        "file": "#",
-        "pdf_link": "economic-growth-tw-cz-ai.html",
+        "file": "economic-growth-tw-cz-ai.html",
+        "pdf_link": "economic-growth-tw-cz.html",
         "target": "_blank",
         "type": "Standard"
     },
