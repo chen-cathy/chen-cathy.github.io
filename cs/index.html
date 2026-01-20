@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cathy Centrum Syntézy</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1e293b;
+            --secondary: #92400e;
+            --bg: #f8fafc;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: #0f172a;
+        }
+
+        .serif {
+            font-family: 'Merriweather', Georgia, serif;
+        }
+
+        /* Fixed Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 30;
+            backdrop-filter: blur(8px);
+            background: rgba(248, 250, 252, 0.85);
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .header-content {
+            max-width: 72rem;
+            margin: 0 auto;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 9999px;
+            background: #1e293b;
+            color: #fbbf24;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Merriweather', serif;
+            font-size: 1.125rem;
+            font-weight: 900;
+        }
+
+        .logo-text h1 {
+            font-family: 'Merriweather', serif;
+            font-size: 1.6rem;
+            color: #0f172a;
+            font-weight: 900;
+        }
+
+        .logo-text p {
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        nav a {
+            color: #475569;
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: #0f172a;
+        }
+
+        /* Main Content */
+        main {
+            padding-top: 7rem;
+            padding-bottom: 4rem;
+        }
+
+        .container {
+            max-width: 72rem;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Hero Section - Two Column Layout */
+        .hero {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 2.5rem;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+
+        .hero-left {
+            /* Left column content */
+        }
+
+        .hero-badge {
+            font-size: 10pt;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: #78350f;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            margin-top: 1.5rem;
+        }
+
+        .hero h1 {
+            font-family: 'Merriweather', serif;
+            font-size: 2.25rem;
+            color: #0f172a;
+            font-weight: 900;
+            line-height: 1.25;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.12rem;
+            color: #b45309;
+            line-height: 1.625;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            font-size: 0.875rem;
+            color: #64748b;
+        }
+
+        .hero-tag {
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+        }
+
+        .tag-dark {
+            background: #1e293b;
+            color: #fcd34d;
+        }
+
+        .tag-border {
+            border: 1px solid #92400e;
+            color: #b45309;
+        }
+
+        .tag-light {
+            background: #f1f5f9;
+        }
+
+        /* Right Card */
+        .hero-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-line {
+            width: 0.375rem;
+            height: 3.5rem;
+            border-radius: 9999px;
+            background: #92400e;
+        }
+
+        .card-content h3 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: #64748b;
+            letter-spacing: 0.2em;
+            margin-bottom: 0.75rem;
+        }
+
+        .card-content p {
+            font-family: 'Merriweather', serif;
+            font-size: 1.5rem;
+            color: #0f172a;
+            font-weight: 900;
+            line-height: 1.375;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #cbd5e1, transparent);
+            margin: 1.5rem 0;
+        }
+
+        .card-footer {
+            font-size: 0.875rem;
+            color: #64748b;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-footer::before {
+            content: "";
+            width: 0.5rem;
+            height: 0.5rem;
+            border-radius: 9999px;
+            background: #92400e;
+        }
+
+        /* Filters */
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            justify-content: center;
+        }
+
+.filter-btn {
+    /* 1. 放大尺寸：增加內邊距與文字大小 */
+    padding: 0.5rem 1rem;        /* 減少內邊距 */
+    font-size: 1.125rem;         /* 原為 0.9375rem (約 18px) */
+    font-weight: 600;            /* 加粗文字提高可讀性 */
+    
+    /* 2. 邊框與外觀 */
+    border: 2px solid #e2e8f0;   /* 邊框加粗到 2px */
+    border-radius: 0.75rem;      /* 圓角稍微加大，更有現代感 */
+    background: white;
+    color: #475569;
+    
+    /* 3. 增加立體感：添加細微陰影 */
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* 讓過渡更平滑 */
+}
+
+/* 懸停效果：顏色對比更強烈 */
+.filter-btn:hover {
+    border-color: #92400e;
+    color: #92400e;
+    background-color: #fffbeb; /* 增加一個淺色背景暗示可點擊 */
+    transform: translateY(-2px); /* 向上微跳動，視覺更靈動 */
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+}
+
+/* 啟動狀態：完全實色填充 */
+.filter-btn.active {
+    background: #92400e;
+    border-color: #92400e;
+    color: white;
+    box-shadow: 0 4px 10px rgba(146, 64, 14, 0.3);
+}
+
+        /* Report Grid */
+        .report-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .report-card {
+            background: white;
+            border: 2px solid #f59e0b;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            transition: all 0.2s;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .report-card:hover {
+            box-shadow: 0 10px 30px rgba(245, 158, 11, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .report-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .category-tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: transparent;
+            color: #c2410c;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .card-icon {
+            font-size: 1.5rem;
+            color: #f59e0b;
+        }
+
+        .report-title {
+            font-family: 'Merriweather', serif;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: #0f172a;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .report-desc {
+            font-size: 0.9375rem;
+            color: #475569;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .card-actions {
+            margin-top: auto;
+        }
+
+        /* Button Styles - Stacked Vertically */
+        .dual-btn-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.625rem;
+        }
+
+        .btn-original,
+        .btn-interactive,
+        .btn-workflow,
+        .btn-primary {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.25rem;
+            border-radius: 0.5rem;
+            font-size: 0.9375rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+            border: none;
+            text-align: center;
+            width: 100%;
+        }
+
+        .btn-original {
+            background: #334155;
+            color: white;
+        }
+
+        .btn-original:hover {
+            background: #1e293b;
+            transform: translateY(-1px);
+        }
+
+        .btn-interactive {
+            background: #fef3c7;
+            color: #92400e;
+            border: 2px solid #f59e0b;
+        }
+
+        .btn-interactive:hover {
+            background: #fde68a;
+            transform: translateY(-1px);
+        }
+
+        .btn-workflow {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-workflow:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary {
+            background: #2563eb;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+        }
+
+        /* Footer */
+        footer {
+            background: #1e293b;
+            color: #94a3b8;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        footer .container p {
+            font-size: 0.875rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 64rem) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 1.875rem;
+            }
+        }
+
+        /* Admin Trigger Styles */
+        .admin-trigger {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            width: 30px;
+            height: 30px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            opacity: 0.1;
+            z-index: 998;
+        }
+        .admin-trigger:hover {
+            opacity: 0.3;
+        }
+        .admin-panel {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 25px 25px 45px 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            z-index: 1000;
+            width: 420px;
+            max-width: 90vw;
+            font-family: "Microsoft JhengHei", Arial, sans-serif;
+        }
+        .admin-panel.active {
+            display: block;
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+        }
+        .overlay.active {
+            display: block;
+        }
+        .admin-panel input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .admin-panel button {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .btn-primary {
+            background: #2563eb;
+            color: white;
+        }
+        .btn-secondary {
+            background: #e5e7eb;
+            color: #374151;
+            margin-bottom: 0;
+        }
+        .btn-reset {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            width: auto;
+            max-width: 50px;
+            padding: 2px 6px;
+            margin: 0;
+            background: #4b5563;
+            color: #9ca3af;
+            font-size: 8px;
+            border-radius: 2px;
+            opacity: 0.25;
+            transition: opacity 0.2s;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .btn-reset:hover {
+            opacity: 1;
+            color: #dc2626;
+            background: #374151;
+        }
+        .stats-summary {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        .stats-card {
+            padding: 12px;
+            border-radius: 6px;
+            text-align: center;
+        }
+        .stats-card.today {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .stats-card.total {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+        .stats-card-label {
+            font-size: 11px;
+            opacity: 0.9;
+            margin-bottom: 4px;
+        }
+        .stats-card-value {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .section-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #374151;
+            margin: 12px 0 8px 0;
+            padding-bottom: 4px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+        .error {
+            color: #dc2626;
+            font-size: 13px;
+            margin-top: 5px;
+        }
+        .page-stats-container {
+            max-height: 280px;
+            overflow-y: auto;
+            margin-bottom: 5px;
+        }
+        .page-stats {
+            margin: 8px 0;
+            padding: 10px;
+            background: #eff6ff;
+            border-left: 3px solid #2563eb;
+            border-radius: 4px;
+        }
+        .page-name {
+            font-weight: 600;
+            color: #1e40af;
+            margin-bottom: 6px;
+            font-size: 13px;
+        }
+        .page-counts {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 6px;
+        }
+        .count-item {
+            display: flex;
+            flex-direction: column;
+        }
+        .count-label {
+            color: #6b7280;
+            font-size: 10px;
+        }
+        .count-value {
+            color: #111827;
+            font-weight: 600;
+            font-size: 15px;
+        }
+        .page-time {
+            font-size: 10px;
+            color: #6b7280;
+        }
+        .current-page {
+            background: #fef3c7;
+            border-left-color: #f59e0b;
+        }
+        .current-page .page-name {
+            color: #92400e;
+        }
+        .today-badge {
+            display: inline-block;
+            background: #10b981;
+            color: white;
+            font-size: 9px;
+            padding: 2px 5px;
+            border-radius: 3px;
+            margin-left: 4px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="header-content">
+            <div class="logo-wrapper">
+                <div class="logo-icon">CS</div>
+                <div class="logo-text">
+                    <h1>Centrum Syntézy</h1>
+                    <p>Originál + AI · Dvouvrstvý pohled</p>
+                </div>
+            </div>
+            <nav>
+                <a href="../about-site_ch.html" target="_blank" class="filter-btn active">O webu</a>
+                <a href="../about-me.html" target="_blank" class="filter-btn">O mně</a>
+                <button class="filter-btn" data-filter="all">Vše</button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="hero">
+                <div class="hero-left">
+                    <p class="hero-badge">AI SYNERGIE</p>
+                    <h1>AI experimenty/Workflow</br>Zprávy čitelné jako bohatě ilustrované knihy příběhů</h1>
+                    <p class="mt-4 text-lg text-slate-700 leading-relaxed">Obsah extrahovaný z nestandardních souborů Excel a zpráv pomocí nástrojů AI a CLI; porovnání původních a AI verzí pro ověření přesnosti.</p>
+                    <div class="hero-tags">
+                        <span class="hero-tag tag-dark">Seriózní</span>
+                        <span class="hero-tag tag-border">Fakulta Managementu</span>
+                        <span class="hero-tag tag-light">VŠE · 2024—</span>
+                    </div>
+                </div>
+
+                <div class="hero-card">
+                    <div class="card-header">
+                        <div class="card-line"></div>
+                        <div class="card-content">
+                            <h4>Od výzkumu k systému</h4>
+                            <p>Od průzkumu k syntéze: Ekonomické modely, manažerské rámce a právní analýzy
+			</p>Tento web prezentuje původní výzkumné poznámky, interaktivní modely a experimenty ze studia VŠE, strukturované pro snadný přehled a hloubkové pochopení.</p>
+			</div>
+                    </div>
+                    <div class="card-divider"></div>
+                    <div class="card-footer">
+                        <span class="w-2 h-2 rounded-full bg-amber-700"></span>
+                        <span>Procházejte níže pro kontext a důkazy.</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Filters (Dynamic) -->
+            <div class="filters" id="filters">
+                <button class="filter-btn" data-filter="AI Lab / Workflow">AI laboratoř / pracovní postupy</button>
+                <button class="filter-btn" data-filter="Economic Models">Ekonomické modely</button>
+                <button class="filter-btn" data-filter="Legal Analysis">Právní analýzy</button>
+                <button class="filter-btn" data-filter="Management">Management</button>
+            </div>
+
+            <!-- Reports Grid -->
+            <div class="report-grid" id="report-grid">
+                <!-- Items injected by main.js -->
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Autor Cathy Chen. Hostováno na GitHub Pages.</p>
+        </div>
+    </footer>
+
+    <!-- Admin Panel -->
+    <button class="admin-trigger" onclick="openAdmin()"></button>
+    <div class="overlay" id="overlay" onclick="closeAdmin()"></div>
+
+    <div class="admin-panel" id="adminPanel">
+        <div id="loginView">
+            <h3 style="margin-top:0;">Přihlášení správce</h3>
+            <input type="password" id="passwordInput" placeholder="Zadejte administrátorské heslo" autocomplete="off">
+            <div class="error" id="errorMsg"></div>
+            <button class="btn-primary" onclick="login()">Přihlásit se</button>
+            <button class="btn-secondary" onclick="closeAdmin()">Zrušit</button>
+        </div>
+        
+        <div id="statsView" style="display:none;">
+            <h3 style="margin-top:0;margin-bottom:12px;">📊 Statistiky čtení</h3>
+            
+            <div class="stats-summary">
+                <div class="stats-card today">
+                    <div class="stats-card-label">Dnešní čtení</div>
+                    <div class="stats-card-value" id="todayTotal">0</div>
+                </div>
+                <div class="stats-card total">
+                    <div class="stats-card-label">Celkem čtení</div>
+                    <div class="stats-card-value" id="totalAllViews">0</div>
+                </div>
+            </div>
+            
+            <div class="section-title">📄 Statistiky jednotlivých stránek</div>
+            <div class="page-stats-container" id="pageStatsList"></div>
+            
+            <div style="padding-right: 60px;">
+                <button class="btn-secondary" onclick="closeAdmin()">Zavřít</button>
+            </div>
+            <button class="btn-reset" onclick="resetAllStats()">Resetovat</button>
+        </div>
+    </div>
+
+    <!-- Load data first to avoid CORS issues -->
+    <script src="data.js?v=2"></script>
+    <script src="../assets/js/main.js?v=2"></script>
+
+    <script>
+    (function() {
+        const ADMIN_PASSWORD = '0520';
+        const STORAGE_PREFIX = 'page_stats_';
+        
+        function getPageName() {
+            const path = window.location.pathname;
+            return path.split('/').pop() || 'index.html';
+        }
+        
+        function getTodayString() {
+            const now = new Date();
+            return now.toISOString().split('T')[0];
+        }
+        
+        function recordVisit() {
+            const pageName = getPageName();
+            const storageKey = STORAGE_PREFIX + pageName;
+            const stats = getPageStats(pageName);
+            const now = new Date().toISOString();
+            const today = getTodayString();
+            
+            stats.totalCount = (stats.totalCount || 0) + 1;
+            stats.lastVisit = now;
+            
+            if (!stats.firstVisit) {
+                stats.firstVisit = now;
+            }
+            
+            if (!stats.dailyStats) {
+                stats.dailyStats = {};
+            }
+            
+            if (!stats.dailyStats[today]) {
+                stats.dailyStats[today] = 0;
+            }
+            
+            stats.dailyStats[today] += 1;
+            
+            const thirtyDaysAgo = new Date();
+            thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+            const cutoffDate = thirtyDaysAgo.toISOString().split('T')[0];
+            
+            Object.keys(stats.dailyStats).forEach(date => {
+                if (date < cutoffDate) {
+                    delete stats.dailyStats[date];
+                }
+            });
+            
+            localStorage.setItem(storageKey, JSON.stringify(stats));
+        }
+        
+        function getPageStats(pageName) {
+            const storageKey = STORAGE_PREFIX + pageName;
+            const data = localStorage.getItem(storageKey);
+            if (data) {
+                return JSON.parse(data);
+            }
+            return {
+                totalCount: 0,
+                firstVisit: null,
+                lastVisit: null,
+                dailyStats: {}
+            };
+        }
+        
+        function getAllPagesStats() {
+            const allStats = [];
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key.startsWith(STORAGE_PREFIX)) {
+                    const pageName = key.replace(STORAGE_PREFIX, '');
+                    const stats = JSON.parse(localStorage.getItem(key));
+                    allStats.push({
+                        page: pageName,
+                        ...stats
+                    });
+                }
+            }
+            return allStats.sort((a, b) => (b.totalCount || 0) - (a.totalCount || 0));
+        }
+        
+        window.openAdmin = function() {
+            document.getElementById('adminPanel').classList.add('active');
+            document.getElementById('overlay').classList.add('active');
+            document.getElementById('passwordInput').value = '';
+            document.getElementById('errorMsg').textContent = '';
+            setTimeout(() => {
+                document.getElementById('passwordInput').focus();
+            }, 100);
+        };
+        
+        window.closeAdmin = function() {
+            document.getElementById('adminPanel').classList.remove('active');
+            document.getElementById('overlay').classList.remove('active');
+            document.getElementById('loginView').style.display = 'block';
+            document.getElementById('statsView').style.display = 'none';
+        };
+        
+        window.login = function() {
+            const password = document.getElementById('passwordInput').value;
+            
+            if (password === ADMIN_PASSWORD) {
+                showStats();
+            } else {
+                document.getElementById('errorMsg').textContent = 'Nesprávné heslo';
+            }
+        };
+        
+        window.showStats = function() {
+            const currentPage = getPageName();
+            const today = getTodayString();
+            const allStats = getAllPagesStats();
+            
+            let totalAllViews = 0;
+            let todayTotal = 0;
+            
+            allStats.forEach(page => {
+                totalAllViews += (page.totalCount || 0);
+                if (page.dailyStats && page.dailyStats[today]) {
+                    todayTotal += page.dailyStats[today];
+                }
+            });
+            
+            document.getElementById('totalAllViews').textContent = totalAllViews;
+            document.getElementById('todayTotal').textContent = todayTotal;
+            
+            const listHtml = allStats.map(page => {
+                const isCurrent = page.page === currentPage;
+                const todayCount = (page.dailyStats && page.dailyStats[today]) || 0;
+                const hasToday = todayCount > 0;
+                
+                return `
+                    <div class="page-stats ${isCurrent ? 'current-page' : ''}">
+                        <div class="page-name">
+                            ${page.page} 
+                            ${isCurrent ? '(Aktuální)' : ''}
+                            ${hasToday ? '<span class="today-badge">Aktivní dnes</span>' : ''}
+                        </div>
+                        <div class="page-counts">
+                            <div class="count-item">
+                                <span class="count-label">Dnes</span>
+                                <span class="count-value">${todayCount}</span>
+                            </div>
+                            <div class="count-item">
+                                <span class="count-label">Celkem</span>
+                                <span class="count-value">${page.totalCount || 0}</span>
+                            </div>
+                        </div>
+                        <div class="page-time">
+                            Naposledy: ${formatDateShort(page.lastVisit)}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            document.getElementById('pageStatsList').innerHTML = listHtml || '<p style="color:#9ca3af;text-align:center;padding:20px 0;font-size:12px;">Zatím žádná data</p>';
+            
+            document.getElementById('loginView').style.display = 'none';
+            document.getElementById('statsView').style.display = 'block';
+        };
+        
+        function formatDateShort(isoString) {
+            if (!isoString) return '--';
+            const date = new Date(isoString);
+            const now = new Date();
+            const today = now.toDateString() === date.toDateString();
+            
+            if (today) {
+                return 'Dnes ' + date.toLocaleTimeString('cs-CZ', { hour: '2-digit', minute: '2-digit' });
+            }
+            
+            return date.toLocaleString('cs-CZ', {
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+        
+        window.resetAllStats = function() {
+            if (confirm('⚠️ Opravdu chcete resetovat všechny statistiky?\nTuto akci nelze vrátit zpět!')) {
+                const keys = [];
+                for (let i = 0; i < localStorage.length; i++) {
+                    const key = localStorage.key(i);
+                    if (key.startsWith(STORAGE_PREFIX)) {
+                        keys.push(key);
+                    }
+                }
+                keys.forEach(key => localStorage.removeItem(key));
+                alert('✅ Všechny statistiky byly resetovány');
+                closeAdmin();
+            }
+        };
+        
+        recordVisit();
+        
+        const passwordInput = document.getElementById('passwordInput');
+        if (passwordInput) {
+            passwordInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    login();
+                }
+            });
+        }
+    })();
+    </script>
+
+</body>
+
+</html>
