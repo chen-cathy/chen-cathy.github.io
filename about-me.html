@@ -359,6 +359,14 @@
     <!-- basic spam trap -->
     <input type="text" name="_gotcha" style="display:none">
 
+    <!-- GDPR Consent Checkbox -->
+    <div class="flex items-start gap-3">
+      <input type="checkbox" id="gdpr-consent" name="gdpr-consent" required class="mt-1 rounded" style="width: 18px; height: 18px; border: 1px solid rgba(31,58,95,.18); cursor: pointer;">
+      <label for="gdpr-consent" class="text-sm" style="color: var(--ink); line-height: 1.7; cursor: pointer;">
+        I have read and agree to the <a href="privacy.html" target="_blank" style="color: var(--accent); text-decoration: underline; text-underline-offset: 3px;">Privacy Policy</a>
+      </label>
+    </div>
+
     <button type="submit" class="inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-medium border" style="border-color: rgba(31,58,95,.22); background: rgba(31,58,95,.06); color: var(--accent);">
       Send message
     </button>
