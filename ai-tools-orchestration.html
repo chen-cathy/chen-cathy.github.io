@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+<!-- saved from url=(0042)file:///C:/Users/Cathy/Downloads/rose.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Tools in Practice | Dual Perspective Research Portfolio</title>
     <style>
@@ -14,43 +14,40 @@
         body {
             font-family: 'Georgia', 'Times New Roman', serif;
             line-height: 1.7;
-            color: #1a1a1a;
-            background: #f8f9fa;
+            color: #1A0B12;
+            background: #F7E8EC;
             font-size: 17px;
         }
 
-        h1, h2, h3, h4, h5, h6 {
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             font-weight: 600;
             line-height: 1.3;
+            color: #1A0B12;
         }
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+            background: linear-gradient(135deg, #732C3F 0%, #1A0B12 100%);
             color: white;
             padding: 100px 20px 80px;
             text-align: center;
-            position: relative;
-        }
-
-        .hero-content {
-            max-width: 900px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
         }
 
         .hero h1 {
             font-size: 2.5rem;
             margin-bottom: 24px;
             font-weight: 600;
-            letter-spacing: -0.5px;
         }
 
         .hero .subtitle {
             font-size: 1.15rem;
-            opacity: 0.9;
+            opacity: 0.95;
             max-width: 700px;
             margin: 0 auto 32px;
             line-height: 1.6;
@@ -60,75 +57,12 @@
         .hero-tagline {
             font-size: 1rem;
             font-style: italic;
-            opacity: 0.85;
-            border-top: 1px solid rgba(255,255,255,0.2);
-            border-bottom: 1px solid rgba(255,255,255,0.2);
+            opacity: 0.9;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
             padding: 16px 0;
             margin: 32px auto;
             max-width: 600px;
-            font-family: 'Georgia', serif;
-        }
-
-        /* Tool Wall */
-        .tool-wall {
-            background: white;
-            padding: 60px 20px;
-            margin-top: -30px;
-            border-radius: 8px 8px 0 0;
-            box-shadow: 0 -4px 20px rgba(0,0,0,0.05);
-        }
-
-        .tool-wall h2 {
-            text-align: center;
-            font-size: 1.75rem;
-            margin-bottom: 40px;
-            color: #2d3748;
-        }
-
-        .tools-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 24px;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .tool-icon {
-            text-align: center;
-            padding: 24px 16px;
-            background: #f7fafc;
-            border-radius: 6px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: 1px solid #e2e8f0;
-        }
-
-        .tool-icon:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-            border-color: #cbd5e0;
-        }
-
-        .tool-icon-placeholder {
-            width: 64px;
-            height: 64px;
-            margin: 0 auto 12px;
-            background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: white;
-            font-weight: 600;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        }
-
-        .tool-name {
-            font-weight: 500;
-            font-size: 0.95rem;
-            color: #2d3748;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
 
         /* Container */
@@ -138,13 +72,13 @@
             padding: 0 20px;
         }
 
-        /* Section Styling */
+        /* Section */
         .section {
             background: white;
             margin: 40px 0;
             padding: 60px 48px;
-            border-radius: 6px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(115, 44, 63, 0.08);
         }
 
         .section-header {
@@ -152,7 +86,7 @@
         }
 
         .section-number {
-            color: #718096;
+            color: #732C3F;
             font-size: 0.85rem;
             font-weight: 500;
             text-transform: uppercase;
@@ -163,210 +97,166 @@
 
         .section-title {
             font-size: 2rem;
-            color: #1a202c;
             margin-bottom: 16px;
             font-weight: 600;
         }
 
         .section-intro {
             font-size: 1.05rem;
-            color: #4a5568;
+            color: #732C3F;
             line-height: 1.7;
             max-width: 900px;
         }
 
-        /* Tool Matrix Table */
-        .tool-matrix {
+        /* Tables */
+        .tool-table {
             width: 100%;
             border-collapse: collapse;
             margin: 32px 0;
             font-size: 0.95rem;
+            border: 2px solid;
         }
 
-        .tool-matrix thead {
-            background: #2d3748;
+        /* Category 1: Lightest */
+        .category-1 {
+            border-color: #C57C8A;
+        }
+
+        .category-1 thead {
+            background: #C57C8A;
             color: white;
         }
 
-        .tool-matrix th {
-            padding: 16px 14px;
+        /* Category 2: Medium */
+        .category-2 {
+            border-color: #732C3F;
+        }
+
+        .category-2 thead {
+            background: #732C3F;
+            color: white;
+        }
+
+        /* Category 3: Dark */
+        .category-3 {
+            border-color: #1A0B12;
+        }
+
+        .category-3 thead {
+            background: #1A0B12;
+            color: white;
+        }
+
+        /* Claude Special: Accent */
+        .category-claude {
+            border-color: #C57C8A;
+            background: #F7E8EC;
+        }
+
+        .category-claude thead {
+            background: linear-gradient(135deg, #C57C8A 0%, #732C3F 100%);
+            color: white;
+        }
+
+        .tool-table thead th {
+            padding: 12px 14px;
             text-align: left;
             font-weight: 500;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            font-size: 0.9rem;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
 
-        .tool-matrix td {
-            padding: 18px 14px;
-            border-bottom: 1px solid #e2e8f0;
+        .tool-table tbody td {
+            padding: 12px 14px;
+            border-bottom: 1px solid #F7E8EC;
             vertical-align: top;
         }
 
-        .tool-matrix tbody tr {
+        .tool-table tbody tr {
             background: white;
             transition: background 0.2s;
         }
 
-        .tool-matrix tbody tr:hover {
-            background: #f7fafc;
+        .tool-table tbody tr:hover {
+            background: #F7E8EC;
         }
 
-        .tool-matrix .tool-name-cell {
+        .tool-table .tool-name {
             font-weight: 600;
-            color: #2d3748;
+            color: #732C3F;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
 
-        /* Story Card */
-        .story-card {
-            background: #f7fafc;
-            border-left: 3px solid #4a5568;
-            padding: 36px;
-            margin: 36px 0;
-            border-radius: 4px;
-        }
-
-        .story-card.warning {
-            background: #fff5f5;
-            border-left-color: #e53e3e;
-        }
-
-        .story-card.success {
-            background: #f0fff4;
-            border-left-color: #38a169;
-        }
-
-        .story-card-title {
-            font-size: 1.35rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-            color: #1a202c;
-        }
-
-        .story-card-content {
-            font-size: 1rem;
-            line-height: 1.75;
-            color: #2d3748;
-        }
-
-        .story-card-content p {
-            margin-bottom: 16px;
-        }
-
-        .story-card-quote {
-            margin: 24px 0;
+        .category-description {
+            background: #F7E8EC;
             padding: 20px 24px;
-            background: rgba(255,255,255,0.8);
-            border-radius: 4px;
-            font-style: italic;
-            border-left: 2px solid #4a5568;
-            color: #2d3748;
+            border-radius: 6px;
+            margin-bottom: 24px;
+            border-left: 4px solid #C57C8A;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #1A0B12;
         }
 
-        .story-card-lesson {
-            margin-top: 24px;
-            padding: 20px;
-            background: rgba(0,0,0,0.04);
-            border-radius: 4px;
-            font-weight: 500;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        /* Content Sections */
+        .tool-detail {
+            margin: 48px 0;
+            padding: 32px;
+            background: transparent;
+            border-radius: 0;
+            border-left: 4px solid;
         }
 
-        /* Media Placeholder */
+        /* Different border colors for different sections */
+        .section:nth-of-type(2) .tool-detail:nth-of-type(1) {
+            border-left-color: #C57C8A;
+            /* Category 1 - Antigravity, Gamma & Skywork */
+        }
+
+        .section:nth-of-type(3) .tool-detail {
+            border-left-color: #732C3F;
+            /* Category 2 - Arena Tools */
+        }
+
+        .section:nth-of-type(4) .tool-detail {
+            border-left-color: #1A0B12;
+            /* Category 3 - Integrated Tools */
+        }
+
+        .section:nth-of-type(5) .tool-detail {
+            border-left-color: #C57C8A;
+            /* Claude Special */
+        }
+
+        .tool-detail h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #1A0B12;
+        }
+
+        .tool-detail p {
+            margin-bottom: 16px;
+            line-height: 1.8;
+            color: #1A0B12;
+        }
+
         .media-placeholder {
-            background: #f7fafc;
-            border: 2px dashed #cbd5e0;
+            background: white;
+            border: 2px dashed #C57C8A;
             border-radius: 6px;
             padding: 48px 32px;
             text-align: center;
-            margin: 36px 0;
+            margin: 24px 0;
+            font-style: italic;
+            color: #732C3F;
         }
 
-        .media-placeholder-title {
-            font-size: 1.1rem;
-            font-weight: 500;
-            color: #2d3748;
-            margin-bottom: 12px;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        }
-
-        .media-placeholder-desc {
-            color: #718096;
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        /* Comparison Cards */
-        .comparison-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 28px;
-            margin: 36px 0;
-        }
-
-        .comparison-card {
-            padding: 28px;
-            border-radius: 6px;
-            background: white;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-            border-top: 3px solid #4a5568;
-        }
-
-        .comparison-card h4 {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-            color: #2d3748;
-        }
-
-        .pros-cons {
-            margin: 20px 0;
-        }
-
-        .pros-cons h5 {
-            font-size: 0.9rem;
-            margin-bottom: 12px;
-            color: #2d3748;
-            font-weight: 600;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        }
-
-        .pros-cons ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .pros-cons li {
-            padding: 10px 0 10px 28px;
-            position: relative;
-            line-height: 1.6;
-            font-size: 0.95rem;
-        }
-
-        .pros-cons li::before {
-            position: absolute;
-            left: 0;
-            font-weight: bold;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        }
-
-        .pros li::before {
-            content: '✓';
-            color: #38a169;
-        }
-
-        .cons li::before {
-            content: '—';
-            color: #e53e3e;
-        }
-
-        /* Key Insight Box */
+        /* Insight Box */
         .insight-box {
-            background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+            background: linear-gradient(135deg, #732C3F 0%, #1A0B12 100%);
             color: white;
             padding: 40px;
-            border-radius: 6px;
+            border-radius: 8px;
             margin: 48px 0;
             text-align: center;
         }
@@ -375,6 +265,7 @@
             font-size: 1.5rem;
             margin-bottom: 20px;
             font-weight: 600;
+            color: white;
         }
 
         .insight-box p {
@@ -387,29 +278,28 @@
         .page-nav {
             background: white;
             padding: 28px;
-            border-radius: 6px;
+            border-radius: 8px;
             margin: 40px 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            box-shadow: 0 2px 8px rgba(115, 44, 63, 0.08);
         }
 
         .nav-btn {
             padding: 12px 24px;
-            background: #2d3748;
+            background: #732C3F;
             color: white;
             text-decoration: none;
-            border-radius: 4px;
+            border-radius: 6px;
             font-weight: 500;
             transition: all 0.2s ease;
-            display: inline-block;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             font-size: 0.95rem;
         }
 
         .nav-btn:hover {
-            background: #1a202c;
+            background: #1A0B12;
             transform: translateY(-1px);
         }
 
@@ -422,22 +312,9 @@
             .hero h1 {
                 font-size: 2rem;
             }
-            
-            .hero .subtitle {
-                font-size: 1.05rem;
-            }
-            
+
             .section {
                 padding: 40px 24px;
-            }
-            
-            .section-title {
-                font-size: 1.65rem;
-            }
-            
-            .tools-grid {
-                grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-                gap: 16px;
             }
 
             .page-nav {
@@ -447,383 +324,383 @@
         }
     </style>
 </head>
+
 <body>
 
     <!-- Hero Section -->
     <div class="hero">
-        <div class="hero-content">
-            <h1>AI Experiment: When reports readable like richly illustrated storybooks</h1>
-            <p class="subtitle">From Antigravity to Claude, from Gamma to Chrome DevTools—how to maximize the value of each tool</p>
-            <p class="hero-tagline">"Tools are easy to find. The hard part? Building the logic for when to use which."</p>
-        </div>
-    </div>
-
-    <!-- Tool Wall Section -->
-    <div class="tool-wall">
-        <h2>My AI Tool Arsenal</h2>
-        <div class="tools-grid">
-            <div class="tool-icon">
-                <div class="tool-icon-placeholder">AG</div>
-                <div class="tool-name">Antigravity</div>
-            </div>
-            <div class="tool-icon">
-                <div class="tool-icon-placeholder">Γ</div>
-                <div class="tool-name">Gamma</div>
-            </div>
-            <div class="tool-icon">
-                <div class="tool-icon-placeholder">C</div>
-                <div class="tool-name">Claude</div>
-            </div>
-            <div class="tool-icon">
-                <div class="tool-icon-placeholder">LM</div>
-                <div class="tool-name">LM Arena</div>
-            </div>
+        <div class="container">
+            <h1 class="ai-style-change-1">AI Makes Progress Addictive: I Keep Iterating Because It Keeps Surprising Me</h1>
             
-            <div class="tool-icon">
-                <div class="tool-icon-placeholder">SW</div>
-                <div class="tool-name">Skywork</div>
-            </div>
-            <div class="tool-icon">
-                <div class="tool-icon-placeholder">CD</div>
-                <div class="tool-name">Chrome DevTools</div>
-            </div>
+            <p class="hero-tagline">From Antigravity to Claude, from Gamma to Chrome DevTools—how to maximize the value of each tool</p>
         </div>
     </div>
 
     <div class="container">
 
-        <!-- Section 1: Tool Selection Matrix -->
+        <!-- Section 01: Tool Selection Matrix -->
         <div class="section">
             <div class="section-header">
                 <div class="section-number">Section 01</div>
                 <h2 class="section-title">Tool Selection Matrix: Strategic Division of Labor</h2>
                 <p class="section-intro">
-                    Different tasks require different tools. The key is not "knowing how to use many tools," but rather "knowing when to use which." This matrix demonstrates how I select the most appropriate AI tool based on task characteristics.
+                    Different tasks require different tools. The key is not "knowing how to use many tools," but rather
+                    "knowing when to use which." This matrix demonstrates how I select the most appropriate AI tool
+                    based on task characteristics.
                 </p>
             </div>
 
-            <table class="tool-matrix">
+            <!-- Category 1: One-Click Website Generators -->
+            <h3 style="margin-top: 40px; margin-bottom: 8px;">Category 1: One-Click Website Generators</h3>
+            <p style="margin-bottom: 24px; color: #732C3F;">Simply input documents or text to generate a webpage. Each
+                offers different flexibility: some run locally for full file control, others are cloud-based with
+                near-zero learning curves, and some specialize in data visualization.</p>
+
+            <table class="tool-table category-1">
                 <thead>
                     <tr>
-                        <th>Task Type</th>
-                        <th>Best Tool</th>
-                        <th>Reason</th>
-                        <th>Real Case</th>
+                        <th>Tool Name</th>
+                        <th>Output</th>
+                        <th>Features</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="tool-name-cell">Visual Website Generation</td>
-                        <td><strong>Antigravity</strong></td>
-                        <td>Directly generates interactive websites from PDF/PPT with professional quality in 3 minutes</td>
-                        <td>Solow-Swan Economic Model Dashboard</td>
+                        <td class="tool-name">Antigravity</td>
+                        <td>Solow-Swan Model Dashboard<br>Criminal Law Case Analysis</td>
+                        <td>Local execution, multi-model support, continuous iteration</td>
                     </tr>
                     <tr>
-                        <td class="tool-name-cell">Structured Report Generation</td>
-                        <td><strong>Gamma</strong></td>
-                        <td>Powerful layout engine with step-by-step AI collaboration for detail refinement</td>
+                        <td class="tool-name">Gamma</td>
                         <td>Sustainability Report (Praha 3)</td>
+                        <td>Cloud-based, zero learning curve, highly flexible post-editing</td>
                     </tr>
                     <tr>
-                        <td class="tool-name-cell">Excel Data Visualization</td>
-                        <td><strong>Skywork</strong></td>
-                        <td>Specialized in handling complex data with multiple sheets and irregular columns</td>
-                        <td>Strategic management analysis of the company Nobilis Tilia </td>
+                        <td class="tool-name">Skywork</td>
+                        <td>Strategic management analysis (Nobilis Tilia)</td>
+                        <td>Specialized in Excel data visualization</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Category 2: Model Arena -->
+            <h3 style="margin-top: 48px; margin-bottom: 8px;">Category 2: Model Arenas</h3>
+            <p style="margin-bottom: 24px; color: #732C3F;">Used to test different model capabilities or utilize
+                specific specialized models.</p>
+
+            <table class="tool-table category-2">
+                <thead>
+                    <tr>
+                        <th>Tool Name</th>
+                        <th>Application</th>
+                        <th>Best Model</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="tool-name">LM Arena</td>
+                        <td>Complex reasoning tasks<br>Criminal Law Case Analysis</td>
+                        <td>Claude Opus 4.5 (thinking mode)</td>
                     </tr>
                     <tr>
-                        <td class="tool-name-cell">Logic Debugging & Dialogue</td>
-                        <td><strong>Claude</strong></td>
-                        <td>All technical discussions and code debugging</td>
+                        <td class="tool-name">Design Arena</td>
+                        <td>Visual / Image generation<br>Criminal Law Cartoon Illustrations</td>
+                        <td>Gemini 3 Pro</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Category 3: Integrated Development -->
+            <h3 style="margin-top: 48px; margin-bottom: 8px;">Category 3: Integrated Development Environments</h3>
+            <p style="margin-bottom: 24px; color: #732C3F;">Embed AI capabilities directly into existing workflows
+                without switching platforms.</p>
+
+            <table class="tool-table category-3">
+                <thead>
+                    <tr>
+                        <th>Tool Name</th>
+                        <th>Environment</th>
+                        <th>Core Capabilities</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="tool-name">VS Code + AI</td>
+                        <td>Code Editor</td>
+                        <td>Full project development, multi-file sync</td>
                     </tr>
                     <tr>
-                        <td class="tool-name-cell">High-Difficulty Reasoning</td>
-                        <td><strong>LM Arena (Opus 4.5)</strong></td>
-                        <td>Specialized in complex information comprehension with strongest Thinking mode</td>
-                        <td>Criminal Law Case Analysis</td>
+                        <td class="tool-name">Chrome DevTools AI</td>
+                        <td>Browser</td>
+                        <td>Real-time UI adjustment, conversational design</td>
                     </tr>
                     <tr>
-                        <td class="tool-name-cell">Visual Generation</td>
-                        <td><strong>Design Arena (Gemini 3 Pro)</strong></td>
-                        <td>Image quality far exceeds other AI</td>
-                        <td>Criminal Law Case Cartoon-Style Illustrations</td>
+                        <td class="tool-name">Google Apps Script</td>
+                        <td>Google Workspace</td>
+                        <td>Batch automation, cloud file operations</td>
                     </tr>
                     <tr>
-                        <td class="tool-name-cell">Real-Time UI Adjustment</td>
-                        <td><strong>Chrome DevTools AI</strong></td>
-                        <td>Dialogue with AI directly in browser for instant style modifications</td>
-                        <td>Button shadows, color fine-tuning</td>
+                        <td class="tool-name">Google Drive AI</td>
+                        <td>Cloud Storage</td>
+                        <td>Smart search, document analysis</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Claude Special Category -->
+            <h3 style="margin-top: 48px; margin-bottom: 8px;">Special Category: Claude (Cross-Functional Model)</h3>
+            <p style="margin-bottom: 24px; color: #732C3F;">Currently the most powerful AI model, applicable in any
+                scenario.</p>
+
+            <table class="tool-table category-claude">
+                <thead>
+                    <tr>
+                        <th>Scenario</th>
+                        <th>Application</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="tool-name">Coding &amp; Debugging</td>
+                        <td>JavaScript, Node.js, various languages</td>
+                    </tr>
+                    <tr>
+                        <td class="tool-name">Logical Discussion</td>
+                        <td>Complex reasoning, multi-turn dialogue</td>
+                    </tr>
+                    <tr>
+                        <td class="tool-name">Integrated Usage</td>
+                        <td>Claude.ai, API, VS Code, Browser Extensions</td>
                     </tr>
                 </tbody>
             </table>
 
             <div class="insight-box">
                 <h3>Core Insight</h3>
-                <p>This is not a showcase of "using many tools," but rather proof of "workflow design capability." Each tool has its optimal use case—the key is establishing a selection logic.</p>
+                <p>This is not a showcase of "using many tools," but rather proof of "workflow design capability." The
+                    key is recognizing which scenario you're in and selecting the right tool for that context.</p>
             </div>
         </div>
 
-        <!-- Section 2: Antigravity - The Thrill and The Disaster -->
+        <!-- Section 02: Category 1 Deep Dive -->
         <div class="section">
             <div class="section-header">
                 <div class="section-number">Section 02</div>
-                <h2 class="section-title">Antigravity: From Thrill to Disaster</h2>
+                <h2 class="section-title">Category 1: One-Click Website Generators</h2>
                 <p class="section-intro">
-                    Antigravity was the first tool that amazed me. You throw it a PPT or PDF, and within minutes it generates an interactive website with charts, descriptions, and that professional quality that makes you think it was done by an agency. But it also taught me the hardest lesson.
+                    The common thread among these three tools is "input content, get a webpage," but each has its own
+                    unique characteristics and use cases.
                 </p>
             </div>
 
-            <div class="media-placeholder">
-                <div class="media-placeholder-title">Antigravity Auto-Generated Solow-Swan Dashboard</div>
-                <div class="media-placeholder-desc">Showing the transformation process from PDF report to interactive economic model website<br>(Screenshot: includes GDP growth curves, convergence analysis charts, theoretical explanations)</div>
+            <!-- Antigravity -->
+            <div class="tool-detail">
+                <h3>Tool 1: Antigravity</h3>
+                <p>Antigravity was the first tool that truly amazed me. You simply import a PPT or PDF, and in minutes
+                    it generates an interactive website complete with charts and descriptions—professional quality that
+                    feels like agency work. I used it to create the Solow-Swan Economic Model Dashboard and the Supply
+                    Chain Management Analysis page. The quality was professional, requiring zero manual CSS or layout
+                    adjustments; the AI handled it all perfectly.</p>
+
+                <div class="media-placeholder">
+                    Antigravity Auto-Generated Solow-Swan Dashboard<br>
+                    (Demonstrating the conversion from PDF report to interactive economic model website)
+                </div>
+
+                <p>However, complex economic models required many iterations. Eventually, the AI got "tired." AI does
+                    get "tired"—its performance degrades. It tries to "optimize," sometimes successfully, but other
+                    times it oversimplifies and ignores key theoretical logic. Worse, I once forgot to stop
+                    Antigravity's background process. I spent an entire evening manually tweaking the `index.html`, but
+                    when I opened it the next morning, the file had been "eaten"—overwritten completely.</p>
+
+                <p>I realized this was because I had imported two very long HTML files simultaneously and asked the
+                    program to modify one to match the other's style. The resource demand was too high, causing my
+                    computer to lag, so I force-closed the interface but continued coding elsewhere. Unbeknownst to me,
+                    the background process was still running, and it eventually overwrote my work. It was a false alarm
+                    since I had backups, but it taught me a valuable lesson: be careful. Since then, I've used Git to
+                    track every change and always backup critical files before using Antigravity.</p>
             </div>
 
-            <div class="story-card success">
-                <div class="story-card-title">
-                    The Thrilling Moment: Three Minutes of Magic
+            <!-- Gamma & Skywork -->
+            <div class="tool-detail">
+                <h3>Tool 2 &amp; 3: Gamma and Skywork</h3>
+
+                <p>If Antigravity is "fast but uncontrollable," Gamma is "powerful and controllable." Its layout engine
+                    is robust, allowing for AI-collaborative edits on every detail. I used Gamma to quickly build the
+                    Prague District 3 Sustainability Report website—from uploading the Word doc to a professional site
+                    in under 20 minutes. Every detail—images, text, layout—could be tweaked via AI. This taught me a key
+                    trade-off: Convenience vs. Control. Gamma gives you speed and polish, but you accept platform
+                    limits—hosting on their domain and no direct code access.</p>
+
+                <div class="media-placeholder">
+                    Gamma-Generated Praha 3 Sustainability Report<br>
+                    (Showcasing the professional layout of the structured report: hierarchy, data charts, citations)
                 </div>
-                <div class="story-card-content">
-                    <p>I used it to create a Solow-Swan economic model dashboard and a supply chain management analysis page. The quality was so professional it was astonishing—no need to manually write CSS or adjust layouts; the AI handled everything perfectly.</p>
-                    
-                    <div class="story-card-quote">
-                        "This truly is agency-level work. I looked at it myself and thought, 'Wow, this is way too professional.'"
-                    </div>
 
-                    <p>But I quickly discovered a fatal problem: <strong>you have no way to fully control the details</strong>. It will "optimize" things on its own—sometimes very well, sometimes simplifying away important theoretical logic.</p>
-                </div>
-            </div>
-
-            <div class="story-card warning">
-                <div class="story-card-title">
-                    The Disaster Moment: A Night's Work Turned to Ashes
-                </div>
-                <div class="story-card-content">
-                    <p>What's worse was that once I didn't notice—Antigravity's background execution didn't close. The index.html I had spent the entire evening manually adjusting, when I opened the file the next morning—</p>
-                    
-                    <div class="story-card-quote" style="font-size: 1.3rem; text-align: center; font-weight: 600;">
-                        Completely blank. Entirely blank.
-                    </div>
-
-                    <p>I stared at the screen for probably ten seconds without reacting, then felt an impulse to smash my computer. That version I had adjusted button positions, changed colors, written a bunch of explanatory text—all gone.</p>
-
-                    <p>Later I realized it was because I had thrown in two very long HTML files, asking it to modify one webpage to match the same style and colors. But because the resources were too large, it became a background execution that couldn't be closed, and ultimately overwrote my file.</p>
-
-                    <div class="story-card-lesson">
-                        <strong>Key Lesson:</strong> Powerful automation tools require strict version control. From that point on, I started using Git to track every modification and learned to backup critical files before using Antigravity.
-                    </div>
-                </div>
-            </div>
-
-            <div class="media-placeholder">
-                <div class="media-placeholder-title">Disaster Scene Comparison</div>
-                <div class="media-placeholder-desc">Left: Carefully adjusted index.html (button positions, colors, explanatory text)<br>Right: The blank file opened the next morning</div>
+                <p>Skywork specializes in Excel files, excelling at visualizing complex data from multiple sheets and
+                    irregular fields. I used it to test economic convergence data, pushing the limits of AI handling
+                    irregular data. The initial results were great, but I made the mistake of trying to micromanage the
+                    colors and style, making it worse. I learned that sometimes you have to let the AI decide the visual
+                    design because its aesthetic algorithms might be better than your manual tweaks. Over-control can
+                    limit AI creativity. In visual design, sometimes "letting go" is more effective than "precise
+                    instruction".</p>
             </div>
         </div>
 
-        <!-- Section 3: Gamma - Power and Constraints -->
+        <!-- Section 03: Category 2 Deep Dive -->
         <div class="section">
             <div class="section-header">
                 <div class="section-number">Section 03</div>
-                <h2 class="section-title">Gamma: Powerful Flexibility, Clear Boundaries</h2>
+                <h2 class="section-title">Category 2: Model Arena Tools</h2>
                 <p class="section-intro">
-                    If Antigravity is "fast but uncontrollable," then Gamma is "powerful and controllable." Its layout engine is very strong, and every detail can be modified through AI collaboration. But this control comes at a cost.
+                    These tools allow you to compare different model capabilities or use specific specialized models. LM
+                    Arena is for reasoning; Design Arena is for image generation.
                 </p>
             </div>
 
-            <div class="comparison-grid">
-                <div class="comparison-card">
-                    <h4>Gamma's Strengths</h4>
-                    <div class="pros-cons">
-                        <ul class="pros">
-                            <li>Very powerful functionality, specialized for structured content</li>
-                            <li>Extremely flexible—every detail you want to modify can be communicated with AI</li>
-                            <li>Professional layout engine with clear visual hierarchy in generated pages</li>
-                            <li>Particularly suitable for academic reports, sustainability analyses, and other rigorously structured content</li>
-                        </ul>
-                    </div>
+            <!-- LM Arena & Design Arena -->
+            <div class="tool-detail">
+                <h3>Tool 4 &amp; 5: LM Arena and Design Arena</h3>
+
+                <p>LM Arena is one of my most-used tools. It's a random battleground for AI models, but also allows you
+                    to select specific ones. I mainly use it for high-difficulty reasoning tasks, especially those
+                    requiring complex information processing like Criminal Law Case Analysis. The best model has been
+                    <code>claude-opus-4-5-20251101-thinking-32k</code>, where the "Thinking" mode reveals the full
+                    reasoning process.</p>
+
+                <p>But there's a distinct phenomenon: the quality of the generated webpages degrades over time. By the
+                    2nd or 3rd revision, if the initial prompt wasn't perfect, fixing specific issues becomes difficult.
+                    It's often better to start a new chat window, which I usually do the next day. This "diminishing
+                    returns" issue taught me that for complex tasks, it's best to clarify requirements upfront rather
+                    than relying on endless revisions.</p>
+
+                <div class="media-placeholder">
+                    LM Arena: Criminal Law Case Analysis<br>
+                    (Demonstrating the full reasoning process in Thinking mode)
                 </div>
 
-                <div class="comparison-card">
-                    <h4>Gamma's Limitations</h4>
-                    <div class="pros-cons">
-                        <ul class="cons">
-                            <li>Cannot host on your own GitHub—this limits complete control</li>
-                            <li>Can only use domains provided by Gamma</li>
-                            <li>Cannot directly modify original HTML/CSS code</li>
-                            <li>Subject to platform restrictions if deep customization is needed</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+                <p>Design Arena isn't for generating websites, but images—similar to comparing model capabilities. I
+                    used it to draw illustrations for criminal law cases. Gemini 3 Pro consistently produced the best
+                    results, with image quality far surpassing other AIs. This clarified that different models have
+                    different strengths: Claude is supreme in logic and coding, while Gemini 3 Pro rules visual
+                    generation.</p>
 
-            <div class="media-placeholder">
-                <div class="media-placeholder-title">Gamma-Generated Praha 3 Sustainability Report</div>
-                <div class="media-placeholder-desc">Showing professional layout of structured report: chapter hierarchy, data charts, source citations<br>(Link: https://pristupy-k-udrzitelnemu--6qn7vj3.gamma.site/)</div>
-            </div>
-
-            <div class="story-card">
-                <div class="story-card-title">
-                    Case Study: Praha 3 Sustainability Report
-                </div>
-                <div class="story-card-content">
-                    <p>I used Gamma to quickly produce a sustainability report webpage for Prague's third district. From uploading the Word document to generating a professional website took less than 20 minutes.</p>
-                    
-                    <div class="story-card-quote">
-                        "Every detail can be modified through AI collaboration, but the downside is inability to host on your own GitHub—this limits complete control."
-                    </div>
-
-                    <p>This made me understand an important trade-off: <strong>convenience vs. control</strong>. Gamma lets you quickly generate professional content, but you must accept its platform limitations.</p>
+                <div class="media-placeholder">
+                    Design Arena: Criminal Law Cartoon-Style Illustrations<br>
+                    (Showcasing high-quality illustrations generated by Gemini 3 Pro)
                 </div>
             </div>
         </div>
 
-        <!-- Section 4: Claude - The Logic Champion -->
+        <!-- Section 04: Category 3 Deep Dive -->
         <div class="section">
             <div class="section-header">
                 <div class="section-number">Section 04</div>
-                <h2 class="section-title">Claude: The Logic Champion and Debugging Partner</h2>
+                <h2 class="section-title">Category 3: Integrated Development Environments</h2>
                 <p class="section-intro">
-                    Among all AI tools, Claude is the one I use most. Whether for logical discussion or code debugging, its performance is most stable. Although it still occasionally "malfunctions," the malfunction rate is much lower than other AI.
+                    The feature of these tools is "embedding into existing workflows," enhancing AI capabilities
+                    directly within your environment without switching platforms.
                 </p>
             </div>
 
-            <div class="story-card">
-                <div class="story-card-title">
-                    Why Claude Became My Primary Tool
-                </div>
-                <div class="story-card-content">
-                    <p>After multiple comparisons, I found Claude clearly superior to other AI in the following areas:</p>
-                    
-                    <ul style="margin: 20px 0; padding-left: 30px;">
-                        <li><strong>Logical Clarity:</strong> When discussing complex issues, Claude's reasoning path is easiest to track</li>
-                        <li><strong>Debugging Capability:</strong> When facing code problems, it can precisely locate the issue</li>
-                        <li><strong>Low Hallucination Rate:</strong> Although it occasionally makes mistakes, it's much more stable than Gemini 3</li>
-                        <li><strong>Code Generation Ability:</strong> I believe among all AI, it writes the best code</li>
-                    </ul>
+            <!-- VS Code -->
+            <div class="tool-detail">
+                <h3>Tool 6: VS Code with AI Extensions</h3>
 
-                    <div class="story-card-quote">
-                        "Claude loves writing code—many times you must restrict it: 'First clarify the problem, don't rush to write code.' But its code-writing ability, I believe, is better than other AI."
-                    </div>
+                <p>VS Code's most amazing feature is that it can generate, manage files, and edit code
+                    simultaneously—integrating everything. Combining it with AI significantly lowers the barrier for
+                    technical web development. When I needed to tweak details late in the project, VS Code + AI was
+                    stunning. I could even let it edit while I worked—fixing links, managing the entire file structure.
+                    I used it to translate the entire project and create a multi-language Index. It is, by far, the tool
+                    that has improved my efficiency the most.</p>
+
+                <p>Its breakthrough capabilities include: simultaneous multi-file editing, project-wide link fixing,
+                    folder-wide translation, and generating multi-language indexes. This isn't just an efficiency boost;
+                    it's a qualitative shift—from "editing files one by one" to "systematic project management." For
+                    projects requiring the maintenance of multiple related files, this integration is irreplaceable.</p>
+
+                <div class="media-placeholder">
+                    VS Code AI: Multi-file Project Management<br>
+                    (Demonstrating multi-file project management: simultaneous editing, link fixing, batch translation)
                 </div>
             </div>
 
-            <div class="media-placeholder">
-                <div class="media-placeholder-title">Discussion with Claude on install-counter.js Logic</div>
-                <div class="media-placeholder-desc">Showing how to clarify through logical questioning the technical fact that "template modifications won't affect existing HTML"<br>(Dialogue focus: Node.js batch script operation logic)</div>
+            <!-- Chrome DevTools AI -->
+            <div class="tool-detail">
+                <h3>Tool 7: Chrome DevTools AI</h3>
+
+                <p>This was the biggest surprise of the project. I discovered that Chrome DevTools can now collaborate
+                    directly with AI, completely changing front-end optimization. Previously, UI adjustment was "Edit
+                    Code → Save → Refresh → Check → Repeat." Now, it's "Select Element → Talk to AI → See Result." This
+                    isn't just faster; it changes the workflow.</p>
+
+                <p>When a title's color or spacing felt off, I didn't need to go back to the editor. I could select the
+                    element in the browser, give AI a command (e.g., "Darken this button's shadow"), and AI would
+                    generate the code and preview it immediately. This demonstrates the massive shift in development
+                    workflows: front-end optimization has moved from a "code loop" to a "real-time conversation." Chrome
+                    DevTools AI isn't just a tool; it represents a "paradigm shift"—from "Humans executing AI
+                    instructions" to "AI executing Human instructions." It was the most magical discovery of my project.
+                </p>
+
+                <div class="media-placeholder">
+                    Chrome DevTools AI Real-Time Adjustment Demo<br>
+                    (Workflow: Select element → Tell AI "Darken shadow" → See immediate result)
+                </div>
             </div>
 
-            <div class="comparison-grid">
-                <div class="comparison-card">
-                    <h4>Claude's Best Use Cases</h4>
-                    <div class="pros-cons">
-                        <ul class="pros">
-                            <li>Complex logical discussions (e.g., template vs. batch scripts)</li>
-                            <li>Code debugging (especially JavaScript, Node.js)</li>
-                            <li>Technical documentation writing</li>
-                            <li>Issues requiring multi-round dialogue for deep exploration</li>
-                        </ul>
-                    </div>
-                </div>
+            <!-- Google Apps Script & Google Drive AI -->
+            <div class="tool-detail">
+                <h3>Tool 8 &amp; 9: Google Apps Script and Google Drive AI</h3>
 
-                <div class="comparison-card">
-                    <h4>Considerations When Using Claude</h4>
-                    <div class="pros-cons">
-                        <ul class="cons">
-                            <li>Need to explicitly restrict "discuss logic first, then write code"</li>
-                            <li>Still occasionally produces logical errors requiring human review</li>
-                            <li>Not as good as other tools for visual design tasks</li>
-                        </ul>
-                    </div>
-                </div>
+                <p>When accessing Google Drive, I was pleasantly surprised to find it also had AI capabilities. Even
+                    more practical was AI teaching me to use Google Apps Script to automatically extract filenames and
+                    IDs from Drive folders. I combined screenshot → AI text extraction → semantic matching to let AI
+                    understand that "Solow-Swan Economic Convergence Report.pptx" should match the "solow-swan-model"
+                    entry, even if the names weren't identical. This automated workflow drastically improved efficiency
+                    for handling over 12 reports, completely eliminating manual copying.</p>
+
+                <p style="margin-top: 24px;"><strong>Read more:</strong> <a href="file:///C:/Users/Cathy/Downloads/automated-research-workflow.html" style="color: #732C3F; text-decoration: underline;">Building a Self-Replicating System</a></p>
             </div>
         </div>
 
-        <!-- Section 5: Skywork & Others -->
+        <!-- Section 05: Claude Special -->
         <div class="section">
             <div class="section-header">
                 <div class="section-number">Section 05</div>
-                <h2 class="section-title">Other Specialized Tools: Skywork, LM Arena, Design Arena</h2>
+                <h2 class="section-title">Claude: The Cross-Functional Champion</h2>
                 <p class="section-intro">
-                    Beyond primary tools, I've explored multiple specialized AI for specific tasks. Each taught me different usage philosophies.
+                    Claude doesn't fit into just one category because it is cross-functional. It is currently the most
+                    robust AI model, usable in any scenario—whether for coding, logical discussion, or integrating into
+                    various tools.
                 </p>
             </div>
 
-            <div class="story-card">
-                <div class="story-card-title">
-                    Skywork: Extracting Meaning from Chaos
-                </div>
-                <div class="story-card-content">
-                    <p>Skywork specializes in Excel files, particularly adept at generating visualizations from complex data with multiple sheets and irregular columns. I used it to test economic convergence data, verifying AI's limits in handling irregular data.</p>
-                    
-                    <div class="story-card-quote">
-                        "The first attempt worked superbly, but I was clumsy, wanting to limit its colors and styles, and it got worse with each change. Later I understood one thing: sometimes you have to let AI decide visual design itself, because its aesthetic algorithms may be better than your own adjustments."
-                    </div>
+            <div class="tool-detail">
+                <h3>Why Claude is Different</h3>
 
-                    <div class="story-card-lesson">
-                        <strong>Key Insight:</strong> Excessive control actually limits AI's creativity. In visual design, sometimes "appropriate hands-off" is more effective than "precise instructions."
-                    </div>
-                </div>
-            </div>
+                <p>Of all AI tools, I use Claude the most. Whether for logical discussion or code debugging, its
+                    performance is the most stable. While it still "glitches" occasionally, the failure rate is much
+                    lower than others. After many comparisons, I found Claude significantly superior in: Logical
+                    Clarity—tracing reasoning paths is easiest; Debugging—precise issue localization; Low Hallucination
+                    Rate—more stable than Gemini 3; Code Generation—I believe it writes the best code of all AIs.</p>
 
-            <div class="comparison-grid">
-                <div class="comparison-card">
-                    <h4>LM Arena (LMSYS Chatbot Arena)</h4>
-                    <p style="margin: 15px 0;">Specialized for high-difficulty reasoning tasks, especially situations requiring complex information comprehension.</p>
-                    <div class="pros-cons">
-                        <ul class="pros">
-                            <li><strong>Best Model:</strong> claude-opus-4-5-20251101-thinking-32k</li>
-                            <li><strong>Use Case:</strong> Criminal Law Case Analysis (Criminal Law in Security Contexts)</li>
-                            <li><strong>Strength:</strong> Thinking mode can display complete reasoning process</li>
-                        </ul>
-                    </div>
+                <p>Claude loves to write code—often you have to restrain it: "Clarify the problem first, don't rush to
+                    code." But its coding ability is unmatched. More importantly, Claude isn't just a standalone chat
+                    AI; it integrates into every environment—Official Claude.ai, API, VS Code, Browser Extensions, etc.
+                    This cross-platform capability makes it a true "Cross-Functional Model." You need code? Claude.
+                    Logical discussion? Claude. Workflow integration? Claude. It is the strongest model for scenarios
+                    requiring high-quality reasoning and code generation. While Gemini 3 Pro wins on visuals, Claude
+                    delivers the most consistent performance in the core competencies of coding and logic.</p>
+
+                <div class="media-placeholder">
+                    Discussion with Claude on install-counter.js Logic<br>
+                    (Demonstrating how to clarify the technical fact that "template modification won't affect existing
+                    HTML" through logical questioning)
                 </div>
 
-                <div class="comparison-card">
-                    <h4>Design Arena (Image Generation)</h4>
-                    <p style="margin: 15px 0;">Specialized for visual generation, especially situations requiring high-quality illustrations.</p>
-                    <div class="pros-cons">
-                        <ul class="pros">
-                            <li><strong>Best Model:</strong> Gemini 3 Pro Image Gen</li>
-                            <li><strong>Use Case:</strong> Criminal Law Case Cartoon-Style Illustrations</li>
-                            <li><strong>Strength:</strong> Image quality far exceeds other AI, unmatched</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Section 6: Chrome DevTools AI - The Surprise -->
-        <div class="section">
-            <div class="section-header">
-                <div class="section-number">Section 06</div>
-                <h2 class="section-title">Chrome DevTools AI: A Workflow Transformation</h2>
-                <p class="section-intro">
-                    This was the biggest surprise of the entire project. I discovered that Chrome's developer tools can now work directly with AI, completely changing how frontend optimization is done.
-                </p>
-            </div>
-
-            <div class="story-card success">
-                <div class="story-card-title">
-                    From "Code Edit Loop" to "Real-Time Dialogue"
-                </div>
-                <div class="story-card-content">
-                    <div class="story-card-quote">
-                        "Previously, UI adjustment was 'edit code → save → refresh → view result → adjust again if unsatisfied.' Now it's 'select element → talk to AI → see result immediately.' This isn't just improved efficiency—it's a qualitative transformation of the entire workflow."
-                    </div>
-
-                    <p>When I felt a title's color or spacing was wrong, instead of going back to the editor, I could directly select the element in the browser and give AI commands (e.g., "deepen this button's shadow"), and AI would directly generate code and preview immediately.</p>
-
-                    <p><strong>This demonstrates the enormous transformation of development workflow in the AI era:</strong> frontend optimization changed from "code loops" to "real-time dialogue."</p>
-                </div>
-            </div>
-
-            <div class="media-placeholder">
-                <div class="media-placeholder-title">Chrome DevTools AI Real-Time Adjustment Demo (15 seconds)</div>
-                <div class="media-placeholder-desc">Operation flow: select element → tell AI "deepen this button's shadow" → see result immediately<br>(Showing comparison from traditional workflow to AI collaboration)</div>
-            </div>
-
-            <div class="insight-box">
-                <h3>The Significance of This Discovery</h3>
-                <p>Chrome DevTools AI is not just a tool—it represents "a transformation in development paradigm"—from "humans executing AI's instructions" to "AI executing humans' instructions." This is the most magical discovery in my project.</p>
+                <p>This is why Claude is a special existence in my classification. It's not just a "One-Click
+                    Generator," "Arena Model," or "Integrated Tool"—it's everything. It is the tool for high-quality
+                    reasoning and code.</p>
             </div>
         </div>
 
@@ -831,41 +708,31 @@
         <div class="section">
             <div class="section-header">
                 <div class="section-number">Core Insight</div>
-                <h2 class="section-title">True AI Capability: Orchestration, Not Mastery</h2>
+                <h2 class="section-title">True AI Capability: Recognizing Scenarios, Not Collecting Tools</h2>
             </div>
 
-            <div class="story-card">
-                <div class="story-card-content" style="font-size: 1.05rem;">
-                    <p>Through hands-on experience with these tools, I've reached a core conclusion:</p>
-                    
-                    <div class="story-card-quote" style="font-size: 1.2rem; font-weight: 600;">
-                        "The future of work is not about mastering one AI—it's about orchestrating many."
-                    </div>
-
-                    <p>Each tool has its optimal use case:</p>
-                    <ul style="margin: 20px 0; padding-left: 30px; line-height: 1.8;">
-                        <li><strong>Antigravity</strong> suits rapid prototyping but requires strict version control</li>
-                        <li><strong>Gamma</strong> suits structured content but requires accepting platform limitations</li>
-                        <li><strong>Claude</strong> suits logical discussion but needs restriction of its "code impulse"</li>
-                        <li><strong>Skywork</strong> suits data visualization but requires learning to "appropriately let go"</li>
-                        <li><strong>LM Arena</strong> suits complex reasoning, strongest in Thinking mode</li>
-                        <li><strong>Design Arena</strong> suits visual generation, Gemini 3 Pro unbeatable</li>
-                        <li><strong>Chrome DevTools AI</strong> suits real-time optimization, transformed the entire workflow</li>
-                    </ul>
-
-                    <p style="font-weight: 600; margin-top: 32px;">True capability is not "knowing how to use every tool," but rather "knowing when to use which, and how to make them work together." This is the core competitive advantage in the AI era.</p>
-                </div>
+            <div class="insight-box">
+                <h3>The Key to Effective AI Tool Usage</h3>
+                <p>Through hands-on experience with these tools, I've reached a core conclusion: The key to effective AI
+                    tool usage isn't about knowing every tool exists - it's about recognizing which scenario you're in
+                    and selecting the right tool for that context.</p>
+                <p style="margin-top: 20px;"><strong>The three scenarios:</strong><br>
+                    Need to generate websites? → Use One-Click Generators<br>
+                    Need to compare capabilities? → Use Model Arenas<br>
+                    Working within existing workflows? → Use Integrated Tools</p>
+                <p style="margin-top: 20px;"><strong>And across all scenarios:</strong> Claude remains the strongest
+                    model for coding and logical reasoning, capable of integrating into any workflow.</p>
             </div>
         </div>
 
         <!-- Navigation -->
         <div class="page-nav">
-            <a href="automated-research-workflow.html" class="nav-btn">← Building a Self-Replicating System</a>
-            <span style="color: #718096;"> </span>
-            <a href="#" class="nav-btn"> AI Illusions & Human Judgment (coming soon)→</a>
+            <a href="file:///C:/Users/Cathy/Downloads/automated-research-workflow.html" class="nav-btn">← Building a Self-Replicating System</a>
+            <a href="file:///C:/Users/Cathy/Downloads/rose.html#" class="nav-btn">AI Illusions &amp; Human Judgment (coming soon) →</a>
         </div>
 
     </div>
 
-</body>
-</html>
+
+
+</body></html>
