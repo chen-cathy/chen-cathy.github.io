@@ -1,374 +1,1159 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About me</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: { sans: 
-            ['ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', 'Noto Sans', 'Liberation Sans', 'sans-serif'] }
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+  <style>
+    :root {
+      --air: #E7F0FA;
+      --structure: #7BA4D0;
+      --accent: #2E5E99;
+      --ground: #0D2440;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--air);
+      color: var(--ground);
+      line-height: 1.7;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* ============================================
+       ABSTRACT GEOMETRIC BACKGROUND CANVAS
+       ============================================ */
+    .canvas-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .geo-circle {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid var(--structure);
+      opacity: 0.3;
+    }
+
+    .geo-circle.c1 {
+      width: 600px;
+      height: 600px;
+      top: -200px;
+      right: -150px;
+      border-width: 2px;
+      opacity: 0.15;
+    }
+
+    .geo-circle.c2 {
+      width: 400px;
+      height: 400px;
+      bottom: 20%;
+      left: -100px;
+      border-color: var(--accent);
+      opacity: 0.12;
+    }
+
+    .geo-circle.c3 {
+      width: 200px;
+      height: 200px;
+      top: 40%;
+      right: 10%;
+      background: linear-gradient(135deg, rgba(123, 164, 208, 0.08), transparent);
+      border: none;
+    }
+
+    .geo-line {
+      position: absolute;
+      background: linear-gradient(90deg, transparent, var(--structure), transparent);
+      height: 1px;
+      opacity: 0.2;
+    }
+
+    .geo-line.l1 {
+      width: 60%;
+      top: 25%;
+      left: 20%;
+      transform: rotate(-15deg);
+    }
+
+    .geo-line.l2 {
+      width: 40%;
+      top: 55%;
+      right: 0;
+      transform: rotate(8deg);
+    }
+
+    .geo-line.l3 {
+      width: 30%;
+      bottom: 30%;
+      left: 5%;
+      transform: rotate(-5deg);
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    }
+
+    .geo-dot-grid {
+      position: absolute;
+      top: 15%;
+      left: 8%;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+      opacity: 0.15;
+    }
+
+    .geo-dot {
+      width: 4px;
+      height: 4px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    .geo-wave {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 200px;
+      opacity: 0.08;
+    }
+
+    .geo-wave svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* ============================================
+       MAIN CONTENT WRAPPER
+       ============================================ */
+    .page-wrapper {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+    }
+
+    /* ============================================
+       HERO SECTION - ASYMMETRIC DRAMATIC LAYOUT
+       ============================================ */
+    .hero {
+      min-height: 70vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      position: relative;
+      padding: 60px 0;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 60px 80px 10%;
+      position: relative;
+    }
+
+    .hero-left::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 20%;
+      height: 60%;
+      width: 3px;
+      background: linear-gradient(180deg, transparent, var(--accent), var(--structure), transparent);
+      opacity: 0.4;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      margin-bottom: 60px;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+    }
+
+    .back-link:hover {
+      gap: 12px;
+      color: var(--ground);
+    }
+
+    .hero-name {
+      font-size: clamp(3.5rem, 8vw, 6rem);
+      font-weight: 800;
+      color: var(--ground);
+      letter-spacing: -0.04em;
+      line-height: 0.95;
+      margin-bottom: 20px;
+    }
+
+    .hero-title {
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      font-weight: 400;
+      color: var(--structure);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 40px;
+    }
+
+    .hero-tagline {
+      font-size: clamp(1.1rem, 2vw, 1.4rem);
+      color: var(--ground);
+      max-width: 380px;
+      line-height: 1.6;
+      font-weight: 400;
+      opacity: 0.85;
+      position: relative;
+      padding-left: 20px;
+    }
+
+    .hero-tagline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 6px;
+      bottom: 6px;
+      width: 3px;
+      background: var(--accent);
+    }
+
+    .hero-right {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-visual {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .visual-ring {
+      position: absolute;
+      border: 1px solid var(--structure);
+      border-radius: 50%;
+      opacity: 0.25;
+      animation: pulse-slow 8s ease-in-out infinite;
+    }
+
+    .visual-ring.r1 {
+      width: 300px;
+      height: 300px;
+      animation-delay: 0s;
+    }
+
+    .visual-ring.r2 {
+      width: 220px;
+      height: 220px;
+      border-color: var(--accent);
+      animation-delay: 2s;
+    }
+
+    .visual-ring.r3 {
+      width: 140px;
+      height: 140px;
+      animation-delay: 4s;
+    }
+
+    .visual-core {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--accent), var(--structure));
+      border-radius: 50%;
+      opacity: 0.6;
+    }
+
+    @keyframes pulse-slow {
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: 0.25;
+      }
+
+      50% {
+        transform: scale(1.05);
+        opacity: 0.15;
+      }
+    }
+
+    /* ============================================
+       FLOATING NAVIGATION DOTS
+       ============================================ */
+    .nav-dots {
+      position: fixed;
+      right: 40px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      z-index: 100;
+    }
+
+    .nav-dot {
+      width: 10px;
+      height: 10px;
+      border: 2px solid var(--structure);
+      border-radius: 50%;
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .nav-dot:hover,
+    .nav-dot.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      transform: scale(1.3);
+    }
+
+    /* ============================================
+       SECTION CARDS - FLOATING LAYERED DESIGN
+       ============================================ */
+    .sections-container {
+      padding: 0 8% 100px;
+      position: relative;
+    }
+
+    .section-card {
+      position: relative;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(123, 164, 208, 0.25);
+      border-radius: 24px;
+      padding: 60px;
+      margin-bottom: 80px;
+      box-shadow:
+        0 20px 60px rgba(13, 36, 64, 0.08),
+        0 4px 20px rgba(123, 164, 208, 0.1);
+      transition: all 0.4s ease;
+    }
+
+    .section-card:hover {
+      transform: translateY(-4px);
+      box-shadow:
+        0 30px 80px rgba(13, 36, 64, 0.12),
+        0 8px 30px rgba(123, 164, 208, 0.15);
+    }
+
+    /* Asymmetric offset cards */
+    .section-card:nth-child(odd) {
+      margin-left: 5%;
+      margin-right: 15%;
+    }
+
+    .section-card:nth-child(even) {
+      margin-left: 15%;
+      margin-right: 5%;
+    }
+
+    .section-marker {
+      position: absolute;
+      top: -20px;
+      left: 40px;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--air);
+      padding: 8px 20px;
+      border-radius: 30px;
+      border: 1px solid var(--structure);
+    }
+
+    .marker-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    .marker-text {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--structure);
+    }
+
+    .section-heading {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      color: var(--ground);
+      letter-spacing: -0.03em;
+      margin-bottom: 30px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-heading::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent), var(--structure));
+      border-radius: 2px;
+    }
+
+    .section-content {
+      font-size: 17px;
+      line-height: 1.9;
+      color: var(--ground);
+      opacity: 0.85;
+    }
+
+    .section-content p {
+      margin-bottom: 1.2em;
+    }
+
+    .section-content p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ============================================
+       AI DIALOGUE - SPECIAL TREATMENT
+       ============================================ */
+    .dialogue-section {
+      background: linear-gradient(135deg, rgba(13, 36, 64, 0.03), rgba(46, 94, 153, 0.05));
+      padding: 80px 8%;
+      margin: 40px 0 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dialogue-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--structure), transparent);
+    }
+
+    .dialogue-section::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--structure), transparent);
+    }
+
+    .dialogue-intro {
+      max-width: 700px;
+      margin: 0 auto 50px;
+      text-align: center;
+    }
+
+    .dialogue-intro p {
+      font-size: 17px;
+      line-height: 1.85;
+      color: var(--ground);
+      opacity: 0.75;
+      margin-bottom: 1em;
+    }
+
+    .dialogue-intro p:last-child {
+      margin-bottom: 0;
+    }
+
+    .dialogue-box {
+      max-width: 800px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      border: 2px solid rgba(46, 94, 153, 0.2);
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(13, 36, 64, 0.1);
+    }
+
+    .dialogue-header {
+      background: linear-gradient(90deg, rgba(46, 94, 153, 0.1), rgba(123, 164, 208, 0.1));
+      padding: 16px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(123, 164, 208, 0.2);
+    }
+
+    .dialogue-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .dialogue-code {
+      font-family: 'SF Mono', Monaco, 'Courier New', monospace;
+      font-size: 10px;
+      color: var(--structure);
+    }
+
+    .dialogue-content {
+      padding: 40px;
+    }
+
+    .dialogue-exchange {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .dialogue-exchange:last-child {
+      margin-bottom: 0;
+    }
+
+    .speaker-label {
+      flex-shrink: 0;
+      width: 80px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--structure);
+      text-align: right;
+      padding-top: 4px;
+    }
+
+    .speaker-text {
+      font-family: 'SF Mono', Monaco, 'Courier New', monospace;
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--ground);
+    }
+
+    .speaker-text strong {
+      font-weight: 600;
+    }
+
+    .speaker-text p {
+      margin-bottom: 12px;
+    }
+
+    .speaker-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    .ai-list {
+      margin: 16px 0;
+      padding-left: 20px;
+      border-left: 2px solid var(--structure);
+    }
+
+    .ai-list li {
+      list-style: none;
+      margin-bottom: 10px;
+      font-weight: 500;
+      color: var(--ground);
+    }
+
+    .ai-list li:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ============================================
+       CONTACT SECTION - SPECIAL CARD
+       ============================================ */
+    .contact-card {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(231, 240, 250, 0.8));
+    }
+
+    .contact-form-container {
+      margin-top: 40px;
+      padding: 40px;
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: 16px;
+      border: 1px solid rgba(123, 164, 208, 0.2);
+    }
+
+    .form-note {
+      font-size: 14px;
+      color: var(--structure);
+      line-height: 1.8;
+      margin-bottom: 30px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .form-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--structure);
+      margin-bottom: 10px;
+    }
+
+    .form-input {
+      padding: 16px 20px;
+      border: 1px solid rgba(123, 164, 208, 0.3);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.9);
+      font-family: inherit;
+      font-size: 15px;
+      color: var(--ground);
+      transition: all 0.3s ease;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(46, 94, 153, 0.1);
+    }
+
+    .form-input::placeholder {
+      color: var(--structure);
+      opacity: 0.6;
+    }
+
+    textarea.form-input {
+      resize: vertical;
+      min-height: 140px;
+    }
+
+    .consent-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-top: 10px;
+    }
+
+    .consent-checkbox {
+      width: 22px;
+      height: 22px;
+      border: 2px solid var(--structure);
+      border-radius: 6px;
+      cursor: pointer;
+      accent-color: var(--accent);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .consent-text {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--ground);
+    }
+
+    .consent-text a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .btn-submit {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px 40px;
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(46, 94, 153, 0.25);
+      margin-top: 20px;
+    }
+
+    .btn-submit:hover {
+      background: var(--ground);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(13, 36, 64, 0.3);
+    }
+
+    .form-footer-note {
+      margin-top: 20px;
+      font-size: 12px;
+      color: var(--structure);
+    }
+
+    /* ============================================
+       FOOTER
+       ============================================ */
+    .site-footer {
+      padding: 40px 8%;
+      text-align: center;
+      position: relative;
+    }
+
+    .site-footer::before {
+      content: '';
+      display: block;
+      width: 100px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--structure), transparent);
+      margin: 0 auto 30px;
+    }
+
+    .footer-text {
+      font-size: 13px;
+      color: var(--structure);
+    }
+
+    /* ============================================
+       RESPONSIVE DESIGN
+       ============================================ */
+    @media (max-width: 1024px) {
+      .hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+        padding: 40px 0;
+      }
+
+      .hero-left {
+        padding: 40px 8%;
+      }
+
+      .hero-left::after {
+        display: none;
+      }
+
+      .hero-right {
+        display: none;
+      }
+
+      .nav-dots {
+        display: none;
+      }
+
+      .section-card:nth-child(odd),
+      .section-card:nth-child(even) {
+        margin-left: 0;
+        margin-right: 0;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero-name {
+        font-size: 3rem;
+      }
+
+      .section-card {
+        padding: 40px 30px;
+        border-radius: 20px;
+      }
+
+      .dialogue-section {
+        padding: 60px 5%;
+      }
+
+      .dialogue-content {
+        padding: 30px 20px;
+      }
+
+      .dialogue-exchange {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .speaker-label {
+        text-align: left;
+        width: auto;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-form-container {
+        padding: 30px 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-left {
+        padding: 30px 6%;
+      }
+
+      .sections-container {
+        padding: 0 5% 60px;
+      }
+
+      .section-card {
+        padding: 30px 20px;
+        margin-bottom: 50px;
+      }
+
+      .section-heading {
+        font-size: 1.8rem;
+      }
+    }
+
+    /* Skip link */
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      z-index: 999;
+      padding: 12px 24px;
+      background: white;
+      color: var(--accent);
+      text-decoration: none;
+      border-radius: 8px;
+    }
+
+    .skip-link:focus {
+      left: 20px;
+      top: 20px;
+    }
+
+    /* Smooth reveal animations */
+    @media (prefers-reduced-motion: no-preference) {
+
+      .section-card,
+      .dialogue-box {
+        opacity: 0;
+        transform: translateY(30px);
+        animation: reveal 0.8s ease forwards;
+        animation-timeline: view();
+        animation-range: entry 10% cover 25%;
+      }
+
+      @keyframes reveal {
+        to {
+          opacity: 1;
+          transform: translateY(0);
         }
       }
     }
-  </script>
-  <style>
-    :root{
-      --bg: #f6f3ee;
-      --bg2:#f1ece4;
-      --ink:#24303a;
-      --muted:#4b5563;
-      --soft:#6b7280;
-      --accent:#1f3a5f;
-      --earth:#6b5b4a;
-      --line: rgba(31,58,95,.16);
-      --line2: rgba(107,91,74,.18);
-      --panel: rgba(241,236,228,.72);
-      --panel2: rgba(31,58,95,.055);
-      --panel3: rgba(107,91,74,.07);
-      --focus: rgba(31,58,95,.22);
-    }
-    html{ scroll-behavior:smooth; }
-    body{
-      background:
-        radial-gradient(1100px 650px at 16% 8%, rgba(31,58,95,.07), transparent 58%),
-        radial-gradient(900px 520px at 86% 14%, rgba(107,91,74,.09), transparent 60%),
-        linear-gradient(180deg, rgba(241,236,228,.82), rgba(246,243,238,1));
-      color: var(--ink);
-      text-rendering: optimizeLegibility;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-    /* Reading */
-    .prose-like{ font-size:19px; line-height:1.9; letter-spacing:.004em; }
-    .prose-like p{ margin:0 0 1.05em 0; }
-    @media (max-width: 640px){
-      .prose-like{ font-size:18px; line-height:1.9; }
-    }
-    a{
-      color: var(--accent);
-      text-underline-offset: 4px;
-      text-decoration-thickness: 1px;
-      text-decoration-color: rgba(31,58,95,.35);
-      transition: color .15s ease, text-decoration-color .15s ease, background-color .15s ease;
-    }
-    a:hover{ color:#162b46; text-decoration-color: rgba(31,58,95,.65); }
-    a:focus-visible{
-      outline:3px solid var(--focus);
-      outline-offset:3px;
-      border-radius: 10px;
-    }
-    .smallcaps{ font-variant-caps: all-small-caps; letter-spacing: .06em; }
-    .mono{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
-    .hair{ border-color: var(--line); }
-    .hair2{ border-color: var(--line2); }
-
-    /* Subtle reveal */
-    @media (prefers-reduced-motion: no-preference){
-      .reveal{
-        opacity:0;
-        transform: translateY(8px);
-        animation: fadeUp .7s ease forwards;
-        animation-timeline: view();
-        animation-range: entry 10% cover 18%;
-      }
-      @keyframes fadeUp{ to{ opacity:1; transform:none; } }
-    }
-    @media (prefers-reduced-motion: reduce){
-      .reveal{ opacity:1; transform:none; }
-    }
-
-    /* Hero subtle rule */
-    .hero-rule{
-      height:1px;
-      background: linear-gradient(90deg, transparent, rgba(31,58,95,.26), rgba(107,91,74,.22), transparent);
-    }
-
-    /* Section marker */
-    .kicker{
-      display:inline-flex;
-      align-items:center;
-      gap:.55rem;
-      padding:.25rem .6rem;
-      border-radius: 999px;
-      border: 1px solid rgba(31,58,95,.14);
-      background: rgba(31,58,95,.03);
-      color: var(--soft);
-      font-size: 12px;
-      line-height: 1.2;
-    }
-    .dot{
-      width:.45rem;height:.45rem;border-radius:999px;background: rgba(107,91,74,.55);
-    }
-
-    /* Anchor paragraph */
-    .anchor{
-      position: relative;
-      border: 1px solid rgba(107,91,74,.20);
-      background: rgba(241,236,228,.75);
-      border-radius: 18px;
-    }
-    .anchor:before{
-      content:"";
-      position:absolute;
-      left:0; top:0; bottom:0;
-      width: 4px;
-      border-top-left-radius: 18px;
-      border-bottom-left-radius: 18px;
-      background: linear-gradient(180deg, rgba(31,58,95,.55), rgba(107,91,74,.45));
-      opacity:.65;
-    }
-
-    /* Enhanced Dialogue */
-    .dialogue{
-      border-radius: 18px;
-      border: 2px solid rgba(31,58,95,.35);
-      background: rgba(246,243,238,.85);
-      box-shadow: 0 4px 12px rgba(31,58,95,.08);
-    }
-    .dialogue-header{
-      background: rgba(31,58,95,.08);
-      border-bottom: 1px solid rgba(31,58,95,.18);
-    }
-    .bubble{
-      border-radius: 16px;
-      border: 1px solid rgba(31,58,95,.12);
-      background: rgba(246,243,238,.65);
-    }
-    .bubble.ai{
-      border-color: rgba(107,91,74,.20);
-      background: rgba(241,236,228,.78);
-    }
-    .label{
-      font-size: 12px;
-      color: var(--soft);
-    }
   </style>
-<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border-width:0}.col-span-12{grid-column:span 12 / span 12}.mx-auto{margin-left:auto;margin-right:auto}.my-2{margin-top:0.5rem;margin-bottom:0.5rem}.mt-16{margin-top:4rem}.mt-2{margin-top:0.5rem}.mt-3{margin-top:0.75rem}.mt-4{margin-top:1rem}.mt-5{margin-top:1.25rem}.mt-6{margin-top:1.5rem}.mt-7{margin-top:1.75rem}.mt-8{margin-top:2rem}.block{display:block}.flex{display:flex}.inline-flex{display:inline-flex}.grid{display:grid}.hidden{display:none}.h-16{height:4rem}.h-2{height:0.5rem}.h-4{height:1rem}.h-px{height:1px}.w-16{width:4rem}.w-2{width:0.5rem}.w-full{width:100%}.max-w-2xl{max-width:42rem}.max-w-\[680px\]{max-width:680px}.max-w-\[980px\]{max-width:980px}.flex-shrink-0{flex-shrink:0}.select-none{-webkit-user-select:none;user-select:none}.list-none{list-style-type:none}.grid-cols-12{grid-template-columns:repeat(12, minmax(0, 1fr))}.flex-col{flex-direction:column}.items-start{align-items:flex-start}.items-center{align-items:center}.items-baseline{align-items:baseline}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-2{gap:0.5rem}.gap-3{gap:0.75rem}.gap-4{gap:1rem}.gap-6{gap:1.5rem}.gap-8{gap:2rem}.space-y-2 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.5rem * var(--tw-space-y-reverse))}.space-y-4 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}.space-y-8 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(2rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(2rem * var(--tw-space-y-reverse))}.overflow-hidden{overflow:hidden}.rounded-2xl{border-radius:1rem}.rounded-full{border-radius:9999px}.rounded-xl{border-radius:0.75rem}.border{border-width:1px}.border-l{border-left-width:1px}.border-t{border-top-width:1px}.p-5{padding:1.25rem}.p-6{padding:1.5rem}.px-5{padding-left:1.25rem;padding-right:1.25rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.py-3{padding-top:0.75rem;padding-bottom:0.75rem}.py-5{padding-top:1.25rem;padding-bottom:1.25rem}.py-6{padding-top:1.5rem;padding-bottom:1.5rem}.py-8{padding-top:2rem;padding-bottom:2rem}.px-4{padding-left:1rem;padding-right:1rem}.pb-20{padding-bottom:5rem}.pb-4{padding-bottom:1rem}.pl-4{padding-left:1rem}.pt-10{padding-top:2.5rem}.pt-2{padding-top:0.5rem}.text-right{text-align:right}.font-mono{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}.text-2xl{font-size:1.5rem;line-height:2rem}.text-\[10px\]{font-size:10px}.text-\[17px\]{font-size:17px}.text-\[18px\]{font-size:18px}.text-base{font-size:1rem;line-height:1.5rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xs{font-size:0.75rem;line-height:1rem}.font-medium{font-weight:500}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.italic{font-style:italic}.leading-relaxed{line-height:1.625}.tracking-tight{letter-spacing:-0.025em}.tracking-wide{letter-spacing:0.025em}.tracking-widest{letter-spacing:0.1em}.hover\:underline:hover{-webkit-text-decoration-line:underline;text-decoration-line:underline}.focus\:not-sr-only:focus{position:static;width:auto;height:auto;padding:0;margin:0;overflow:visible;clip:auto;white-space:normal}.focus\:fixed:focus{position:fixed}.focus\:left-4:focus{left:1rem}.focus\:top-4:focus{top:1rem}.focus\:z-50:focus{z-index:50}.focus\:rounded-xl:focus{border-radius:0.75rem}.focus\:bg-white\/90:focus{background-color:rgb(255 255 255 / 0.9)}.focus\:px-4:focus{padding-left:1rem;padding-right:1rem}.focus\:py-2:focus{padding-top:0.5rem;padding-bottom:0.5rem}@media (min-width: 640px){.sm\:mt-10{margin-top:2.5rem}.sm\:mt-20{margin-top:5rem}.sm\:h-20{height:5rem}.sm\:h-5{height:1.25rem}.sm\:flex-row{flex-direction:row}.sm\:items-center{align-items:center}.sm\:justify-between{justify-content:space-between}.sm\:gap-10{gap:2.5rem}.sm\:gap-6{gap:1.5rem}.sm\:px-10{padding-left:2.5rem;padding-right:2.5rem}.sm\:pb-28{padding-bottom:7rem}.sm\:pt-12{padding-top:3rem}.sm\:text-3xl{font-size:1.875rem;line-height:2.25rem}.sm\:text-\[17px\]{font-size:17px}.sm\:text-\[19px\]{font-size:19px}}@media (min-width: 768px){.md\:col-span-4{grid-column:span 4 / span 4}.md\:col-span-8{grid-column:span 8 / span 8}.md\:p-10{padding:2.5rem}}@media (min-width: 1024px){.lg\:col-span-10{grid-column:span 10 / span 10}.lg\:col-span-2{grid-column:span 2 / span 2}.lg\:block{display:block}}</style><style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border-width:0}.col-span-12{grid-column:span 12 / span 12}.mx-auto{margin-left:auto;margin-right:auto}.my-2{margin-top:0.5rem;margin-bottom:0.5rem}.mt-16{margin-top:4rem}.mt-2{margin-top:0.5rem}.mt-3{margin-top:0.75rem}.mt-4{margin-top:1rem}.mt-5{margin-top:1.25rem}.mt-6{margin-top:1.5rem}.mt-7{margin-top:1.75rem}.mt-8{margin-top:2rem}.block{display:block}.flex{display:flex}.inline-flex{display:inline-flex}.grid{display:grid}.hidden{display:none}.h-16{height:4rem}.h-2{height:0.5rem}.h-4{height:1rem}.h-px{height:1px}.w-16{width:4rem}.w-2{width:0.5rem}.w-full{width:100%}.max-w-2xl{max-width:42rem}.max-w-\[680px\]{max-width:680px}.max-w-\[980px\]{max-width:980px}.flex-shrink-0{flex-shrink:0}.select-none{-webkit-user-select:none;user-select:none}.list-none{list-style-type:none}.grid-cols-12{grid-template-columns:repeat(12, minmax(0, 1fr))}.items-start{align-items:flex-start}.items-center{align-items:center}.items-baseline{align-items:baseline}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-2{gap:0.5rem}.gap-3{gap:0.75rem}.gap-4{gap:1rem}.gap-6{gap:1.5rem}.gap-8{gap:2rem}.space-y-2 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.5rem * var(--tw-space-y-reverse))}.space-y-4 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}.space-y-8 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(2rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(2rem * var(--tw-space-y-reverse))}.overflow-hidden{overflow:hidden}.rounded-2xl{border-radius:1rem}.rounded-full{border-radius:9999px}.rounded-xl{border-radius:0.75rem}.border{border-width:1px}.border-l{border-left-width:1px}.border-t{border-top-width:1px}.p-5{padding:1.25rem}.p-6{padding:1.5rem}.px-4{padding-left:1rem;padding-right:1rem}.px-5{padding-left:1.25rem;padding-right:1.25rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.py-3{padding-top:0.75rem;padding-bottom:0.75rem}.py-5{padding-top:1.25rem;padding-bottom:1.25rem}.py-6{padding-top:1.5rem;padding-bottom:1.5rem}.py-8{padding-top:2rem;padding-bottom:2rem}.pb-20{padding-bottom:5rem}.pb-4{padding-bottom:1rem}.pl-4{padding-left:1rem}.pt-10{padding-top:2.5rem}.pt-2{padding-top:0.5rem}.text-right{text-align:right}.font-mono{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}.text-2xl{font-size:1.5rem;line-height:2rem}.text-\[10px\]{font-size:10px}.text-\[18px\]{font-size:18px}.text-base{font-size:1rem;line-height:1.5rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xs{font-size:0.75rem;line-height:1rem}.font-medium{font-weight:500}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.italic{font-style:italic}.leading-relaxed{line-height:1.625}.tracking-tight{letter-spacing:-0.025em}.tracking-wide{letter-spacing:0.025em}.tracking-widest{letter-spacing:0.1em}.hover\:underline:hover{-webkit-text-decoration-line:underline;text-decoration-line:underline}.focus\:not-sr-only:focus{position:static;width:auto;height:auto;padding:0;margin:0;overflow:visible;clip:auto;white-space:normal}.focus\:fixed:focus{position:fixed}.focus\:left-4:focus{left:1rem}.focus\:top-4:focus{top:1rem}.focus\:z-50:focus{z-index:50}.focus\:rounded-xl:focus{border-radius:0.75rem}.focus\:bg-white\/90:focus{background-color:rgb(255 255 255 / 0.9)}.focus\:px-4:focus{padding-left:1rem;padding-right:1rem}.focus\:py-2:focus{padding-top:0.5rem;padding-bottom:0.5rem}@media (min-width: 640px){.sm\:mt-10{margin-top:2.5rem}.sm\:mt-20{margin-top:5rem}.sm\:h-20{height:5rem}.sm\:h-5{height:1.25rem}.sm\:gap-10{gap:2.5rem}.sm\:gap-6{gap:1.5rem}.sm\:px-10{padding-left:2.5rem;padding-right:2.5rem}.sm\:pb-28{padding-bottom:7rem}.sm\:pt-12{padding-top:3rem}.sm\:text-3xl{font-size:1.875rem;line-height:2.25rem}.sm\:text-\[17px\]{font-size:17px}.sm\:text-\[19px\]{font-size:19px}}@media (min-width: 768px){.md\:col-span-4{grid-column:span 4 / span 4}.md\:col-span-8{grid-column:span 8 / span 8}.md\:p-10{padding:2.5rem}}@media (min-width: 1024px){.lg\:col-span-10{grid-column:span 10 / span 10}.lg\:col-span-2{grid-column:span 2 / span 2}.lg\:block{display:block}}</style></head>
+</head>
 
 <body>
-  <a href="#content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:bg-white/90 focus:px-4 focus:py-2 focus:rounded-xl">Skip to content</a>
+  <a href="#content" class="skip-link">Skip to content</a>
 
-  <!-- HERO -->
-  <header class="px-6 sm:px-10 pt-10 sm:pt-12">
-    <div class="mx-auto max-w-[980px]">
-      <div class="flex items-center justify-between gap-6">
-        <a href="index.html" style="color: #3498db; text-decoration: none; font-size: 20px; font-weight: 700;">← Back to Synthesis Hub</a>
+  <!-- Abstract Geometric Background -->
+  <div class="canvas-bg" aria-hidden="true">
+    <div class="geo-circle c1"></div>
+    <div class="geo-circle c2"></div>
+    <div class="geo-circle c3"></div>
+    <div class="geo-line l1"></div>
+    <div class="geo-line l2"></div>
+    <div class="geo-line l3"></div>
+    <div class="geo-dot-grid">
+      <div class="geo-dot"></div>
+      <div class="geo-dot"></div>
+      <div class="geo-dot"></div>
+      <div class="geo-dot"></div>
+      <div class="geo-dot"></div>
+      <div class="geo-dot"></div>
+      <div class="geo-dot"></div>
+      <div class="geo-dot"></div>
+      <div class="geo-dot"></div>
+      <div class="geo-dot"></div>
+      <div class="geo-dot"></div>
+      <div class="geo-dot"></div>
+      <div class="geo-dot"></div>
+      <div class="geo-dot"></div>
+      <div class="geo-dot"></div>
+      <div class="geo-dot"></div>
+      <div class="geo-dot"></div>
+      <div class="geo-dot"></div>
+      <div class="geo-dot"></div>
+      <div class="geo-dot"></div>
+    </div>
+    <div class="geo-wave">
+      <svg viewBox="0 0 1440 200" preserveAspectRatio="none">
+        <path fill="none" stroke="#7BA4D0" stroke-width="1"
+          d="M0,100 C360,150 720,50 1080,100 C1260,125 1380,100 1440,100" />
+        <path fill="none" stroke="#2E5E99" stroke-width="1"
+          d="M0,130 C360,80 720,180 1080,130 C1260,105 1380,130 1440,130" />
+      </svg>
+    </div>
+  </div>
+
+  <!-- Navigation Dots -->
+  <nav class="nav-dots" aria-label="Section navigation">
+    <a href="#hero" class="nav-dot active" aria-label="Hero section"></a>
+    <a href="#background" class="nav-dot" aria-label="Background section"></a>
+    <a href="#approach" class="nav-dot" aria-label="Approach section"></a>
+    <a href="#dialogue" class="nav-dot" aria-label="AI Dialogue section"></a>
+    <a href="#work" class="nav-dot" aria-label="On this site section"></a>
+    <a href="#contact" class="nav-dot" aria-label="Contact section"></a>
+  </nav>
+
+  <div class="page-wrapper">
+    <!-- HERO SECTION -->
+    <header id="hero" class="hero">
+      <div class="hero-left">
+        <a href="index.html" class="back-link">← Back to Synthesis Hub</a>
+
+        <h1 class="hero-name">About me</h1>
+        <p class="hero-title">Cathy Chen</p>
+
+        <p class="hero-tagline">Much of my thinking starts where clear rules produce unclear outcomes.</p>
       </div>
 
-      <!-- Asymmetric hero: narrow text + calm margin space -->
-      <div class="mt-8 sm:mt-10 grid grid-cols-12 gap-8 items-start">
-        <div class="col-span-12 lg:col-span-2 hidden lg:block">
-          <div class="pt-2">
-            <div class="kicker">
-              <span class="dot"></span>
-              <span class="smallcaps">Analytical lens</span>
+      <div class="hero-right">
+        <div class="hero-visual">
+          <div class="visual-ring r1"></div>
+          <div class="visual-ring r2"></div>
+          <div class="visual-ring r3"></div>
+          <div class="visual-core"></div>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main id="content">
+      <div class="sections-container">
+
+        <!-- BACKGROUND -->
+        <section id="background" class="section-card" aria-labelledby="h-background">
+          <div class="section-marker">
+            <span class="marker-dot"></span>
+            <span class="marker-text">Context & trajectory</span>
+          </div>
+
+          <h2 id="h-background" class="section-heading">Background</h2>
+
+          <div class="section-content">
+            <p>I am currently based in Prague.</p>
+            <p>My background includes working across organizational contexts in Taiwan, China, and the Czech
+              Republic—particularly in areas where systems, people, and institutional requirements intersect.</p>
+            <p>I hold a master's degree in Information and Knowledge Management from Loughborough University.</p>
+            <p>My professional experience spans roles within a French multinational retail group, where I was involved
+              in the design and operation of corporate training systems, knowledge management infrastructure, and
+              organizational processes during mergers and acquisitions.</p>
+            <p>I later worked in roles positioned at the interface between organizational governance and labor
+              regulation within Taiwanese and Chinese listed companies, engaging with organizational restructuring,
+              cross-border coordination, and labor relations across differing regulatory environments.</p>
+            <p>In recent years in the Czech Republic, my professional background included involvement in international
+              trade related to the import of products from Taiwan, as well as work in translation, providing practical
+              exposure to cross-regulatory and cross-linguistic contexts.</p>
+            <p>I am currently undertaking graduate studies in Czech at the Prague University of Economics and Business,
+              Faculty of Management.</p>
+          </div>
+        </section>
+
+        <!-- APPROACH -->
+        <section id="approach" class="section-card" aria-labelledby="h-approach">
+          <div class="section-marker">
+            <span class="marker-dot"></span>
+            <span class="marker-text">How I read organizations</span>
+          </div>
+
+          <h2 id="h-approach" class="section-heading">Approach</h2>
+
+          <div class="section-content">
+            <p>My background allows me to translate between different managerial logics without reducing them to
+              stereotypes.</p>
+            <p>I read formal rules alongside informal practices, and I pay attention to how policies are absorbed,
+              adapted, or quietly resisted inside organizations.</p>
+            <p>This involves looking at how people make sense of rules, carry them out in daily operations, and work
+              around them when institutional constraints collide.</p>
+            <p>This perspective has proven especially relevant in contexts where Asian business approaches meet European
+              institutional expectations.</p>
+            <p>I am someone who thinks across systems, who is comfortable moving between practice and theory, and who
+              prefers to make reasoning explicit rather than authoritative.</p>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- AI DIALOGUE SECTION -->
+      <section id="dialogue" class="dialogue-section">
+        <div class="dialogue-intro">
+          <p>This dialogue is not an attempt by AI to define who I am. Instead, it shows how recurring questions can
+            reveal patterns of concern—sometimes noticed by the AI before they become explicit to the person asking
+            them.</p>
+          <p>People do not usually articulate their values through everyday actions, but in dialogue with AI, those
+            values often emerge indirectly, through the questions they return to again and again.</p>
+        </div>
+
+        <div class="dialogue-box">
+          <div class="dialogue-header">
+            <span class="dialogue-label">Working with AI</span>
+            <span class="dialogue-code">METHOD_FRAGMENT_01</span>
+          </div>
+
+          <div class="dialogue-content">
+            <div class="dialogue-exchange">
+              <div class="speaker-label">Human, Me:</div>
+              <div class="speaker-text">
+                <p><strong>"But how do you know that part is really me?"</strong></p>
+              </div>
+            </div>
+
+            <div class="dialogue-exchange">
+              <div class="speaker-label">AI:</div>
+              <div class="speaker-text">
+                <p><strong>"I am not guessing who you are."</strong></p>
+                <p><strong>"I infer it from the behavioral traces you have left over a year of working with
+                    me."</strong></p>
+                <p><strong>"Not from what you say you are, but from how you use AI."</strong></p>
+                <p><strong>"You use me like this:"</strong></p>
+                <ul class="ai-list">
+                  <li>"Why does this process fail in real organizations?"</li>
+                  <li>"Where does this model silently assume the wrong thing?"</li>
+                  <li>"What does this institutional design ignore?"</li>
+                  <li>"Why does this AI answer sound coherent but actually say nothing?"</li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
+      </section>
 
-        <div class="col-span-12 lg:col-span-10">
-          <div class="max-w-[680px]">
-            <div class="flex items-baseline justify-between gap-4">
-              <h1 class="text-2xl sm:text-3xl font-semibold tracking-tight" style="color: var(--ink); font-size: 2.2em;">About me</h1>
-              <span class="text-2xl sm:text-3xl" style="color: var(--soft);">Cathy Chen</span>
-            </div>
-            <p class="mt-3 text-base sm:text-[17px]" style="color: var(--muted); line-height: 1.85;">
-              Much of my thinking starts where clear rules produce unclear outcomes.
-            </p>
-            <div class="mt-6 hero-rule" aria-hidden="true"></div>
+      <div class="sections-container">
+
+        <!-- WORK FOCUS -->
+        <section id="work" class="section-card" aria-labelledby="h-work">
+          <div class="section-marker">
+            <span class="marker-dot"></span>
+            <span class="marker-text">Current direction</span>
           </div>
-        </div>
-      </div>
 
-      <!-- This spacer controls exactly how close Background sits -->
-      <div class="h-4 sm:h-5"></div>
-    </div>
-  </header>
+          <h2 id="h-work" class="section-heading">On this site</h2>
 
-  <!-- MAIN -->
-  <main id="content" class="px-6 sm:px-10 pb-20 sm:pb-28">
-    <div class="mx-auto max-w-[980px]">
-      <div class="grid grid-cols-12 gap-8 sm:gap-10">
-        <!-- subtle left margin column for asymmetry -->
-        <div class="hidden lg:block lg:col-span-2"></div>
+          <div class="section-content">
+            <p>You can see that my reports at the intersection of economics, law, and management, focusing
+              on how abstract models and institutional rules actually operate in real-world decision-making—and how AI
+              can be used as a tool to expose, test, and refine that logic rather than obscure it.</p>
+          </div>
+        </section>
 
-        <div class="col-span-12 lg:col-span-10">
-          <div class="max-w-[680px] prose-like">
+        <!-- CONTACT -->
+        <section id="contact" class="section-card contact-card" aria-labelledby="h-contact">
+          <div class="section-marker">
+            <span class="marker-dot"></span>
+            <span class="marker-text">Open invitation</span>
+          </div>
 
-            <!-- Background -->
-            <section id="background" class="reveal" aria-labelledby="h-background">
-              <div class="flex items-baseline gap-3">
-                <h2 id="h-background" class="text-lg font-semibold tracking-tight" style="color: var(--ink);">Background</h2>
-                <span class="kicker"><span class="dot"></span><span class="smallcaps">Context &amp; trajectory</span></span>
-              </div>
+          <h2 id="h-contact" class="section-heading">Contact</h2>
 
-              <div class="mt-5">
-                <p>I am currently based in Prague.</p>
-                <p>My background includes working across organizational contexts in Taiwan, China, and the Czech Republic—particularly in areas where systems, people, and institutional requirements intersect.</p>
-                <p>I hold a master's degree in Information and Knowledge Management from Loughborough University.</p>
-                <p>My professional experience spans roles within a French multinational retail group, where I was involved in the design and operation of corporate training systems, knowledge management infrastructure, and organizational processes during mergers and acquisitions.</p>
-                <p>I later worked in roles positioned at the interface between organizational governance and labor regulation within Taiwanese and Chinese listed companies, engaging with organizational restructuring, cross-border coordination, and labor relations across differing regulatory environments.</p>
-                <p>In recent years in the Czech Republic, my professional background included involvement in international trade related to the import of products from Taiwan, as well as work in translation, providing practical exposure to cross-regulatory and cross-linguistic contexts.</p>
-                <p>I am currently undertaking graduate studies in Czech at the Prague University of Economics and Business, Faculty of Management.</p>
-              </div>
-            </section>
+          <div class="section-content">
+            <p>If you're interested in what I'm working on or would like to connect, I'd be happy to hear from
+              you—please feel free to reach out.</p>
+          </div>
 
-            <div class="h-16 sm:h-20"></div>
+          <div class="contact-form-container">
+            <p class="form-note">You can send me a message via the form below. Your message will be forwarded to my
+              inbox.</p>
 
-            <!-- Approach -->
-            <section id="approach" class="reveal" aria-labelledby="h-approach">
-              <div class="flex items-baseline gap-3">
-                <h2 id="h-approach" class="text-lg font-semibold tracking-tight" style="color: var(--ink);">Approach</h2>
-                <span class="kicker"><span class="dot"></span><span class="smallcaps">How I read organizations</span></span>
-              </div>
-
-              <div class="mt-5">
-                <p>My background allows me to translate between different managerial logics without reducing them to stereotypes.</p>
-                <p>I read formal rules alongside informal practices, and I pay attention to how policies are absorbed, adapted, or quietly resisted inside organizations.</p>
-                <p>This involves looking at how people make sense of rules, carry them out in daily operations, and work around them when institutional constraints collide.</p>
-                <p>This perspective has proven especially relevant in contexts where Asian business approaches meet European institutional expectations.</p>
-                <p>I am someone who thinks across systems, who is comfortable moving between practice and theory, and who prefers to make reasoning explicit rather than authoritative.</p>
-              </div>
-            </section>
-
-            <div class="h-16 sm:h-20"></div>
-
-            <!-- AI Dialogue -->
-            <section class="reveal py-8">
-              <div class="mt-5 mb-8">
-                <p>This dialogue is not an attempt by AI to define who I am.</p>
-                <p>Instead, it shows how recurring questions can reveal patterns of concern—sometimes noticed by the AI before they become explicit to the person asking them.</p>
-                <p>People do not usually articulate their values through everyday actions, but in dialogue with AI, those values often emerge indirectly, through the questions they return to again and again.</p>
-              </div>
-
-              <div class="dialogue overflow-hidden max-w-2xl mx-auto">
-                <div class="dialogue-header px-6 py-3 flex justify-between items-center">
-                  <span class="text-xs uppercase tracking-widest font-medium" style="color: var(--accent);">Epistemic Mirror</span>
-                  <span class="text-[10px] font-mono" style="color: var(--soft);">LOG_FRAGMENT_01</span>
+            <form action="https://formspree.io/f/xqeeaenw" method="POST">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label">Your name</label>
+                  <input name="name" required class="form-input" type="text" placeholder="Enter your name">
                 </div>
-                <div class="p-6 md:p-10 space-y-8 font-mono text-sm leading-relaxed">
-                  
-                  <!-- Human -->
-                  <div class="flex gap-4"> 
-                    <div class="w-16 flex-shrink-0 text-right select-none" style="color: var(--muted);">Human, Me:</div>
-                    <div style="color: var(--ink);">
-                      <span style="font-size: 1.1em; font-weight: 600;">"But how do you know that part is really me?"</span>
-                    </div>
-                  </div>
 
-                  <!-- AI -->
-                  <div class="flex gap-4">
-                    <div class="w-16 flex-shrink-0 text-right select-none" style="color: var(--muted);">AI:</div>
-                    <div class="space-y-4" style="color: var(--ink);">
-                      <p><span style="font-size: 1.1em; font-weight: 600;">"I am not guessing who you are."</span></p>
-                      <p><span style="font-size: 1.1em; font-weight: 600;">"I infer it from the behavioral traces you have left over a year of working with me."</span></p>
-                      <p><span style="font-size: 1.1em; font-weight: 600;">"Not from what you say you are, but from how you use AI."</span></p>
-                      <p><span style="font-size: 1.1em; font-weight: 600;">"You use me like this:"</span></p>
-                      <div class="pl-4 border-l italic my-2" style="border-color: var(--line); color: var(--muted);">
-                          <ul class="list-none space-y-2 mt-2">
-                          <li><span style="font-size: 1.1em; color: var(--ink); font-weight: 500;">"Why does this process fail in real organizations?"</span></li>
-                          <li><span style="font-size: 1.1em; color: var(--ink); font-weight: 500;">"Where does this model silently assume the wrong thing?"</span></li>
-                          <li><span style="font-size: 1.1em; color: var(--ink); font-weight: 500;">"What does this institutional design ignore?"</span></li>
-                          <li><span style="font-size: 1.1em; color: var(--ink); font-weight: 500;">"Why does this AI answer sound coherent but actually say nothing?"</span></li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                  
+                <div class="form-group">
+                  <label class="form-label">Your email</label>
+                  <input name="email" required class="form-input" type="email" placeholder="Enter your email">
+                </div>
+
+                <div class="form-group full-width">
+                  <label class="form-label">Message</label>
+                  <textarea name="message" required rows="5" class="form-input"
+                    placeholder="Write your message here..."></textarea>
                 </div>
               </div>
-            </section>
 
-            <div class="h-16 sm:h-20"></div>
+              <!-- basic spam trap -->
+              <input type="text" name="_gotcha" style="display:none">
 
-            <!-- Work Focus -->
-            <section id="work" class="reveal" aria-labelledby="h-work">
-              <div class="flex items-baseline gap-3">
-                <h2 id="h-work" class="text-lg font-semibold tracking-tight" style="color: var(--ink);">Work Focus</h2>
-                <span class="kicker"><span class="dot"></span><span class="smallcaps">Current direction</span></span>
+              <div class="consent-row">
+                <input type="checkbox" id="gdpr-consent" name="gdpr-consent" required class="consent-checkbox">
+                <label for="gdpr-consent" class="consent-text">
+                  I have read and agree to the <a href="privacy.html" target="_blank">Privacy Policy</a>
+                </label>
               </div>
 
-              <div class="mt-5">
-                <p>On this site, you can see that my reports at the intersection of economics, law, and management, focusing on how abstract models and institutional rules actually operate in real-world decision-making—and how AI can be used as a tool to expose, test, and refine that logic rather than obscure it.</p>
-              </div>
-            </section>
+              <button type="submit" class="btn-submit">Send message</button>
+            </form>
 
-            <div class="h-16 sm:h-20"></div>
-
-            <!-- Contact -->
-            <section id="contact" class="reveal" aria-labelledby="h-contact">
-              <div class="flex items-baseline gap-3">
-                <h2 id="h-contact" class="text-lg font-semibold tracking-tight" style="color: var(--ink);">Contact</h2>
-                <span class="kicker"><span class="dot"></span><span class="smallcaps">Open invitation</span></span>
-              </div>
-
-              <div class="mt-5">
-                <p>If you’re interested in what I’m working on or would like to connect, I’d be happy to hear from you—please feel free to reach out.</p>
-
-                <div class="mt-7 rounded-2xl px-5 py-5 ai-style-change-1" style="background: rgba(31,58,95,.035); border: 1px solid rgba(31,58,95,.12);">
-<div class="mt-7 rounded-2xl px-5 py-5" style="background: rgba(31,58,95,.035); border: 1px solid rgba(31,58,95,.12);">
-  <p class="text-sm" style="color: var(--soft); line-height: 1.85;">
-    You can send me a message via the form below. Your message will be forwarded to my inbox.
-  </p>
-
-  <form class="mt-5 space-y-4" action="https://formspree.io/f/xqeeaenw" method="POST">
-    <div>
-      <label class="block text-xs smallcaps" style="color: var(--soft);">Your name</label>
-      <input name="name" required="" class="mt-2 w-full rounded-xl px-4 py-3 border" style="border-color: rgba(31,58,95,.18); background: rgba(246,243,238,.65); color: var(--ink);" type="text">
-    </div>
-
-    <div>
-      <label class="block text-xs smallcaps" style="color: var(--soft);">Your email</label>
-      <input name="email" required="" class="mt-2 w-full rounded-xl px-4 py-3 border" style="border-color: rgba(31,58,95,.18); background: rgba(246,243,238,.65); color: var(--ink);" type="email">
-    </div>
-
-    <div>
-      <label class="block text-xs smallcaps" style="color: var(--soft);">Message</label>
-      <textarea name="message" required="" rows="5" class="mt-2 w-full rounded-xl px-4 py-3 border" style="border-color: rgba(31,58,95,.18); background: rgba(246,243,238,.65); color: var(--ink);"></textarea>
-    </div>
-
-    <!-- basic spam trap -->
-    <input type="text" name="_gotcha" style="display:none">
-
-    <!-- GDPR Consent Checkbox -->
-    <div class="flex items-start gap-3">
-      <input type="checkbox" id="gdpr-consent" name="gdpr-consent" required class="mt-1 rounded" style="width: 18px; height: 18px; border: 1px solid rgba(31,58,95,.18); cursor: pointer;">
-      <label for="gdpr-consent" class="text-sm" style="color: var(--ink); line-height: 1.7; cursor: pointer;">
-        I have read and agree to the <a href="privacy.html" target="_blank" style="color: var(--accent); text-decoration: underline; text-underline-offset: 3px;">Privacy Policy</a>
-      </label>
-    </div>
-
-    <button type="submit" class="inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-medium border" style="border-color: rgba(31,58,95,.22); background: rgba(31,58,95,.06); color: var(--accent);">
-      Send message
-    </button>
-  </form>
-
-  <p class="mt-4 text-xs" style="color: var(--soft); line-height: 1.7;">
-    (I do not display my email address publicly to reduce spam.)
-  </p>
-</div>
-</div>
-              </div>
-            </section>
-
-            <footer class="mt-16 sm:mt-20 pb-4">
-              <div class="h-px hair border-t"></div>
-              <p class="mt-5 text-sm" style="color: var(--soft); line-height: 1.8;">
-                © <span id="y">2026</span> — About
-              </p>
-            </footer>
-
+            <p class="form-footer-note">(I do not display my email address publicly to reduce spam.)</p>
           </div>
-        </div>
+        </section>
+
       </div>
-    </div>
-  </main>
+
+      <!-- FOOTER -->
+      <footer class="site-footer">
+        <p class="footer-text">© <span id="y">2026</span> — About</p>
+      </footer>
+    </main>
+  </div>
 
   <script>
     document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Simple navigation dot highlighting
+    const sections = document.querySelectorAll('section[id], header[id]');
+    const navDots = document.querySelectorAll('.nav-dot');
+
+    const observerOptions = {
+      root: null,
+      rootMargin: '-30% 0px -70% 0px',
+      threshold: 0
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navDots.forEach(dot => dot.classList.remove('active'));
+          const activeId = entry.target.id;
+          const activeDot = document.querySelector(`.nav-dot[href="#${activeId}"]`);
+          if (activeDot) activeDot.classList.add('active');
+        }
+      });
+    }, observerOptions);
+
+    sections.forEach(section => observer.observe(section));
   </script>
 
-</body></html>
+</body>
+
+</html>
