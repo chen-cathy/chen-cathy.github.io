@@ -59,21 +59,12 @@ window.filesData = [
         "target": "_blank",
         "type": "Standard"
     },
-    {
-        "id": 3,
-        "title": "Optimization Models in Microeconomics",
-        "category": "Economic Models",
-        "description": "Mathematical optimization techniques for consumer choice and firm behavior analysis.",
-        "file": "#",
-        "pdf_link": "microeconomic-models.html",
-        "target": "_blank",
-        "type": "Standard"
-    },
+    
     {
         "id": 4,
-        "title": "Fiscal Transfer Effectiveness",
+        "title": "Do Fiscal Transfers Stimulate the Economy?",
         "category": "Economic Models",
-        "description": "Evaluating fiscal policy and subsidies impact on regional development in Taiwan.",
+        "description": "Evaluating fiscal policy and subsidies impact on regional development in Taiwan and Czechia.",
         "file": "mutiplikator.html",
         "pdf_link": "fiscal-transfers-tw-cz.html",
         "target": "_blank",
@@ -110,6 +101,16 @@ window.filesData = [
         "description": "Public service analysis and sustainability strategies for urban districts.",
         "file": "https://pristupy-k-udrzitelnemu--6qn7vj3.gamma.site/",
         "pdf_link": "sustainable-development-praha3.html",
+        "target": "_blank",
+        "type": "Standard"
+    },
+    {
+        "id": 3,
+        "title": "Optimization Models in Microeconomics",
+        "category": "Economic Models",
+        "description": "Mathematical optimization techniques for consumer choice and firm behavior analysis.",
+        "file": "#",
+        "pdf_link": "microeconomic-models.html",
         "target": "_blank",
         "type": "Standard"
     },

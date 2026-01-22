@@ -59,21 +59,12 @@ window.filesData = [
         "target": "_blank",
         "type": "Standard"
     },
-    {
-        "id": 3,
-        "title": "Optimalizační modely v mikroekonomii",
-        "category": "Economic Models",
-        "description": "Matematické optimalizační techniky pro analýzu spotřebitelského chování a chování firem.",
-        "file": "#",
-        "pdf_link": "../microeconomic-models.html",
-        "target": "_blank",
-        "type": "Standard"
-    },
+
     {
         "id": 4,
-        "title": "Efektivita fiskálních transferů",
+        "title": "Stimulují fiskální transfery ekonomiku?",
         "category": "Economic Models",
-        "description": "Vyhodnocení dopadů fiskální politiky a dotací na regionální rozvoj na Tchaj-wanu.",
+        "description": "Aplikace stimulačních poukazů na Tchaj-wanu a jejich možná implementace v České republice",
         "file": "../mutiplikator.html",
         "pdf_link": "../fiscal-transfers-tw-cz.html",
         "target": "_blank",
@@ -112,5 +103,16 @@ window.filesData = [
         "pdf_link": "../sustainable-development-praha3.html",
         "target": "_blank",
         "type": "Standard"
-    }
+    },
+    {
+        "id": 3,
+        "title": "Optimalizační modely v mikroekonomii",
+        "category": "Economic Models",
+        "description": "Matematické optimalizační techniky pro analýzu spotřebitelského chování a chování firem.",
+        "file": "#",
+        "pdf_link": "../microeconomic-models.html",
+        "target": "_blank",
+        "type": "Standard"
+    },  
+
 ];
