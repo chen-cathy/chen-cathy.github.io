@@ -11,6 +11,14 @@ window.filesData = [
         "target": "_blank",
         "type": "Standard"
     },
+     {
+        "id": 13,
+        "title": "Zvolila jsem jeden model AI. Objevily se dva „duchové“ modely",
+        "category": "AI Lab / Workflow",
+        "description": "Neviditelná rozhodnutí uvnitř „černé skříňky“ AI. Pozorováno prostřednictvím artefaktů rozhraní, nikoli na základě systémového zveřejnění.",
+        "file": "antigravity-workflow-notes.html",
+        "type": "AI Lab"
+    },
     {
         "id": 6,
         "title": "Od terorismu k organizovanému zločinu",
