@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investigation: AI Model Orchestration in Antigravity</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --verified: #10b981;
+            --inference: #f59e0b;
+            --speculation: #ef4444;
+            --retracted: #9ca3af;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f9fafb;
+            --bg-code: #1f2937;
+            --text-primary: #111827;
+            --text-secondary: #6b7280;
+            --border: #e5e7eb;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            font-size: 1.125rem;
+            line-height: 1.8;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border);
+            padding: 2rem 1.5rem;
+        }
+
+        .hub-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .hub-badge {
+            width: 2.2rem;
+            height: 2.2rem;
+            border-radius: 50%;
+            background: #1e293b;
+            color: #fbbf24;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Merriweather', serif;
+            font-size: 1rem;
+            font-weight: 900;
+            flex-shrink: 0;
+        }
+
+        .hub-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+
+        .hub-subtitle {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+
+        nav h2 {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        nav ul {
+            list-style: none;
+        }
+
+        nav li {
+            margin-bottom: 0.5rem;
+        }
+
+        nav a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: block;
+            padding: 0.5rem 0;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--verified);
+        }
+
+        nav a.active {
+            color: var(--verified);
+            font-weight: 600;
+        }
+
+        main {
+            padding: 3rem 4rem;
+            max-width: 900px;
+        }
+
+        .preface {
+            background: var(--bg-secondary);
+            border-left: 4px solid var(--inference);
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            line-height: 1.3;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.3;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            margin-left: 0.5rem;
+        }
+
+        .badge.verified {
+            background: var(--verified);
+            color: white;
+        }
+
+        .badge.inference {
+            background: var(--inference);
+            color: white;
+        }
+
+        .badge.speculation {
+            background: var(--speculation);
+            color: white;
+        }
+
+        .badge.retracted {
+            background: var(--retracted);
+            color: white;
+        }
+
+        .dialogue-block {
+            border-left: 3px solid #374151;
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 0.95rem;
+            background: #1f2937;
+            color: #e5e7eb;
+            padding: 1.5rem;
+            border-radius: 6px;
+        }
+
+        .dialogue-speaker {
+            font-weight: bold;
+            color: #10b981;
+            margin-bottom: 0.75rem;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .code-block {
+            background: var(--bg-code);
+            color: #e5e7eb;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 2rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+
+        .code-label {
+            background: var(--text-secondary);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px 4px 0 0;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: -0.5rem;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+
+        .evidence-box {
+            background: #fef3c7;
+            border: 2px solid var(--inference);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+        }
+
+        .evidence-title {
+            font-weight: bold;
+            color: var(--inference);
+            margin-bottom: 1rem;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+
+        .gif-container {
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .gif-container img {
+            max-width: 100%;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+        }
+
+        .caption {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        .retracted-text {
+            text-decoration: line-through;
+            color: var(--retracted);
+        }
+
+        .findings-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .finding-category {
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+
+        .finding-category h4 {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .finding-category ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .finding-category li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .finding-category li:last-child {
+            border-bottom: none;
+        }
+
+        .finding-category.verified {
+            border-color: var(--verified);
+            background: rgba(16, 185, 129, 0.05);
+        }
+
+        .finding-category.inference {
+            border-color: var(--inference);
+            background: rgba(245, 158, 11, 0.05);
+        }
+
+        .finding-category.speculation {
+            border-color: var(--speculation);
+            background: rgba(239, 68, 68, 0.05);
+        }
+
+        .finding-category.retracted {
+            border-color: var(--retracted);
+            background: rgba(156, 163, 175, 0.05);
+        }
+
+        .expandable {
+            margin: 2rem 0;
+        }
+
+        .expandable summary {
+            cursor: pointer;
+            font-weight: 600;
+            padding: 1rem;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            list-style: none;
+        }
+
+        .expandable summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .expandable summary::before {
+            content: "▶ ";
+            display: inline-block;
+            margin-right: 0.5rem;
+        }
+
+        .expandable[open] summary::before {
+            content: "▼ ";
+        }
+
+        .expandable-content {
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--verified);
+            color: white;
+            padding: 0.8rem 1.2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        @media (max-width: 1024px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                position: relative;
+                height: auto;
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+            }
+
+            main {
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        @media print {
+            nav, .back-to-top {
+                display: none;
+            }
+
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            main {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav id="navigation">
+            <div class="hub-header">
+                <div class="hub-badge">SH</div>
+                <div>
+                    <div class="hub-title">Synthesis Hub</div>
+                    <div class="hub-subtitle">Original + AI · Dual-Layer View</div>
+                </div>
+            </div>
+            <h2>Navigation</h2>
+            <ul>
+                <li><a href="#preface">Preface</a></li>
+                <li><a href="#section1">1. The Unexpected Observation</a></li>
+                <li><a href="#section2">2. The Cascade of Questions</a></li>
+                <li><a href="#section3">3. Three Turning Points</a></li>
+                <li><a href="#section6">4. ChatGPT Cross-Examination</a></li>
+                <li><a href="#section7">5. Three Competing possibilities</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <h1>I Chose One AI. Two Ghost Models Showed Up.</h1>
+
+            <div id="preface" class="preface">
+                <p>After several rounds of iteration, I eventually succeeded in getting the AI to process my long-form report with complete fidelity to the original text, while also producing a coherent structural organization. Through repeated experimentation, I observed that when working with long documents in particular, the AI tends to exhibit a range of recurring issues, <strong>including hallucination, unintended summarization, rationalization, information reorganization, and overly confident reasoning</strong>. This behavior likely stems from the AI's inherent tendency to resolve problems, or from the fact that it is fundamentally designed to do so. My project, however, runs counter to this inclination.</p>
+
+                <p>Certain economics reports involve a level of complexity that requires the AI to perform data calculation, visual presentation, and logical integration, while simultaneously adhering to a strict requirement of absolute fidelity to the source text, with no rewriting or reinterpretation. Satisfying all of these constraints at once places considerable strain on the system.</p>
+
+                <p>In my pensonal experences, a more constrained prompt does not necessarily lead to better outcomes. When the AI allocates disproportionate attention to a single requirement—such as numerical accuracy—its performance in other dimensions tends to degrade.</p>
+
+                <div class="gif-container">
+                    <img src="antigravity-workflow-notes-files/distracted-AI.jpg" alt="Distracted AI" />
+                </div>
+
+                <p>Moreover, when reasoning over long texts, the AI shows a persistent tendency to introduce its own rationalizations and reorganized "perspectives." One of the more interesting observations from this process was that, even when explicitly instructed to preserve the original text without alteration, the model may still revert—particularly toward the later stages of processing—to handling the material in its own way.</p>
+
+                <p>The turning point emerged when I applied a two-stage prompting strategy using Antigravity. Although the prompt itself was more complex, the result was successful on the first attempt: the output was fully structured and met my requirements. Only some additional adjustments were still required at the UI level. Upon closer examination of the processing behavior within Antigravity, I identified several intriguing patterns, which motivated me to document these observations.</p>
+            </div>
+
+            <section id="section1">
+                <h2>1. The Unexpected Observation</h2>
+
+                <p>The investigation begins at the moment I submitted my prompt to Antigravity. I had selected Gemini 3 Pro (High) as my working model, expecting a straightforward execution. When I saw the result was quite successful, I detaily check how this task has been organised, I find lying on the top of my prompt comlicated information, which did not come from me. Like a ghost, they displayed outputs from two additional models that I had never explicitly invoked.</p>
+
+                <div class="gif-container">
+                    <img src="antigravity-workflow-notes-files/prompt starting.png" alt="prompt starting" />
+                </div>
+
+                <p>What I saw in the interface was unambiguous. The model name "nvidia-nemotron-3-nano-30b-a3b-bf16" appeared at the top of the content area. The main text began with "STEP 1 – STRUKTURA (DESIGN ONLY)" and proceeded to lay out a comprehensive site map, layout system, and completeness checklist—all in Czech, all following the exact requirements I had specified in my prompt.</p>
+
+                <div class="gif-container">
+                    <img src="antigravity-workflow-notes-files/nvidia-nemotron-model.png" alt="nvidia-nemotron model output" />
+                </div>
+
+                <div class="gif-container">
+                    <img src="antigravity-workflow-notes-files/checklists-nvidia-nemotron-model.png" alt="nvidia-nemotron model checklist" />
+                </div>
+
+                <p>Below this, I found similar content from "gpt-5.2," labeled "KROK 1 — NÁVRH STRUKTURY (bez kódu)." Both outputs were detailed, methodical, and clearly responsive to my original instructions.</p>
+
+                <div class="gif-container">
+                    <img src="antigravity-workflow-notes-files/gtp-model.png" alt="gpt-5.2 model output" />
+                </div>
+
+                <div class="gif-container">
+                    <img src="antigravity-workflow-notes-files/checkboxes from gpt5.2.png" alt="gpt-5.2 model checkboxes" />
+                </div>
+
+                <p>The GIF recording I captured provides a visual record of exactly what appeared in the Antigravity interface during my session. This section analyzes that recording frame by frame, noting only what is objectively visible without inferring the underlying processes that produced the display.</p>
+
+                <div class="gif-container">
+                    <img src="antigravity-workflow-notes-files/Video-Antigravity-working.gif" alt="Antigravity interface working demonstration" />
+                </div>
+            </section>
+
+            <section id="section2">
+                <h2>2. The Cascade of Questions</h2>
+
+                <p>Once the discrepancy became apparent, a series of questions naturally emerged. The first was simple verification: were multiple models actually working on this task, or was the interface merely displaying reference templates from some internal library? </p>
+
+                <p>The second question concerned agency and instruction. If multiple models were indeed involved, who or what had given the instruction for them to appear? I had submitted a single prompt and explicitly selected Gemini 3 Pro (High) from a dropdown menu. Nothing in the interface had indicated that additional models would be invoked. Was this automatic behavior triggered by some characteristic of my prompt? Was it a feature of Antigravity's "Planning" mode? Or had I unknowingly activated some multi-model configuration in my account settings? <span class="badge inference">Inference</span></p>
+
+                <div class="gif-container">
+                    <img src="antigravity-workflow-notes-files/question-model-behaviour.png" alt="Questions about model behavior" />
+                </div>
+
+                <p>The third question addressed mechanism and communication. If these models were operating in parallel or in sequence, were they aware of one another's outputs? Was nvidia-nemotron generating planning content that was then passed to gpt-5.2 for refinement, which was then passed to Gemini for execution? Or were they working independently, each producing its own interpretation of my prompt, with Antigravity selecting the best result afterward? The interface provided no clear indication of the information flow between models. <span class="badge speculation">Speculation</span></p>
+
+                <p>I posed these questions directly to Claude, preserving the exact wording I used in my inquiry:</p>
+
+                <div class="dialogue-block">
+                    <div class="dialogue-speaker">MY QUESTION TO CLAUDE:</div>
+                    <p>"Actually, I chose Gemini 3 Pro (High) as the working model in Antigravity. Why were both models ultimately used for preparation and architecture?"</p>
+                </div>
+
+                <div class="dialogue-block">
+                    <div class="dialogue-speaker">FOLLOW-UP QUESTION:</div>
+                    <p>"Since both models built the solution, how do I know (according to the attached text) which model (solution) was actually executed? Who executed it? Was it Gemini 3 Pro (High) or just one of them? Why?"</p>
+                </div>
+
+                <div class="dialogue-block">
+                    <div class="dialogue-speaker">FOLLOW-UP QUESTION:</div>
+                    <p>"Why does this task require two models to work together? Is this a normal workflow or an exception?"</p>
+                </div>
+
+                <div class="dialogue-block">
+                    <div class="dialogue-speaker">FOLLOW-UP QUESTION:</div>
+                    <p>"What types of projects specifically require two models to work together? Why these two models in this profession? Is it random? Or selected or designated? Who designated them? Under what circumstances would other models be used?"</p>
+                </div>
+
+                <div class="dialogue-block">
+                    <div class="dialogue-speaker">FOLLOW-UP QUESTION:</div>
+                    <p>"Since they are collaborating, why not divide the work, for example, one model doing one part and the other doing another? Can't they communicate with each other?"</p>
+                </div>
+
+                <p>These questions represented my initial attempt to make sense of the evidence. They progressed from verification (confirming that the behavior was real) to explanation (understanding why it occurred) to mechanism (determining how the models interacted). At this stage, I had no assumptions about the answers. I was simply mapping the space of possible explanations, starting with the most basic facts and working toward more complex architectural questions.</p>
+            </section>
+
+            <section id="section3">
+                <h2>3. Three Turning Points in the Investigation</h2>
+
+                <h3>Turning Point 1: The Bakery Manager Analogy and the Conflict of "Prerequisites"</h3>
+
+                <p>When I discovered outputs from nvidia-nemotron and gpt-5.2 in my workspace, Claude initially offered a seemingly perfect explanation. He compared the Antigravity system to a "Bakery Manager" who, behind the scenes, automatically recruited specialized planners to assist my chosen baker (Gemini). </p>
+                <div class="gif-container">
+                    <img src="antigravity-workflow-notes-files/AI-process-inference.png" alt="AI process inference diagram" />
+                </div>
+                <p>This analogy was compelling because it explained several aspects of the observed behavior. It accounted for why I saw multiple model outputs despite selecting only one. It suggested a division of labor that made intuitive sense: planning models create structure, execution models implement that structure.</p>
+               
+                <p><b>However, behind this analogy, Claude made a strong assumption:</b></p>
+
+                <div class="dialogue-block">
+                    <div class="dialogue-speaker">CLAUDE'S INITIAL EXPLANATION:</div>
+                    <p>"You actually did NOT use two models simultaneously. This is a crucial misunderstanding. Let me clarify what happened:</p>
+                    <p>...</p>
+                    <p>The two previous documents (nvidia-nemotron and gpt-5.2) were NOT produced in your current session. They were example templates or reference materials that were included in your prompt context to show the AI how to structure the work."</p>
+                </div>
+
+                <h3>Turning Point 2: The Counter-Evidence—I Never Issued Such a Prompt</h3>
+
+                <p>I immediately challenged this claim. I requested that Claude re-examine my original actions, as I knew I had not provided any "example recipes." This led to a crucial correction in our dialogue. After re-evaluating the source material, Claude issued a "Critical Clarification," admitting to a significant error. He confirmed that my prompt contained "nothing else" besides the task instructions and the Czech PDF. This pivot proved that these models were not brought in by me, but were instead an automatic planning mechanism triggered by the system without my knowledge.</p>
+
+                <h3>Turning Point 3: Forensic Evidence Search and the AI's Retreat</h3>
+
+                <p>Once it was confirmed that the models were system-triggered, I pushed further: If multiple models were at work, was there actual "communication" or "reference" between them? I demanded explicit textual evidence. Claude then performed a "forensic examination" of the final Gemini output (Document 2). The results were revealing: the final document made no mention of the other models or any "combination" of their approaches. Claude eventually had to admit that his previous narrative of "model collaboration" was an "unjustified inference." He conceded that while the file paths were factual, the claim of collaboration was merely his assumption, not a provable truth.</p>
+            </section>
+
+            <section id="section6">
+                <h2>4. The ChatGPT Cross-Examination</h2>
+
+                <p>To test whether Claude's retraction was justified or overly cautious, I submitted the same evidence to ChatGPT with a request for independent analysis. The question I posed summarized the entire investigation up to that point, including dialog with Claude. </p>
+
+                
+
+                <p>ChatGPT's response confirmed several key points that Claude had established. </p>
+
+                <div class="dialogue-block">
+                    <div class="dialogue-speaker">CHATGPT'S ANALYSIS:</div>
+                    <p>"What I would conclude, strictly from what you described (and what typically exists in Antigravity's official materials), is:</p>
+                    <p>1. There is credible, documented evidence that Antigravity supports (i) an Agent Manager designed for orchestrating multiple agents and (ii) a 'Planning' mode that produces artifacts before execution.</p>
+                    <p>2. There is also documented evidence that Antigravity may run subagents (e.g., a browser agent) using a model that is different from the model you selected for the main agent.</p>
+                    <p>3. What is not credibly documented (at least in public-facing docs) is the specific claim 'Planning mode automatically invokes NVIDIA Nemotron and GPT-5.2 as hidden planning models when you selected Gemini 3 Pro (High).' That may be true in your observed run, but it is not something you can currently 'prove' just by citing public documentation."</p>
+                </div>
+
+                <p>ChatGPT's analysis was more cautious than Claude's initial "Bakery Manager" hypothesis but more nuanced than the full retraction. Where Claude had moved from confident explanation to acknowledgment that the central claim was unverified, ChatGPT offered a middle position: the behavior I observed is consistent with known platform capabilities, but the specific routing logic (which models get invoked when, and under what conditions) is not publicly specified. <span class="badge inference">Inference</span></p>
+
+                
+
+                <p>The cross-examination with ChatGPT did not resolve the central mystery—why nvidia-nemotron and gpt-5.2 appeared in my workspace—but it did establish clearer epistemic boundaries. What is documented about Antigravity's capabilities provides a framework for understanding the behavior but does not explain the specific instance. What remains undocumented is the exact decision logic that determines when and how planning models are invoked. The investigation had reached the limits of what could be determined through document analysis alone.</p>
+            </section>
+
+            <section id="section7">
+                <h2>5. Three "possibilities" for AI behavior</h2>
+
+                <div class="gif-container">
+                    <img src="antigravity-workflow-notes-files/3possibilities.png" alt="Three possibilities for AI behavior" />
+                </div>
+
+                <p>Given the evidence from the documents, the visual record of the interface, and the divergent interpretations from Claude and ChatGPT, three plausible explanations emerged for the observed behavior. Each theory makes different assumptions about how Antigravity's orchestration system operates, and each has different evidentiary requirements.</p>
+
+                <h3>1: Undocumented Automatic Routing</h3>
+
+                <p>propose that Antigravity has an internal routing algorithm that automatically invokes specialized planning models for complex tasks, regardless of which execution model the user selects. </p>
+
+                <h3>2: Special Account Configuration</h3>
+
+                <p>propose that my Antigravity account—which I was accessing through a paid Google Workspace subscription—had special orchestration settings enabled that are not available in the free or standard tier. <span class="badge speculation">Speculation</span></p>
+
+                
+                <h3>3: UI Display of Reference Context</h3>
+
+                <p>propose that the nvidia-nemotron and gpt-5.2 outputs were not generated during my session at all, but were instead retrieved from a database of reference templates or best-practice examples and displayed in the interface as "guidance" for how planning should be structured. <span class="badge speculation">Speculation</span></p>
+                         
+                            </section>
+
+                                        
+               
+            </section>
+
+            

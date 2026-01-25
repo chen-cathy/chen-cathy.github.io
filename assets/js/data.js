@@ -12,6 +12,14 @@ window.filesData = [
         "type": "Standard"
     },
     {
+        "id": 13,
+        "title": "I Chose One AI. Two Ghost Models Showed Up.",
+        "category": "AI Lab / Workflow",
+        "description": "Invisible decisions inside a black-box AI.Observed through interface artifacts, not system disclosure.",
+        "file": "antigravity-workflow-notes.html",
+        "type": "AI Lab"
+    },
+    {
         "id": 6,
         "title": "From Terrorism to Organized Crime",
         "category": "Legal Analysis",

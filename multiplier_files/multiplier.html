@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Účinnost fiskálních transferů v modelu produkt–výdaje</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- MathJax for rendering formulas -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+
+    <header>
+        <h1>EKONOMIE A HOSPODÁŘSKÁ POLITIKA</h1>
+        <span class="subtitle">Účinnost fiskálních transferů v modelu produkt–výdaje: aplikace stimulačních poukazů na
+            Tchaj-wanu a jejich možná implementace v ČR</span>
+    </header>
+
+    <div class="layout">
+
+        <!-- Sticky Sidebar Navigation -->
+        <aside class="sidebar">
+            <nav>
+                <ul>
+                    <li><a href="#section-1">1. Výzkumní otázky a přehled modelu</a></li>
+                    <li><a href="#section-2">2. Aplikace spotřebitelských poukázek na Tchaj-wanu</a></li>
+                    <li class="sub"><a href="#section-2-1">2-1. Popis dvou použití</a></li>
+                    <li class="sub"><a href="#section-2-2">2-2. Diskuse o multiplikátorovém efektu</a></li>
+                    <li class="sub"><a href="#section-2-1-1">2.1.1. Transferový multiplikátor</a></li>
+                    <li class="sub"><a href="#section-2-1-2">2.1.2. Odvětvová analýza</a></li>
+                    <li><a href="#section-3">3. Česká republika vs spotřebitelské poukázky</a></li>
+                    <li class="sub"><a href="#section-3-1">3.1. Vysoká míra úspor</a></li>
+                    <li class="sub"><a href="#otazka-1">Otázka 1</a></li>
+                    <li class="sub"><a href="#otazka-2">Otázka 2</a></li>
+                    <li class="sub"><a href="#section-3-2">3.2. Další faktory</a></li>
+                    <li><a href="#section-4">4. Závěr a doporučení</a></li>
+                    <li><a href="#bibliografie">Bibliografie</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main>
+
+            <!-- Section 1 -->
+            <section id="section-1">
+                <h2>1 Výzkumní otázky a přehled modelu</h2>
+                <p>Z hlediska Keynesova teorie spotřeby a multiplikátorového efektu jednoduchého keynesiánského modelu
+                    diskutujeme o účinnosti spotřebitelských poukazů na Tchaj-wanu. Následně posuzujeme vhodnost
+                    aplikace této politiky v České republice.</p>
+
+                <h3>Keynesova teorie spotřeby:</h3>
+                <div class="formula-block">
+                    $$C = f(YD) = Ca + cYD$$
+                </div>
+
+                <p>
+                    <strong>Ca :</strong> (autonomous consumption)<br>
+                    <strong>c :</strong> mezní sklon ke spotřebě (marginal propensity to consume, MPC) : přírůstek
+                    spotřeby vyvolaný přírůstkem důchodu o jednotku. \(MPC = \Delta C / \Delta Y\)
+                </p>
+                <p>Platí: \(APC + APS = 1\), \(c + s = 1\)</p>
+
+                <h3>Model produkt-výdaje (model s linií 45 stupňů)</h3>
+                <p>Determinace rovnovážné produkce ve čtyřsektorové ekonomice:</p>
+                <div class="formula-block formula-ladder">
+                    <p>$$Ys = Yd = AE = AD = C + I + G + NX$$</p>
+                    <p>$$= Ca + cYD + I + G + NX$$</p>
+                    <p>$$= Ca + c \cdot (Y – t \cdot Y – TAa + TRa) + I + G + NX$$</p>
+                </div>
+            </section>
+
+            <!-- Section 2 -->
+            <section id="section-2">
+                <h2>2 Aplikace spotřebitelských poukázek na Tchaj-wanu: data, dopady a limity teorie</h2>
+                <p>Tchaj-wan v letech 2009 a 2021 dvakrát prostřednictvím zvláštního rozpočtu vydal spotřební poukázky,
+                    čímž uskutečnil fiskální stimulaci, která nejen stabilizovala domácí poptávku, ale zároveň vytvořila
+                    prostor pro následné oživení ekonomiky. V době hospodářské krize vláda přijímá opatření na podporu
+                    spotřeby, aby napravila Keynesem zdůrazněný nedostatek agregátní poptávky, zvýšila disponibilní
+                    příjem domácností a podpořila výdaje na spotřebu. Obecně je monetární politika schopna působit
+                    rychleji, avšak při úrokových sazbách blížících se je její účinnost omezena, a právě tehdy mohou
+                    fiskální nástroje (jako spotřební poukázky) příměji posílit reálnou ekonomickou poptávku.</p>
+            </section>
+
+            <!-- Section 2-1 -->
+            <section id="section-2-1">
+                <h3>2-1 Popis dvou použití spotřebních poukázek na Tchaj-wanu (1 TWD ≈ 0.71 ~ 0.75 CZK)</h3>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Položka</th>
+                                <th>Poukázky 2009</th>
+                                <th>Trojité poukázky 2021 (COVID-19)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Politické pozadí</td>
+                                <td>Finanční krize 2008 vedoucí k recesi</td>
+                                <td>Pandemie COVID-19 zasahující ekonomiku</td>
+                            </tr>
+                            <tr>
+                                <td>Rozpočet</td>
+                                <td>858 mld. TWD</td>
+                                <td>50 mld. TWD (část trojitých poukázek)</td>
+                            </tr>
+                            <tr>
+                                <td>Částka na osobu</td>
+                                <td>3 600 TWD na osobu (zdarma)</td>
+                                <td>Za 1 000 TWD poukázky v hodnotě 3 000 TWD (subvence 2 000 TWD)</td>
+                            </tr>
+                            <tr>
+                                <td>Oprávnění příjemci</td>
+                                <td>Obyvatelé s taiwanskou státní příslušností a trvalým pobytem (cca 23,1 mil.)</td>
+                                <td>Občané a zahraniční partneři s pobytovým povolením, bez věkového omezení;
+                                    nízkopříjmovým domácnostem zdarma</td>
+                            </tr>
+                            <tr>
+                                <td>Období použití</td>
+                                <td>2009 – 30. 9. 2009</td>
+                                <td>2020 – 31. 12. 2020</td>
+                            </tr>
+                            <tr>
+                                <td>Omezení použití</td>
+                                <td>Nelze směnit za hotovost, dobíjet ani kupovat finanční produkty</td>
+                                <td>Nelze použít na online nákupy, daně, pokuty, platby za vodu a elektřinu</td>
+                            </tr>
+                            <tr>
+                                <td>Skutečný ekonomický přínos</td>
+                                <td>HDP +0,28 % až +0,43 % (předpoklad +0,66 %)</td>
+                                <td>Extra spotřeba +44,3 – 78,6 mld. TWD, MPC ≈ 0,49 – 0,63</td>
+                            </tr>
+                            <tr>
+                                <td>Dopad na odvětví</td>
+                                <td>Výrazný růst v maloobchodu a cestovním ruchu</td>
+                                <td>Největší nárůst v gastronomii a obchodních domech</td>
+                            </tr>
+                            <tr>
+                                <td>Formát poukázek</td>
+                                <td>Papírové poukázky</td>
+                                <td>Volba mezi papírovými nebo digitálními poukázkami</td>
+                            </tr>
+                            <tr>
+                                <td>Zdroje financování</td>
+                                <td>Financováno emisí dluhopisů jako zvláštní rozpočet</td>
+                                <td>Zvláštní rozpočet: část z přebytků předchozího roku, část formou dluhu</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p style="font-size: 0.9em; font-style: italic; color: #666;">
+                    (Kan et al., 2017a; Liao et al., 2021; Wei, n.d.; 政大機構典藏-National Chengchi University Institutional
+                    Repository(NCCUR):Item 140.119/154629, n.d.-a), chatGPT
+                </p>
+
+                <p>O politice spotřebních poukázek existuje řada studií, které se k jejím přínosům a výsledkům staví
+                    rozporuplně.(Liao et al., 2021) Akademické i vládní výzkumy se shodují, že první série poukázek v
+                    hodnotě 1 USD vyvolala neplánované výdaje ve výši 0,24 USD (Kan et al., 2017b). Ve druhé vlně byl
+                    mezní sklon ke spotřebě (MPC) odhadnut na 0,57. Výzkum zahrnoval dva odlišné přístupy: dotazníkové
+                    šetření chování uživatelů poukázek a meziperiodní i meziodvětvovou analýzu dopadu na HDP. Chan a Kan
+                    (2022) spolu s výsledky této studie ukazují, že i při použití různých metod a dat jsou odhady MPC
+                    pro stimulační poukázky podobné. (政大機構典藏-National Chengchi University Institutional
+                    Repository(NCCUR):Item 140.119/154629, n.d.-b)</p>
+            </section>
+
+            <!-- Section 2-2 -->
+            <section id="section-2-2">
+                <h3>2-2 Diskuse o multiplikátorovém efektu spotřebních poukázek</h3>
+                <p>Ohledně účinnosti spotřebních poukázek existuje řada komentářů, které se týkají jejich
+                    multiplikátorového efektu. Vláda původně odhadovala, že poukázky díky multiplikátoru zvýší HDP o
+                    0,66–1 %, ale výzkumy ukazují hodnoty pouze 0,24–0,44. (Wei, n.d.) Mnozí kritici tvrdí, že
+                    multiplikátorový efekt poukázek je daleko pod očekáváním a HDP se „nezmultiplikoval“. Některé studie
+                    dokonce uvádějí, že „multiplikátor menší než 1 je neefektivní“ (Lin & Chen, 2020). Následující část
+                    analyzuje, zda je tento závěr teoreticky podložen samotným multiplikátorem:</p>
+
+                <div id="section-2-1-1">
+                    <h4>2.1.1</h4>
+                    <p>Spotřebitelské poukázky se v rovnici \(AD = Ca+c (Y–t Y–TAa+TRa)+I+G\) řadí mezi \(TRa\), tedy
+                        mezi vládní transferové platby. Nejprve přímým způsobem zvyšují disponibilní důchod domácností
+                        (\(\Delta YD=\Delta TRa\)). Následně domácnosti podle mezního sklonu ke spotřebě (c) utratí tuto
+                        zvýšenou část disponibilního důchodu (\(\Delta C = c \cdot \Delta YD = c \cdot \Delta TRa\)).
+                        Pouze tato navýšená spotřeba se pak promítne do agregátní poptávky (AD) a ovlivní rovnovážný
+                        produkt (Y).</p>
+                    <p>Multiplikátor transferových plateb:</p>
+                    <div class="formula-block">
+                        $$Y = \frac{c}{1 - c(1-t) + m} \cdot TRa$$
+                    </div>
+                    <p>Proto bude multiplikátor při použití spotřebních poukázek (transferový multiplikátor) vždy menší
+                        než multiplikátor vládních výdajů (G).</p>
+                    <p>Jednoduchý výdajový multiplikátor v otevřené ekonomice:</p>
+                    <div class="formula-block">
+                        $$Y = \frac{1}{1 - c(1-t) + m} \cdot Aa$$
+                    </div>
+                    <p>Protože v podstatě, \(APC + APS = 1\), \(c+s=1\), \(0 < c < 1\)</p>
+                            <p>Z toho jen vyplývá, že multiplikátor vládních výdajů je vyšší než multiplikátor
+                                transferů; multiplikátor tak může být větší, rovný i menší než 1, a nelze z toho
+                                jednoznačně usoudit, zda je multiplikátor menší než 1 neúčinný.</p>
+                </div>
+
+                <!-- INTERACTIVE SIMULATOR -->
+                <div class="simulator-card">
+                    <div class="simulator-header">
+                        <h3>Simulátor multiplikátoru</h3>
+                        <p>Spočítejte účinnost fiskálního transferu ve čtyřsektorové ekonomice.</p>
+                    </div>
+                    <div class="controls">
+                        <div class="control-group">
+                            <label for="input-c">Mezní sklon ke spotřebě (c): <span id="val-c">0.60</span></label>
+                            <input type="range" id="input-c" min="0" max="0.95" step="0.01" value="0.60">
+                        </div>
+                        <div class="control-group">
+                            <label for="input-t">Daňová sazba (t): <span id="val-t">0.20</span></label>
+                            <input type="range" id="input-t" min="0" max="0.60" step="0.01" value="0.20">
+                        </div>
+                        <div class="control-group">
+                            <label for="input-m">Mezní sklon k importu (m): <span id="val-m">0.30</span></label>
+                            <input type="range" id="input-m" min="0" max="0.60" step="0.01" value="0.30">
+                        </div>
+                        <div class="control-group">
+                            <label for="input-transfer">Hodnota poukázky (ΔTRa): <span
+                                    id="val-transfer">1000</span></label>
+                            <input type="number" id="input-transfer" value="1000" step="100">
+                        </div>
+                    </div>
+                    <div class="results-display">
+                        <div class="result-item">
+                            <span class="label">Multiplikátor transferových plateb (k_TR):</span>
+                            <span class="value" id="res-k-tr">0.000</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="label">Změna produktu (ΔY_TR):</span>
+                            <span class="value" id="res-y-tr">0.00</span>
+                        </div>
+                        <hr>
+                        <p style="font-size: 0.9em; margin: 0.5rem 0;">Pro srovnání: multiplikátor autonomních výdajů
+                            (Aa)</p>
+                        <div class="result-item">
+                            <span class="label">Multiplikátor autonomních výdajů (k_A):</span>
+                            <span class="value" id="res-k-a">0.000</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="label">Změna produktu (ΔY_A):</span>
+                            <span class="value" id="res-y-a">0.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="section-2-1-2">
+                    <h4>2.1.2</h4>
+                    <p>Multiplikátor od dvousektorové k čtyřsektorové ekonomice</p>
+                    <ul>
+                        <li>
+                            V dvousektorové (domácnosti a firmy) ekonomice, multiplikátor transferů（napři stumulační
+                            pokázka）je ： \(c / (1 - c)\)<br>
+                            Aby platilo \(c / (1 - c) > 1\), musí platit, \(2c > 1\), taky \(c > 0.5\)<br>
+                            MPC > 0.5 může znamenat, že spotřebitelé z dodatečného disponibilního důchodu utratí více
+                            než polovinu, což umožňuje opakované kolo „spotřeba → důchod → opakovaná spotřeba a
+                            kumulativní zesílení, takže multiplikátorový efekt může přesáhnout 1.
+                        </li>
+                        <li>
+                            v třísektorové ekonomice,<br>
+                            \(c / (1 - c (1-t))\)<br>
+                            Čím nižší je daňová sazba（t→0）, tím silnější je multiplikátorový efekt; multiplikátor
+                            dosáhne hodnoty \(c / (1 - c)\) Čím vyšší je daňová sazba（t→1），tím slabší je
+                            multiplikátorový efekt; multiplikátor se blíží hodnotě \(c\)
+                        </li>
+                        <li>
+                            ve čtyřsektorové ekonomice,<br>
+                            \(\frac{1}{1 - c(1-t) + m}\) kde je m (mezní sklon k importu) v jmenovateli kladným členem,
+                            který snižuje účinek multiplikátoru
+                        </li>
+                    </ul>
+                    <p>Z toho vyplývá, že pouze v dokonale uzavřeném teoretickém modelu bez daní a bez úniků ve formě
+                        dovozu může mít transferový multiplikátor hodnotu nad jedničkou – je tedy nutné, aby mezní sklon
+                        ke spotřebě c překročil 0,5. V reálné ekonomice jsou však daňové sazby i mezní sklon k dovozu
+                        větší než nula, což způsobuje, že multiplikátor je obvykle menší než 1, a zejména v normálním
+                        období bývá výrazně pod 1. To je důvod, proč účinky fiskálních stimulů nejsou vždy tak silné
+                        jako teorie. Navíc necílené transfery domácnostem patří mezi výdajové nástroje s nejnižšími
+                        dopady.(Batini et al., 2014)</p>
+                    <p style="font-weight: bold; margin-top: 1.5rem;">Average of DSGE Models: First-year Multipliers
+                        (Batini et al., 2014)</p>
+                    <p style="font-size: 0.85em; color: #888;">(nejasné v podkladu)</p>
+                </div>
+            </section>
+
+            <!-- Section 3 -->
+            <section id="section-3">
+                <h2>3 Česká republika vs spotřebitelské poukázky</h2>
+
+                <div id="section-3-1">
+                    <h3>3.1</h3>
+                    <p>Vysoká míra úspor: Ve srovnání s ostatními evropskými zeměmi má Česko relativně vysokou míru
+                        úspor a domácnosti dávají přednost spoření před spotřebou. Výzkumy ukazují, že finanční návyky
+                        obyvatel jsou do určité míry ovlivněny zkušenostmi z období komunistického režimu. I když
+                        tehdejší statistiky úspor nejsou plně dostupné, za komunismu byli lidé nuceni nakupovat do
+                        zásoby kvůli nedostatku potravin a omezeným možnostem spotřeby. To mohlo vést k potřebě mít k
+                        dispozici dostatečné finanční rezervy pro případ nejistoty. Kvůli omezenému výběru zboží lidé
+                        často nakupovali pouze základní potřeby a většinu svých příjmů ukládali do úspor spíše než do
+                        spotřeby. (Mecerodová, 2020) Tato kulturní hodnota mohla přetrvat a vést k dodnes patrné
+                        spořivosti českých domácností. Míra úspor v Česku je vyšší než evropský průměr. Ve druhém
+                        čtvrtletí roku 2023 se míra úspor českých domácností blížila 19 procentům (The Saving Rate in
+                        the Euro Area and the Czech Republic – Potential for Growth in Consumption? - Czech National
+                        Bank, n.d.).</p>
+
+                    <div class="qa-block" id="otazka-1">
+                        <span class="qa-label">Otázka 1</span>
+                        <p class="question-text">To však taky znamená, že poukázky nejsou hotovostí. Lze je
+                            transformovat do spoření a následně snižovat účinky spotřebitelských poukázek?</p>
+                        <p>Jelikož spotřebitelské poukázky nejsou hotovostní prostředky, nemohou být přímo uloženy do
+                            úspor, na rozdíl od běžných transferů vlády ČR, jako jsou dotace, které jsou poskytovány v
+                            peněžní formě. Pokud však poukázky nejsou spojeny s žádnými omezeními použití, mohou zcela
+                            nahradit autonomní spotřebu (Ca), a tím plnit funkci hotovosti — tedy mohou být teoreticky i
+                            ušetřeny. Z tohoto modelu vyplývá, že když část transferů (Tra-poukázky) substituuje Ca
+                            (autonomní spotřebu), celkový fiskální multiplikační efekt bude nižší.</p>
+                        <div class="formula-block">
+                            $$C = f(YD)= Ca +cYD = Ca + c \cdot (Y – t \cdot Y – TAa + TRa) + I + G$$
+                        </div>
+                    </div>
+
+                    <div class="qa-block" id="otazka-2">
+                        <span class="qa-label">Otázka 2</span>
+                        <p class="question-text">Pokud domácnosti obdrží nečekané příjmy, jako například poukázky, spíše
+                            je uloží než utratí. Snižuje se tak účinnost spotřebitelských poukázek jako nástrojů
+                            fiskální stimulace?</p>
+                        <p>Průměrný sklon k úsporám (APS) se liší od mezního sklonu k úsporám (MPS). APS (Average
+                            Propensity to Save) může zůstat vysoký i při nízkém MPS, pokud jsou úspory stabilně vysoké v
+                            poměru k příjmu. MPS (mezní sklon k úsporám) závisí na chování spotřebitelů v reakci na
+                            dodatečný příjem.</p>
+                        <p>České MPC nebylo nalezeno přímým zkoumáním. Je však přesvědčivé, že vlastnost
+                            spotřebitelských poukázek poskytovaných vládou je podobná jako u neočekávaných příjmů. Jedna
+                            studie, která testovala hypotézu permanentního příjmu (PIH), využila české privatizační
+                            poukázky jako formu tzv. „windfall income“ – nečekaného příjmu. (Hanousek & Tůma, 2002) Šlo
+                            o ideální příležitost odhalit spotřební chování lidí: více než 60 % obyvatel se zúčastnilo a
+                            obdrželi relativně velkou částku peněžního transferu, přibližně ve výši dvouměsíční mzdy. Z
+                            výsledků vyplývá, že mezní sklon ke spotřebě z tohoto neočekávaného příjmu byl poměrně nízký
+                            – jen něco málo přes 0,3. To naznačuje, že Češi mají tendenci více spořit než utrácet, pokud
+                            obdrží příjem mimo své běžné příjmy. Poskytuje to důležité historické hledisko. Přestože se
+                            česká ekonomika a společnost za posledních 20 let výrazně vyvinuly, Češi zůstávají prakticky
+                            založení, se sklonem ke spoření a opatrnému plánování. Dávají přednost nízké ceně před
+                            kvalitou, nemají v oblibě okázalou spotřebu a jsou velmi citliví na ceny zboží.(Connect_Two,
+                            2019; To je to, cos chtěla, drahá?, 2018)</p>
+                    </div>
+                </div>
+
+                <div id="section-3-2">
+                    <h3>3.2</h3>
+                    <p>Další faktory: dovoz a nezaměstnanost</p>
+                    <p>Český trh, jako středně velká, otevřená a na export orientovaná ekonomika, je výrazně závislý na
+                        zahraniční poptávce, zejména od partnerů z EU. Podle Světové banky dosahuje zahraniční obchod
+                        přibližně 130 % jejího HDP. (Foreign Trade Figures of the Czech Republic - International Trade
+                        Portal, n.d.) Toto by vedlo k tomu, že výdaje ze spotřebitelských poukázek by převážně
+                        prospívaly zahraničním ekonomikám, čímž by se omezil multiplikační efekt těchto poukázek.</p>
+                    <p>Kromě toho ani relativně nízká míra nezaměstnanosti, kterou se Česká republika do určité míry
+                        pyšní, nepředstavuje příznivou podmínku pro zavedení spotřebitelských poukázků. Masivní vydávání
+                        poukazů by mohlo vést k nadměrnému růstu poptávky, což by mohlo vyvolat inflační tlaky a
+                        následně zvýšit ceny.</p>
+                </div>
+            </section>
+
+            <!-- Section 4 -->
+            <section id="section-4">
+                <h2>4 Závěr a doporučení</h2>
+                <p>Ačkoli účinnost spotřebitelských poukázek může být teoreticky omezená a vysoká míra úspor spolu s
+                    kulturními faktory v České republice by mohla snižovat jejich potenciál, různé země — jako například
+                    Jižní Korea(‘Consumption Response to Seoul’s COVID-19 Shopping Coupons’, 2022), Spojené státy,
+                    Japonsko (Hsieh et al., 2010)nebo Velká Británie — přesto využily tuto formu fiskální stimulace
+                    během ekonomických krizí. Výzkumy ukazují, že zvýšení poptávky způsobené spotřebitelskými poukázkami
+                    vedlo k větší nabídce ze strany podniků, což významně podpořilo malé a střední podniky, které se tak
+                    mohly zotavit z krize.(Wang et al., 2022) (Wei, n.d.) Proto kromě samotného multiplikátorového
+                    efektu stojí za to prozkoumat, jaké další účinky spotřebitelské poukázky přinášejí a v jakých
+                    případech mohou vést k efektivnějším výsledkům.</p>
+            </section>
+
+            <!-- Bibliography -->
+            <section id="bibliografie">
+                <h2>Bibliografie</h2>
+                <div class="bib-list">
+                    <p>Kan et al., 2017a</p>
+                    <p>Liao et al., 2021</p>
+                    <p>Wei, n.d.</p>
+                    <p>政大機構典藏-National Chengchi University Institutional Repository(NCCUR):Item 140.119/154629, n.d.-a
+                    </p>
+                    <p>Kan et al., 2017b</p>
+                    <p>Chan a Kan (2022)</p>
+                    <p>政大機構典藏-National Chengchi University Institutional Repository(NCCUR):Item 140.119/154629, n.d.-b
+                    </p>
+                    <p>Lin & Chen, 2020</p>
+                    <p>Batini et al., 2014</p>
+                    <p>Mecerodová, 2020</p>
+                    <p>The Saving Rate in the Euro Area and the Czech Republic – Potential for Growth in Consumption? -
+                        Czech National Bank, n.d.</p>
+                    <p>Hanousek & Tůma, 2002</p>
+                    <p>Connect_Two, 2019</p>
+                    <p>To je to, cos chtěla, drahá?, 2018</p>
+                    <p>Foreign Trade Figures of the Czech Republic - International Trade Portal, n.d.</p>
+                    <p>‘Consumption Response to Seoul’s COVID-19 Shopping Coupons’, 2022</p>
+                    <p>Hsieh et al., 2010</p>
+                    <p>Wang et al., 2022</p>
+                    <p>chatGPT</p>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <a href="#" class="back-to-top" title="Zpět nahoru">↑</a>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
