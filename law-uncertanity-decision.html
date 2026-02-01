@@ -238,7 +238,7 @@ header .sub{color:#7e8fa3;font-size:0.9em;margin-top:14px;font-weight:400;positi
 /* ─── MATRIX (Ch4) ─── */
 .matrix-label{display:flex;align-items:center;gap:10px;font-size:0.82em;font-weight:700;color:var(--muted);letter-spacing:.03em;text-transform:uppercase;margin-bottom:10px}
 .matrix-tbl{width:85%;border-collapse:collapse;margin-bottom:30px;margin-left:auto;margin-right:auto}
-.matrix-tbl th,.matrix-tbl td{border:1px solid var(--border)}
+.matrix-tbl th,.matrix-tbl td{border:2px solid #94a3b8}
 .matrix-tbl th{background:var(--bg);padding:10px 8px;font-size:0.78em;font-weight:700;color:var(--muted);text-align:center;vertical-align:middle}
 .matrix-tbl .m-rowh{background:var(--bg);padding:10px 12px;font-size:0.78em;font-weight:700;color:var(--ink);text-align:left;white-space:nowrap;vertical-align:middle}
 .matrix-tbl .m-cell{padding:10px 8px;text-align:center;background:var(--white);vertical-align:middle;transition:background .15s}
@@ -455,7 +455,7 @@ header .sub{color:#7e8fa3;font-size:0.9em;margin-top:14px;font-weight:400;positi
     <div class="fold-body">
       <div class="fold-inner">
         <p>P、I、L 三項因素之組合，共形成 12 個方案（alternatives）。在本研究中，「方案」並非指可供選擇之政策或策略方案，而係指代表不同因素組合之分析用方案，後續將依 <span class="bd bd-S">S</span> 與 <span class="bd bd-U">U</span> 兩項準則加以評估。本研究將自 12 個方案中，選取具有分析意義與代表性的方案進行較深入分析。</p>
-        <p style="color:var(--P);font-weight:600;font-size:0.91em">12 個方案的完整矩陣列表，見「風險分析：方案與象限」分頁。</p>
+        <p><a style="background:var(--P-bg);padding:6px 12px;border-radius:5px;cursor:pointer;font-weight:600;color:var(--P);text-decoration:none;display:inline-block;" onclick="switchTab('ch4',document.querySelector('.tab-btn:nth-child(4)'));setTimeout(function(){goTo('s4-1')},200)">12 個方案的完整矩陣列表，見「風險分析：方案與象限」分頁</a></p>
         <p>本研究將各方案在兩項評估準則——刑事法律後果之嚴重性（<span class="bd bd-S">S</span>）與法律及制度性不確定性（<span class="bd bd-U">U</span>）——下進行比較。所有方案皆以相同的評估準則加以衡量，以確保不同方案之間具有可比性。</p>
         <p>AHP 用以建立「目標—準則—方案」之層級結構，使各方案在 <span class="bd bd-S">S</span> 與 <span class="bd bd-U">U</span> 兩項準則下的相對位置得以清楚呈現；MCDA 則協助比較不同方案在兩項準則下所呈現之風險特徵。透過此一方式，各方案之風險差異不再僅停留於描述層次，而能以結構化方式加以呈現。</p>
         <p>情境分析則用於檢視各方案所對應之 <span class="bd bd-P">P</span>、<span class="bd bd-I">I</span>、<span class="bd bd-L">L</span> 因素組合，確保其在假想衝突情境中的內部一致性，並作為後續解讀風險結構差異之基礎。</p>
@@ -478,7 +478,7 @@ header .sub{color:#7e8fa3;font-size:0.9em;margin-top:14px;font-weight:400;positi
      ═══════════════════════════════════════════════════════ -->
 <div class="ch" id="ch3">
   <div class="notice">
-    <span class="notice-icon">⚠</span>
+    <span class="notice-icon"></span>
     <div class="notice-txt"><strong>範例說明：</strong>本研究尚未完成文獻探討。以下推演為「形式邏輯推導」之範例，用於說明分析框架的應用方式。S 與 U 的評估為範例性質，不代表最終結論。</div>
   </div>
 
@@ -522,7 +522,7 @@ header .sub{color:#7e8fa3;font-size:0.9em;margin-top:14px;font-weight:400;positi
     <div class="arg">
       <div class="arg-title" style="font-size:1.22em">3.2.1 <span class="law">§321</span>：國家</div>
       <div class="arg-body">
-        <p><span class="law">§321(1) 規定：「Kdo koná službu ve vojsku nebo ozbrojených silách <strong>jiného státu</strong>」——即為「另一國家」的武裝力量服役。</span>
+        <p><span class="law">§321(1) 規定：「Kdo koná službu ve vojsku nebo ozbrojených silách <strong>jiného státu</strong>」即為另一"國家"的武裝力量服役。</span>
         <p>此條文的適用前提為：對象必須是被承認的「國家」（<em>stát</em>）。</p>
         <p>捷克未承認臺灣為獨立國家。在捷克法律體系的正式立場下，臺灣不符合「<em>jiného státu</em>」的定義。</p>
       </div>
@@ -719,7 +719,7 @@ header .sub{color:#7e8fa3;font-size:0.9em;margin-top:14px;font-weight:400;positi
         <tr>
           <td class="m-rowh"><span class="bd bd-P">P1</span> 友臺</td>
           <td class="m-cell"><span class="m-num">方案 1</span><span class="m-code">P1 · I1 · L1</span></td>
-          <td class="m-cell highlight"><span class="m-num">方案 2</span><span class="m-code">P1 · I2 · L1</span><span class="m-ref">← 第 3 章範例案例</span></td>
+          <td class="m-cell highlight" onclick="switchTab('ch3',document.querySelector('.tab-btn:nth-child(3)'));setTimeout(function(){goTo('s3-1')},200)" style="cursor:pointer"><span class="m-num">方案 2</span><span class="m-code">P1 · I2 · L1</span><span class="m-ref">第 3 章範例案例</span></td>
           <td class="m-cell"><span class="m-num">方案 3</span><span class="m-code">P1 · I3 · L1</span></td>
         </tr>
         <tr>
