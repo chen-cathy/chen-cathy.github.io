@@ -1,0 +1,897 @@
+/* ============================================
+   認知負荷最小化設計系統
+   Decision Model Report - Styles
+   ============================================ */
+
+/* CSS Variables */
+:root {
+  /* 色彩系統 */
+  --color-bg: #f8fafc;
+  --color-surface: #ffffff;
+  --color-text: #1e293b;
+  --color-text-muted: #64748b;
+  --color-border: #e2e8f0;
+  
+  /* 因素色彩編碼 */
+  --color-factor-p: #6366f1;
+  --color-factor-p-bg: #eef2ff;
+  --color-factor-i: #059669;
+  --color-factor-i-bg: #ecfdf5;
+  --color-factor-l: #d97706;
+  --color-factor-l-bg: #fffbeb;
+  
+  /* 象限色彩 */
+  --color-quadrant-tl: #fef3c7;  /* 低S/高U - 黃色 */
+  --color-quadrant-tr: #fecaca;  /* 高S/高U - 紅色 */
+  --color-quadrant-bl: #bbf7d0;  /* 低S/低U - 綠色 */
+  --color-quadrant-br: #fed7aa;  /* 高S/低U - 橙色 */
+  
+  /* 排版 */
+  --font-sans: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+  --font-mono: 'Fira Code', monospace;
+  
+  /* 間距 */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  
+  /* 圓角 */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  
+  /* 陰影 */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+}
+
+/* ============================================
+   基礎樣式
+   ============================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--color-text);
+  background: var(--color-bg);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0 0 var(--space-4);
+  line-height: 1.4;
+  font-weight: 600;
+}
+
+p {
+  margin: 0 0 var(--space-4);
+}
+
+a {
+  color: var(--color-factor-p);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ============================================
+   網站標題區
+   ============================================ */
+.site-header {
+  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  color: #ffffff;
+  padding: var(--space-12) var(--space-8);
+  text-align: center;
+}
+
+.header-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.site-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: var(--space-3);
+  letter-spacing: -0.02em;
+}
+
+.site-subtitle {
+  font-size: 1.125rem;
+  opacity: 0.85;
+  margin: 0;
+}
+
+/* ============================================
+   主導覽
+   ============================================ */
+.main-nav {
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow-sm);
+}
+
+.nav-list {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-2);
+  list-style: none;
+  margin: 0;
+  padding: var(--space-2);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.nav-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-md);
+  color: var(--color-text-muted);
+  font-weight: 500;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  background: var(--color-bg);
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.nav-link.active {
+  background: var(--color-factor-p-bg);
+  color: var(--color-factor-p);
+}
+
+.nav-title {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 400;
+  margin-top: var(--space-1);
+}
+
+/* ============================================
+   主內容區
+   ============================================ */
+.main-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-8);
+}
+
+.chapter {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: var(--space-8);
+  margin-bottom: var(--space-8);
+}
+
+.chapter[hidden] {
+  display: none;
+}
+
+.chapter-header {
+  margin-bottom: var(--space-8);
+  padding-bottom: var(--space-6);
+  border-bottom: 2px solid var(--color-border);
+}
+
+.chapter-title {
+  font-size: 1.75rem;
+  color: var(--color-text);
+  margin-bottom: var(--space-4);
+}
+
+.chapter-intro {
+  color: var(--color-text-muted);
+  font-size: 1rem;
+}
+
+/* 子節導覽 */
+.section-nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.section-link {
+  display: inline-block;
+  padding: var(--space-2) var(--space-4);
+  background: var(--color-bg);
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  transition: all 0.2s ease;
+}
+
+.section-link:hover {
+  background: var(--color-factor-p-bg);
+  color: var(--color-factor-p);
+  text-decoration: none;
+}
+
+.section-link.active {
+  background: var(--color-factor-p);
+  color: #ffffff;
+}
+
+/* ============================================
+   章節內容
+   ============================================ */
+.section {
+  margin-bottom: var(--space-8);
+  scroll-margin-top: 100px;
+}
+
+.section-title {
+  font-size: 1.25rem;
+  color: var(--color-text);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: var(--space-6);
+}
+
+.section-content {
+  font-size: 1rem;
+  line-height: 2;
+}
+
+.subsection {
+  margin-bottom: var(--space-6);
+  padding-left: var(--space-4);
+  border-left: 3px solid var(--color-border);
+}
+
+.subsection-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: var(--space-3);
+}
+
+/* 研究問題 */
+.research-questions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.rq-item {
+  display: flex;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  background: var(--color-bg);
+  border-radius: var(--radius-md);
+}
+
+.rq-label {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: var(--color-factor-p);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.875rem;
+  border-radius: var(--radius-md);
+}
+
+.rq-item p {
+  margin: 0;
+  line-height: 1.7;
+}
+
+/* 評估準則 */
+.criteria-list {
+  display: flex;
+  gap: var(--space-4);
+  margin: var(--space-4) 0;
+}
+
+.criterion {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background: var(--color-bg);
+  border-radius: var(--radius-md);
+}
+
+.criterion-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: var(--color-text);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1.25rem;
+  border-radius: 50%;
+}
+
+/* ============================================
+   因素說明區塊
+   ============================================ */
+.factor-explanation {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  margin-top: var(--space-6);
+}
+
+.factor-block {
+  padding: var(--space-6);
+  border-radius: var(--radius-md);
+}
+
+.factor-block.factor-p {
+  background: var(--color-factor-p-bg);
+  border-left: 4px solid var(--color-factor-p);
+}
+
+.factor-block.factor-i {
+  background: var(--color-factor-i-bg);
+  border-left: 4px solid var(--color-factor-i);
+}
+
+.factor-block.factor-l {
+  background: var(--color-factor-l-bg);
+  border-left: 4px solid var(--color-factor-l);
+}
+
+.factor-title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: 1rem;
+  margin-bottom: var(--space-4);
+}
+
+.factor-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  font-weight: 700;
+  font-size: 1rem;
+  border-radius: var(--radius-sm);
+  color: #ffffff;
+}
+
+.factor-badge.factor-p,
+.factor-p .factor-badge {
+  background: var(--color-factor-p);
+}
+
+.factor-badge.factor-i,
+.factor-i .factor-badge {
+  background: var(--color-factor-i);
+}
+
+.factor-badge.factor-l,
+.factor-l .factor-badge {
+  background: var(--color-factor-l);
+}
+
+.factor-options {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.factor-options li {
+  margin-bottom: var(--space-2);
+  line-height: 1.7;
+}
+
+/* ============================================
+   替代方案矩陣
+   ============================================ */
+.alternatives-matrix {
+  margin-top: var(--space-6);
+  padding: var(--space-6);
+  background: var(--color-bg);
+  border-radius: var(--radius-md);
+}
+
+.alternatives-matrix h4 {
+  text-align: center;
+  margin-bottom: var(--space-4);
+}
+
+.matrix-grid {
+  display: grid;
+  grid-template-columns: auto repeat(4, 1fr);
+  gap: 2px;
+  background: var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.matrix-cell {
+  padding: var(--space-3);
+  background: var(--color-surface);
+  text-align: center;
+  font-size: 0.875rem;
+}
+
+.matrix-cell.corner {
+  background: var(--color-bg);
+}
+
+.matrix-cell.col-header,
+.matrix-cell.row-header {
+  background: var(--color-bg);
+  font-weight: 600;
+}
+
+.matrix-cell.row-header {
+  text-align: left;
+}
+
+.matrix-cell small {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  font-weight: 400;
+}
+
+.alt-cell {
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  transition: all 0.2s ease;
+}
+
+.alt-cell:hover {
+  background: var(--color-factor-p-bg);
+  color: var(--color-factor-p);
+}
+
+.alt-cell.featured {
+  background: var(--color-factor-p-bg);
+  font-weight: 600;
+  position: relative;
+}
+
+.alt-cell.featured::before {
+  content: '●';
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  font-size: 8px;
+  color: var(--color-factor-p);
+}
+
+.matrix-note {
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  margin-top: var(--space-4);
+}
+
+.featured-indicator {
+  color: var(--color-factor-p);
+}
+
+/* ============================================
+   風險分析區
+   ============================================ */
+.risk-analysis-container {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: var(--space-6);
+}
+
+/* 因素篩選器 */
+.factor-filter {
+  position: sticky;
+  top: 80px;
+  align-self: start;
+  padding: var(--space-6);
+  background: var(--color-bg);
+  border-radius: var(--radius-md);
+}
+
+.factor-filter h3 {
+  font-size: 1rem;
+  margin-bottom: var(--space-2);
+}
+
+.filter-instruction {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-4);
+}
+
+.factor-group {
+  margin-bottom: var(--space-4);
+  padding: 0;
+  border: none;
+}
+
+.factor-group legend {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-weight: 600;
+  font-size: 0.875rem;
+  margin-bottom: var(--space-2);
+}
+
+.filter-option {
+  display: block;
+  padding: var(--space-2);
+  font-size: 0.875rem;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: background 0.2s ease;
+}
+
+.filter-option:hover {
+  background: var(--color-surface);
+}
+
+.filter-option input {
+  margin-right: var(--space-2);
+}
+
+.btn-reset-filter {
+  width: 100%;
+  padding: var(--space-3);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-reset-filter:hover {
+  background: var(--color-factor-p-bg);
+  border-color: var(--color-factor-p);
+}
+
+/* 風險象限 */
+.quadrant-section {
+  flex: 1;
+}
+
+.quadrant-wrapper {
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+}
+
+.quadrant-container {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.risk-quadrant-svg {
+  width: 100%;
+  height: auto;
+}
+
+.quadrant-bg {
+  transition: opacity 0.3s ease;
+}
+
+.quadrant-tl { fill: var(--color-quadrant-tl); }
+.quadrant-tr { fill: var(--color-quadrant-tr); }
+.quadrant-bl { fill: var(--color-quadrant-bl); }
+.quadrant-br { fill: var(--color-quadrant-br); }
+
+.quadrant-label {
+  font-size: 14px;
+  font-weight: 600;
+  text-anchor: middle;
+  fill: var(--color-text);
+}
+
+.quadrant-sublabel {
+  font-size: 11px;
+  text-anchor: middle;
+  fill: var(--color-text-muted);
+}
+
+.axis-line {
+  stroke: var(--color-text);
+  stroke-width: 2;
+}
+
+.axis-label-text {
+  font-size: 12px;
+  font-weight: 600;
+  fill: var(--color-text);
+}
+
+.alt-point {
+  fill: var(--color-text-muted);
+  stroke: var(--color-surface);
+  stroke-width: 2;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.alt-point:hover {
+  fill: var(--color-factor-p);
+  transform: scale(1.2);
+}
+
+.alt-point.featured {
+  fill: var(--color-factor-p);
+}
+
+.alt-point.filtered-out {
+  opacity: 0.15;
+}
+
+.alt-point.selected {
+  fill: var(--color-factor-p);
+  stroke: var(--color-text);
+  stroke-width: 3;
+}
+
+.quadrant-legend {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-6);
+  margin-top: var(--space-4);
+  font-size: 0.875rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--color-text-muted);
+}
+
+.legend-dot.featured {
+  background: var(--color-factor-p);
+}
+
+.quadrant-note {
+  margin-top: var(--space-6);
+  padding: var(--space-4);
+  background: var(--color-bg);
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+
+.quadrant-note p {
+  margin: 0;
+}
+
+/* 方案詳情面板 */
+.alternative-detail-panel {
+  position: fixed;
+  top: 50%;
+  right: var(--space-8);
+  transform: translateY(-50%);
+  width: 360px;
+  max-height: 80vh;
+  overflow-y: auto;
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  z-index: 200;
+}
+
+.alternative-detail-panel[hidden] {
+  display: none;
+}
+
+.btn-close-panel {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+  width: 32px;
+  height: 32px;
+  background: var(--color-bg);
+  border: none;
+  border-radius: 50%;
+  font-size: 1.25rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-close-panel:hover {
+  background: var(--color-border);
+}
+
+.panel-content {
+  padding: var(--space-6);
+}
+
+.alt-code {
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  margin-bottom: var(--space-4);
+}
+
+.factor-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.tag {
+  display: inline-block;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.tag-p {
+  background: var(--color-factor-p-bg);
+  color: var(--color-factor-p);
+}
+
+.tag-i {
+  background: var(--color-factor-i-bg);
+  color: var(--color-factor-i);
+}
+
+.tag-l {
+  background: var(--color-factor-l-bg);
+  color: var(--color-factor-l);
+}
+
+.alt-position {
+  padding: var(--space-3);
+  background: var(--color-quadrant-tr);
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-4);
+}
+
+.alt-position p {
+  margin: 0;
+  font-size: 0.875rem;
+}
+
+.alt-description h4 {
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-2);
+}
+
+.alt-description p {
+  font-size: 0.875rem;
+  line-height: 1.7;
+}
+
+/* ============================================
+   查看象限按鈕
+   ============================================ */
+.view-quadrant-link {
+  margin-top: var(--space-4);
+}
+
+.btn-view-quadrant {
+  display: inline-block;
+  padding: var(--space-3) var(--space-6);
+  background: var(--color-factor-p);
+  color: #ffffff;
+  border-radius: var(--radius-md);
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.btn-view-quadrant:hover {
+  background: #4f46e5;
+  text-decoration: none;
+}
+
+/* ============================================
+   頁尾
+   ============================================ */
+.site-footer {
+  text-align: center;
+  padding: var(--space-8);
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+  border-top: 1px solid var(--color-border);
+}
+
+/* ============================================
+   響應式設計
+   ============================================ */
+@media (max-width: 900px) {
+  .risk-analysis-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .factor-filter {
+    position: static;
+  }
+  
+  .alternative-detail-panel {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    max-height: 60vh;
+    transform: none;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  }
+  
+  .site-title {
+    font-size: 1.5rem;
+  }
+  
+  .nav-list {
+    flex-wrap: wrap;
+  }
+  
+  .nav-link {
+    padding: var(--space-2) var(--space-4);
+  }
+}
+
+@media (max-width: 600px) {
+  .main-content {
+    padding: var(--space-4);
+  }
+  
+  .chapter {
+    padding: var(--space-4);
+  }
+  
+  .criteria-list {
+    flex-direction: column;
+  }
+  
+  .matrix-grid {
+    font-size: 0.75rem;
+  }
+  
+  .matrix-cell {
+    padding: var(--space-2);
+  }
+}
