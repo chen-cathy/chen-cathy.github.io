@@ -16,7 +16,7 @@ window.filesData = [
         "title": "Zvolila jsem jeden model AI. Objevily se dva „duchové“ modely",
         "category": "AI Lab / Workflow",
         "description": "Neviditelná rozhodnutí uvnitř „černé skříňky“ AI. Pozorováno prostřednictvím artefaktů rozhraní, nikoli na základě systémového zveřejnění.",
-        "file": "antigravity-workflow-notes.html",
+        "file": "../antigravity-workflow-notes.html",
         "type": "AI Lab"
     },
     {
