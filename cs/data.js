@@ -1,16 +1,7 @@
 window.filesData = [
     
     // Doporučené
-    {
-        "id": 5,
-        "title": "Český paradox",
-        "category": "Economic Models",
-        "description": "Vyšší lidský kapitál a produktivita v Česku — přesto Tchaj-wan vede v HDP na obyvatele: proč Tchaj-wan předstihl Česko (MRW / rozšířený Solowův model).",
-        "file": "../economic-growth-tw-cz-ai.html",
-        "pdf_link": "../economic-growth-tw-cz.html",
-        "target": "_blank",
-        "type": "Standard"
-    },
+
 
     {
         "id": 6,
@@ -115,12 +106,23 @@ window.filesData = [
         "target": "_blank",
         "type": "Standard"
     },
+
     {
         "id": 13,
         "title": "Zvolila jsem jeden model AI. Objevily se dva „duchové" modely",
         "category": "AI Lab / Workflow",
         "description": "Neviditelná rozhodnutí uvnitř „černé skříňky" AI. Pozorováno prostřednictvím artefaktů rozhraní, nikoli na základě systémového zveřejnění.",
         "file": "../antigravity-workflow-notes.html",        "target": "_blank",        "type": "AI Lab"
-    }  
+    },
+    {
+        "id": 5,
+        "title": "Český paradox (Práce v procesu)",
+        "category": "Economic Models",
+        "description": "Vyšší lidský kapitál a produktivita v Česku — přesto Tchaj-wan vede v HDP na obyvatele: proč Tchaj-wan předstihl Česko (MRW / rozšířený Solowův model). [Práce v procesu / Under Development]",
+        "file": "#",
+        "pdf_link": "#",
+        "target": "_blank",
+        "type": "Standard"
+    }
 
 ];
