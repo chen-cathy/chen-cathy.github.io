@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modelování rozhodování o zapojení do ozbrojených konfliktů v podmínkách nejistoty</title>
+<style>
+/* ─── RESET ─── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+/* ─── VARS ─── */
+:root{
+  --navy:#141e2e;--ink:#1e293b;--body:#374151;--muted:#6b7280;
+  --border:#e2e8f0;--bg:#f7f8fa;--white:#ffffff;
+  --P:#2563eb;--P-bg:#eff6ff;--P-border:#bfdbfe;
+  --I:#ea580c;--I-bg:#fff7ed;--I-border:#fed7aa;
+  --L:#16a34a;--L-bg:#f0fdf4;--L-border:#bbf7d0;
+  --S:#dc2626;--S-bg:#fef2f2;--S-border:#fecaca;
+  --U:#7c3aed;--U-bg:#faf5ff;--U-border:#ddd6fe;
+  --law-bg:#fef9c3;--law-fg:#854d0e;
+  --warn:#f59e0b;--warn-bg:#fffbeb;--warn-border:#fcd34d;
+}
+
+/* ─── BASE ─── */
+html{scroll-behavior:smooth}
+body{
+  font-family:"Segoe UI","Roboto",sans-serif;
+  line-height:1.95;color:var(--body);background:#e8eaed;font-size:18px;
+}
+.page{max-width:1080px;margin:0 auto;background:var(--white);box-shadow:0 0 40px rgba(0,0,0,.07)}
+
+/* ─── HEADER ─── */
+header{background:var(--navy);padding:50px 56px 42px;position:relative;overflow:hidden}
+header::before{content:'';position:absolute;top:-55px;right:-55px;width:260px;height:260px;border-radius:50%;background:rgba(255,255,255,.03)}
+header h1{color:#fff;font-size:1.72em;font-weight:600;line-height:1.4;position:relative}
+header .sub{color:#7e8fa3;font-size:0.9em;margin-top:14px;font-weight:400;position:relative}
+
+/* ─── TAB NAV ─── */
+.tab-nav{
+  display:flex;background:var(--white);border-bottom:2px solid var(--border);
+  position:sticky;top:0;z-index:50;overflow-x:auto;-webkit-overflow-scrolling:touch;
+}
+.tab-nav::-webkit-scrollbar{height:0}
+.tab-btn{
+  flex-shrink:0;padding:16px 30px;border:none;background:transparent;
+  cursor:pointer;text-align:left;transition:all .2s;
+  border-bottom:3px solid transparent;outline:none;
+}
+.tab-btn:hover .tab-name{color:var(--ink)}
+.tab-btn.active{border-bottom-color:var(--navy)}
+.tab-btn .tab-num{
+  display:block;font-size:0.83em;font-weight:700;color:var(--muted);
+  letter-spacing:.08em;text-transform:uppercase;margin-bottom:3px;
+}
+.tab-btn .tab-name{font-size:0.83em;font-weight:600;color:var(--muted);display:block;white-space:nowrap}
+.tab-btn .tab-name{font-size:1.32em;font-weight:700;color:var(--navy);display:block;white-space:nowrap}
+.tab-btn.active .tab-num{color:var(--navy)}
+.tab-btn.active .tab-name{color:var(--navy)}
+
+/* ─── CHAPTER PANEL ─── */
+.ch{display:none;padding:10px 56px 56px}
+.ch.active{display:block}
+
+/* ─── SUB INDEX ─── */
+.sub-idx{
+  display:flex;flex-wrap:wrap;gap:8px;
+  padding:22px 0 26px;border-bottom:1px solid var(--border);margin-bottom:34px;
+}
+.sub-idx a{
+  display:inline-block;padding:7px 16px;background:var(--bg);
+  border:1px solid var(--border);border-radius:20px;
+  font-size:0.83em;color:var(--ink);text-decoration:none;
+  transition:all .2s;cursor:pointer;font-weight:500;
+}
+.sub-idx a:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
+
+/* ─── FOLD ─── */
+.fold{margin:9px 0}
+.fold-head{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:15px 22px;background:var(--bg);border:1px solid var(--border);
+  border-radius:7px;cursor:pointer;user-select:none;transition:all .15s;
+}
+.fold-head:hover{background:#eef0f4}
+.fold-head.open{background:#edf2f9;border-color:#c9d8ec;border-radius:7px 7px 0 0}
+.fold-head .ftitle{font-size:0.92em;font-weight:700;color:var(--ink)}
+.fold-head .farrow{color:var(--navy);font-size:1.25em;font-weight:900;transition:transform .25s}
+.fold-head.open .farrow{transform:rotate(180deg)}
+.ch#ch1 {}
+
+/* ─── CH1 FOLD ADJUSTMENTS ─── */
+#ch1 .fold-head{padding:12px 16px}
+#ch1 .fold-head .ftitle{flex:0 0 58%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:0.9em}
+#ch1 .fold-head .farrow{flex:0 0 10%;text-align:right}
+.fold-body{
+  max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.4,0,.2,1);
+  border:1px solid var(--border);border-top:none;border-radius:0 0 7px 7px;background:var(--white);
+}
+.fold-body.open{max-height:9999px}
+.fold-inner{padding:28px 30px}
+
+/* ─── SUB-HEAD (for nested sections) ─── */
+.sub-head{
+  font-size:1.05em;font-weight:700;color:var(--ink);
+  margin:26px 0 12px 0;padding-bottom:8px;
+  border-bottom:2px solid var(--border);
+}
+.fold-inner .sub-head:first-child{margin-top:0}
+
+p{margin-bottom:18px;line-height:1.88}
+p:last-child{margin-bottom:0}
+.notice{
+  background:var(--warn-bg);border:1px solid var(--warn-border);border-radius:7px;
+  padding:18px 20px;margin:24px 0;display:flex;align-items:start;gap:14px;
+}
+.notice-icon{font-size:1.5em;line-height:1;flex-shrink:0}
+.notice-txt{flex:1;font-size:0.92em;line-height:1.7}
+.notice-txt strong{color:var(--warn)}
+
+/* ─── BADGE ─── */
+.bd{
+  display:inline-block;padding:3px 9px;border-radius:4px;
+  font-weight:700;font-size:0.83em;letter-spacing:.02em;
+}
+.bd-P{background:var(--P-bg);color:var(--P);border:1px solid var(--P-border)}
+.bd-I{background:var(--I-bg);color:var(--I);border:1px solid var(--I-border)}
+.bd-L{background:var(--L-bg);color:var(--L);border:1px solid var(--L-border)}
+.bd-S{background:var(--S-bg);color:var(--S);border:1px solid var(--S-border)}
+.bd-U{background:var(--U-bg);color:var(--U);border:1px solid var(--U-border)}
+
+.law{
+  background:var(--law-bg);color:var(--law-fg);
+  padding:2px 7px;border-radius:4px;font-weight:700;font-size:0.92em;
+}
+
+/* ─── RQ (Research Question) ─── */
+.rq-stack{display:flex;flex-direction:column;gap:14px}
+.rq{background:var(--bg);border:1px solid var(--border);border-radius:7px;overflow:hidden}
+.rq-head{background:var(--navy);padding:10px 18px;display:flex;align-items:center}
+.rq-id{
+  color:#fff;font-weight:700;font-size:0.92em;letter-spacing:.05em;
+}
+.rq-body{padding:18px 20px;font-size:0.92em;line-height:1.88;color:var(--body)}
+
+/* ─── DIM CARD (Dimension card for P/I/L factors) ─── */
+.dim-card{
+  border-radius:7px;overflow:hidden;margin:20px 0;
+  border:1px solid;
+}
+.dim-card.P{border-color:var(--P-border);background:var(--P-bg)}
+.dim-card.I{border-color:var(--I-border);background:var(--I-bg)}
+.dim-card.L{border-color:var(--L-border);background:var(--L-bg)}
+.dim-hd{
+  padding:14px 18px;display:flex;align-items:center;gap:10px;
+  font-weight:700;font-size:0.95em;color:var(--ink);
+}
+.dim-title{flex:1}
+.dim-body{padding:0 18px 18px 18px}
+.dim-item{
+  background:var(--white);border:1px solid var(--border);border-radius:5px;
+  padding:12px 16px;margin-top:10px;font-size:0.92em;line-height:1.8;
+}
+.di-id{font-weight:700;color:var(--ink);margin-right:6px}
+.di-txt{color:var(--body)}
+
+/* ─── TAG BAR (for chapter 3) ─── */
+.tag-bar{
+  display:flex;flex-wrap:wrap;gap:10px;padding:20px 0;
+  border-bottom:1px solid var(--border);margin-bottom:28px;
+}
+.tag{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:9px 16px;border-radius:20px;border:1px solid;
+  font-size:0.88em;font-weight:500;
+}
+.tag.P{background:var(--P-bg);border-color:var(--P-border);color:var(--P)}
+.tag.I{background:var(--I-bg);border-color:var(--I-border);color:var(--I)}
+.tag.L{background:var(--L-bg);border-color:var(--L-border);color:var(--L)}
+
+/* ─── SEC TITLE (section title) ─── */
+.sec-title{
+  font-size:1.38em;font-weight:700;color:var(--navy);
+  margin:30px 0 20px 0;padding-bottom:12px;
+  border-bottom:2px solid var(--navy);
+}
+.sec-title:first-child{margin-top:0}
+
+/* ─── ARG (Argument block - black header box) ─── */
+.arg{margin:24px 0;border-radius:7px;overflow:hidden;border:1px solid var(--border)}
+.arg-title{
+  background:var(--navy);color:#fff;padding:14px 20px;
+  font-weight:700;font-size:1.05em;
+}
+.arg-body{background:var(--white);padding:22px 24px}
+.arg-body p{margin-bottom:16px}
+.arg-body p:last-child{margin-bottom:0}
+
+/* ─── FORK (Decision fork with options) ─── */
+.fork{
+  background:var(--bg);border:1px solid var(--border);border-radius:7px;
+  padding:20px;margin:24px 0;
+}
+.fork-q{
+  font-weight:700;font-size:1.05em;color:var(--ink);margin-bottom:16px;
+}
+.fork-options{display:flex;flex-direction:column;gap:12px}
+.fork-opt{
+  background:var(--white);border:1px solid var(--border);border-radius:5px;
+  padding:16px 18px;
+}
+.opt-id{
+  display:block;font-weight:700;color:var(--navy);margin-bottom:8px;
+  font-size:0.95em;
+}
+.opt-txt{display:block;font-size:0.92em;line-height:1.8;color:var(--body)}
+
+/* ─── RESULT BOX ─── */
+.result{
+  padding:16px 20px;border-radius:7px;margin:20px 0;
+  border:1px solid;font-size:0.92em;line-height:1.8;
+}
+.result.neutral{
+  background:#fafafa;border-color:#ddd;color:var(--body);
+}
+.result strong{color:var(--navy)}
+
+/* ─── COMPARISON TABLE ─── */
+.cmp-tbl{
+  width:100%;border-collapse:collapse;margin:20px 0;
+  font-size:0.88em;
+}
+.cmp-tbl thead{background:var(--navy);color:#fff}
+.cmp-tbl th{padding:12px 14px;text-align:left;font-weight:600}
+.cmp-tbl td{padding:12px 14px;border-bottom:1px solid var(--border)}
+.cmp-tbl tbody tr:last-child td{border-bottom:none}
+.cmp-tbl .col-l2{background:#fff7ed}
+.cmp-tbl .col-tw{background:#f0fdf4}
+
+/* ─── SU GRID (S×U cards) ─── */
+.su-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:24px 0}
+.su-card{border-radius:7px;padding:20px;border:1px solid}
+.su-card.S{border-color:var(--S-border);background:var(--S-bg)}
+.su-card.U{border-color:var(--U-border);background:var(--U-bg)}
+.su-hd{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.su-label{font-weight:700;font-size:1.05em;color:var(--ink)}
+.su-bd{font-size:0.88em;line-height:1.8;color:var(--body)}
+.su-note{
+  margin-top:12px;padding-top:12px;border-top:1px solid rgba(0,0,0,.1);
+  font-style:italic;font-size:0.92em;color:var(--muted);
+}
+
+/* ─── QUADRANT (Risk quadrant visualization) ─── */
+.quadrant{margin:30px 0;border:1px solid var(--border);border-radius:7px;overflow:hidden}
+.q-header{
+  background:var(--navy);color:#fff;padding:16px 20px;
+  font-weight:700;font-size:1.05em;
+}
+.q-wrap{padding:24px}
+.q-axis-y{
+  text-align:center;font-size:0.88em;font-weight:600;
+  color:var(--muted);margin-bottom:16px;
+}
+.q-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:12px;
+}
+.q-cell{
+  background:var(--bg);border:1px solid var(--border);border-radius:5px;
+  padding:18px;min-height:140px;display:flex;flex-direction:column;
+}
+.q-cell.dg{background:#1e293b;color:#fff;border-color:#334155}
+.q-label{
+  font-weight:700;font-size:0.95em;margin-bottom:8px;
+  color:var(--navy);
+}
+.q-cell.dg .q-label{color:#fff}
+.q-desc{
+  font-size:0.85em;color:var(--muted);margin-top:8px;
+  display:block;line-height:1.6;
+}
+.q-cell.dg .q-desc{color:#cbd5e1}
+.q-mark{
+  display:inline-block;background:#059669;color:#fff;
+  padding:4px 10px;border-radius:4px;font-weight:700;
+  font-size:0.85em;margin-top:auto;align-self:flex-start;
+}
+
+/* ─── MATRIX TABLE (Variant matrix) ─── */
+.matrix-label{
+  padding:12px 18px;background:var(--L-bg);border:1px solid var(--L-border);
+  border-radius:7px;margin:16px 0;font-weight:600;color:var(--L);
+  display:inline-flex;align-items:center;gap:8px;
+}
+.matrix-tbl{
+  width:100%;border-collapse:collapse;margin:20px 0;
+  font-size:0.88em;
+}
+.matrix-tbl thead{background:var(--navy);color:#fff}
+.matrix-tbl th{padding:14px;text-align:center;font-weight:600}
+.matrix-tbl .m-rowh{
+  background:var(--P-bg);color:var(--P);font-weight:700;
+  padding:14px;text-align:center;border:1px solid var(--P-border);
+}
+.matrix-tbl .m-cell{
+  border:1px solid var(--border);padding:16px;text-align:center;
+  background:var(--white);transition:all .2s;
+}
+.matrix-tbl .m-cell.highlight{
+  background:var(--P-bg);border-color:var(--P-border);
+}
+.m-num{
+  display:block;font-weight:700;color:var(--navy);margin-bottom:6px;
+}
+.m-code{
+  display:block;font-family:monospace;font-size:0.9em;
+  color:var(--muted);
+}
+.m-ref{
+  display:block;font-size:0.82em;color:var(--P);
+  margin-top:6px;font-weight:600;
+}
+
+@media(max-width:768px){
+  .page{box-shadow:none}
+  .ch{padding:28px 24px}
+  header{padding:36px 24px 28px}
+  .su-grid{grid-template-columns:1fr}
+  .q-grid{grid-template-columns:1fr}
+  .matrix-tbl{font-size:0.75em}
+  .tab-nav{justify-content:flex-start}
+  .tab-btn{padding:12px 18px}
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+<!-- ═══ HEADER ═══ -->
+<header>
+  <h1>Modelování rozhodování o zapojení do ozbrojených konfliktů v podmínkách nejistoty</h1>
+  <div class="sub">Případová studie tchajwanského konfliktu v kontextu trestního práva České republiky</div>
+</header>
+
+<!-- ═══ TAB NAV ═══ -->
+<nav class="tab-nav">
+  <button class="tab-btn active" onclick="switchTab('ch1',this)">
+    <span class="tab-num">Kapitola 1</span>
+    <span class="tab-name">Úvod</span>
+  </button>
+  <button class="tab-btn" onclick="switchTab('ch2',this)">
+    <span class="tab-num">Kapitola 2</span>
+    <span class="tab-name">Metodologie</span>
+  </button>
+  <button class="tab-btn" onclick="switchTab('ch3',this)">
+    <span class="tab-num">Kapitola 3</span>
+    <span class="tab-name">Analýza</span>
+  </button>
+  <button class="tab-btn" onclick="switchTab('ch4',this)">
+    <span class="tab-num">Kapitola 4</span>
+    <span class="tab-name">Rizikový kvadrant</span>
+  </button>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════
+    CH1  Úvod: problematika a kontext
+     ═══════════════════════════════════════════════════════ -->
+<div class="ch active" id="ch1">
+  <div class="sub-idx">
+    <a onclick="goTo('s1-1')">1.1 Typ zkoumání</a>
+    <a onclick="goTo('s1-2')">1.2 Problematizace</a>
+    <a onclick="goTo('s1-3')">1.3 Cíl práce</a>
+    <a onclick="goTo('s1-4')">1.4 Výzkumné otázky</a>
+  </div>
+
+  <!-- 1.1 Typ zkoumání -->
+  <div class="fold" id="s1-1">
+    <div class="fold-head" onclick="toggle(this)"><span class="ftitle">1.1 Typ zkoumání</span><span class="farrow">▼</span></div>
+    <div class="fold-body">
+      <div class="fold-inner">
+        <p>Tato studie přijímá vícekriteriální analytický přístup, který klade důraz na procesní logiku rozhodování a identifikaci rizikových faktorů, nikoli na normativní hodnocení etických či politických pozic. Nejde o závěr, že by měla existovat ta či ona politická volba, ale o poskytnutí strukturovaného rámce pro hodnocení různých variant, kdy za podmínek vysoké nejistoty mohou jednotliví aktéři lépe porozumět interakci právních a politických proměnných.</p>
+        <p>V této souvislosti studie úmyslně stanoví hranice výzkumu: jejím cílem není vynášet právní úsudky o konkrétních případech ani poskytovat právní argumentaci v podobě „jak to má být". Místo toho se zaměřuje na analytické modelování rozhodovacího procesu a hodnocení rizik – jak transformovat nejistotu do formy použitelné pro manažerské rozhodování.</p>
+        <p>Tento přístup především vyžaduje rozlišení analytických kategorií: <span class="bd bd-P">P</span> (politický postoj domovského státu), <span class="bd bd-I">I</span> (intenzita účasti jednotlivce) a <span class="bd bd-L">L</span> (právní povaha konfliktní strany) jsou považovány za nezávislé dimenze hodnocení a nikoliv za vzájemně se nahrazující proměnné. Na základě definic těchto kategorií studie neoperuje na výchozím předpokladu, že konflikt mezi de facto státem a státem mezinárodně uznaným je redukovaný na konflikt se separatisty, ani na základě předpokladu, že daný „stát-bez-uznání" je proto automaticky legitimizován.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 1.2 Problematizace -->
+  <div class="fold" id="s1-2">
+    <div class="fold-head" onclick="toggle(this)"><span class="ftitle">1.2 Problematizace</span><span class="farrow">▼</span></div>
+    <div class="fold-body">
+      <div class="fold-inner">
+        
+        <div class="sub-head">Český trestněprávní rámec ve vztahu k de facto státům</div>
+        <p>Vzhledem k de facto státům český trestní zákoník (zákon č. 40/2009 Sb.) neprovádí explicitní rozlišení mezi mezinárodně uznaným státem, separatistickou entitou a de facto státem, přičemž s touto poslední kategorií právní rámec vůbec nepočítá. V těchto situacích nevyplývá riziko pouze ze samotného jednání, ale je výsledkem interakce více faktorů, včetně politického postoje domovského státu daného aktéra, formy a intenzity jeho skutečného zapojení a právního a politického postavení konfliktní strany v mezinárodní praxi. Tyto faktory často nelze obsáhnout jediným pravidlem nebo jasnou klasifikací, což aktérům ztěžuje odhadování možných důsledků jejich jednání v různých situacích.</p>
+        <p>Existuje situace, kdy trestněprávní rámec pro „účast v cizím konfliktu" je v ČR formálně dán – v posledních letech se v České republice objevilo několik případů tzv. „foreign fighters", zejména v souvislosti s konfliktem na východní Ukrajině (Donbas). Tyto kauzy se dotýkají aplikace ustanovení trestního zákoníku, jako jsou § 311 (teroristický útok), § 321 (služba v cizích ozbrojených silách) nebo § 361 (účast na organizované zločinecké skupině), avšak jejich praktická aplikace neposkytuje jasné vodítko pro situace zahrnující aktéry působící ve vztahu k de facto státům. Zároveň chybí nástroj, který by tuto právní a institucionální nejistotu převáděl do srozumitelného rámce pro rozhodování a řízení rizik. Z managementního hlediska tak vzniká mezera mezi právním diskurzem (skutkové podstaty, judikatura, mezinárodní právo) a rozhodovací praxí aktérů, kteří se musí rozhodovat v podmínkách vysoké nejistoty a potenciálně velmi závažných následků.</p>
+
+        <div class="sub-head">De facto státy</div>
+        <p>Pokud jde o výběr zkoumaných subjektů, de facto státy nepředstavují ojedinělý ani výjimečný jev. V celosvětovém měřítku mezi často uváděné příklady patří například Kosovo, Palestine či Transnistria…, tedy politické entity disponující faktickou schopností vládnutí, jejichž míra mezinárodního uznání se však liší. Těmto entitám je v politické a právní praxi jednotlivých států často přisuzováno odlišné postavení, což dále zvyšuje míru nejistoty v přeshraničním rozhodování.</p>
+
+        <div class="sub-head">Volba Tchaj-wanu jako případové studie</div>
+        <p>Hlavním případovým příkladem této práce je Tchaj-wan. Důvodem je skutečnost, že vykazuje charakteristiky, které jsou z hlediska manažerského rozhodování vysoce relevantní: zaprvé dlouhodobě stabilní faktickou správu, plně funkční vojenský a administrativní aparát a současně klíčovou roli v globálních dodavatelských řetězcích a strategických odvětvích, což ve srovnání s většinou ostatních de facto států výrazně zvyšuje pravděpodobnost faktického zapojení jednotlivců, podniků a organizací; Zadruhé je Tchaj-wan vysoce integrován do globálních dodavatelských řetězců a udržuje s většinou států intenzivní a pravidelné hospodářské vztahy, což činí nesoulad politických, ekonomických a právních podmínek běžným rizikem v rozhodovací praxi; rozdílné přístupy jednotlivých států k jeho mezinárodnímu postavení tuto nejednotnost dále prohlubují, což činí hodnocení rizik složitějším. Zatřetí se Tchaj-wan dlouhodobě nachází v prostředí vysoké úrovně bezpečnostních a vojenských hrozeb, zejména v důsledku přetrvávajícího vojenského tlaku ze strany Číny a rizika potenciálního ozbrojeného konfliktu, což vede k tomu, že související rozhodování musí současně čelit náhlému nárůstu geopolitické nejistoty; tato bezpečnostní rizika se vzájemně kumulují s výše uvedenými politickými, ekonomickými a právními nejistotami a dále zesilují celkovou míru rizikové expozice rozhodovacích aktérů.</p>
+        <p>Omezená míra mezinárodního uznání Tchaj-wanu existuje již dlouhodobě a je opakovaně předmětem diskusí. Příkladem jsou rozdílné interpretace historických a právních textů, jako je Sanfranciská mírová smlouva či dokumenty týkající se kapitulace Japonska. Odborná literatura a materiály mezinárodního práva se převážně soustředí na vymezení kategorií, do nichž jsou takové politické entity zařazovány, a to prostřednictvím pojmů jako de facto state, contested statehood či partially recognized state. Jen zřídka se však věnují tomu, jaké důsledky má tato institucionální a právní nejistota pro rozhodování konkrétních jednotlivců nebo organizací.</p>
+
+        <div class="sub-head">Trestněprávní nejistota v kontextu zahraničních ozbrojených konfliktů</div>
+        <p>Rizika spojená se zapojením do zahraničních ozbrojených konfliktů se netýkají pouze jednotlivců, ale rovněž právnických osob. V závislosti na povaze zapojení mohou tyto aktivity v různých trestněprávních kontextech zahrnovat podporu, logistickou spolupráci či jiné formy účasti. Podle českého trestního práva přitom podléhají české jurisdikci všechny společnosti registrované v České republice, což znamená, že trestněprávní nejistota se vztahuje jak na jednání uskutečňovaná na území státu, tak na aktivity realizované v zahraničí.</p>
+        <p>V případě hypotetického ozbrojeného konfliktu v Tchajwanském průlivu by tak reakce podniků i jednotlivců, včetně forem podpory či zapojení, mohly se dotýkat oblasti působnosti českých orgánů činných v trestním řízení. Na základě zásady oficiality jsou totiž státní orgány (policie a státní zastupitelství) povinny zahájit a vést trestní řízení z úřední povinnosti, jakmile se dozvědí o skutečnostech nasvědčujících spáchání trestného činu. Existence vysoké míry nejistoty v těchto situacích tak může vést nejen k obtížnému rozhodování aktérů a zároveň na institucionální úrovni vytváří trvalý hodnoticí tlak, který nutí příslušné institucionální subjeckty opakovaně přehodnocovat nejasné hranice jejich vlastní působnosti.</p>
+        
+      </div>
+    </div>
+  </div>
+
+  <!-- 1.3 Cíl práce -->
+  <div class="fold" id="s1-3">
+    <div class="fold-head" onclick="toggle(this)"><span class="ftitle">1.3 Cíl práce</span><span class="farrow">▼</span></div>
+    <div class="fold-body">
+      <div class="fold-inner">
+        <p>Hlavním cílem této studie je vytvořit model pro identifikaci a posuzování rizik využitelný v praxi, který transformuje nejistoty v kontextu nadnárodních konfliktů do formy použitelné pro manažerské rozhodování. Na tomto základě se výzkum zaměřuje na identifikaci hlavních podmínek vzniku rizika, včetně externích nejistot vyplývajících z právního a politického prostředí, a analyzuje jejich vzájemné interakce v rámci provázaných scénářů. Ty jsou dále transformovány do kvantifikovatelných indikátorů hodnocení rizik. Prostřednictvím metod vícekriteriální analýzy rozhodování jsou pak nejistoty v komplexních konfliktních situacích převedeny na indikátory rozhodovacího rizika s manažerským významem. Studie současně poskytuje strukturovaný rozhodovací mechanismus, který slouží aktérům jako základ pro formulaci strategií reakce na rizika.</p>
+        <p>Tato práce nevynáší hodnotové soudy o právních normách ani neprovádí jejich systémovou interpretaci; namísto toho na ně nahlíží jako na externí institucionální parametry, které jsou včleněny do rámce rozhodovací analýzy jako základní proměnné pro hodnocení rizik. Práce umožňuje strukturovat různé scénáře účasti českých aktérů na zahraničních ozbrojených konfliktech (na příkladu hypotetického konfliktu v Tchajwanském průlivu) z hlediska trestněprávních rizik. Zároveň práce využívá nástroje mezinárodního managementu a rozhodovací analýzy (MCDA, AHP, scénářová analýza) k návrhu analytické vizualizace a interpretace těchto scénářů v podobě „rizikového kvadrantu".</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 1.4 Výzkumné otázky -->
+  <div class="fold" id="s1-4">
+    <div class="fold-head" onclick="toggle(this)"><span class="ftitle">1.4 Výzkumné otázky</span><span class="farrow">▼</span></div>
+    <div class="fold-body">
+      <div class="fold-inner">
+        <div class="rq-stack">
+          <div class="rq">
+            <div class="rq-head"><div class="rq-id">RQ1</div></div>
+            <div class="rq-body">Jak se mění očekávaná závažnost trestněprávních následků (S) a míra právní a institucionální nejistoty (U) při různých kombinacích politických faktorů (P), intenzity účasti jednotlivce (I) a právní povahy zapojeného protějšku (L) v kontextu zapojení českých aktérů do zahraničních ozbrojených konfliktů?</div>
+          </div>
+          <div class="rq">
+            <div class="rq-head"><div class="rq-id">RQ2</div></div>
+            <div class="rq-body">Jak lze tyto rozdíly systematicky strukturovat a vyjádřit pomocí vícekriteriální rozhodovací analýzy (MCDA a AHP) tak, aby byly srozumitelné a použitelné pro rozhodování a řízení rizik v manažerské praxi?</div>
+          </div>
+          <div class="rq">
+            <div class="rq-head"><div class="rq-id">RQ3</div></div>
+            <div class="rq-body">Které typy variant se na základě tohoto analytického rámce jeví jako relativně předvídatelné a které naopak spadají do zóny vysoké nejistoty? Jaké faktory přispívají k tomu, že se tyto varianty vyznačují zvýšenou mírou trestněprávního a institucionálního rizika?</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+    CH2  Metodologie a analytický rámec
+     ═══════════════════════════════════════════════════════ -->
+<div class="ch" id="ch2">
+  <div class="sub-idx">
+    <a onclick="goTo('s2-1')">2.1 Vícekriteriální rozhodovací analýza</a>
+    <a onclick="goTo('s2-2')">2.2 Kritéria hodnocení</a>
+    <a onclick="goTo('s2-3')">2.3 Strukturální faktory</a>
+    <a onclick="goTo('s2-4')">2.4 Tvorba variant</a>
+    <a onclick="goTo('s2-5')">2.5 Vyhodnocení variant</a>
+    <a onclick="goTo('s2-6')">2.6 Vizualizace výsledků</a>
+  </div>
+
+  <!-- 2.1 MCDA -->
+  <div class="fold" id="s2-1">
+    <div class="fold-head" onclick="toggle(this)"><span class="ftitle">2.1 Vícekriteriální rozhodovací analýza (MCDA) a AHP</span><span class="farrow">▼</span></div>
+    <div class="fold-body">
+      <div class="fold-inner">
+        <p>Tato práce aplikuje přístup vícekriteriální analýzy rozhodování (MCDA) a metodu analytického hierarchického procesu (AHP). Tyto metody jsou využity k transformaci nejistot v kontextu nadnárodních konfliktů do strukturovaného hodnotícího rámce. MCDA spočívá v porovnávání různých variant (kombinací faktorů P, I, L) podle více kritérií současně (S a U), zatímco AHP podporuje dekompozici komplexních problémů do hierarchie cíl – kritéria – varianty a umožňuje porovnávací hodnocení prostřednictvím párových srovnání.</p>
+        <p>V tomto výzkumu jsou jednotlivé situace (určené faktory P, I, L) chápány jako varianty (alternativy), které jsou dále hodnoceny z hlediska dvou hlavních kritérií – závažnosti možných trestněprávních důsledků (S) a míry právní nejistoty (U). Podstatou modelu je systematicky posoudit, jak různé kombinace vstupních proměnných (P, I, L) determinují výsledné rizikové profily jednotlivých variant.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2.2 Kritéria -->
+  <div class="fold" id="s2-2">
+    <div class="fold-head" onclick="toggle(this)"><span class="ftitle">2.2 Kritéria hodnocení rizik: závažnost (S) a nejistota (U)</span><span class="farrow">▼</span></div>
+    <div class="fold-body">
+      <div class="fold-inner">
+        <p>V manažerských modelech hodnocení rizik je obvykle rozlišováno mezi pravděpodobností a dopadem. V této práci je však pojmenování upraveno tak, aby lépe odpovídalo specifickým charakteristikám právního kontextu:</p>
+        <div class="dim-card S">
+          <div class="dim-hd"><span class="bd bd-S">S</span><span class="dim-title">Závažnost (Severity) možných trestněprávních následků</span></div>
+          <div class="dim-body">
+            <div class="dim-item">Vyjadřuje míru závažnosti důsledků v případě, že jednání bude kvalifikováno jako trestný čin. Zahrnuje závažnost právních sankcí, druhy použitelných ustanovení a rozsah dopadů na osoby či organizace.</div>
+          </div>
+        </div>
+        <div class="dim-card U">
+          <div class="dim-hd"><span class="bd bd-U">U</span><span class="dim-title">Nejistota (Uncertainty) v právní a institucionální rovině</span></div>
+          <div class="dim-body">
+            <div class="dim-item">Zahrnuje: Právní nejasnost (absence jasné normy nebo judikatury, konfliktní interpretační cesty); Politickou nestabilitu (kdy se mohou oficiální postoje nebo trestní politika rychle měnit); Institucionální rozdílnost (kdy různé vládní instituce mohou přijmout protichůdné nebo nekoordinované postoje).</div>
+          </div>
+        </div>
+        <p>V klasickém manažerském rámci rizik je pravděpodobnost (Probability) obvykle odvozena ze statistických údajů nebo historických precedensů. V trestněprávním kontextu však není primární otázkou „jaká je pravděpodobnost postihu", ale „do jaké míry je vůbec možné předem určit, zda dané jednání spadá do oblasti právní odpovědnosti". Klíčové je proto posoudit nejen závažnost možných následků, ale i rozsah a povahu nejistoty ohledně aplikovatelnosti normy a relevantního postupu orgánů činných v trestním řízení.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2.3 Strukturální faktory -->
+  <div class="fold" id="s2-3">
+    <div class="fold-head" onclick="toggle(this)"><span class="ftitle">2.3 Strukturální faktory (P, I, L) a jejich operacionalizace</span><span class="farrow">▼</span></div>
+    <div class="fold-body">
+      <div class="fold-inner">
+        <p>Struktura rizik se v modelu mění v závislosti na kombinaci tří faktorů (P, I, L), které slouží jako vstupní proměnné pro tvorbu variant:</p>
+        
+        <div class="dim-card P">
+          <div class="dim-hd"><span class="bd bd-P">P</span><span class="dim-title">Politická linie České republiky vůči ČLR a Tchaj-wanu (dvě kategorie)</span></div>
+          <div class="dim-body">
+            <div class="dim-item"><span class="di-id">P1:</span><span class="di-txt">hodnotově orientovaný přístup vstřícný k Tchaj-wanu (důraz na demokracii, lidská práva, parlamentní diplomacii), při zachování formální politiky jedné Číny.</span></div>
+            <div class="dim-item"><span class="di-id">P2:</span><span class="di-txt">přístup vstřícnější vůči ČLR a zdrženlivější vůči Tchaj-wanu (důraz na ekonomické vztahy, opatrnost vůči krokům vnímaným jako potenciálně „provokativní").</span></div>
+          </div>
+        </div>
+
+        <div class="dim-card I">
+          <div class="dim-hd"><span class="bd bd-I">I</span><span class="dim-title">Intenzita účasti jednotlivce (tři úrovně)</span></div>
+          <div class="dim-body">
+            <div class="dim-item"><span class="di-id">I1:</span><span class="di-txt">vyjádření názoru a drobná podpora (veřejné postoje, menší finanční příspěvky, symbolická účast).</span></div>
+            <div class="dim-item"><span class="di-id">I2:</span><span class="di-txt">logistická a organizační podpora (nábor, koordinace, organizování cest, materiální podpora).</span></div>
+            <div class="dim-item"><span class="di-id">I3:</span><span class="di-txt">přímá účast na boji nebo vojenském výcviku (služba ve zbrani, účast na operacích).</span></div>
+          </div>
+        </div>
+
+        <div class="dim-card L">
+          <div class="dim-hd"><span class="bd bd-L">L</span><span class="dim-title">Právní povaha zapojeného protějšku (dvě kategorie)</span></div>
+          <div class="dim-body">
+            <div class="dim-item"><span class="di-id">L1:</span><span class="di-txt">de facto stát / částečně uznaný subjekt (Tchaj-wan jako modelový příklad).</span></div>
+            <div class="dim-item"><span class="di-id">L2:</span><span class="di-txt">nestátní ozbrojený aktér (právní zařazení Tchaj-wanu jako nestátního aktéra).</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2.4 Tvorba variant -->
+  <div class="fold" id="s2-4">
+    <div class="fold-head" onclick="toggle(this)"><span class="ftitle">2.4 Tvorba variant a výběr reprezentativního souboru</span><span class="farrow">▼</span></div>
+    <div class="fold-body">
+      <div class="fold-inner">
+        <p>Kombinace faktorů P, I a L vytváří celkem 12 variant (alternativ). V rámci této práce nejsou alternativy chápány jako volitelné politické či strategické „návrhy", ale jako analytické varianty reprezentující různé kombinace vstupních faktorů, které jsou následně hodnoceny podle kritérií S a U. Z celkového souboru 12 variant práce vybírá varianty, které mají analytický význam a jsou považovány za reprezentativní pro další podrobnější analýzu.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2.5 Vyhodnocení variant -->
+  <div class="fold" id="s2-5">
+    <div class="fold-head" onclick="toggle(this)"><span class="ftitle">2.5 Vyhodnocení variant pomocí AHP/MCDA a scénářové analýzy</span><span class="farrow">▼</span></div>
+    <div class="fold-body">
+      <div class="fold-inner">
+        <p>Jednotlivé varianty jsou v této práci posuzovány ve vztahu ke dvěma hodnoticím kritériím, jimiž jsou závažnost možných trestněprávních následků (S) a míra právní a institucionální nejistoty (U). Všechny varianty jsou hodnoceny podle stejných kritérií, aby byla zajištěna jejich vzájemná srovnatelnost.</p>
+        <p>Metoda AHP slouží k vytvoření hierarchické struktury rozhodovacího problému (cíl – kritéria – varianty) a umožňuje systematicky porovnat jednotlivé varianty z hlediska jejich relativního postavení vůči kritériím S a U. Vícekriteriální analýza rozhodování (MCDA) tak napomáhá strukturovanému zachycení rozdílů v rizikovém profilu jednotlivých variant, aniž by předjímala jejich právní hodnocení.</p>
+        <p>Scénářová analýza je využita k ověření vnitřní konzistence jednotlivých variant jako kombinací faktorů P, I a L a slouží jako rámec pro interpretaci zjištěných rozdílů v jejich rizikové struktuře v hypotetických konfliktních situacích.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2.6 Vizualizace -->
+  <div class="fold" id="s2-6">
+    <div class="fold-head" onclick="toggle(this)"><span class="ftitle">2.6 Vizualizace a interpretace výsledků: „rizikový kvadrant"</span><span class="farrow">▼</span></div>
+    <div class="fold-body">
+      <div class="fold-inner">
+        <p>Výsledky hodnocení jsou interpretovány pomocí jednoduché analytické vizualizace v podobě „rizikového kvadrantu" (závažnost × nejistota), který umožňuje rozlišit varianty relativně předvídatelné a varianty spadající do zón vysoké nejistoty. Na tomto základě práce formuluje doporučení pro rozhodování a řízení rizik, zejména identifikaci situací, kde kombinace vysoké závažnosti a vysoké nejistoty vytváří tzv. „temně šedé zóny".</p>
+        <div class="notice">
+          <div class="notice-icon">⚠</div>
+          <div class="notice-txt"><strong>Metodologické shrnutí:</strong> V rámci AHP jsou hodnocena kritéria (S, U), variabilními vstupy jsou faktory (P, I, L) a jejich kombinace tvoří varianty (alternativy), které jsou dále analyzovány scénářovým přístupem a interpretovány prostřednictvím rizikového kvadrantu.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+    CH3  Analýza: Případová studie P1-I2-L1
+     ═══════════════════════════════════════════════════════ -->
+<div class="ch" id="ch3">
+  <div class="sub-idx">
+    <a onclick="goTo('s3-1')">3.1 Nastavení scénáře</a>
+    <a onclick="goTo('s3-2')">3.2 Přezkum aplikace</a>
+    <a onclick="goTo('s3-3')">3.3 Analytická premisa</a>
+    <a onclick="goTo('s3-4')">3.4 Hodnocení rizik</a>
+  </div>
+
+  <div class="tag-bar">
+    <span class="tag P"><span class="bd bd-P">P1</span> hodnotově orientovaný přístup vstřícný k Tchaj-wanu</span>
+    <span class="tag I"><span class="bd bd-I">I2</span> logistická a organizační podpora</span>
+    <span class="tag L"><span class="bd bd-L">L1</span> De facto stát</span>
+  </div>
+
+  <!-- 3.1 Nastavení scénáře -->
+  <div id="s3-1">
+    <div class="sec-title">3.1 Nastavení scénáře</div>
+    <p style="margin-bottom:20px;font-size:0.92em;line-height:1.88;color:var(--body);">Tato případová studie je analytickým nastavením scénáře, jehož účelem je demonstrovat způsob odvození logiky právní aplikace a struktury rozhodování. Nepředstavuje faktický úsudek o skutečném případu.</p>
+    <div class="arg">
+      <div class="arg-title">Analýza případu</div>
+      <div class="arg-body">
+        <p>Předpokládejme, že dojde k ozbrojenému konfliktu v Tchajwanském průlivu. Český státní příslušník v Taipei pomáhá organizovat přepravu neprůstřelných vest a komunikačního zařízení a účastní se výcvikového tábora, který je ve spojení s tchajwanskými ozbrojenými silami.</p>
+        <p>Česká vláda v tomto okamžiku uplatňuje politickou linii <span class="bd bd-P">P1</span>.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3.2 Přezkum aplikace skutkové podstaty -->
+  <div id="s3-2">
+    <div class="sec-title">3.2 Přezkum aplikace skutkové podstaty: právní postavení Tchaj-wanu</div>
+    
+    <div class="arg">
+      <div class="arg-title" style="font-size:1.22em">3.2.1 <span class="law">§321</span>: Stát</div>
+      <div class="arg-body">
+        <p><span class="law">§321(1) stanoví: „Kdo koná službu ve vojsku nebo ozbrojených silách <strong>jiného státu</strong>"</span> – tedy ve zbrojních silách „jiného státu".</p>
+        <p>Klíčem je rozsah výkladu výrazu „<em>jiného státu</em>": zda se omezuje pouze na státy uznané v mezinárodním právu, nebo zda může zahrnovat i politické entity s faktickou vládou. V českém právním řádu neexistuje hotový a jednotný návod.</p>
+        <p>V případě Tchaj-wanu existuje nesoulad mezi diplomatickým uznáním a faktickou vládou, což činí aplikaci §321 systémově spornou a vyžaduje další vyjasnění prostřednictvím odborné literatury a materiálů z praxe.</p>
+      </div>
+    </div>
+    <div class="result neutral"><strong>Analytický závěr:</strong> Aplikace <span class="law">§321</span> zůstává vysoce sporná a spadá do oblasti vysoké nejistoty.</div>
+
+    <div class="arg">
+      <div class="arg-title" style="font-size:1.22em">3.2.2 <span class="law">§321a</span>: Nestátní ozbrojená skupina</div>
+      <div class="arg-body">
+        <p><span class="law">§321a</span> se vztahuje na účast na „<em>nestátní ozbrojené skupině</em>", která se zabývá ozbrojeným konfliktem na území jiného státu.</p>
+        <p>Skutečná struktura tchajwanských ozbrojených sil:</p>
+        <p>— Má ministerstvo obrany, vojenské akademie, velitelství námořních a vzdušných sil<br>— Udržuje systém povinné vojenské služby<br>— Má kompletní vojenský velitelský systém</p>
+        <p>Tyto charakteristiky naznačují, že je blíže pravidelné armádě a správnímu systému. Přímé chápání jako „nestátní ozbrojené skupiny" by se mohlo jevit jako nesouladné s typem entity předpokládané v §321a.</p>
+      </div>
+    </div>
+    <div class="result neutral"><strong>Analytický závěr:</strong> Rozsah použitelnosti <span class="law">§321a</span> je třeba dále vymezit prostřednictvím odborné literatury a materiálů z praxe.</div>
+
+    <div class="arg">
+      <div class="arg-title" style="font-size:1.22em">3.2.3 Klasifikační dilema v rámci současného trestního práva</div>
+      <div class="arg-body">
+        <p>Klíčová ustanovení českého trestního práva týkající se zahraničních vojenských aktivit jsou <span class="law">§321</span> (státní ozbrojené síly) a <span class="law">§321a</span> (nestátní ozbrojené skupiny). Skutečné postavení Tchaj-wanu leží mezi těmito dvěma:</p>
+        <p>— Zda může být Tchaj-wan chápán jako <em>jiného státu</em>, zůstává předmětem významné kontroverze, proto nelze předem stabilně posoudit použitelnost <span class="law">§321</span><br>— Pokud je Tchaj-wan chápán jako politická entita s pravidelnou armádou a kompletním správním systémem, nesouhlasí s obecným porozuměním „nestátní ozbrojené skupině", proto nelze předem stabilně posoudit použitelnost <span class="law">§321a</span></p>
+        <p>Jako <span class="bd bd-L">L1</span> (de facto stát) vykazuje Tchaj-wan klasifikační dilema těžko stabilně zařaditelné v rámci současné trestněprávní klasifikační struktury.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3.3 Analytická premisa -->
+  <div id="s3-3">
+    <div class="sec-title">3.3 Analytická subjektivní premisa: považování Tchaj-wanu za <span class="bd bd-L">L2</span></div>
+    
+    <div class="arg">
+      <div class="arg-title">Premisa odvození</div>
+      <div class="arg-body">
+        <p>Následující analýza je založena na analytické subjektivní premise, která má testovat výsledky odvození vyplývající ze skutkové podstaty práva při konkrétní klasifikaci. <strong>Předpokládejme, že Tchaj-wan je klasifikován jako <span class="bd bd-L">L2</span> (nestátní ozbrojená skupina) a že se aplikuje <span class="law">§321a</span>,</strong> jedná se o formální odvození, jehož účelem je prozkoumat, jaké logické důsledky by taková klasifikace vedla.</p>
+      </div>
+    </div>
+    
+    <div class="arg">
+      <div class="arg-title">Skutková podstata jedna: „nestátní" (nestátní)</div>
+      <div class="arg-body">
+        <p>V tomto odvození, pokud je jako formální kritérium pro rozlišení „stát / nestátní" použito „diplomatické uznání", pak by tchajwanské ozbrojené síly mohly být umístěny na straně „nestátní" a dále se pokusit zařadit pod „nestátní ozbrojenou skupinu".</p>
+        <p><strong>Toto odvození je formálně platné. Ale odvozeným závěrem je:</strong></p>
+        <p>— Ministerstvo obrany Tchaj-wanu je velitelstvím nestátní ozbrojené skupiny<br>— Systém povinné vojenské služby Tchaj-wanu je systémem odvodu nestátní ozbrojené skupiny<br>— Tchajwanská armáda (včetně stíhacích letadel, námořních flotil, obranného rozpočtu) je vybavením a financováním nestátní ozbrojené skupiny</p>
+      </div>
+    </div>
+    
+    <div class="arg">
+      <div class="arg-title">Skutková podstata dva: „operuje na území jiného státu" (působí na území jiného státu)</div>
+      <div class="arg-body">
+        <p>Pokud <span class="law">§321a</span> stanoví „nestátní ozbrojená skupina operující na území jiného státu", pak musíme vyřešit:</p>
+        <p><strong>Je ostrov Tchaj-wan „územím jiného státu"?</strong></p>
+      </div>
+    </div>
+
+    <div class="fork-options">
+      <div class="fork-opt">
+        <span class="opt-id">Interpretační cesta jedna</span>
+        <span class="opt-txt"><strong>Ostrov Tchaj-wan je „územím" ČLR</strong><br>→ Tchajwanská armáda působí na území ČLR<br>→ Skutková podstata <span class="law">§321a</span> je potenciálně splněna<br>→ Český soud prohlašuje, že ostrov Tchaj-wan patří k suverénnímu území ČLR<br>→ Nutná je institucionální konzistence s ostatními vládními politikami</span>
+      </div>
+      <div class="fork-opt">
+        <span class="opt-id">Interpretační cesta dva</span>
+        <span class="opt-txt"><strong>Ostrov Tchaj-wan není „územím jiného státu"</strong><br>→ Tchajwanská armáda nepůsobí na území „<em>jiného státu</em>"<br>→ Skutková podstata <span class="law">§321a</span> není splněna<br>→ Návrat do právního vakua</span>
+      </div>
+    </div>
+
+    <!-- Srovnávací tabulka Donbasu -->
+    <div class="fold">
+      <div class="fold-head" onclick="toggle(this)"><span class="ftitle">Faktické srovnání se skutečným případem L2 (Donbas)</span><span class="farrow">▼</span></div>
+      <div class="fold-body">
+        <div class="fold-inner">
+          <p>Donbaské separatistické síly jsou subjektem, na který se v současné době v České republice aplikuje <span class="law">§321a</span> podle precedentu. Pokud je tchajwanská armáda postavena vedle něj, rozdíly ve faktických charakteristikách jsou následující:</p>
+          <table class="cmp-tbl">
+            <thead>
+              <tr>
+                <th style="width:26%">Porovnávací prvek</th>
+                <th class="col-l2" style="width:37%">Donbaské separatistické síly<br><span class="bd bd-L" style="font-size:.72em">Typický případ L2</span></th>
+                <th class="col-tw" style="width:37%">Tchajwanská armáda<br><span class="bd bd-L" style="font-size:.72em">Pokud je klasifikována jako L2</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Povaha organizace</td><td class="col-l2">Milice ＋ cizí pomocné ozbrojené síly</td><td class="col-tw">Ministerstvo obrany ＋ pravidelná armáda ＋ povinná vojenská služba</td></tr>
+              <tr><td>Územní kontrola</td><td class="col-l2">Částečné sporné území</td><td class="col-tw">Faktická vláda trvající více než sedmdesát let</td></tr>
+              <tr><td>Mezinárodní postavení</td><td class="col-l2">Téměř žádné mezinárodní uznání</td><td class="col-tw">13 diplomatických spojenců ＋ více než 140 zemí s bezvízovým vstupem</td></tr>
+              <tr><td>Vládní instituce</td><td class="col-l2">Primitivní politická struktura</td><td class="col-tw">Kompletní správní a politický systém s institucionalizovanou správou</td></tr>
+              <tr><td>Ekonomická velikost</td><td class="col-l2">Válečná ekonomika, silně závislá na zahraniční pomoci</td><td class="col-tw">Vysoce industrializovaná a významná ekonomika</td></tr>
+              <tr><td>Faktický základ pro použití <span class="law">§321a</span></td><td class="col-l2">Dostatečný</td><td class="col-tw">Rozdíl od donbaských ozbrojených sil je strukturální</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec-title">3.3.1 Výsledky odvození podle různých interpretačních cest práva</div>
+    <p style="margin-bottom:20px;font-size:0.92em;line-height:1.88;color:var(--body);">Tato sekce prezentuje výsledky odvození vyplývající z různých interpretačních cest práva pro srovnání jejich institucionální konzistence a praktických důsledků.</p>
+    
+    <div class="arg">
+      <div class="arg-title">Odvození jedna: soud přijímá klasifikaci „Tchaj-wan = L2"</div>
+      <div class="arg-body">
+        <p>Pokud soud ve svém rozsudku uznává tchajwanskou armádu za „nestátní ozbrojenou skupinu", musí rozsudek obsahovat následující potvrzení:</p> 
+        <p>— Tchajwanská armáda je nestátní ozbrojená skupina<br>— Ostrov Tchaj-wan je oblastí na území Čínské lidové republiky kontrolovanou touto ozbrojenou skupinou</p>
+        <p>Výsledné institucionální důsledky (test konzistence) mohou zahrnovat:</p>
+        <p>— Návštěva tchajwanské delegace českého parlamentu bude konceptuálně přeformulována jako kontakt s nestátní ozbrojenou skupinou</p>
+        <p>— Běžné styky mezi českými a tchajwanskými vládními institucemi budou konceptuálně přeformulány jako styky s nestátní ozbrojenou skupinou</p>
+        <p>— Stávající hraniční a cestovní opatření budou konceptuálně přeformulována jako zacházení s členy nestátní ozbrojené skupiny</p>
+        </div>
+    </div>
+    
+    <div class="arg">
+      <div class="arg-title">Odvození dva: soud odmítá klasifikaci „Tchaj-wan = L2"</div>
+      <div class="arg-body">
+        <p>Soud nemůže aplikovat <span class="law">§321a</span>. Zároveň se neaplikuje <span class="law">§321</span>.</p>
+        <p>Výsledkem je: stejná povaha logistické podpory, pokud je subjektem donbaské ozbrojené síly (<span class="bd bd-L">L2</span>), může být stíhána podle <span class="law">§321a</span>; pokud je subjektem Tchaj-wan (<span class="bd bd-L">L1</span>), nelze aplikovat žádné ustanovení.</p>
+        <p>Základ tohoto rozdílu není v odlišné povaze samotného jednání, ale v odlišném politickém postavení subjektové entity.</p>
+      </div>
+    </div>
+    
+    <div class="arg">
+      <div class="arg-title">Odvození tři: prokurátor se rozhodne nestíhat</div>
+      <div class="arg-body">
+        <p>Pokud prokurátor posoudí, že žádná z výše uvedených cest nemůže být udržena, může se rozhodnout nestíhat.</p>
+        <p>Ale problém, který v tomto okamžiku vzniká, nezmizí: stejná povaha logistické podpory, když je subjektem donbaské ozbrojené síly, může být stíhána, když je subjektem Tchaj-wan, není stíhána. Toto diferenciované zacházení není založeno na rozdílu v vlastním jednání aktéra, ale vychází z nejasnosti subjektové entity v mezinárodním právním postavení.</p>
+      </div>
+    </div>
+    
+    <div class="arg">
+      <div class="arg-title">Odvození čtyři: považování Tchaj-wanu za „stát"?</div>
+      <div class="arg-body">
+        <p>Pokud se prokurátor pokusí o jiný typ argumentace – považovat tchajwanskou armádu za ozbrojené síly státní povahy a analogicky aplikovat <span class="law">§321</span> – pak musí čelit problému:</p>
+        <p>Česká republika v mezinárodní diplomacii neuznává Tchaj-wan jako nezávislý stát. Považování Tchaj-wanu za „stát" v domácím soudním rozsudku bude v přímém rozporu s oficiálním diplomatickým postojem České republiky. Dilema této cesty spočívá v tom, že: nejde o problém právního výkladu, ale o strukturální konflikt mezi soudním rozsudkem a zahraniční politikou.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3.4 Hodnocení rizik -->
+  <div id="s3-4">
+    <div class="sec-title">3.4 Příkladné hodnocení rizik (S × U)</div>
+    <p style="margin-bottom:20px;font-size:0.92em;line-height:1.88;color:var(--body);">Umístění rizika v této sekci je příkladným hodnocením pro demonstraci procesu analýzy, skutečné skóre bude upraveno podle literatury a odborných názorů v následující fázi výzkumu.</p>
+    <div class="su-grid">
+      <div class="su-card S">
+        <div class="su-hd"><span class="bd bd-S">S</span><span class="su-label">Závažnost trestněprávních důsledků</span></div>
+        <div class="su-bd">V rámci tohoto výzkumu je <span class="bd bd-S">S</span> hodnoceno pouze tehdy, když „skutečně vstoupí na cestu skutkové podstaty konkrétního trestného činu". Jeho závažnost závisí především na: typu použitelných právních ustanovení, kombinaci subjektivních prvků (přímý / nepřímý úmysl) a stadia trestného činu (příprava / pokus / dokonání). Pokud v prvním stupni kontroly aplikovatelnosti spadá do právní nekompatibility nebo mezery pokrytí, mělo by být <span class="bd bd-S">S</span> označeno jako nepoužitelné (N/A), nikoli vysoké nebo nízké skóre.<div class="su-note">Příkladné odvození. Přesné skóre S bude stanoveno po následné diskusi literatury.</div></div>
+      </div>
+      <div class="su-card U">
+        <div class="su-hd"><span class="bd bd-U">U</span><span class="su-label">Právní a institucionální nejistota</span></div>
+        <div class="su-bd">Zdroj nejistoty je strukturální: Tchaj-wan není výslovně pokryt současnými ustanoveními, neexistuje srovnatelný precedens, stejné jednání může vést k výrazně odlišným právním důsledkům podle různých klasifikačních a interpretačních cest. Tato nejistota je strukturálním problémem a není eliminována předpokladem jediné politické situace.<div class="su-note">Příkladné odvození. Tato úroveň je v tomto kontextu nejvyšší.</div></div>
+      </div>
+    </div>
+    <div class="quadrant">
+      <div class="q-header">Rizikový kvadrant: S (závažnost) × U (nejistota)</div>
+      <div class="q-wrap">
+        <div class="q-axis-y">← U nízká &nbsp;&nbsp; U vysoká →</div>
+        <div class="q-grid">
+          <div class="q-cell"><div class="q-label">Nízká S ＋ nízká U</div>Předvídatelné nízké riziko</div>
+          <div class="q-cell"><div class="q-label">Nízká S ＋ vysoká U</div>Možná legální, ale nejistá</div>
+          <div class="q-cell"><div class="q-label">Vysoká S ＋ nízká U</div>Předvídatelné vysoké riziko</div>
+          <div class="q-cell dg"><div class="q-label">Vysoká S ＋ vysoká U</div>Oblast vysoké nejistoty<div class="q-mark">P1-I2-L1</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="result neutral"><strong>Vysvětlení umístění:</strong> Tento scénář se nachází v kvadrantu vysoké nejistoty. Přesná míra S závisí na subjektivních prvcích, stadiu trestného činu a konkrétní aplikační cestě; ale U (nejistota) sama je strukturální, vycházející z nejasných klasifikačních hranic. To je inherentní charakteristikou situace <span class="bd bd-L">L1</span> (de facto stát).</div>
+  </div>
+  <p style="margin-top:30px;padding-top:20px;border-top:1px solid var(--border);font-size:0.92em;line-height:1.88;color:var(--body);">Výsledky analýzy této kapitoly budou sloužit jako základní vstup pro následné expertní rozhovory a modelování vícekriteriální analýzy rozhodování.</p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+    CH4  Analýza rizik: varianty a kvadranty
+     ═══════════════════════════════════════════════════════ -->
+<div class="ch" id="ch4">
+  <div class="sub-idx">
+    <a onclick="goTo('s4-1')">4.1 Matice variant L1</a>
+    <a onclick="goTo('s4-2')">4.2 Matice variant L2</a>
+    <a onclick="goTo('s4-3')">4.3 Rizikový kvadrant</a>
+  </div>
+
+  <div id="s4-1">
+    <div class="sec-title">4.1 12 variant: skupina L1</div>
+    <div class="matrix-label"><span class="bd bd-L">L1</span> De facto stát / částečně uznaná politická entita</div>
+    <table class="matrix-tbl">
+      <thead>
+        <tr>
+          <th style="width:15%"></th>
+          <th><span class="bd bd-I">I1</span> Vyjádření názoru</th>
+          <th><span class="bd bd-I">I2</span> Logistická podpora</th>
+          <th><span class="bd bd-I">I3</span> Přímá účast</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="m-rowh"><span class="bd bd-P">P1</span> Pro-tchajwanský</td>
+          <td class="m-cell"><span class="m-num">Varianta 1</span><span class="m-code">P1 · I1 · L1</span></td>
+          <td class="m-cell highlight" onclick="switchTab('ch3',document.querySelector('.tab-btn:nth-child(3)'));setTimeout(function(){goTo('s3-1')},200)" style="cursor:pointer"><span class="m-num">Varianta 2</span><span class="m-code">P1 · I2 · L1</span><span class="m-ref">Příkladová případová studie kapitola 3</span></td>
+          <td class="m-cell"><span class="m-num">Varianta 3</span><span class="m-code">P1 · I3 · L1</span></td>
+        </tr>
+        <tr>
+          <td class="m-rowh"><span class="bd bd-P">P2</span> Pro-čínský</td>
+          <td class="m-cell"><span class="m-num">Varianta 4</span><span class="m-code">P2 · I1 · L1</span></td>
+          <td class="m-cell"><span class="m-num">Varianta 5</span><span class="m-code">P2 · I2 · L1</span></td>
+          <td class="m-cell"><span class="m-num">Varianta 6</span><span class="m-code">P2 · I3 · L1</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div id="s4-2">
+    <div class="sec-title">4.2 12 variant: skupina L2</div>
+    <div class="matrix-label"><span class="bd bd-L">L2</span> Nestátní ozbrojený aktér</div>
+    <table class="matrix-tbl">
+      <thead>
+        <tr>
+          <th style="width:15%"></th>
+          <th><span class="bd bd-I">I1</span> Vyjádření názoru</th>
+          <th><span class="bd bd-I">I2</span> Logistická podpora</th>
+          <th><span class="bd bd-I">I3</span> Přímá účast</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="m-rowh"><span class="bd bd-P">P1</span> Pro-tchajwanský</td>
+          <td class="m-cell"><span class="m-num">Varianta 7</span><span class="m-code">P1 · I1 · L2</span></td>
+          <td class="m-cell"><span class="m-num">Varianta 8</span><span class="m-code">P1 · I2 · L2</span></td>
+          <td class="m-cell"><span class="m-num">Varianta 9</span><span class="m-code">P1 · I3 · L2</span></td>
+        </tr>
+        <tr>
+          <td class="m-rowh"><span class="bd bd-P">P2</span> Pro-čínský</td>
+          <td class="m-cell"><span class="m-num">Varianta 10</span><span class="m-code">P2 · I1 · L2</span></td>
+          <td class="m-cell"><span class="m-num">Varianta 11</span><span class="m-code">P2 · I2 · L2</span></td>
+          <td class="m-cell"><span class="m-num">Varianta 12</span><span class="m-code">P2 · I3 · L2</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div id="s4-3">
+    <div class="sec-title">4.3 Rizikový kvadrant</div>
+    <div class="quadrant">
+      <div class="q-header">Rizikový kvadrant: S (závažnost) × U (nejistota)</div>
+      <div class="q-wrap">
+        <div class="q-axis-y">← U nízká &nbsp;&nbsp; U vysoká →</div>
+        <div class="q-grid">
+          <div class="q-cell"><div class="q-label">Nízká S ＋ nízká U</div>Předvídatelné nízké riziko<span class="q-desc">Jednání je legální a důsledky jsou jasné</span></div>
+          <div class="q-cell"><div class="q-label">Nízká S ＋ vysoká U</div>Možná legální, ale nejistá<span class="q-desc">Nemožnost předem potvrdit soulad</span></div>
+          <div class="q-cell"><div class="q-label">Vysoká S ＋ nízká U</div>Předvídatelné vysoké riziko<span class="q-desc">Jasně nelegální, důsledky jsou jasné</span></div>
+          <div class="q-cell dg"><div class="q-label">Vysoká S ＋ vysoká U</div>Oblast vysoké nejistoty<span class="q-desc">„Temně šedá zóna" kde závažnost a nejistota existují současně</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="result neutral"><strong>Vysvětlení:</strong> Přesné umístění každé varianty v kvadrantu bude prezentováno podle výsledků hodnocení <span class="bd bd-S">S</span> a <span class="bd bd-U">U</span> po dokončení diskuse literatury. Příkladová analýza kapitoly 3 demonstrovala metodu umístění – na příkladu scénáře P1-I2-L1, ukazující, jak prostřednictvím formálně logického odvození určit rizikovou oblast, ve které se nachází.</div>
+  </div>
+</div>
+
+</div><!-- /page -->
+
+<!-- ═══ JS ═══ -->
+<script>
+function switchTab(id, btn) {
+  document.querySelectorAll('.ch').forEach(function(p){ p.classList.remove('active'); });
+  document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function toggle(head) {
+  head.classList.toggle('open');
+  head.nextElementSibling.classList.toggle('open');
+}
+
+function goTo(id) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  var head = el.querySelector('.fold-head');
+  var body = el.querySelector('.fold-body');
+  if (head && !head.classList.contains('open')) {
+    head.classList.add('open');
+    body.classList.add('open');
+  }
+  setTimeout(function(){
+    el.scrollIntoView({behavior:'smooth', block:'start'});
+  }, 150);
+}
+</script>
+</body>
+</html>
